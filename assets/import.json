@@ -1,0 +1,423 @@
+{
+  "roster": {
+    "costs": [
+      {
+        "name": "pts",
+        "typeId": "points",
+        "value": 140
+      }
+    ],
+    "costLimits": [
+      {
+        "name": "pts",
+        "typeId": "points",
+        "value": 750
+      }
+    ],
+    "forces": [
+      {
+        "costs": [
+          {
+            "name": "Force Category - GHB",
+            "typeId": "de92-2099-fbf7-a156",
+            "value": 1
+          }
+        ],
+        "categories": [
+          {
+            "name": "Configuration",
+            "id": "3n8p4jj",
+            "primary": false,
+            "entryId": "676-2b78-7bbf-ba9c"
+          },
+          {
+            "name": "Reference",
+            "id": "3n2ky0a",
+            "primary": false,
+            "entryId": "3360-1158-e879-9606"
+          },
+          {
+            "name": "Army Composition",
+            "id": "x6ewvf",
+            "primary": false,
+            "entryId": "ac97-b27c-7e35-7ab9"
+          },
+          {
+            "name": "FACTION TERRAIN",
+            "id": "x6oqipg",
+            "primary": false,
+            "entryId": "cdd6-ffa1-9b32-4cb8"
+          },
+          {
+            "name": "Illegal Units",
+            "id": "3nv7deg",
+            "primary": false,
+            "entryId": "(Illegal Units)"
+          }
+        ],
+        "forces": [
+          {
+            "selections": [
+              {
+                "profiles": [
+                  {
+                    "characteristics": [
+                      {
+                        "$text": "4\"",
+                        "name": "Move",
+                        "typeId": "fed0-d1b3-1bb8-c501"
+                      },
+                      {
+                        "$text": "8",
+                        "name": "Health",
+                        "typeId": "96be-54ae-ce7b-10b7"
+                      },
+                      {
+                        "$text": "3+",
+                        "name": "Save",
+                        "typeId": "1981-ef09-96f6-7aa9"
+                      },
+                      {
+                        "$text": "2",
+                        "name": "Control",
+                        "typeId": "6c6f-8510-9ce1-fc6e"
+                      }
+                    ],
+                    "id": "e8e5-8560-5331-37a",
+                    "name": "Megaboss",
+                    "hidden": false,
+                    "typeId": "ff03-376e-972f-8ab2",
+                    "typeName": "Unit",
+                    "from": "entry"
+                  },
+                  {
+                    "characteristics": [
+                      {
+                        "$text": "Reaction: You declared a **^^Fight^^** ability for this unit",
+                        "name": "Timing",
+                        "typeId": "652c-3d84-4e7-14f4"
+                      },
+                      {
+                        "name": "Declare",
+                        "typeId": "bad3-f9c5-ba46-18cb"
+                      },
+                      {
+                        "$text": "Pick a friendly **^^Brute^^** unit that has not used a **^^Fight^^** ability  this turn and is within this unit's combat range to be the target. The  target can be picked to use a **^^Fight^^** ability immediately after the **^^Fight^^** ability used by this unit has been resolved. If it is picked to do so, add 1 to the Attacks characteristic of that unit's melee weapons for the rest of the turn.",
+                        "name": "Effect",
+                        "typeId": "b6f1-ba36-6cd-3b03"
+                      },
+                      {
+                        "name": "Keywords",
+                        "typeId": "12e8-3214-7d8f-1d0f"
+                      },
+                      {
+                        "name": "Used By",
+                        "typeId": "1b32-c9d6-3106-166b"
+                      }
+                    ],
+                    "attributes": [
+                      {
+                        "$text": "Red",
+                        "name": "Color",
+                        "typeId": "5a11-eab3-180c-ddf5"
+                      },
+                      {
+                        "$text": "Offensive",
+                        "name": "Type",
+                        "typeId": "6d16-c86b-2698-85a4"
+                      },
+                      {
+                        "name": "Parent Node",
+                        "typeId": "2d74-4dcd-8468-87fa"
+                      }
+                    ],
+                    "id": "8557-bf37-78c7-ea5d",
+                    "name": "Lead da Brutes",
+                    "hidden": false,
+                    "typeId": "59b6-d47a-a68a-5dcc",
+                    "typeName": "Ability (Activated)",
+                    "from": "entry"
+                  },
+                  {
+                    "characteristics": [
+                      {
+                        "$text": "End of Any Turn",
+                        "name": "Timing",
+                        "typeId": "652c-3d84-4e7-14f4"
+                      },
+                      {
+                        "name": "Declare",
+                        "typeId": "bad3-f9c5-ba46-18cb"
+                      },
+                      {
+                        "$text": "If any damage points were allocated to an enemy unit by this unit’s combat attacks this turn and that enemy unit has been destroyed, give this unit a **Waaagh! token**, to a maximum of 3.\nUntil the end of the next turn, add 1 to the Attacks characteristic of this unit’s weapons for each **Waaagh! token** it has.",
+                        "name": "Effect",
+                        "typeId": "b6f1-ba36-6cd-3b03"
+                      },
+                      {
+                        "name": "Keywords",
+                        "typeId": "12e8-3214-7d8f-1d0f"
+                      },
+                      {
+                        "name": "Used By",
+                        "typeId": "1b32-c9d6-3106-166b"
+                      }
+                    ],
+                    "attributes": [
+                      {
+                        "$text": "Purple",
+                        "name": "Color",
+                        "typeId": "5a11-eab3-180c-ddf5"
+                      },
+                      {
+                        "$text": "Offensive",
+                        "name": "Type",
+                        "typeId": "6d16-c86b-2698-85a4"
+                      },
+                      {
+                        "name": "Parent Node",
+                        "typeId": "2d74-4dcd-8468-87fa"
+                      }
+                    ],
+                    "id": "fe7-6e6c-e3d5-cec8",
+                    "name": "Strength From Victory",
+                    "hidden": false,
+                    "typeId": "59b6-d47a-a68a-5dcc",
+                    "typeName": "Ability (Activated)",
+                    "from": "entry"
+                  },
+                  {
+                    "characteristics": [
+                      {
+                        "name": "Keywords",
+                        "typeId": "b977-7c5e-33b2-428e"
+                      },
+                      {
+                        "$text": "If this **^^Hero^^** is within the combat range of a friendly unit that is not a **^^Hero^^**:\n• Subtract 1 from hit rolls for shooting attacks that target this Hero.\n• If this **^^Hero^^** is **^^Infantry^^**, they cannot be picked as the target of shooting attacks made by models more than 12\" from them.",
+                        "name": "Effect",
+                        "typeId": "fd7f-888d-3257-a12b"
+                      }
+                    ],
+                    "attributes": [
+                      {
+                        "$text": "Black",
+                        "name": "Color",
+                        "typeId": "50fe-4f29-6bc3-dcc6"
+                      },
+                      {
+                        "$text": "Defensive",
+                        "name": "Type",
+                        "typeId": "bf11-4e10-3ab1-06f4"
+                      },
+                      {
+                        "name": "Parent Node",
+                        "typeId": "e2e1-15ca-d345-22b8"
+                      }
+                    ],
+                    "id": "3bc-444a-5cf8-e4d",
+                    "name": "Guarded Hero",
+                    "hidden": false,
+                    "typeId": "907f-a48-6a04-f788",
+                    "typeName": "Ability (Passive)",
+                    "from": "entry"
+                  }
+                ],
+                "selections": [
+                  {
+                    "id": "iyv0pid",
+                    "name": "General",
+                    "entryId": "4079-fb73-a4d7-7b0d::87e5-8fcf-9d12-f05b::a56b-952e-ad15-7868",
+                    "number": 1,
+                    "type": "upgrade",
+                    "from": "entry"
+                  },
+                  {
+                    "selections": [
+                      {
+                        "profiles": [
+                          {
+                            "characteristics": [
+                              {
+                                "$text": "8",
+                                "name": "Atk",
+                                "typeId": "60e-35aa-31ed-e488"
+                              },
+                              {
+                                "$text": "4+",
+                                "name": "Hit",
+                                "typeId": "26dc-168-b2fd-cb93"
+                              },
+                              {
+                                "$text": "2+",
+                                "name": "Wnd",
+                                "typeId": "61c1-22cc-40af-2847"
+                              },
+                              {
+                                "$text": "1",
+                                "name": "Rnd",
+                                "typeId": "eccc-10fa-6958-fb73"
+                              },
+                              {
+                                "$text": "2",
+                                "name": "Dmg",
+                                "typeId": "e948-9c71-12a6-6be4"
+                              },
+                              {
+                                "$text": "-",
+                                "name": "Ability",
+                                "typeId": "eda3-7332-5db1-4159"
+                              }
+                            ],
+                            "id": "f6b3-b16f-c6c9-3fb9",
+                            "name": "Boss-choppa",
+                            "hidden": false,
+                            "typeId": "9074-76b6-9e2f-81e3",
+                            "typeName": "Melee Weapon",
+                            "from": "entry"
+                          }
+                        ],
+                        "id": "j1521rb",
+                        "name": "Boss-choppa",
+                        "entryId": "4079-fb73-a4d7-7b0d::8200-bc1f-235c-d69e",
+                        "number": 1,
+                        "type": "upgrade",
+                        "from": "entry"
+                      }
+                    ],
+                    "id": "iydm9w",
+                    "name": "Megaboss",
+                    "entryId": "4079-fb73-a4d7-7b0d::1ba9-5017-6a18-2aee",
+                    "number": 1,
+                    "type": "model",
+                    "from": "entry"
+                  }
+                ],
+                "costs": [
+                  {
+                    "name": "pts",
+                    "typeId": "points",
+                    "value": 140
+                  }
+                ],
+                "categories": [
+                  {
+                    "id": "6e72-1656-d554-528a",
+                    "name": "HERO",
+                    "entryId": "6e72-1656-d554-528a",
+                    "primary": false
+                  },
+                  {
+                    "id": "9057-5a29-dda5-3c28",
+                    "name": "DESTRUCTION",
+                    "entryId": "9057-5a29-dda5-3c28",
+                    "primary": false
+                  },
+                  {
+                    "id": "75d6-6995-dfcc-3898",
+                    "name": "INFANTRY",
+                    "entryId": "75d6-6995-dfcc-3898",
+                    "primary": false
+                  },
+                  {
+                    "id": "c1ca-4b17-3512-89f",
+                    "name": "IRONJAWZ",
+                    "entryId": "c1ca-4b17-3512-89f",
+                    "primary": false
+                  },
+                  {
+                    "id": "db3a-7199-c92e-f3cf",
+                    "name": "Regimental Option",
+                    "entryId": "db3a-7199-c92e-f3cf",
+                    "primary": false
+                  },
+                  {
+                    "id": "d1f3-921c-b403-1106",
+                    "entryId": "d1f3-921c-b403-1106",
+                    "name": "Regimental Leader",
+                    "primary": true
+                  }
+                ],
+                "id": "ixjopd9",
+                "name": "Megaboss",
+                "entryId": "4079-fb73-a4d7-7b0d::4e07-f63a-6315-b48b",
+                "number": 1,
+                "type": "unit",
+                "from": "entry"
+              }
+            ],
+            "categories": [
+              {
+                "name": "Regimental Leader",
+                "id": "qio5ebb",
+                "primary": false,
+                "entryId": "d1f3-921c-b403-1106"
+              },
+              {
+                "name": "HERO",
+                "id": "qikwx6",
+                "primary": false,
+                "entryId": "6e72-1656-d554-528a"
+              },
+              {
+                "name": "INFANTRY",
+                "id": "qi55xs",
+                "primary": false,
+                "entryId": "75d6-6995-dfcc-3898"
+              },
+              {
+                "name": "MONSTER",
+                "id": "qicvp9",
+                "primary": false,
+                "entryId": "6d54-625c-d063-13e2"
+              },
+              {
+                "name": "WAR MACHINE",
+                "id": "qiu6vb",
+                "primary": false,
+                "entryId": "f7bc-b618-4b5d-2bae"
+              },
+              {
+                "name": "CAVALRY",
+                "id": "qi92qg",
+                "primary": false,
+                "entryId": "926c-df8c-6841-d49e"
+              },
+              {
+                "name": "BEAST",
+                "id": "qilk34si",
+                "primary": false,
+                "entryId": "b224-8c8e-ca93-9860"
+              },
+              {
+                "name": "Illegal Units",
+                "id": "qj4l8aa",
+                "primary": false,
+                "entryId": "(Illegal Units)"
+              }
+            ],
+            "id": "qhggbx8",
+            "name": "Regiment",
+            "entryId": "48a1-e075-c797-5605::376a-6b97-8699-dd59",
+            "catalogueId": "832c-fd6-a535-ffae",
+            "catalogueRevision": 38,
+            "catalogueName": "Ironjawz"
+          }
+        ],
+        "id": "x1ohu4r",
+        "name": "✦ General's Handbook 2025-26",
+        "entryId": "f079-501a-2738-6845",
+        "catalogueId": "832c-fd6-a535-ffae",
+        "catalogueRevision": 38,
+        "catalogueName": "Ironjawz"
+      }
+    ],
+    "id": "ws69v8",
+    "name": "App Test",
+    "battleScribeVersion": 2.03,
+    "generatedBy": "https://newrecruit.eu",
+    "gameSystemId": "e51d-b1a3-75fc-dc3g",
+    "gameSystemName": "Age of Sigmar 4.0",
+    "gameSystemRevision": 89,
+    "xmlns": "http://www.battlescribe.net/schema/rosterSchema"
+  }
+}
