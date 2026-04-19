@@ -1,15 +1,8 @@
-import 'profiles.dart';
-
 class Selections {
   Selections(this.id, this.name);
 
-  //Profiles profiles;
-  //Selections selections;
-  //Costs costs;
-  //Categories categories;
-
-  String id = "Yoyoyo";
-  String name = "Gandalf";
+  String id;
+  String name;
   String type = "-1";
 
   /*
@@ -20,12 +13,5 @@ class Selections {
    */
 
   List<dynamic> profilesDynamic = [];
-
   List<dynamic> selectionsDynamic = [];
-
-  Selections.fromJsonList(List<dynamic> json)
-      : id = json.elementAt(0)["id"] as String,
-        name = json.elementAt(0)["name"] as String,
-        profilesDynamic = (json.elementAt(0)["profiles"]),
-        selectionsDynamic = (json.elementAt(0)["selections"]);
 }

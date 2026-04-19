@@ -1,10 +1,8 @@
 class Profiles {
   Profiles(this.id, this.name);
 
-  //Characteristics characteristics = Characteristics("test", "test");
-
-  String id = "Yoyoyo";
-  String name = "Gandalf";
+  String id;
+  String name;
   String typeName = "type";
 
   /*
@@ -17,6 +15,5 @@ class Profiles {
    */
 
   List<dynamic> characteristics = [];
-
   List<dynamic> attributes = [];
 }

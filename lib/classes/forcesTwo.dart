@@ -1,15 +1,11 @@
-import 'selections.dart';
-
 class ForcesTwo {
   ForcesTwo(this.id, this.name);
-
-  Selections selections = Selections("id", "name");
 
   List<dynamic> selectionsDynamic = [];
   List<dynamic> categoriesDynamic = [];
 
-  String id = "Yoyoyo";
-  String name = "Gandalf";
+  String id;
+  String name;
 
   /*
   "entryId": "48a1-e075-c797-5605::376a-6b97-8699-dd59",
@@ -17,9 +13,4 @@ class ForcesTwo {
   "catalogueRevision": 38,
   "catalogueName": "Ironjawz"
    */
-
-  ForcesTwo.fromJsonList(List<dynamic> json)
-      : id = json.elementAt(0)["id"] as String,
-        name = json.elementAt(0)["name"] as String,
-        selections = Selections.fromJsonList(json.elementAt(0)["selections"]);
 }

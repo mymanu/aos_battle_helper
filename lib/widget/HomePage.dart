@@ -184,7 +184,7 @@ class _HomePage extends State<HomePage> {
 
                     SizedBox(width: 85),
 
-                    ElevatedButton( // TODO Funktion ändern zu: Einkaufsliste anzeigen
+                    ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: buttonColors[1],
                         shadowColor: Colors.black,
@@ -229,7 +229,7 @@ class _HomePage extends State<HomePage> {
 
                     SizedBox(width: 85),
 
-                    ElevatedButton( // TODO Funktion ändern zu: Einkaufsliste anzeigen
+                    ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: buttonColors[3],
                         shadowColor: Colors.black,
@@ -251,7 +251,7 @@ class _HomePage extends State<HomePage> {
 
               SizedBox(height: 30),
 
-              Row ( //TODO Funktion für Button Produkt anlegen hier einfügen
+              Row (
                   children: [
                     SizedBox(width: 125),
                     ElevatedButton(

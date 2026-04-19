@@ -1,14 +1,17 @@
 import 'dart:convert';
-import 'package:aos_battle_helper/classes/selections.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:file_picker/file_picker.dart';
 
 import 'package:aos_battle_helper/classes/roster.dart';
 import 'package:aos_battle_helper/classes/profiles.dart';
 import 'package:aos_battle_helper/classes/selections.dart';
 import 'package:aos_battle_helper/classes/unit.dart';
 import 'package:aos_battle_helper/classes/ability.dart';
+import 'package:aos_battle_helper/classes/selections.dart';
 
+import '../classes/army.dart';
 import '../classes/forces.dart';
 import '../classes/forcesTwo.dart';
 import '../classes/weapon.dart';
@@ -24,52 +27,47 @@ class ArmyImport extends StatefulWidget {
 }
 
 class _ArmyImport extends State<ArmyImport> {
+  FilePickerResult? result;
+  String? _fileName;
+  PlatformFile? pickedFile;
+  bool isLoading = false;
+  File? fileToDisplay;
+
+  void pickFile() async {
+    try {
+      setState(() {
+        isLoading = true;
+      });
+
+      result = await FilePicker.platform.pickFiles(
+        type: FileType.any,
+        allowMultiple: false,
+      );
+
+      if(result != null) {
+        _fileName = result!.files.first.name;
+        pickedFile = result!.files.first;
+        fileToDisplay = File(pickedFile!.path.toString());
+
+        print("File name: $_fileName");
+      }
+
+      setState(() {
+        isLoading = false;
+      });
+    } catch (exception) {
+      print(exception);
+    }
+  }
+
+
+
   Future<void> readJson() async {
     final String response = await rootBundle.loadString('assets/import.json');
     final data = await json.decode(response);
     //final data = await jsonDecode(response) ;
 
     setState(() {
-      Map<String, dynamic> _items = data["roster"];
-      print("..number of items ${_items.length}");
-
-      Roster rosterTest = Roster.fromJson(data["roster"]);
-
-      print("Name: " + rosterTest.name);
-      print("ID: " + rosterTest.id);
-
-      print("Forces Name: " + rosterTest.forces.name);
-
-      print("ForcesTwo Name: " + rosterTest.forces.forcesTwo.name);
-
-      print("Selections Name: " + rosterTest.forces.forcesTwo.selections.name);
-
-      /*
-      print(
-        "Profiles Name: " + rosterTest.forces.forcesTwo.selections.profiles.name,
-      );
-
-
-      print(
-        "Characteristics Name: " +
-            rosterTest.forces.forcesTwo.selections.profiles.characteristics.name,
-      );
-
-
-
-      print(
-        "Test " +
-            rosterTest.forces.forcesTwo.selections.profiles.charDynamic.toString(),
-      );
-      */
-
-      //Alles importiert bis Zeile 224 (profiles aktuell fertig)
-      //Jetzt muss für 225 die seclections angepasst werden (bereits geschehen)
-      //Jetzt mit den Daten unter der selectionsDynamic unter selections arbeiten wie mit der profiledynamic (siehe ab Zeile 68)
-      //aber es geht in der JSON noch tiefer (nochmal selections, profiles, characteristics) JSON Zeile 225 fortfolgend
-
-      print("Platzhalter\n\n");
-
       Roster roster = Roster("id", "name");
       Map<String, dynamic> rosterMap = data["roster"];
 
@@ -80,6 +78,8 @@ class _ArmyImport extends State<ArmyImport> {
       roster.forcesDynamic = rosterMap["forces"];
 
       print("Roster -> costDynamic Length: ${roster.costDynamic.length}");
+
+      Army army = Army("name");
 
       //roster -> forces
       for (Map<String, dynamic> forcesMapJSON in roster.forcesDynamic) {
@@ -145,14 +145,14 @@ class _ArmyImport extends State<ArmyImport> {
                     in profile.characteristics) {
                   if (charMapJSON["name"].contains("Move")) {
                     unit.move = charMapJSON["\$text"].toString();
-                    print("\n");
+                    print("");
                     print("ACHTUNG ACHTUNG");
                     print(
                       "Hier der Move der Unit ausgegeben: " +
                           charMapJSON["\$text"].toString(),
                     );
                     print("DURCHSAGE BEENDET");
-                    print("\n");
+                    print("");
                   }
                   if (charMapJSON["name"].contains("Health")) {
                     unit.health = charMapJSON["\$text"].toString();
@@ -168,7 +168,6 @@ class _ArmyImport extends State<ArmyImport> {
                 //--------------------------------------------------------------------
 
                 if (profile.typeName.contains("Ability")) {
-                  //TODO Klammer richtig setzen
                   Ability ability = Ability(profile.name);
                   ability.id = profile.id;
                   ability.typeName = profile.typeName;
@@ -280,16 +279,16 @@ class _ArmyImport extends State<ArmyImport> {
                     }
                   }
                 }
-                roster.unitList.add(unit);
               }
+              army.unitList.add(unit);
             }
           }
         }
       }
 
-      for (Unit unit in roster.unitList) {
+      for (Unit unit in army.unitList) {
         print("-------------------------------------------------------------");
-        print("\n\n");
+        print("");
         print("Unit aus dem großen neuen Decode Block:");
         print("Name der Unit: " + unit.name);
         print("Move: " + unit.move);
@@ -321,215 +320,10 @@ class _ArmyImport extends State<ArmyImport> {
         }
 
         print("-------------------------------------------------------------");
-        print("\n\n");
+        print("");
       }
 
-      //TODO alten Code entfernen
-      //ab hier "alter Code" von unten aufgebaut
-
-      //hier für Mittel Selection (Zeile 225) General und Megaboss
-
-      List<Selections> selectionList = [];
-
-      for (Map<String, dynamic> selectionMapJSON
-          in rosterTest.forces.forcesTwo.selections.selectionsDynamic) {
-        Selections select = Selections(
-          selectionMapJSON["id"],
-          selectionMapJSON["name"],
-        );
-
-        if (selectionMapJSON.containsKey("selections")) {
-          select.selectionsDynamic = selectionMapJSON["selections"];
-        }
-
-        selectionList.add(select);
-      }
-
-      print("Inhalt Selection-List: " + selectionList.toString());
-      print("");
-
-      for (Selections select in selectionList) {
-        print("Neue Selection erkannt");
-        print(select.name);
-        print(select.id);
-
-        //hier für unter Selection (Zeile 235) Boss Choppa
-        //weiter
-
-        List<Selections> selectionListInner = [];
-
-        for (Map<String, dynamic> selectionMapJSON
-            in select.selectionsDynamic) {
-          Selections selectInner = Selections(
-            selectionMapJSON["id"],
-            selectionMapJSON["name"],
-          );
-
-          if (selectionMapJSON.containsKey("selections")) {
-            selectInner.selectionsDynamic = selectionMapJSON["selections"];
-          }
-
-          if (selectionMapJSON.containsKey("profiles")) {
-            selectInner.profilesDynamic = selectionMapJSON["profiles"];
-          }
-
-          selectionListInner.add(selectInner);
-        }
-
-        for (Selections selectInSelect in selectionListInner) {
-          print("Neue Unter-Selection erkannt");
-          print(selectInSelect.name);
-          print(selectInSelect.id);
-        }
-      }
-
-      List<Profiles> profileList = [];
-
-      for (Map<String, dynamic> unitMapJSON
-          in rosterTest.forces.forcesTwo.selections.profilesDynamic) {
-        Profiles profile = Profiles(unitMapJSON["id"], unitMapJSON["name"]);
-
-        if (unitMapJSON.containsKey("characteristics")) {
-          profile.characteristics = unitMapJSON["characteristics"];
-        }
-        if (unitMapJSON.containsKey("typeName")) {
-          profile.typeName = unitMapJSON["typeName"];
-        }
-        if (unitMapJSON.containsKey("attributes")) {
-          profile.attributes = unitMapJSON["attributes"];
-        }
-
-        profileList.add(profile);
-      }
-
-      //Ab hier Profiles Decodieren und in die letzte Unit in der UnitList einspeichern
-
-      List<Unit> unitListTest = [];
-
-      for (Profiles profile in profileList) {
-        print("neues Profil mit Name: " + profile.name);
-        print("Characteristics: " + profile.characteristics.toString());
-        Unit unitToFill = Unit("test");
-
-        if (profile.typeName.contains("Unit")) {
-          print("Unit erkannt");
-          print("----------------------");
-
-          unitToFill.name = profile.name;
-          unitToFill.id = profile.id;
-
-          //Characteristics für Units
-          for (Map<String, dynamic> charMapJSON in profile.characteristics) {
-            if (charMapJSON["name"].contains("Move")) {
-              unitToFill.move = charMapJSON["\$text"].toString();
-            }
-            if (charMapJSON["name"].contains("Health")) {
-              unitToFill.health = charMapJSON["\$text"].toString();
-            }
-            if (charMapJSON["name"].contains("Save")) {
-              unitToFill.save = charMapJSON["\$text"].toString();
-            }
-            if (charMapJSON["name"].contains("Control")) {
-              unitToFill.control = charMapJSON["\$text"].toString();
-            }
-          }
-          unitListTest.add(unitToFill);
-        }
-
-        if (profile.typeName.contains("Ability (Activated)")) {
-          Ability abilityBuild = Ability("test");
-          print("Ability (Activated) erkannt");
-          print("----------------------");
-
-          abilityBuild.name = profile.name;
-          abilityBuild.id = profile.id;
-
-          ////Characteristics für Abilitys (Activated)
-          for (Map<String, dynamic> charMapJSON in profile.characteristics) {
-            if (charMapJSON["name"].contains("Timing")) {
-              abilityBuild.timing = charMapJSON["\$text"].toString();
-            }
-            if (charMapJSON["name"].contains("Declare")) {
-              abilityBuild.declare = charMapJSON["\$text"].toString();
-            }
-            if (charMapJSON["name"].contains("Effect")) {
-              abilityBuild.effect = charMapJSON["\$text"].toString();
-            }
-            if (charMapJSON["name"].contains("Keywords")) {
-              abilityBuild.keywords = charMapJSON["\$text"].toString();
-            }
-            if (charMapJSON["name"].contains("Used By")) {
-              abilityBuild.usedBy = charMapJSON["\$text"].toString();
-            }
-          }
-
-          for (Map<String, dynamic> attributesMapJSON in profile.attributes) {
-            if (attributesMapJSON["name"].contains("Color")) {
-              abilityBuild.color = attributesMapJSON["\$text"].toString();
-            }
-          }
-
-          unitListTest.last.abilitys.add(abilityBuild);
-        }
-
-        if (profile.typeName.contains("Ability (Passive)")) {
-          Ability abilityBuildPassive = Ability("test");
-          print("Ability (Passive) erkannt");
-          print("----------------------");
-
-          abilityBuildPassive.name = profile.name;
-          abilityBuildPassive.id = profile.id;
-
-          ////Characteristics für Abilitys (Passive)
-          for (Map<String, dynamic> charMapJSON in profile.characteristics) {
-            if (charMapJSON["name"].contains("Keywords")) {
-              abilityBuildPassive.keywords = charMapJSON["\$text"].toString();
-            }
-            if (charMapJSON["name"].contains("Effect")) {
-              abilityBuildPassive.effect = charMapJSON["\$text"].toString();
-            }
-          }
-
-          for (Map<String, dynamic> attributesMapJSON in profile.attributes) {
-            if (attributesMapJSON["name"].contains("Color")) {
-              abilityBuildPassive.color = attributesMapJSON["\$text"]
-                  .toString();
-            }
-          }
-
-          unitListTest.last.abilitys.add(abilityBuildPassive);
-        }
-      }
-      for (Unit unitThis in unitListTest) {
-        print(
-          "Unit wurde erstellt:\nMove: " +
-              unitThis.move +
-              "\nHealth: " +
-              unitThis.health,
-        );
-        print("Save: " + unitThis.save + "\nControl: " + unitThis.control);
-
-        for (Ability abi in unitThis.abilitys) {
-          print("---------------");
-          print("Ability Timing: " + abi.timing);
-          print("Ability Name: " + abi.name);
-          print("Ability Color: " + abi.color);
-          print("Ability Effect: " + abi.effect);
-        }
-      }
-
-      /*
-      rosterTest
-      -> forces
-        -> forcesTwo
-          -> selections
-            -> profiles
-              -> characteristics
-            -> selections
-              -> selections
-                -> profiles
-                  -> characteristics
-       */
+      print("Anzahl der Units in der Unit-List: ${army.unitList.length}");
     });
   }
 
@@ -575,6 +369,15 @@ class _ArmyImport extends State<ArmyImport> {
               },
               child: Center(child: Text("Load Json")),
             ),
+            isLoading
+                ? CircularProgressIndicator()
+                : TextButton(onPressed: (){
+                  pickFile();
+            }, child: Text("Pick File")),
+            if(pickedFile != null)
+              SizedBox(
+                height: 300, width: 400, child: Image.file(fileToDisplay!),
+              ),
           ],
         ),
       ),

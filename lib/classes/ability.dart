@@ -1,4 +1,3 @@
-//import 'package:aos_battle_helper/classes/spell.dart';
 class Ability {
   Ability(this.name);
 
