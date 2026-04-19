@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../classes/settings.dart';
+import 'HeroPhase.dart';
 import 'StartofBattle.dart';
 import 'ArmyImport.dart';
 import 'SettingsWidget.dart';
@@ -140,12 +141,12 @@ class _HomePage extends State<HomePage> {
                   maximumSize: Size(510, 510),
                 ),
                 child: Text(
-                  'Credits',
+                  'Heldenphase',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20),
                 ),
                 onPressed: () {
-                  //_navigateToCredits(context);
+                  _navigateToHero(context, widget.settings);
                 },
               ),
             ],
@@ -419,6 +420,14 @@ class _HomePage extends State<HomePage> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => SettingsWidget(title: "Einstellungen", settings: settings),
+      ),
+    );
+  }
+
+  void _navigateToHero(BuildContext context, Settings settings) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => HeroPhase(title: "Heldenphase", settings: settings),
       ),
     );
   }
