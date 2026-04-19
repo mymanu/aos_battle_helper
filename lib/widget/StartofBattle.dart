@@ -1,5 +1,5 @@
-import 'package:aos_battle_helper/classes/spell.dart';
 import 'package:aos_battle_helper/classes/unit.dart';
+import 'package:aos_battle_helper/classes/ability.dart';
 import 'package:flutter/material.dart';
 
 class StartofBattle extends StatefulWidget {
@@ -25,44 +25,41 @@ class _StartofBattle extends State<StartofBattle> {
     String title = widget.title;
     //String title = widget.title + "Phase";
 
-    List<Spell> megabossSpells = [
-      Spell.trigger(
+    List<Ability> megabossSpells = [
+      Ability.example(
         "firstSpell-Title",
         "Start of Battle",
-        "own phase",
         "Diese Fähigkeit lässt dich das Spiel gewinnen,\nwas ist wenn hier ganz viel Text steht",
       ),
-      Spell.trigger(
+      Ability.example(
         "Zweite Fähigkeit",
         "Start of Battle",
-        "enemy phase",
         "Hier wird leider verloren",
       ),
     ];
 
-    List<Spell> kragnosSpells = [
-      Spell("Dritte  Fähigkeit", "Heldenphase", "Hier gibt es Untentschieden"),
-      Spell("Vierte Fähigkeit", "Start of Battle", "Up we Go"),
-      Spell("5. Spell", "Heldenphase", "Testspell ohne erledigt"),
-      Spell("Spell 1 von Kragnos", "Start of Battle", "Saucool"),
+    List<Ability> kragnosSpells = [
+      Ability.example("Dritte  Fähigkeit", "Heldenphase", "Hier gibt es Untentschieden"),
+      Ability.example("Vierte Fähigkeit", "Start of Battle", "Up we Go"),
+      Ability.example("5. Spell", "Heldenphase", "Testspell ohne erledigt"),
+      Ability.example("Spell 1 von Kragnos", "Start of Battle", "Saucool"),
     ];
 
-    List<Spell> gordrakkSpells = [
-      Spell.trigger(
+    List<Ability> gordrakkSpells = [
+      Ability.example(
         "Spell 1 von Gordrakk",
         "Start of Battle",
         "any phase",
-        "Saucool",
       ),
-      Spell("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Spell("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Spell("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Spell("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Spell("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Spell("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Spell("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Spell("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Spell("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
+      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
+      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
+      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
+      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
+      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
+      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
+      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
+      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
+      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
     ];
 
     List<Unit> units = [
@@ -71,27 +68,31 @@ class _StartofBattle extends State<StartofBattle> {
       Unit.withSpells("Kragnos", kragnosSpells),
     ];
 
-    List<Spell> spellsThisPhase = [];
+    List<Ability> spellsThisPhase = [];
 
     for (Unit unit in units) {
-      for (Spell spell in unit.spells) {
-        if (spell.phase.contains("Start of Battle")) {
-          //if(spell.phase.contains("Movement Phase")) {
+      for (Ability ability in unit.abilitys) {
+        if (ability.timing.contains("Start of Battle")) {
+          //if(ability.phase.contains("Movement Phase")) {
 
-          if ((spell.trigger.contains("own phase") ||
-                  spell.trigger.contains("any phase")) &&
+          /*if ((ability.trigger.contains("own phase") ||
+                  ability.trigger.contains("any phase")) &&
               widget.ownPhase) {
-            widget.erledigtList.add(spell.erledigt);
-            spell.originUnit = unit.name;
-            spellsThisPhase.add(spell);
+            widget.erledigtList.add(ability.erledigt);
+            ability.originUnit = unit.name;
+            spellsThisPhase.add(ability);
           }
-          if ((spell.trigger.contains("enemy phase") ||
-                  spell.trigger.contains("any phase")) &&
+          if ((ability.trigger.contains("enemy phase") ||
+                  ability.trigger.contains("any phase")) &&
               !widget.ownPhase) {
-            widget.erledigtList.add(spell.erledigt);
-            spell.originUnit = unit.name;
-            spellsThisPhase.add(spell);
-          }
+            widget.erledigtList.add(ability.erledigt);
+            ability.originUnit = unit.name;
+            spellsThisPhase.add(ability);
+            }
+           */
+          widget.erledigtList.add(ability.erledigt);
+          ability.originUnit = unit.name;
+          spellsThisPhase.add(ability);
         }
       }
     }
@@ -154,7 +155,7 @@ class _StartofBattle extends State<StartofBattle> {
                           child: Column(
                             children: [
                               Text(
-                                spellsThisPhase[index].title,
+                                spellsThisPhase[index].name,
                                 style: TextStyle(fontSize: 20),
                               ),
                               Icon(Icons.done, size: 100),
@@ -182,7 +183,7 @@ class _StartofBattle extends State<StartofBattle> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  spellsThisPhase[index].title,
+                                  spellsThisPhase[index].name,
                                   style: TextStyle(
                                     backgroundColor: widget.phaseColor,
                                     fontWeight: FontWeight.bold,
@@ -193,7 +194,7 @@ class _StartofBattle extends State<StartofBattle> {
                                 ),
                               ],
                             ),
-                            Text(spellsThisPhase[index].trigger),
+                            Text(spellsThisPhase[index].timing),
                             Text(spellsThisPhase[index].originUnit),
                             Text(spellsThisPhase[index].details),
                             /*

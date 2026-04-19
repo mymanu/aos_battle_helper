@@ -1,10 +1,12 @@
 import 'selections.dart';
 
 class ForcesTwo {
-  ForcesTwo(this.id, this.name, this.selections);
+  ForcesTwo(this.id, this.name);
 
-  Selections selections;
-  //Categories categories;
+  Selections selections = Selections("id", "name");
+
+  List<dynamic> selectionsDynamic = [];
+  List<dynamic> categoriesDynamic = [];
 
   String id = "Yoyoyo";
   String name = "Gandalf";

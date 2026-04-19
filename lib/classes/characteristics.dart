@@ -7,11 +7,4 @@ class Characteristics {
   /*
   "typeId": "fed0-d1b3-1bb8-c501",
    */
-
-  /*
-  Characteristics.fromJsonList(List<dynamic> json)
-      : text = json.elementAt(0)["\$text"] as String,
-        name = json.elementAt(0)["name"] as String;
-
-   */
 }

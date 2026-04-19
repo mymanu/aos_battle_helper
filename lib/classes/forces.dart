@@ -1,10 +1,14 @@
 import 'forcesTwo.dart';
 
 class Forces {
-  Forces(this.id, this.name, this.forcesTwo);
+  Forces(this.id, this.name);
   //Costs costs;
   //Categories categories;
-  ForcesTwo forcesTwo;
+  ForcesTwo forcesTwo = ForcesTwo("id", "name");
+
+  List<dynamic> costDynamic = [];
+  List<dynamic> categoriesDynamic = [];
+  List<dynamic> forcesTwoDynamic = [];
 
   String id = "Yoyoyo";
   String name = "Gandalf";

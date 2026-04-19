@@ -1,12 +1,14 @@
-import 'package:aos_battle_helper/classes/spell.dart';
+import 'package:aos_battle_helper/classes/ability.dart';
+import 'package:aos_battle_helper/classes/weapon.dart';
 class Unit {
   Unit(this.name);
-  Unit.withSpells(this.name, this.spells);
+  Unit.withSpells(this.name, this.abilitys);
 
   //Profiles
   String id = "-13";
   String name;
-  List<Spell> spells = [];
+  List<Ability> abilitys = [];
+  List<Weapon> weapons = [];
 
   //Characteristics
   String move = "-1";

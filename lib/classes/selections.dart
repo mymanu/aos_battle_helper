@@ -10,6 +10,7 @@ class Selections {
 
   String id = "Yoyoyo";
   String name = "Gandalf";
+  String type = "-1";
 
   /*
   "entryId": "4079-fb73-a4d7-7b0d::4e07-f63a-6315-b48b",
@@ -20,8 +21,11 @@ class Selections {
 
   List<dynamic> profilesDynamic = [];
 
+  List<dynamic> selectionsDynamic = [];
+
   Selections.fromJsonList(List<dynamic> json)
       : id = json.elementAt(0)["id"] as String,
         name = json.elementAt(0)["name"] as String,
-        profilesDynamic = (json.elementAt(0)["profiles"]);
+        profilesDynamic = (json.elementAt(0)["profiles"]),
+        selectionsDynamic = (json.elementAt(0)["selections"]);
 }

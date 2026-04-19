@@ -1,11 +1,18 @@
 //import 'package:aos_battle_helper/classes/spell.dart';
 class Ability {
   Ability(this.name);
-  Ability.withSpells(this.name);
+
+  Ability.example(this.name, this.timing, this.details);
+
+  /*
+ Spell (this.title, this.phase, this.details);
+  Spell.trigger (this.title, this.phase, this.trigger, this.details);
+  */
 
   //Profiles
   String id = "-13";
   String name;
+
   //List<Spell> spells = [];
 
   //Characteristics
@@ -17,9 +24,12 @@ class Ability {
 
   //Attributes
   String color = "-6";
-  String type = "-7";
+  String typeName = "-7";
 
   String details = "Details der Unit?";
+
+  bool erledigt = false;
+  String originUnit = "Nobody";
 
   String imagePath = "";
 }
