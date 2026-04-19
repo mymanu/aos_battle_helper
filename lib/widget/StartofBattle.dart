@@ -64,11 +64,13 @@ class _StartofBattle extends State<StartofBattle> {
       Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
     ];
 
+    /*
     List<Unit> units = [
       Unit.withSpells("Megaboss", megabossSpells),
       Unit.withSpells("Gordrakk", gordrakkSpells),
       Unit.withSpells("Kragnos", kragnosSpells),
     ];
+     */
 
     List<Ability> spellsThisPhase = [];
 
@@ -101,6 +103,7 @@ class _StartofBattle extends State<StartofBattle> {
       }
     }
 
+    //TODO ab Hier wird das UI gebaut, ab hier kannst du dich dann austoben
     return Scaffold(
       appBar: AppBar(
         title: Text(title), //Text('Logged In'),
