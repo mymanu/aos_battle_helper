@@ -24,12 +24,12 @@ class _HeroPhase extends State<HeroPhase> {
 
     List<Ability> megabossSpells = [
       Ability.example(
-        "firstSpell-Title",
+        "Spell 1",
         "Start of Battle",
         "Diese Fähigkeit lässt dich das Spiel gewinnen,\nwas ist wenn hier ganz viel Text steht",
       ),
       Ability.example(
-        "Zweite Fähigkeit",
+        "Spell 2",
         "Start of Battle",
         "Hier wird leider verloren",
       ),
@@ -37,7 +37,7 @@ class _HeroPhase extends State<HeroPhase> {
 
     List<Ability> kragnosSpells = [
       Ability.example("Dritte  Fähigkeit", "Heldenphase", "Hier gibt es Untentschieden"),
-      Ability.example("Vierte Fähigkeit", "Start of Battle", "Up we Go"),
+      Ability.example("Spell 4", "Start of Battle", "Up we Go"),
       Ability.example("5. Spell", "Heldenphase", "Testspell ohne erledigt"),
       Ability.example("Spell 1 von Kragnos", "Start of Battle", "Saucool"),
     ];
@@ -171,6 +171,7 @@ class _HeroPhase extends State<HeroPhase> {
                           )
                         : Column(
                             mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -187,9 +188,16 @@ class _HeroPhase extends State<HeroPhase> {
                                   ),
                                 ],
                               ),
-                              Text(spellsThisPhase[index].timing),
-                              Text(spellsThisPhase[index].originUnit),
-                              Text(spellsThisPhase[index].details),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  //TODO abändern zu Unit, von welcher es genutzt werden kann
+                                  Text("Ursprung: " + spellsThisPhase[index].originUnit),
+                                ],
+                              ),
+                              Text("Trigger: " + spellsThisPhase[index].timing),
+                              Text("Effekt: " + spellsThisPhase[index].details),
+                              //Text("Ursprung: " + spellsThisPhase[index].originUnit),
                               /*
                             ListTile(
                               leading: Icon(Icons.album),
