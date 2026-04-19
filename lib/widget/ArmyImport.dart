@@ -371,83 +371,86 @@ class _ArmyImport extends State<ArmyImport> {
             select.rulesDynamic = selectionMapJSON["rules"];
           }
 
+          if(select.name.contains("Battle Trait")) {
             BattleTraits battleTrait = BattleTraits();
 
-          //roster -> forces -> selections -> profiles
-          for (Map<String, dynamic> profilesMapJSON
-          in select.profilesDynamic) {
-            Profiles profile = Profiles(
-              profilesMapJSON["id"],
-              profilesMapJSON["name"],
-            );
+            //roster -> forces -> selections -> profiles
+            for (Map<String, dynamic> profilesMapJSON
+            in select.profilesDynamic) {
+              Profiles profile = Profiles(
+                profilesMapJSON["id"],
+                profilesMapJSON["name"],
+              );
 
-            if (profilesMapJSON.containsKey("characteristics")) {
-              profile.characteristics =
-              profilesMapJSON["characteristics"];
-            }
-            if (profilesMapJSON.containsKey("attributes")) {
-              profile.attributes =
-              profilesMapJSON["attributes"];
-            }
-            if (profilesMapJSON.containsKey("typeName")) {
-              profile.typeName = profilesMapJSON["typeName"];
-            }
-
-            if (profile.typeName.contains("Ability")) {
-              Ability ability = Ability(profile.name);
-              ability.id = profile.id;
-              ability.typeName = profile.typeName;
-
-              ////Characteristics für Abilitys
-              for (Map<String, dynamic> charMapJSON
-              in profile.characteristics) {
-                if (charMapJSON["name"].contains("Timing")) {
-                  ability.timing = charMapJSON["\$text"].toString();
-                }
-                if (charMapJSON["name"].contains("Declare")) {
-                  ability.declare = charMapJSON["\$text"].toString();
-                }
-                if (charMapJSON["name"].contains("Effect")) {
-                  ability.effect = charMapJSON["\$text"].toString();
-                }
-                if (charMapJSON["name"].contains("Keywords")) {
-                  ability.keywords = charMapJSON["\$text"].toString();
-                }
-                if (charMapJSON["name"].contains("Used By")) {
-                  ability.usedBy = charMapJSON["\$text"].toString();
-                }
+              if (profilesMapJSON.containsKey("characteristics")) {
+                profile.characteristics =
+                profilesMapJSON["characteristics"];
               }
-              ////Attributes für Abilitys
-              for (Map<String, dynamic> attributesMapJSON
-              in profile.attributes) {
-                if (attributesMapJSON["name"].contains("Color")) {
-                  ability.color = attributesMapJSON["\$text"].toString();
-                }
+              if (profilesMapJSON.containsKey("attributes")) {
+                profile.attributes =
+                profilesMapJSON["attributes"];
               }
-              battleTrait.abilitys.add(ability);
-              print("Battle-Trait Ausgabe: " + battleTrait.abilitys.length.toString());
+              if (profilesMapJSON.containsKey("typeName")) {
+                profile.typeName = profilesMapJSON["typeName"];
+              }
+
+              if (profile.typeName.contains("Ability")) {
+                Ability ability = Ability(profile.name);
+                ability.id = profile.id;
+                ability.typeName = profile.typeName;
+
+                ////Characteristics für Abilitys
+                for (Map<String, dynamic> charMapJSON
+                in profile.characteristics) {
+                  if (charMapJSON["name"].contains("Timing")) {
+                    ability.timing = charMapJSON["\$text"].toString();
+                  }
+                  if (charMapJSON["name"].contains("Declare")) {
+                    ability.declare = charMapJSON["\$text"].toString();
+                  }
+                  if (charMapJSON["name"].contains("Effect")) {
+                    ability.effect = charMapJSON["\$text"].toString();
+                  }
+                  if (charMapJSON["name"].contains("Keywords")) {
+                    ability.keywords = charMapJSON["\$text"].toString();
+                  }
+                  if (charMapJSON["name"].contains("Used By")) {
+                    ability.usedBy = charMapJSON["\$text"].toString();
+                  }
+                }
+                ////Attributes für Abilitys
+                for (Map<String, dynamic> attributesMapJSON
+                in profile.attributes) {
+                  if (attributesMapJSON["name"].contains("Color")) {
+                    ability.color = attributesMapJSON["\$text"].toString();
+                  }
+                }
+                battleTrait.abilitys.add(ability);
+                print("Battle-Trait Ausgabe: " +
+                    battleTrait.abilitys.length.toString());
+              }
             }
+            widget.settings.army.battleTraitsList.add(battleTrait);
           }
-          widget.settings.army.battleTraitsList.add(battleTrait);
 
-          //TODO hier demnächst Manifestation ableiten und Manifestation Object erstellen, befüllen und in Army abspeichern
-          //roster -> forces -> selections -> selectionsTwo
-          for (Map<String, dynamic> selectionMapTwoJSON
-          in select.selectionsDynamic) {
-            Selections selectTwo = Selections(
-              selectionMapTwoJSON["id"],
-              selectionMapTwoJSON["name"],
-            );
+            //TODO hier demnächst Manifestation ableiten und Manifestation Object erstellen, befüllen und in Army abspeichern
+            //roster -> forces -> selections -> selectionsTwo
+            for (Map<String, dynamic> selectionMapTwoJSON
+            in select.selectionsDynamic) {
+              Selections selectTwo = Selections(
+                selectionMapTwoJSON["id"],
+                selectionMapTwoJSON["name"],
+              );
 
-            if (selectionMapTwoJSON.containsKey("categories")) {
-              selectTwo.categoriesDynamic =
-              selectionMapTwoJSON["categories"];
-            }
+              if (selectionMapTwoJSON.containsKey("categories")) {
+                selectTwo.categoriesDynamic =
+                selectionMapTwoJSON["categories"];
+              }
 
-            if (selectionMapTwoJSON.containsKey("profiles")) {
-              selectTwo.profilesDynamic =
-              selectionMapTwoJSON["profiles"];
-            }
+              if (selectionMapTwoJSON.containsKey("profiles")) {
+                selectTwo.profilesDynamic =
+                selectionMapTwoJSON["profiles"];
+              }
           }
         }
       }
