@@ -218,7 +218,54 @@ class _ArmyImport extends State<ArmyImport> {
                       selectionMapTwoJSON["selections"];
                 }
 
-                //roster -> forces -> forcesTwo -> selections -> selections -> selections
+                if (selectionMapTwoJSON.containsKey("profiles")) {
+                  selectTwo.profilesDynamic =
+                  selectionMapTwoJSON["profiles"];
+                }
+
+                //roster -> forces -> forcesTwo -> selections -> selectTwo -> profiles
+                for (Map<String, dynamic> profileMapJSON
+                in selectTwo.profilesDynamic) {
+                  Profiles profile = Profiles(
+                    profileMapJSON["id"],
+                    profileMapJSON["name"],
+                  );
+                  if (profile.typeName.contains("Ability")) {
+                    Ability ability = Ability(profile.name);
+                    ability.id = profile.id;
+                    ability.typeName = profile.typeName;
+
+                    ////Characteristics für Abilitys
+                    for (Map<String, dynamic> charMapJSON
+                    in profile.characteristics) {
+                      if (charMapJSON["name"].contains("Timing")) {
+                        ability.timing = charMapJSON["\$text"].toString();
+                      }
+                      if (charMapJSON["name"].contains("Declare")) {
+                        ability.declare = charMapJSON["\$text"].toString();
+                      }
+                      if (charMapJSON["name"].contains("Effect")) {
+                        ability.effect = charMapJSON["\$text"].toString();
+                      }
+                      if (charMapJSON["name"].contains("Keywords")) {
+                        ability.keywords = charMapJSON["\$text"].toString();
+                      }
+                      if (charMapJSON["name"].contains("Used By")) {
+                        ability.usedBy = charMapJSON["\$text"].toString();
+                      }
+                    }
+                    ////Attributes für Abilitys
+                    for (Map<String, dynamic> attributesMapJSON
+                    in profile.attributes) {
+                      if (attributesMapJSON["name"].contains("Color")) {
+                        ability.color = attributesMapJSON["\$text"].toString();
+                      }
+                    }
+                    unit.abilitys.add(ability);
+                  }
+                }
+
+                //roster -> forces -> forcesTwo -> selections -> selectTwo -> selectThree
                 for (Map<String, dynamic> selectionThreeMapJSON
                     in selectTwo.selectionsDynamic) {
                   Selections selectThree = Selections(
