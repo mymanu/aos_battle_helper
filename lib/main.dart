@@ -1,3 +1,4 @@
+import 'package:aos_battle_helper/classes/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:aos_battle_helper/widget/HomePage.dart';
 
@@ -11,6 +12,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Settings settings = Settings();
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData.dark(
@@ -32,13 +34,13 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         //colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: HomePage(title: 'Age of Sigmar Battle Helper'),
+      home: HomePage(title: 'Age of Sigmar Battle Helper', settings: settings),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  MyHomePage({super.key, required this.title});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect

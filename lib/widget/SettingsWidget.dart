@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-class SettingsWidget extends StatefulWidget {
-  SettingsWidget({super.key, required this.title /*required this.settings*/});
+import '../classes/settings.dart';
 
-  //MySettings settings;
+class SettingsWidget extends StatefulWidget {
+  SettingsWidget({super.key, required this.title, required this.settings});
+
+  Settings settings;
   String title;
 
   @override

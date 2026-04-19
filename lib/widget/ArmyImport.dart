@@ -14,12 +14,13 @@ import 'package:aos_battle_helper/classes/selections.dart';
 import '../classes/army.dart';
 import '../classes/forces.dart';
 import '../classes/forcesTwo.dart';
+import '../classes/settings.dart';
 import '../classes/weapon.dart';
 
 class ArmyImport extends StatefulWidget {
-  ArmyImport({super.key, required this.title /*required this.settings*/});
+  ArmyImport({super.key, required this.title, required this.settings});
 
-  //MySettings settings;
+  Settings settings;
   String title;
 
   @override
@@ -33,13 +34,14 @@ class _ArmyImport extends State<ArmyImport> {
   bool isLoading = false;
   File? fileToDisplay;
 
+
   void pickFile() async {
     try {
       setState(() {
         isLoading = true;
       });
 
-      result = await FilePicker.platform.pickFiles(
+      result = await FilePicker.pickFiles(
         type: FileType.any,
         allowMultiple: false,
       );
@@ -52,6 +54,7 @@ class _ArmyImport extends State<ArmyImport> {
         print("File name: $_fileName");
       }
 
+      readJson();
       setState(() {
         isLoading = false;
       });
@@ -60,10 +63,11 @@ class _ArmyImport extends State<ArmyImport> {
     }
   }
 
-
-
   Future<void> readJson() async {
-    final String response = await rootBundle.loadString('assets/import.json');
+    widget.settings.army.unitList.clear();
+
+    final String response = await fileToDisplay!.readAsString();
+    //final String response = await rootBundle.loadString('assets/import.json');
     final data = await json.decode(response);
     //final data = await jsonDecode(response) ;
 
@@ -78,8 +82,6 @@ class _ArmyImport extends State<ArmyImport> {
       roster.forcesDynamic = rosterMap["forces"];
 
       print("Roster -> costDynamic Length: ${roster.costDynamic.length}");
-
-      Army army = Army("name");
 
       //roster -> forces
       for (Map<String, dynamic> forcesMapJSON in roster.forcesDynamic) {
@@ -280,13 +282,13 @@ class _ArmyImport extends State<ArmyImport> {
                   }
                 }
               }
-              army.unitList.add(unit);
+              widget.settings.army.unitList.add(unit);
             }
           }
         }
       }
 
-      for (Unit unit in army.unitList) {
+      for (Unit unit in widget.settings.army.unitList) {
         print("-------------------------------------------------------------");
         print("");
         print("Unit aus dem großen neuen Decode Block:");
@@ -317,13 +319,14 @@ class _ArmyImport extends State<ArmyImport> {
           print("Durchschlag: " + weap.rend);
           print("Schaden pro Würfel: " + weap.damage);
           print("Fähigkeit: " + weap.ability);
+          print("------------------");
         }
 
         print("-------------------------------------------------------------");
         print("");
       }
 
-      print("Anzahl der Units in der Unit-List: ${army.unitList.length}");
+      print("Anzahl der Units in der Unit-List: ${widget.settings.army.unitList.length}");
     });
   }
 
@@ -376,8 +379,11 @@ class _ArmyImport extends State<ArmyImport> {
             }, child: Text("Pick File")),
             if(pickedFile != null)
               SizedBox(
-                height: 300, width: 400, child: Image.file(fileToDisplay!),
+                height: 300, width: 400, //child: Image.file(fileToDisplay!),
+                child: Text("Armee erfolgreich importiert"),
               ),
+
+            Text("Unit-Anzahl in der Armee: " + widget.settings.army.unitList.length.toString()),
           ],
         ),
       ),

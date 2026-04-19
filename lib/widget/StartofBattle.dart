@@ -2,10 +2,12 @@ import 'package:aos_battle_helper/classes/unit.dart';
 import 'package:aos_battle_helper/classes/ability.dart';
 import 'package:flutter/material.dart';
 
-class StartofBattle extends StatefulWidget {
-  StartofBattle({super.key, required this.title /*required this.settings*/});
+import '../classes/settings.dart';
 
-  //MySettings settings;
+class StartofBattle extends StatefulWidget {
+  StartofBattle({super.key, required this.title, required this.settings});
+
+  Settings settings;
   String title;
   List<bool> erledigtList = [];
   bool ownPhase = true;
@@ -70,9 +72,11 @@ class _StartofBattle extends State<StartofBattle> {
 
     List<Ability> spellsThisPhase = [];
 
-    for (Unit unit in units) {
+    for(Unit unit in widget.settings.army.unitList) {
+    //for (Unit unit in units) {
       for (Ability ability in unit.abilitys) {
-        if (ability.timing.contains("Start of Battle")) {
+        if (ability.typeName.contains("Ability")) {
+        //if (ability.timing.contains("Start of Battle")) {
           //if(ability.phase.contains("Movement Phase")) {
 
           /*if ((ability.trigger.contains("own phase") ||

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../classes/settings.dart';
 import 'StartofBattle.dart';
 import 'ArmyImport.dart';
 import 'SettingsWidget.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key, required this.title /*required this.settings*/});
+  HomePage({super.key, required this.title, required this.settings});
 
-  //MySettings settings;
+  Settings settings;
   String title;
 
   @override
@@ -82,7 +83,7 @@ class _HomePage extends State<HomePage> {
                   style: TextStyle(fontSize: 20),
                 ),
                 onPressed: () {
-                  _navigateToStartofBattle(context);
+                  _navigateToStartofBattle(context, widget.settings);
                 },
               ),
 
@@ -103,7 +104,7 @@ class _HomePage extends State<HomePage> {
                   style: TextStyle(fontSize: 20),
                 ),
                 onPressed: () {
-                  _navigateToArmyImport(context);
+                  _navigateToArmyImport(context, widget.settings);
                 },
               ),
 
@@ -123,7 +124,7 @@ class _HomePage extends State<HomePage> {
                   style: TextStyle(fontSize: 20),
                 ),
                 onPressed: () {
-                  _navigateToSettings(context);
+                  _navigateToSettings(context, widget.settings);
                 },
               ),
 
@@ -398,26 +399,26 @@ class _HomePage extends State<HomePage> {
         : Colors.white;
   }
 
-  void _navigateToStartofBattle(BuildContext context) {
+  void _navigateToStartofBattle(BuildContext context, Settings settings) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => StartofBattle(title: "Start of Battle Round"),
+        builder: (context) => StartofBattle(title: "Start of Battle Round", settings: settings),
       ),
     );
   }
 
-  void _navigateToArmyImport(BuildContext context) {
+  void _navigateToArmyImport(BuildContext context, Settings settings) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => ArmyImport(title: "Armee importieren"),
+        builder: (context) => ArmyImport(title: "Armee importieren", settings: settings),
       ),
     );
   }
 
-  void _navigateToSettings(BuildContext context) {
+  void _navigateToSettings(BuildContext context, Settings settings) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => SettingsWidget(title: "Einstellungen"),
+        builder: (context) => SettingsWidget(title: "Einstellungen", settings: settings),
       ),
     );
   }
