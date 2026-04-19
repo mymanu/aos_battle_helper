@@ -4,6 +4,7 @@ class Forces {
   List<dynamic> costDynamic = [];
   List<dynamic> categoriesDynamic = [];
   List<dynamic> forcesTwoDynamic = [];
+  List<dynamic> selectionsDynamic = [];
 
   String id;
   String name;

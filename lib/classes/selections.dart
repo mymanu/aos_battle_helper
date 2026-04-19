@@ -14,4 +14,6 @@ class Selections {
 
   List<dynamic> profilesDynamic = [];
   List<dynamic> selectionsDynamic = [];
+  List<dynamic> categoriesDynamic = [];
+  List<dynamic> rulesDynamic = [];
 }

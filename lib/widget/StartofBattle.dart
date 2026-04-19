@@ -1,3 +1,4 @@
+import 'package:aos_battle_helper/classes/battleTraits.dart';
 import 'package:aos_battle_helper/classes/unit.dart';
 import 'package:aos_battle_helper/classes/ability.dart';
 import 'package:flutter/material.dart';
@@ -102,6 +103,36 @@ class _StartofBattle extends State<StartofBattle> {
         }
       }
     }
+
+    print("Anzahl Battle Traits: "+ widget.settings.army.battleTraitsList.length.toString());
+    for(BattleTraits battleTrait in widget.settings.army.battleTraitsList) {
+      for (Ability ability in battleTrait.abilitys) {
+        if (ability.typeName.contains("Ability")) {
+          //if (ability.timing.contains("Start of Battle")) {
+          //if(ability.phase.contains("Movement Phase")) {
+
+          /*if ((ability.trigger.contains("own phase") ||
+                  ability.trigger.contains("any phase")) &&
+              widget.ownPhase) {
+            widget.erledigtList.add(ability.erledigt);
+            ability.originUnit = unit.name;
+            spellsThisPhase.add(ability);
+          }
+          if ((ability.trigger.contains("enemy phase") ||
+                  ability.trigger.contains("any phase")) &&
+              !widget.ownPhase) {
+            widget.erledigtList.add(ability.erledigt);
+            ability.originUnit = unit.name;
+            spellsThisPhase.add(ability);
+            }
+           */
+          widget.erledigtList.add(ability.erledigt);
+          ability.originUnit = "Battle-Trait";
+          spellsThisPhase.add(ability);
+        }
+      }
+    }
+
 
     //TODO ab Hier wird das UI gebaut, ab hier kannst du dich dann austoben
     return Scaffold(

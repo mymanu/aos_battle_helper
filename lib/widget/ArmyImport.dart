@@ -16,6 +16,7 @@ import '../classes/forces.dart';
 import '../classes/forcesTwo.dart';
 import '../classes/settings.dart';
 import '../classes/weapon.dart';
+import '../classes/battleTraits.dart';
 
 class ArmyImport extends StatefulWidget {
   ArmyImport({super.key, required this.title, required this.settings});
@@ -81,14 +82,15 @@ class _ArmyImport extends State<ArmyImport> {
       roster.costLimitsDynamic = rosterMap["costLimits"];
       roster.forcesDynamic = rosterMap["forces"];
 
-      print("Roster -> costDynamic Length: ${roster.costDynamic.length}");
-
       //roster -> forces
       for (Map<String, dynamic> forcesMapJSON in roster.forcesDynamic) {
         Forces forces = Forces(forcesMapJSON["id"], forcesMapJSON["name"]);
 
         if (forcesMapJSON.containsKey("forces")) {
           forces.forcesTwoDynamic = forcesMapJSON["forces"];
+        }
+        if (forcesMapJSON.containsKey("selections")) {
+          forces.selectionsDynamic = forcesMapJSON["selections"];
         }
 
         //roster -> forces -> forcesTwo
@@ -230,6 +232,17 @@ class _ArmyImport extends State<ArmyImport> {
                     profileMapJSON["id"],
                     profileMapJSON["name"],
                   );
+
+                  if (profileMapJSON.containsKey("characteristics")) {
+                    profile.characteristics = profileMapJSON["characteristics"];
+                  }
+                  if (profileMapJSON.containsKey("typeName")) {
+                    profile.typeName = profileMapJSON["typeName"];
+                  }
+                  if (profileMapJSON.containsKey("attributes")) {
+                    profile.attributes = profileMapJSON["attributes"];
+                  }
+
                   if (profile.typeName.contains("Ability")) {
                     Ability ability = Ability(profile.name);
                     ability.id = profile.id;
@@ -330,6 +343,110 @@ class _ArmyImport extends State<ArmyImport> {
                 }
               }
               widget.settings.army.unitList.add(unit);
+            }
+          }
+        }
+
+        //roster -> forces -> selections
+        for (Map<String, dynamic> selectionMapJSON
+        in forces.selectionsDynamic) {
+          Selections select = Selections(
+            selectionMapJSON["id"],
+            selectionMapJSON["name"],
+          );
+
+          if (selectionMapJSON.containsKey("profiles")) {
+            select.profilesDynamic = selectionMapJSON["profiles"];
+          }
+          if (selectionMapJSON.containsKey("categories")) {
+            select.categoriesDynamic = selectionMapJSON["categories"];
+          }
+          if (selectionMapJSON.containsKey("selections")) {
+            select.selectionsDynamic = selectionMapJSON["selections"];
+          }
+          if (selectionMapJSON.containsKey("type")) {
+            select.type = selectionMapJSON["type"];
+          }
+          if (selectionMapJSON.containsKey("rules")) {
+            select.rulesDynamic = selectionMapJSON["rules"];
+          }
+
+            BattleTraits battleTrait = BattleTraits();
+
+          //roster -> forces -> selections -> profiles
+          for (Map<String, dynamic> profilesMapJSON
+          in select.profilesDynamic) {
+            Profiles profile = Profiles(
+              profilesMapJSON["id"],
+              profilesMapJSON["name"],
+            );
+
+            if (profilesMapJSON.containsKey("characteristics")) {
+              profile.characteristics =
+              profilesMapJSON["characteristics"];
+            }
+            if (profilesMapJSON.containsKey("attributes")) {
+              profile.attributes =
+              profilesMapJSON["attributes"];
+            }
+            if (profilesMapJSON.containsKey("typeName")) {
+              profile.typeName = profilesMapJSON["typeName"];
+            }
+
+            if (profile.typeName.contains("Ability")) {
+              Ability ability = Ability(profile.name);
+              ability.id = profile.id;
+              ability.typeName = profile.typeName;
+
+              ////Characteristics für Abilitys
+              for (Map<String, dynamic> charMapJSON
+              in profile.characteristics) {
+                if (charMapJSON["name"].contains("Timing")) {
+                  ability.timing = charMapJSON["\$text"].toString();
+                }
+                if (charMapJSON["name"].contains("Declare")) {
+                  ability.declare = charMapJSON["\$text"].toString();
+                }
+                if (charMapJSON["name"].contains("Effect")) {
+                  ability.effect = charMapJSON["\$text"].toString();
+                }
+                if (charMapJSON["name"].contains("Keywords")) {
+                  ability.keywords = charMapJSON["\$text"].toString();
+                }
+                if (charMapJSON["name"].contains("Used By")) {
+                  ability.usedBy = charMapJSON["\$text"].toString();
+                }
+              }
+              ////Attributes für Abilitys
+              for (Map<String, dynamic> attributesMapJSON
+              in profile.attributes) {
+                if (attributesMapJSON["name"].contains("Color")) {
+                  ability.color = attributesMapJSON["\$text"].toString();
+                }
+              }
+              battleTrait.abilitys.add(ability);
+              print("Battle-Trait Ausgabe: " + battleTrait.abilitys.length.toString());
+            }
+          }
+          widget.settings.army.battleTraitsList.add(battleTrait);
+
+          //TODO hier demnächst Manifestation ableiten und Manifestation Object erstellen, befüllen und in Army abspeichern
+          //roster -> forces -> selections -> selectionsTwo
+          for (Map<String, dynamic> selectionMapTwoJSON
+          in select.selectionsDynamic) {
+            Selections selectTwo = Selections(
+              selectionMapTwoJSON["id"],
+              selectionMapTwoJSON["name"],
+            );
+
+            if (selectionMapTwoJSON.containsKey("categories")) {
+              selectTwo.categoriesDynamic =
+              selectionMapTwoJSON["categories"];
+            }
+
+            if (selectionMapTwoJSON.containsKey("profiles")) {
+              selectTwo.profilesDynamic =
+              selectionMapTwoJSON["profiles"];
             }
           }
         }
