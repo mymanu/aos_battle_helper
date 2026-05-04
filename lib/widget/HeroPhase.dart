@@ -69,11 +69,11 @@ class _HeroPhase extends State<HeroPhase> {
 
     List<Ability> spellsThisPhase = [];
 
-    //for(Unit unit in widget.settings.army.unitList) {
-      for (Unit unit in units) {
+    for(Unit unit in widget.settings.army.unitList) {
+      //for (Unit unit in units) {
       for (Ability ability in unit.abilitys) {
         //if (ability.typeName.contains("Ability")) {
-          if (ability.timing.contains("Start of Battle")) {
+          if (ability.timing.contains("Hero")) {
           //if(ability.timing.contains("Movement Phase")) {
 
           /*if ((ability.trigger.contains("own phase") ||

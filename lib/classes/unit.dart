@@ -5,18 +5,19 @@ class Unit {
   Unit.withSpells(this.name, this.abilitys);
 
   //Profiles
-  String id = "-13";
+  String id = "-";
   String name;
   List<Ability> abilitys = [];
   List<Weapon> weapons = [];
 
   //Characteristics
-  String move = "-1";
-  String health = "-2";
-  String save = "-3";
-  String control = "-4";
+  String move = "-";
+  String health = "-";
+  String save = "-";
+  String control = "-";
 
   String details = "Details der Unit?";
+  String banishment = "-";
 
   String imagePath = "";
 }

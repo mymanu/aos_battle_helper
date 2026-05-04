@@ -5,6 +5,7 @@ class Weapon {
   String name;
   String typeName = "-0";
 
+  String range = "-0,5";
   String attack = "-1";
   String hit = "-2";
   String wound = "-3";

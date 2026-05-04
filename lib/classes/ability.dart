@@ -9,23 +9,24 @@ class Ability {
   */
 
   //Profiles
-  String id = "-13";
+  String id = "-";
   String name;
 
   //List<Spell> spells = [];
 
   //Characteristics
-  String timing = "-1";
-  String declare = "-2";
-  String effect = "-3";
-  String keywords = "-4";
-  String usedBy = "-5";
+  String timing = "-";
+  String declare = "-";
+  String effect = "-";
+  String keywords = "-";
+  String usedBy = "-";
 
   //Attributes
-  String color = "-6";
-  String typeName = "-7";
+  String color = "-";
+  String typeName = "-";
 
   String details = "Details der Unit?";
+  String castingValue = "-";
 
   bool erledigt = false;
   String originUnit = "Nobody";

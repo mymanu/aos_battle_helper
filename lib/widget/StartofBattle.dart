@@ -3,7 +3,10 @@ import 'package:aos_battle_helper/classes/unit.dart';
 import 'package:aos_battle_helper/classes/ability.dart';
 import 'package:flutter/material.dart';
 
+import '../classes/battleFormation.dart';
 import '../classes/settings.dart';
+import '../classes/spellLore.dart';
+import '../classes/weapon.dart';
 
 class StartofBattle extends StatefulWidget {
   StartofBattle({super.key, required this.title, required this.settings});
@@ -28,59 +31,15 @@ class _StartofBattle extends State<StartofBattle> {
     String title = widget.title;
     //String title = widget.title + "Phase";
 
-    List<Ability> megabossSpells = [
-      Ability.example(
-        "firstSpell-Title",
-        "Start of Battle",
-        "Diese Fähigkeit lässt dich das Spiel gewinnen,\nwas ist wenn hier ganz viel Text steht",
-      ),
-      Ability.example(
-        "Zweite Fähigkeit",
-        "Start of Battle",
-        "Hier wird leider verloren",
-      ),
-    ];
-
-    List<Ability> kragnosSpells = [
-      Ability.example("Dritte  Fähigkeit", "Heldenphase", "Hier gibt es Untentschieden"),
-      Ability.example("Vierte Fähigkeit", "Start of Battle", "Up we Go"),
-      Ability.example("5. Spell", "Heldenphase", "Testspell ohne erledigt"),
-      Ability.example("Spell 1 von Kragnos", "Start of Battle", "Saucool"),
-    ];
-
-    List<Ability> gordrakkSpells = [
-      Ability.example(
-        "Spell 1 von Gordrakk",
-        "Start of Battle",
-        "any phase",
-      ),
-      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-    ];
-
-    /*
-    List<Unit> units = [
-      Unit.withSpells("Megaboss", megabossSpells),
-      Unit.withSpells("Gordrakk", gordrakkSpells),
-      Unit.withSpells("Kragnos", kragnosSpells),
-    ];
-     */
-
     List<Ability> spellsThisPhase = [];
 
     for(Unit unit in widget.settings.army.unitList) {
     //for (Unit unit in units) {
       for (Ability ability in unit.abilitys) {
-        if (ability.typeName.contains("Ability")) {
+        //if (ability.typeName.contains("Ability")) {
         //if (ability.timing.contains("Start of Battle")) {
           //if(ability.phase.contains("Movement Phase")) {
+        if(ability.timing.contains("Passive")) {
 
           /*if ((ability.trigger.contains("own phase") ||
                   ability.trigger.contains("any phase")) &&
@@ -107,7 +66,7 @@ class _StartofBattle extends State<StartofBattle> {
     print("Anzahl Battle Traits: "+ widget.settings.army.battleTraitsList.length.toString());
     for(BattleTraits battleTrait in widget.settings.army.battleTraitsList) {
       for (Ability ability in battleTrait.abilitys) {
-        if (ability.typeName.contains("Ability")) {
+        //if (ability.typeName.contains("Ability")) {
           //if (ability.timing.contains("Start of Battle")) {
           //if(ability.phase.contains("Movement Phase")) {
 
@@ -129,7 +88,7 @@ class _StartofBattle extends State<StartofBattle> {
           widget.erledigtList.add(ability.erledigt);
           ability.originUnit = "Battle-Trait";
           spellsThisPhase.add(ability);
-        }
+        //}
       }
     }
 
