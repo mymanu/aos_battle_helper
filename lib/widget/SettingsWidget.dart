@@ -30,9 +30,9 @@ class _SettingsWidget extends State<SettingsWidget> {
     // Megaboss
 
     List<Ability> megabossSpells = [
-      Ability.example("Guarded Hero", "Passive", "If this Hero is within the combat range of a friendly unit that is not a Hero:\n• Subtract 1 from hit rolls for shooting attacks that target this Hero.\n• If this Hero is Infantry, they cannot be picked as the target of shooting attacks made by models more than 12\" from them.",),
-      Ability.example("Alright, Get´ Em", "Passive", "If a friendly IRONJAWZ unit uses the ‘Counter-charge’ command while it is wholly within 12\" of this unit, spend 1 command point to use that command instead of 2.",),
-      Ability.example("Obsessed With Violence", "Passive", "Add 1 to hit rolls for this unit’s attacks while it is in combat. Add 1 to this unit’s Move characteristic while it is not in combat.",),
+      Ability.color("Guarded Hero", "Passive", "Black", "If this Hero is within the combat range of a friendly unit that is not a Hero:\n• Subtract 1 from hit rolls for shooting attacks that target this Hero.\n• If this Hero is Infantry, they cannot be picked as the target of shooting attacks made by models more than 12\" from them.",),
+      Ability.color("Alright, Get´ Em", "Passive", "Orange", "If a friendly IRONJAWZ unit uses the ‘Counter-charge’ command while it is wholly within 12\" of this unit, spend 1 command point to use that command instead of 2.",),
+      Ability.color("Obsessed With Violence", "Passive", "Black", "Add 1 to hit rolls for this unit’s attacks while it is in combat. Add 1 to this unit’s Move characteristic while it is not in combat.",),
     ];
 
     Weapon choppa = Weapon("choppa", "Choppa");
@@ -55,9 +55,9 @@ class _SettingsWidget extends State<SettingsWidget> {
     // Ardboyz
 
     List<Ability> ardboyzSpells = [
-      Ability.example("Shield Bash", "Any Combat Phase", "Make a shield bash roll of D6 for each model in this unit that is within 3\" of the target. For each 6+, inflict 1 mortal damage on the target."),
-      Ability.example("Champion", "Passive", "Add 1 to the Attacks characteristic of weapons used by champions in this unit"),
-      Ability.example("Standard Bearer", "Passive", "While this unit contains any standard bearers, add 1 to this unit’s control score."),
+      Ability.color("Shield Bash", "Any Combat Phase", "Red", "Make a shield bash roll of D6 for each model in this unit that is within 3\" of the target. For each 6+, inflict 1 mortal damage on the target."),
+      Ability.color("Champion", "Passive", "Red", "Add 1 to the Attacks characteristic of weapons used by champions in this unit"),
+      Ability.color("Standard Bearer", "Passive", "Purple", "While this unit contains any standard bearers, add 1 to this unit’s control score."),
     ];
 
     Weapon choppaOrStikka = Weapon("choppaOrStikka", "Choppa or Stikka");
@@ -80,8 +80,8 @@ class _SettingsWidget extends State<SettingsWidget> {
     // Brutes
 
     List<Ability> brutesSpells = [
-      Ability.example("You Messin'?", "Passive", "Enemy units with a Health characteristic of 1 or 2 cannot contest objectives while they are in combat with this unit.",),
-      Ability.example("Champion", "Passive", "Add 1 to the Attacks characteristic of weapons used by champions in this unit."),
+      Ability.color("You Messin'?", "Passive", "Purple", "Enemy units with a Health characteristic of 1 or 2 cannot contest objectives while they are in combat with this unit.",),
+      Ability.color("Champion", "Passive", "Red", "Add 1 to the Attacks characteristic of weapons used by champions in this unit."),
     ];
 
     Weapon bruteWeapons = Weapon("bruteWeapons", "Brute Weapons");
@@ -112,8 +112,8 @@ class _SettingsWidget extends State<SettingsWidget> {
     // Gore-gruntas
 
     List<Ability> goreGruntaSpells = [
-      Ability.example("Gore-grunta Charge", "Any Charge Phase", "Declare: If this unit charged this phase, pick an enemy unit within 1\" of it to be the target.\nEffect: Roll a D3. On a 2+, inflict an amount of mortal damage on the target equal to the roll. Add 1 to the mortal damage inflicted (if any) if the target is Cavalry.",),
-      Ability.example("Champion", "Passive", "Add 1 to the Attacks characteristic of weapons used by champions in this unit."),
+      Ability.color("Gore-grunta Charge", "Any Charge Phase", "Orange", "Declare: If this unit charged this phase, pick an enemy unit within 1\" of it to be the target.\nEffect: Roll a D3. On a 2+, inflict an amount of mortal damage on the target equal to the roll. Add 1 to the mortal damage inflicted (if any) if the target is Cavalry.",),
+      Ability.color("Champion", "Passive", "Red", "Add 1 to the Attacks characteristic of weapons used by champions in this unit."),
     ];
 
     Weapon choppaOrHacka = Weapon("choppaOrHacka", "Choppa or Hacka");
@@ -145,8 +145,8 @@ class _SettingsWidget extends State<SettingsWidget> {
     // Weirdnob Shaman
 
     List<Ability> shamanSpells = [
-      Ability.example("Guarded Hero", "Passive", "If this Hero is within the combat range of a friendly unit that is not a Hero:\n• Subtract 1 from hit rolls for shooting attacks that target this Hero.\n• If this Hero is Infantry, they cannot be picked as the target of shooting attacks made by models more than 12\" from them.",),
-      Ability.example("Brutal Power", "Passive", "Add 1 to this unit’s power level while there are any friendly Ironjawz units that have 10 or more models wholly within 12\" of it.",),
+      Ability.color("Guarded Hero", "Passive", "Black", "If this Hero is within the combat range of a friendly unit that is not a Hero:\n• Subtract 1 from hit rolls for shooting attacks that target this Hero.\n• If this Hero is Infantry, they cannot be picked as the target of shooting attacks made by models more than 12\" from them.",),
+      Ability.color("Brutal Power", "Passive", "Yellow", "Add 1 to this unit’s power level while there are any friendly Ironjawz units that have 10 or more models wholly within 12\" of it.",),
     ];
 
     Weapon greenPuke = Weapon("greenPuke", "GreenPuke");
@@ -178,10 +178,10 @@ class _SettingsWidget extends State<SettingsWidget> {
     // Bossrokk Tower
 
     List<Ability> towerSpells = [
-      Ability.example("Man da Tower!", "Passive", "While this terrain feature has a Shouty Boss:\n• The Shouty Boss cannot use Move abilities.\n• Instead of measuring range or visibility to the Shouty Boss, measure to this terrain feature instead.\n• All attacks that would target the Shouty Boss target this terrain feature instead.\n• If this terrain feature is destroyed, before removing it from the battlefield, inflict D3 mortal damage on the Shouty Boss. Then, set up the Shouty Boss on the battlefield within 3\" of this terrain feature and not in combat. That unit is no longer the Shouty Boss. If it is not possible to set up the Shouty Boss, it is slain.",),
-      Ability.example("Up We Go!", "Your Hero Phase", "Declare: If this terrain feature does not have a Shouty Boss , pick a friendly Ironjawz Infantry Hero that is not in combat and is within 3\" of it to be the target.\nEffect: Place the target on this terrain feature. The target is now a Shouty Boss (see ‘Man da Tower’).",),
-      Ability.example("Aggressively Bossy", "Once Per Turn, Your Hero Phase", "Declare: Pick a visible enemy unit within 18\" of this terrain feature to be the target.\nEffect: Roll a dice. Add 1 to the roll if this terrain feature has a Shouty Boss. On a 4+, pick 1 of the following effects to apply to the target until the start of your next turn:\nDat's Ours, Ya Git!: Subtract 3 from the target's control score.\nZog Off Wiv Ya Magic!: Subtract 1 from casting rolls and/or chanting rolls for the target.\nOi! Hold it!: Subtract 1 from the number of dice rolled when making charge rolls for the target, to a minimum of 1.",),
-      Ability.example("I'm Off!", "Your Movement Phase", "Effect: If this terrain feature has a Shouty Boss that was not placed on it this turn, set up the Shouty Boss on the battlefield wholly within 6\" of this terrain feature and not in combat. That unit is no longer a Shouty Boss.",),
+      Ability.color("Man da Tower!", "Passive", "Black", "While this terrain feature has a Shouty Boss:\n• The Shouty Boss cannot use Move abilities.\n• Instead of measuring range or visibility to the Shouty Boss, measure to this terrain feature instead.\n• All attacks that would target the Shouty Boss target this terrain feature instead.\n• If this terrain feature is destroyed, before removing it from the battlefield, inflict D3 mortal damage on the Shouty Boss. Then, set up the Shouty Boss on the battlefield within 3\" of this terrain feature and not in combat. That unit is no longer the Shouty Boss. If it is not possible to set up the Shouty Boss, it is slain.",),
+      Ability.color("Up We Go!", "Your Hero Phase", "Yellow", "Declare: If this terrain feature does not have a Shouty Boss , pick a friendly Ironjawz Infantry Hero that is not in combat and is within 3\" of it to be the target.\nEffect: Place the target on this terrain feature. The target is now a Shouty Boss (see ‘Man da Tower’).",),
+      Ability.color("Aggressively Bossy", "Yellow", "Once Per Turn, Your Hero Phase", "Declare: Pick a visible enemy unit within 18\" of this terrain feature to be the target.\nEffect: Roll a dice. Add 1 to the roll if this terrain feature has a Shouty Boss. On a 4+, pick 1 of the following effects to apply to the target until the start of your next turn:\nDat's Ours, Ya Git!: Subtract 3 from the target's control score.\nZog Off Wiv Ya Magic!: Subtract 1 from casting rolls and/or chanting rolls for the target.\nOi! Hold it!: Subtract 1 from the number of dice rolled when making charge rolls for the target, to a minimum of 1.",),
+      Ability.color("I'm Off!", "Your Movement Phase", "Gray", "Effect: If this terrain feature has a Shouty Boss that was not placed on it this turn, set up the Shouty Boss on the battlefield wholly within 6\" of this terrain feature and not in combat. That unit is no longer a Shouty Boss.",),
     ];
 
     Unit tower = Unit.withSpells("Bossrokk Tower", towerSpells);
@@ -195,9 +195,9 @@ class _SettingsWidget extends State<SettingsWidget> {
     // Manifestation
 
     List<Ability> footSpells = [
-      Ability.example("Multiple Parts", "Passive", "When a number of damage points equal to this Manifestation's Health characteristic are allocated to it, this Manifestation is destroyed and all its parts are removed from play."),
-      Ability.example("Ward Save", "Passive", "6+\nIn step 1 of the damage sequence (see 18.0), make a ward roll of D6 for each damage point in this unit’s damage pool. If the roll equals or exceeds this unit’s ward value, remove that damage point from the damage pool."),
-      Ability.example("Wandering Destruction", "Once Per Turn, Your Movement Phase", "Declare: Pick a part of this Manifestation to be the target.\nRemove the target from the battlefield and set it up again on the battlefield wholly within 9\" of the other part of this Manifestation.\nThen, roll a D3 for each enemy unit within 3\" of the target. On a 2+:\n• Inflict an amount of mortal damage on the target equal to the roll.\n• That unit has the Stomped keyword until the start of your next turn.\n• Subtract 1 from the number of dice rolled when making charge rolls for Stomped units, to a minimum of 1."),
+      Ability.color("Multiple Parts", "Passive", "Black", "When a number of damage points equal to this Manifestation's Health characteristic are allocated to it, this Manifestation is destroyed and all its parts are removed from play."),
+      Ability.color("Ward Save", "Passive", "Black", "6+\nIn step 1 of the damage sequence (see 18.0), make a ward roll of D6 for each damage point in this unit’s damage pool. If the roll equals or exceeds this unit’s ward value, remove that damage point from the damage pool."),
+      Ability.color("Wandering Destruction", "Once Per Turn, Your Movement Phase", "Gray", "Declare: Pick a part of this Manifestation to be the target.\nRemove the target from the battlefield and set it up again on the battlefield wholly within 9\" of the other part of this Manifestation.\nThen, roll a D3 for each enemy unit within 3\" of the target. On a 2+:\n• Inflict an amount of mortal damage on the target equal to the roll.\n• That unit has the Stomped keyword until the start of your next turn.\n• Subtract 1 from the number of dice rolled when making charge rolls for Stomped units, to a minimum of 1."),
     ];
 
     Unit foot = Unit.withSpells("Foot of Gork", footSpells);
@@ -207,8 +207,8 @@ class _SettingsWidget extends State<SettingsWidget> {
 
 
     List<Ability> gorkSpells = [
-      Ability.example("Ward Save", "Passive", "6+\nIn step 1 of the damage sequence (see 18.0), make a ward roll of D6 for each damage point in this unit’s damage pool. If the roll equals or exceeds this unit’s ward value, remove that damage point from the damage pool."),
-      Ability.example("Bellowing Waaagh!-Cries", "Your Hero Phase", "Declare: Pick a friendly Ironjawz or Kruleboyz Wizard or Priest within 3\" of this Manifestation to be the target.\nEffect: Pick either 1 or 2 to add to casting rolls or chanting rolls for the target until the start of your next turn. Then, roll a number of dice equal to the number picked. For each 1-2, allocate 1 damage point to the target (ward rolls cannot be made for those damage points). For each 5+, until the start of your next turn, add 1 to charge rolls for friendly Kruleboyz or Ironjawz units while they are wholly within 12\" of this Manifestation. Friendly units can be affected by this ability multiple times and the effects are cumulative."),
+      Ability.color("Ward Save", "Passive", "Black", "6+\nIn step 1 of the damage sequence (see 18.0), make a ward roll of D6 for each damage point in this unit’s damage pool. If the roll equals or exceeds this unit’s ward value, remove that damage point from the damage pool."),
+      Ability.color("Bellowing Waaagh!-Cries", "Your Hero Phase", "Yellow", "Declare: Pick a friendly Ironjawz or Kruleboyz Wizard or Priest within 3\" of this Manifestation to be the target.\nEffect: Pick either 1 or 2 to add to casting rolls or chanting rolls for the target until the start of your next turn. Then, roll a number of dice equal to the number picked. For each 1-2, allocate 1 damage point to the target (ward rolls cannot be made for those damage points). For each 5+, until the start of your next turn, add 1 to charge rolls for friendly Kruleboyz or Ironjawz units while they are wholly within 12\" of this Manifestation. Friendly units can be affected by this ability multiple times and the effects are cumulative."),
     ];
 
     Weapon toxicGas = Weapon("toxicGas", "Toxic Gas");
@@ -227,9 +227,9 @@ class _SettingsWidget extends State<SettingsWidget> {
 
 
     List<Ability> morkspitSpells = [
-      Ability.example("Ward Save", "Passive", "6+\nIn step 1 of the damage sequence (see 18.0), make a ward roll of D6 for each damage point in this unit’s damage pool. If the roll equals or exceeds this unit’s ward value, remove that damage point from the damage pool."),
-      Ability.example("Tricksy Footing", "Passive", "Subtract 3 from the control score of enemy units while they are within 6\" of this Manifestation."),
-      Ability.example("Grasping Gunge", "Passive", "Enemy units cannot use Run abilities while they are within 6\" of this Manifestation."),
+      Ability.color("Ward Save", "Passive", "Black", "6+\nIn step 1 of the damage sequence (see 18.0), make a ward roll of D6 for each damage point in this unit’s damage pool. If the roll equals or exceeds this unit’s ward value, remove that damage point from the damage pool."),
+      Ability.color("Tricksy Footing", "Passive", "Yellow", "Subtract 3 from the control score of enemy units while they are within 6\" of this Manifestation."),
+      Ability.color("Grasping Gunge", "Passive", "Gray", "Enemy units cannot use Run abilities while they are within 6\" of this Manifestation."),
     ];
 
     Unit morkspit = Unit.withSpells("Morkspit Marsh", morkspitSpells);
@@ -260,10 +260,12 @@ class _SettingsWidget extends State<SettingsWidget> {
     Ability ironjawzWaaagh = Ability("Ironjawz Waaagh!");
     ironjawzWaaagh.timing = "Once Per Turn (Army), Your Charge Phase";
     ironjawzWaaagh.keywords = "WAAAGH!";
+    ironjawzWaaagh.color = "Orange";
     ironjawzWaaagh.details = "Declare: Pick a friendly Ironjawz Hero to be the target. You cannot pick the same Hero to be the target of this ability more than once per battle.\nEffect: For the rest of the turn, the following effects apply to friendly Ironjawz units while they are wholly within 18\" of the target:\n• Add 1 to charge rolls for those units.\n• Add 1 to the Attacks characteristic of those units’ melee weapons.";
 
     Ability mightyDestroyers = Ability("Mighty Destroyers");
     mightyDestroyers.timing = "Once Per Turn (Army), Any Hero Phase";
+    mightyDestroyers.color = "Yellow";
     mightyDestroyers.details = "Declare: Pick a friendly Ironjawz unit that was not set up this turn to be the target.\nEffect: The target can move up to 3\". It can move into combat. If it was in combat at the start of the move, it must end that move in combat.";
 
     BattleTraits battleTraits = BattleTraits();
@@ -276,36 +278,42 @@ class _SettingsWidget extends State<SettingsWidget> {
 
     Ability summonFoot = Ability("Summon Foot of Gork");
     summonFoot.timing = "Your Hero Phase";
+    summonFoot.color = "Yellow";
     summonFoot.castingValue = "7";
     summonFoot.keywords = "Spell, Summon";
     summonFoot.details = "Declare: If there is not a friendly Foot of Gork on the battlefield, pick a friendly Ironjawz Wizard to cast this spell, then make a casting roll of 2D6.\nEffect: Set up a Foot of Gork wholly within 12\" of the caster, visible to them and more than 9\" from all enemy units. A Foot of Gork has 2 parts that must be set up within 9\" of each other.";
 
     Ability summonGork = Ability("Summon Gork-Roara");
     summonGork.timing = "Your Hero Phase";
+    summonGork.color = "Yellow";
     summonGork.castingValue = "5";
     summonGork.keywords = "Spell, Summon";
     summonGork.details = "Declare: If there is not a friendly Gork-Roara on the battlefield, pick a friendly Ironjawz Wizard to cast this spell, then make a casting roll of 2D6.\nEffect: Set up a Gork-Roara wholly within 12\" of the caster, visible to them and more than 9\" from all enemy units.";
 
     Ability summonMorkspit = Ability("Summon Morkspit Marsh");
     summonMorkspit.timing = "Your Hero Phase";
+    summonMorkspit.color = "Yellow";
     summonMorkspit.castingValue = "5";
     summonMorkspit.keywords = "Spell, Summon";
     summonMorkspit.details = "Declare: If there is not a friendly Morkspit Marsh on the battlefield, pick a friendly Ironjawz Wizard to cast this spell, then make a casting roll of 2D6.\nEffect: Set up a Morkspit Marsh wholly within 18\" of the caster and visible to them.";
 
     Ability bashEmLadz = Ability("Bash 'Em, Ladz");
     bashEmLadz.timing = "Your Hero Phase";
+    bashEmLadz.color = "Yellow";
     bashEmLadz.castingValue = "6";
     bashEmLadz.keywords = "Spell, Unlimited";
     bashEmLadz.details = "Declare: Pick a friendly Ironjawz Wizard to cast this spell, pick a visible friendly Ironjawz unit wholly within 12\" of them to be the target, then make a casting roll of 2D6.\nEffect: The target’s melee weapons have Crit (2 Hits) until the start of your next turn";
 
     Ability greatHand = Ability("Da Great Big Green Hand of Gork");
     greatHand.timing = "Your Hero Phase";
+    greatHand.color = "Yellow";
     greatHand.castingValue = "7";
     greatHand.keywords = "Spell";
     greatHand.details = "Declare: Pick a friendly Ironjawz Wizard to cast this spell, pick a visible friendly unit wholly within 12\" of them and not in combat to be the target, then make a casting roll of 2D6.\nEffect: Remove the target from the battlefield and set it up again wholly within 24\" of the caster and more than 9\" from all enemy units.";
 
     Ability mightyEadbutt = Ability("Mighty 'Eadbutt");
     mightyEadbutt.timing = "Your Hero Phase";
+    mightyEadbutt.color = "Yellow";
     mightyEadbutt.castingValue = "6";
     mightyEadbutt.keywords = "Spell";
     mightyEadbutt.details = "Declare: Pick a friendly Ironjawz Wizard to cast this spell, pick a visible enemy unit within 18\" of them to be the target, then make a casting roll of 2D6.\nEffect: Inflict D3 mortal damage on the target. If the target is a Wizard, inflict 3 mortal damage on the target instead.";
@@ -325,6 +333,7 @@ class _SettingsWidget extends State<SettingsWidget> {
 
     Ability naturalDisaster = Ability("Natural Disaster");
     naturalDisaster.timing = "Passive";
+    naturalDisaster.color = "Orange";
     naturalDisaster.details = "If you make an unmodified charge roll of 8+ for a friendly non-Hero Ironjawz unit, add 1 to the Attacks characteristic of that unit’s melee weapons for the rest of the turn.";
 
     BattleFormation battleFormation = BattleFormation();

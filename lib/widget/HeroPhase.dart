@@ -1,6 +1,8 @@
+import 'package:aos_battle_helper/classes/battleFormation.dart';
 import 'package:flutter/material.dart';
 
 import '../classes/ability.dart';
+import '../classes/battleTraits.dart';
 import '../classes/settings.dart';
 import '../classes/unit.dart';
 
@@ -13,6 +15,8 @@ class HeroPhase extends StatefulWidget {
   bool ownPhase = true;
   Color phaseColor = Colors.yellow.shade800;
 
+  String phaseColorString = "Yellow";
+
   @override
   _HeroPhase createState() => _HeroPhase();
 }
@@ -22,59 +26,14 @@ class _HeroPhase extends State<HeroPhase> {
   Widget build(BuildContext context) {
     String title = widget.title;
 
-    List<Ability> megabossSpells = [
-      Ability.example(
-        "Spell 1",
-        "Start of Battle",
-        "Diese Fähigkeit lässt dich das Spiel gewinnen,\nwas ist wenn hier ganz viel Text steht",
-      ),
-      Ability.example(
-        "Spell 2",
-        "Start of Battle",
-        "Hier wird leider verloren",
-      ),
-    ];
-
-    List<Ability> kragnosSpells = [
-      Ability.example("Dritte  Fähigkeit", "Heldenphase", "Hier gibt es Untentschieden"),
-      Ability.example("Spell 4", "Start of Battle", "Up we Go"),
-      Ability.example("5. Spell", "Heldenphase", "Testspell ohne erledigt"),
-      Ability.example("Spell 1 von Kragnos", "Start of Battle", "Saucool"),
-    ];
-
-    List<Ability> gordrakkSpells = [
-      Ability.example(
-        "Spell 1 von Gordrakk",
-        "Start of Battle",
-        "any phase",
-      ),
-      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-      Ability.example("Spell 1 von Gordrakk", "Movement Phase", "Saucool"),
-    ];
-
-
-    List<Unit> units = [
-      Unit.withSpells("Megaboss", megabossSpells),
-      Unit.withSpells("Gordrakk", gordrakkSpells),
-      Unit.withSpells("Kragnos", kragnosSpells),
-    ];
-
-
     List<Ability> spellsThisPhase = [];
 
     for(Unit unit in widget.settings.army.unitList) {
       //for (Unit unit in units) {
       for (Ability ability in unit.abilitys) {
         //if (ability.typeName.contains("Ability")) {
-          if (ability.timing.contains("Hero")) {
-          //if(ability.timing.contains("Movement Phase")) {
+          //if (ability.timing.contains("Hero")) {
+          if(ability.color.contains(widget.phaseColorString)) {
 
           /*if ((ability.trigger.contains("own phase") ||
                   ability.trigger.contains("any phase")) &&
@@ -94,6 +53,34 @@ class _HeroPhase extends State<HeroPhase> {
           widget.erledigtList.add(ability.erledigt);
           ability.originUnit = unit.name;
           spellsThisPhase.add(ability);
+        }
+      }
+    }
+
+    for(Ability abi in widget.settings.army.spellLore.abilitys) {
+      if(abi.color.contains(widget.phaseColorString)) {
+        widget.erledigtList.add(abi.erledigt);
+        abi.originUnit = "Spell-Lore";
+        spellsThisPhase.add(abi);
+      }
+    }
+
+    for(BattleTraits battleTrait in widget.settings.army.battleTraitsList) {
+      for(Ability abi in battleTrait.abilitys) {
+        if(abi.color.contains(widget.phaseColorString)) {
+          widget.erledigtList.add(abi.erledigt);
+          abi.originUnit = "Battle-Trait";
+          spellsThisPhase.add(abi);
+        }
+      }
+    }
+
+    for(BattleFormation battleFormation in widget.settings.army.battleFormationsList) {
+      for(Ability abi in battleFormation.abilitys) {
+        if(abi.color.contains(widget.phaseColorString)) {
+          widget.erledigtList.add(abi.erledigt);
+          abi.originUnit = "Battle-Formation";
+          spellsThisPhase.add(abi);
         }
       }
     }

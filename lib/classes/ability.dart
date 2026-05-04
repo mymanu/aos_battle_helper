@@ -2,6 +2,7 @@ class Ability {
   Ability(this.name);
 
   Ability.example(this.name, this.timing, this.details);
+  Ability.color(this.name, this.timing, this.color, this.details);
 
   /*
  Spell (this.title, this.phase, this.details);

@@ -16,8 +16,9 @@ class StartofBattle extends StatefulWidget {
   List<bool> erledigtList = [];
   bool ownPhase = true;
   Color phaseColor = Colors.orange.shade800;
-
   //Color phaseColor = Colors.grey;
+
+  String phaseColorString = "Black";
 
   @override
   _StartofBattle createState() => _StartofBattle();
@@ -39,9 +40,10 @@ class _StartofBattle extends State<StartofBattle> {
         //if (ability.typeName.contains("Ability")) {
         //if (ability.timing.contains("Start of Battle")) {
           //if(ability.phase.contains("Movement Phase")) {
-        if(ability.timing.contains("Passive")) {
+        //if(ability.timing.contains("Passive")) {
+         if(ability.color.contains(widget.phaseColorString)) {
 
-          /*if ((ability.trigger.contains("own phase") ||
+            /*if ((ability.trigger.contains("own phase") ||
                   ability.trigger.contains("any phase")) &&
               widget.ownPhase) {
             widget.erledigtList.add(ability.erledigt);
@@ -56,13 +58,43 @@ class _StartofBattle extends State<StartofBattle> {
             spellsThisPhase.add(ability);
             }
            */
-          widget.erledigtList.add(ability.erledigt);
-          ability.originUnit = unit.name;
-          spellsThisPhase.add(ability);
+            widget.erledigtList.add(ability.erledigt);
+            ability.originUnit = unit.name;
+            spellsThisPhase.add(ability);
+
         }
       }
     }
 
+    for(Ability abi in widget.settings.army.spellLore.abilitys) {
+      if(abi.color.contains(widget.phaseColorString)) {
+        widget.erledigtList.add(abi.erledigt);
+        abi.originUnit = "Spell-Lore";
+        spellsThisPhase.add(abi);
+      }
+    }
+
+    for(BattleTraits battleTrait in widget.settings.army.battleTraitsList) {
+      for(Ability abi in battleTrait.abilitys) {
+        if(abi.color.contains(widget.phaseColorString)) {
+          widget.erledigtList.add(abi.erledigt);
+          abi.originUnit = "Battle-Trait";
+          spellsThisPhase.add(abi);
+        }
+      }
+    }
+
+    for(BattleFormation battleFormation in widget.settings.army.battleFormationsList) {
+      for(Ability abi in battleFormation.abilitys) {
+        if(abi.color.contains(widget.phaseColorString)) {
+          widget.erledigtList.add(abi.erledigt);
+          abi.originUnit = "Battle-Formation";
+          spellsThisPhase.add(abi);
+        }
+      }
+    }
+
+    /*
     print("Anzahl Battle Traits: "+ widget.settings.army.battleTraitsList.length.toString());
     for(BattleTraits battleTrait in widget.settings.army.battleTraitsList) {
       for (Ability ability in battleTrait.abilitys) {
@@ -91,6 +123,7 @@ class _StartofBattle extends State<StartofBattle> {
         //}
       }
     }
+    */
 
 
     //TODO ab Hier wird das UI gebaut, ab hier kannst du dich dann austoben
