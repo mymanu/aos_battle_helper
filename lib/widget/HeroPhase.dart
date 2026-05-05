@@ -5,6 +5,8 @@ import '../classes/ability.dart';
 import '../classes/battleTraits.dart';
 import '../classes/settings.dart';
 import '../classes/unit.dart';
+import 'HomePage.dart';
+import 'MovementPhase.dart';
 
 class HeroPhase extends StatefulWidget {
   HeroPhase({super.key, required this.title, required this.settings});
@@ -28,59 +30,119 @@ class _HeroPhase extends State<HeroPhase> {
 
     List<Ability> spellsThisPhase = [];
 
-    for(Unit unit in widget.settings.army.unitList) {
+    for (Unit unit in widget.settings.army.unitList) {
       //for (Unit unit in units) {
       for (Ability ability in unit.abilitys) {
         //if (ability.typeName.contains("Ability")) {
-          //if (ability.timing.contains("Hero")) {
-          if(ability.color.contains(widget.phaseColorString)) {
-
-          /*if ((ability.trigger.contains("own phase") ||
-                  ability.trigger.contains("any phase")) &&
+        //if (ability.timing.contains("Hero")) {
+        if (ability.color.contains(widget.phaseColorString)) {
+          if ((ability.timing.contains("Your") ||
+                  ability.timing.contains("Any") ||
+                  ability.timing.contains("Passive")) &&
               widget.ownPhase) {
             widget.erledigtList.add(ability.erledigt);
             ability.originUnit = unit.name;
             spellsThisPhase.add(ability);
           }
-          if ((ability.trigger.contains("enemy phase") ||
-                  ability.trigger.contains("any phase")) &&
+          if ((ability.timing.contains("Enemy") ||
+                  ability.timing.contains("Any") ||
+                  ability.timing.contains("Passive")) &&
               !widget.ownPhase) {
             widget.erledigtList.add(ability.erledigt);
             ability.originUnit = unit.name;
             spellsThisPhase.add(ability);
-            }
+          }
+
+          /*
+            widget.erledigtList.add(ability.erledigt);
+            ability.originUnit = unit.name;
+            spellsThisPhase.add(ability);
            */
+        }
+      }
+    }
+
+    for (Ability ability in widget.settings.army.spellLore.abilitys) {
+      if (ability.color.contains(widget.phaseColorString)) {
+        if ((ability.timing.contains("Your") ||
+                ability.timing.contains("Any") ||
+                ability.timing.contains("Passive")) &&
+            widget.ownPhase) {
           widget.erledigtList.add(ability.erledigt);
-          ability.originUnit = unit.name;
+          ability.originUnit = "Spell-Lore";
           spellsThisPhase.add(ability);
         }
+        if ((ability.timing.contains("Enemy") ||
+                ability.timing.contains("Any") ||
+                ability.timing.contains("Passive")) &&
+            !widget.ownPhase) {
+          widget.erledigtList.add(ability.erledigt);
+          ability.originUnit = "Spell-Lore";
+          spellsThisPhase.add(ability);
+        }
+        /*
+        widget.erledigtList.add(ability.erledigt);
+        ability.originUnit = "Spell-Lore";
+        spellsThisPhase.add(ability);
+         */
       }
     }
 
-    for(Ability abi in widget.settings.army.spellLore.abilitys) {
-      if(abi.color.contains(widget.phaseColorString)) {
-        widget.erledigtList.add(abi.erledigt);
-        abi.originUnit = "Spell-Lore";
-        spellsThisPhase.add(abi);
-      }
-    }
+    for (BattleTraits battleTrait in widget.settings.army.battleTraitsList) {
+      for (Ability ability in battleTrait.abilitys) {
+        if (ability.color.contains(widget.phaseColorString)) {
+          if ((ability.timing.contains("Your") ||
+                  ability.timing.contains("Any") ||
+                  ability.timing.contains("Passive")) &&
+              widget.ownPhase) {
+            widget.erledigtList.add(ability.erledigt);
+            ability.originUnit = "Battle-Trait";
+            spellsThisPhase.add(ability);
+          }
+          if ((ability.timing.contains("Enemy") ||
+                  ability.timing.contains("Any") ||
+                  ability.timing.contains("Passive")) &&
+              !widget.ownPhase) {
+            widget.erledigtList.add(ability.erledigt);
+            ability.originUnit = "Battle-Trait";
+            spellsThisPhase.add(ability);
+          }
+          /*
+          widget.erledigtList.add(ability.erledigt);
+          ability.originUnit = "Battle-Trait";
+          spellsThisPhase.add(ability);
 
-    for(BattleTraits battleTrait in widget.settings.army.battleTraitsList) {
-      for(Ability abi in battleTrait.abilitys) {
-        if(abi.color.contains(widget.phaseColorString)) {
-          widget.erledigtList.add(abi.erledigt);
-          abi.originUnit = "Battle-Trait";
-          spellsThisPhase.add(abi);
+           */
         }
       }
     }
 
-    for(BattleFormation battleFormation in widget.settings.army.battleFormationsList) {
-      for(Ability abi in battleFormation.abilitys) {
-        if(abi.color.contains(widget.phaseColorString)) {
-          widget.erledigtList.add(abi.erledigt);
-          abi.originUnit = "Battle-Formation";
-          spellsThisPhase.add(abi);
+    for (BattleFormation battleFormation
+        in widget.settings.army.battleFormationsList) {
+      for (Ability ability in battleFormation.abilitys) {
+        if (ability.color.contains(widget.phaseColorString)) {
+          if ((ability.timing.contains("Your") ||
+                  ability.timing.contains("Any") ||
+                  ability.timing.contains("Passive")) &&
+              widget.ownPhase) {
+            widget.erledigtList.add(ability.erledigt);
+            ability.originUnit = "Battle-Formation";
+            spellsThisPhase.add(ability);
+          }
+          if ((ability.timing.contains("Enemy") ||
+                  ability.timing.contains("Any") ||
+                  ability.timing.contains("Passive")) &&
+              !widget.ownPhase) {
+            widget.erledigtList.add(ability.erledigt);
+            ability.originUnit = "Battle-Formation";
+            spellsThisPhase.add(ability);
+          }
+          /*
+          widget.erledigtList.add(ability.erledigt);
+          ability.originUnit = "Battle-Formation";
+          spellsThisPhase.add(ability);
+
+           */
         }
       }
     }
@@ -88,15 +150,65 @@ class _HeroPhase extends State<HeroPhase> {
     //TODO ab Hier wird das UI der Helden-Phase gebaut, ab hier kann sich Jenny austoben.
     return Scaffold(
       appBar: AppBar(
-        title: Text(title, style: TextStyle(color: calculateTextColor(widget.phaseColor)),),
+        title: Text(
+          title,
+          style: TextStyle(color: calculateTextColor(widget.phaseColor)),
+        ),
         centerTitle: true,
         backgroundColor: widget.phaseColor,
         actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add, color: calculateTextColor(widget.phaseColor)),
+            onPressed: () {
+              setState(() {
+                widget.settings.commandPoints =
+                    widget.settings.commandPoints + 1;
+              });
+            },
+          ),
+          Text(
+            "CP: " + widget.settings.commandPoints.toString(),
+            style: TextStyle(color: calculateTextColor(widget.phaseColor)),
+          ),
+          IconButton(
+            icon: Icon(Icons.remove, color: calculateTextColor(widget.phaseColor)),
+            onPressed: () {
+              setState(() {
+                widget.settings.commandPoints =
+                    widget.settings.commandPoints - 1;
+              });
+            },
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.red,
+              backgroundColor: Colors.blueGrey.shade800,
+              shadowColor: Colors.black,
+            ),
+            onPressed: () {
+              _navigateToMenu(context, widget.settings);
+            },
+            child: Text("Menü"),
+          ),
+          SizedBox(width: 10),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.orange,
+              backgroundColor: Colors.blueGrey.shade800,
+              shadowColor: Colors.black,
+            ),
+            onPressed: () {
+              _navigateToMovement(context, widget.settings);
+            },
+            child: Text("Weiter zur Movement Phase"),
+          ),
+          SizedBox(width: 50),
           Text(
             widget.ownPhase
                 ? 'Meine ' + widget.title
                 : 'Gegnerische ' + widget.title,
-        style: TextStyle(color: calculateTextColor(widget.phaseColor))),
+            style: TextStyle(color: calculateTextColor(widget.phaseColor)),
+          ),
           Switch(
             // Dieser bool-Wert ändert den Switch.
             value: widget.ownPhase,
@@ -114,32 +226,41 @@ class _HeroPhase extends State<HeroPhase> {
         primary: false,
         slivers: <Widget>[
           SliverPadding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.only(right: 50),
             sliver: SliverGrid(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
+                crossAxisCount: 2,
+                childAspectRatio: 1.1,
+                /*
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
                 crossAxisCount: 3,
                 childAspectRatio: 2,
+
+                 */
               ),
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  return Card(
-                    child: widget.erledigtList[index]
-                        ? ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                widget.erledigtList[index] = false;
-                              });
-                            },
-                            child: Column(
-                              children: [
-                                Text(
-                                  spellsThisPhase[index].name,
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                Icon(Icons.done, size: 100),
-                                /*
+              delegate: SliverChildBuilderDelegate((
+                BuildContext context,
+                int index,
+              ) {
+                return Card(
+                  child: widget.erledigtList[index]
+                      ? ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              widget.erledigtList[index] = false;
+                            });
+                          },
+                          child: Column(
+                            children: [
+                              Text(
+                                spellsThisPhase[index].name,
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Icon(Icons.done, size: 100),
+                              /*
                               Container(
                                 height: 100,
                                 width: 100,
@@ -153,72 +274,75 @@ class _HeroPhase extends State<HeroPhase> {
                                 ),
                               ),
                               */
-                              ],
-                            ),
-                          )
-                        : Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    spellsThisPhase[index].name,
-                                    style: TextStyle(
-                                      backgroundColor: widget.phaseColor,
-                                      fontWeight: FontWeight.bold,
-                                      color: calculateTextColor(
-                                        widget.phaseColor,
-                                      ),
+                            ],
+                          ),
+                        )
+                      : Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  spellsThisPhase[index].name,
+                                  style: TextStyle(
+                                    backgroundColor: widget.phaseColor,
+                                    fontWeight: FontWeight.bold,
+                                    color: calculateTextColor(
+                                      widget.phaseColor,
                                     ),
                                   ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  //TODO abändern zu Unit, von welcher es genutzt werden kann
-                                  Text("Ursprung: " + spellsThisPhase[index].originUnit),
-                                ],
-                              ),
-                              Text("Trigger: " + spellsThisPhase[index].timing),
-                              Text("Effekt: " + spellsThisPhase[index].details),
-                              //Text("Ursprung: " + spellsThisPhase[index].originUnit),
-                              /*
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                //TODO abändern zu Unit, von welcher es genutzt werden kann
+                                Text(
+                                  "Ursprung: " +
+                                      spellsThisPhase[index].originUnit,
+                                ),
+                              ],
+                            ),
+                            Text("Trigger: " + spellsThisPhase[index].timing),
+                            Text("Effekt: " + spellsThisPhase[index].details),
+                            //Text("Ursprung: " + spellsThisPhase[index].originUnit),
+                            /*
                             ListTile(
                               leading: Icon(Icons.album),
                               title: Text(spells[index].title),
                               subtitle: Text(spells[index].details),
                             ),
                             */
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: <Widget>[
-                                  TextButton(
-                                    child: Text("Fähigkeit erledigt"),
-                                    onPressed: () {
-                                      setState(() {
-                                        widget.erledigtList[index] = true;
-                                      });
-                                    },
-                                  ),
-                                  const SizedBox(width: 8),
-                                  TextButton(
-                                    child: Text("Item $index"),
-                                    onPressed: () {
-                                      /* ... */
-                                    },
-                                  ),
-                                  const SizedBox(width: 8),
-                                ],
-                              ),
-                            ],
-                          ),
-                  );
-                }, childCount: spellsThisPhase.length),
-              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                TextButton(
+                                  child: Text("Fähigkeit erledigt"),
+                                  onPressed: () {
+                                    setState(() {
+                                      widget.erledigtList[index] = true;
+                                    });
+                                  },
+                                ),
+                                const SizedBox(width: 8),
+                                TextButton(
+                                  child: Text("Item $index"),
+                                  onPressed: () {
+                                    /* ... */
+                                  },
+                                ),
+                                const SizedBox(width: 8),
+                              ],
+                            ),
+                          ],
+                        ),
+                );
+              }, childCount: spellsThisPhase.length),
             ),
+          ),
         ],
       ),
     );
@@ -228,5 +352,23 @@ class _HeroPhase extends State<HeroPhase> {
     return ThemeData.estimateBrightnessForColor(background) == Brightness.light
         ? Colors.black
         : Colors.white;
+  }
+
+  void _navigateToMovement(BuildContext context, Settings settings) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) =>
+            MovementPhase(title: "Movementphase", settings: settings),
+      ),
+    );
+  }
+
+  void _navigateToMenu(BuildContext context, Settings settings) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) =>
+            HomePage(title: "Age of Sigmar Battle Helper", settings: settings),
+      ),
+    );
   }
 }
