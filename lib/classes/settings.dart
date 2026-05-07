@@ -5,4 +5,5 @@ class Settings {
   Army army = Army("Beispiel-Armee-Name");
   int commandPoints = 4;
   List<Ability> commandAbilitys = [];
+  List<Ability> normalAbilitys = [];
 }

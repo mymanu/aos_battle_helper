@@ -26,6 +26,309 @@ class _SettingsWidget extends State<SettingsWidget> {
     String title = widget.title;
     //String title = widget.title + "Phase";
 
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title), //Text('Logged In'),
+        centerTitle: true,
+        actions: <Widget>[],
+      ),
+      body: Center(
+          child: Column(
+            //crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.orange,
+                    backgroundColor: Colors.blueGrey.shade800,
+                    shadowColor: Colors.black,
+                    padding: const EdgeInsets.all(10.0),
+                    minimumSize: Size(250, 100),
+                    maximumSize: Size(510, 510),
+                  ),
+                  child: Text(
+                    'add AoS Spells',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () {
+                    addCommandSpells();
+                    addNormalSpells();
+                  },
+                ),
+
+                SizedBox(height: 20,),
+
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.orange,
+                    backgroundColor: Colors.blueGrey.shade800,
+                    shadowColor: Colors.black,
+                    padding: const EdgeInsets.all(10.0),
+                    minimumSize: Size(250, 100),
+                    maximumSize: Size(510, 510),
+                  ),
+                  child: Text(
+                    'Orks Orks Orks',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () {
+                    pickIronjawzHardcoded();
+                  },
+                ),
+
+                SizedBox(height: 20,),
+
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.orange,
+                    backgroundColor: Colors.blueGrey.shade800,
+                    shadowColor: Colors.black,
+                    padding: const EdgeInsets.all(10.0),
+                    minimumSize: Size(250, 100),
+                    maximumSize: Size(510, 510),
+                  ),
+                  child: Text(
+                    'Dino-Time',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () {
+                    pickSeraphonHardcoded();
+                  },
+                ),
+              ]
+          )
+      ),
+    );
+  }
+
+  Color calculateTextColor(Color background) {
+    return ThemeData.estimateBrightnessForColor(background) == Brightness.light
+        ? Colors.black
+        : Colors.white;
+  }
+
+  void addCommandSpells() {
+    List<Ability> commandSpells = [];
+
+    Ability rally = Ability.color(
+      "Rally",
+      "Any Hero Phase",
+      "Yellow",
+      "Declare: Choose a friendly unit which is not in combat to use this ability."
+          "\nEffect: Make 6x D6 Rallyroles. For each 4+ you gain 1 Rallypoint. You can use them as following:"
+          "\n - Heal(1) this unit for each spent Rallypoint"
+          "\n - You can use Rallypoints in the amount of health of 1 model to revive it.",
+    );
+    commandSpells.add(rally);
+
+    Ability magicalIntervention = Ability.color(
+        "Magical Intervention",
+        "Enemy Hero Phase",
+        "Yellow",
+        "Declare: Pick a friendly Wizard or Priest to use this ability."
+            "\nEffect: That friendly unit can use a Spell or Prayer ability (as appropriate) as if it were your hero phase. "
+            "\nIf you do so, subtract 1 from casting rolls or chanting rolls made as part of that ability."
+    );
+    commandSpells.add(magicalIntervention);
+
+    Ability atTheDouble = Ability.color(
+        "At The Double",
+        "Reaction: You declared a RUN Ability",
+        "Gray",
+        "Used By: The unit using that Run ability."
+        "\nEffect: Do not make a run roll as part of that Run ability. Instead, add 6\" to that unit’s Move characteristic to determine the distance each model"
+        "in that unit can move as part of that Run ability."
+    );
+    commandSpells.add(atTheDouble);
+
+    Ability redeploy = Ability.color(
+        "Redeploy",
+        "Enemy Movement Phase",
+        "Gray",
+        "Declare: Pick a friendly unit that is not in combat to use this ability."
+            "\nEffect: Each model in that unit can move up to D6\"."
+            "That move cannot pass through or end within the"
+            "combat range of an enemy unit."
+    );
+    commandSpells.add(redeploy);
+
+    Ability coveringFire = Ability.color(
+        "Covering Fire",
+        "Enemy Shooting Phase",
+        "Blue",
+        "Declare: Pick a friendly unit that is not in combat to use this ability."
+            "\nEffect: Resolve shooting attacks for that unit, but all of the attacks must target the nearest visible enemy"
+            "unit and you must subtract 1 from the hit rolls for those attacks."
+    );
+    commandSpells.add(coveringFire);
+
+    Ability forwardToVictory = Ability.color(
+        "Forward To Victory",
+        "Reaction: You declared a CHARGE Ability",
+        "Orange",
+        "Used By: The unit using that Charge ability."
+            "\nEffect: You can re-roll the charge roll."
+    );
+    commandSpells.add(forwardToVictory);
+
+    Ability counterCharge = Ability.color(
+        "Counter-Charge",
+        "Enemy Charge Phase",
+        "Orange",
+        "Used By: The unit using that Charge ability."
+            "\nEffect: You can re-roll the charge roll."
+    );
+    commandSpells.add(counterCharge);
+
+    Ability allOutAttack = Ability.color(
+        "All-Out Attack",
+        "Reaction: You declared an ATTACK Ability",
+        "Red",
+        "Used By: The unit using that Attack ability."
+            "\nEffect: Add 1 to hit rolls for attacks made as part of"
+            "that Attack ability. This also affects weapons that"
+            "have the Companion weapon ability."
+    );
+    commandSpells.add(allOutAttack);
+
+    Ability allOutDefence = Ability.color(
+        "All-Out Defence",
+        "Reaction: Opponent declared an ATTACK Ability",
+        "Red",
+        "Used By: A unit targeted by that Attack ability."
+            "\nEffect: Add 1 to save rolls for that unit in this phase."
+    );
+    commandSpells.add(allOutDefence);
+
+    Ability powerThrough = Ability.color(
+        "Power Through",
+        "End of Any Turn",
+        "Purple",
+        "Declare: Pick a friendly unit that charged this turn"
+            "to use this ability, then you must pick an enemy unit "
+            "in combat with it to be the target. The target must"
+            "have a lower Health characteristic than the unit"
+            "using this ability."
+            "\nEffect: Inflict D3 mortal damage on the target. Then,"
+            "the unit using this ability can move a distance up to"
+            "its Move characteristic. It can pass through and end"
+            "that move within the combat ranges of enemy units"
+            "that were in combat with it at the start of the move,"
+            "but not those of other enemy units. It does not have"
+            "to end the move in combat."
+    );
+    commandSpells.add(powerThrough);
+
+    widget.settings.commandAbilitys = commandSpells;
+  }
+
+  void addNormalSpells() {
+    List<Ability> normalSpells = [];
+
+    Ability activatePlaceOfPower = Ability.color(
+        "Activate Place Of Power",
+        "Start of Any Turn",
+        "Black",
+        "Declare: Pick a friendly Hero within 3\" of any Places of Power to use this ability."
+        "\nEffect: Roll a dice. On a 1, inflict D3 mortal damage on that Hero. On a 2+:"
+            "\n• If that Hero is a Wizard or Priest, add 1 to casting rolls or chanting rolls for that Hero this turn."
+            "\n• If that Hero is not a Wizard or Priest, they can use the ‘Unbind’ or ‘Banish Manifestation’ ability this turn as if they had Wizard (1)."
+      );
+    normalSpells.add(activatePlaceOfPower);
+
+    Ability banishManifestation = Ability.color(
+      "Banish Manifestation",
+      "Your Hero Phase",
+      "Yellow",
+      "Declare: Pick a friendly Wizard or Priest to use this ability, pick a manifestation within 30\" of them"
+          "to be the target, then make a banishment roll of 2D6."
+          "\nEffect: If the banishment roll equals or exceeds the banishment value listed on the manifestation’s"
+          "warscroll, it is banished and removed from play. You cannot pick the same manifestation as the target of this ability more than once per turn."
+    );
+    normalSpells.add(banishManifestation);
+
+    Ability unbind = Ability.color(
+        "Unbind",
+        "Reaction: Opponent declared a SPELL ability",
+        "Yellow",
+        "Used By: A friendly Wizard within 30\" of the enemy Wizard casting the spell."
+            "\nEffect: Make an unbinding roll of 2D6. If the roll exceeds the casting roll for the spell, then the spell is"
+            "unbound and its effect is not resolved. This reaction cannot be used more than once per casting roll."
+    );
+    normalSpells.add(unbind);
+
+    Ability normalMove = Ability.color(
+        "Normal Move",
+        "Your Movement Phase",
+        "Gray",
+        "Declare: Pick a friendly unit that is not in combat to use this ability."
+            "\nEffect: That unit can move a distance up to its Move characteristic. That unit cannot move into combat"
+            "during any part of that move."
+    );
+    normalSpells.add(normalMove);
+
+    Ability run = Ability.color(
+        "Run",
+        "Your Movement Phase",
+        "Gray",
+        "Declare: Pick a friendly unit that is not in combat to use this ability."
+            "\nEffect: Make a run roll of D6. That unit can move a distance up to its Move characteristic added to the"
+            "run roll. That unit cannot move into combat during"
+            "any part of that move."
+    );
+    normalSpells.add(run);
+
+    Ability retreat = Ability.color(
+        "Retreat",
+        "Your Movement Phase",
+        "Gray",
+        "Declare: Pick a friendly unit that is in combat to use this ability."
+            "\nEffect: Inflict D3 mortal damage on that unit. That unit can move a distance up to its Move"
+            "characteristic. That unit can move through the"
+            "combat ranges of any enemy units but cannot end"
+            "that move within an enemy unit’s combat range."
+    );
+    normalSpells.add(retreat);
+
+    Ability shoot = Ability.color(
+        "Shoot",
+        "Your Shooting Phase",
+        "Blue",
+        "Declare: Pick a friendly unit that has not used a Run or Retreat ability this turn to use this ability. Then,"
+            "pick one or more enemy units as the target(s) of that unit’s attacks (see 16.0)."
+            "\nEffect: Resolve shooting attacks against the target unit(s)."
+    );
+    normalSpells.add(shoot);
+
+    Ability charge = Ability.color(
+        "Charge",
+        "Your Charge Phase",
+        "Orange",
+        "Declare: Pick a friendly unit that is not in combat and has not used a Run or Retreat ability this turn"
+            "to use this ability. Then, make a charge roll of 2D6."
+            "\nEffect: That unit can move a distance up to the value of the charge roll. That unit can move through the"
+            "combat ranges of any enemy units and must end that move within ½\" of a visible enemy unit. If it does so,"
+            "the unit using this ability has charged."
+    );
+    normalSpells.add(charge);
+
+    Ability fight = Ability.color(
+        "Fight",
+        "Reaction: Opponent declared an ATTACK Ability",
+        "Red",
+        "Declare: Pick a friendly unit that is in combat or that charged this turn to use this ability. That unit can"
+            "make a pile‑in move (see 15.4). Then, if that unit is in combat, you must pick one or more enemy units as"
+            "the target(s) of that unit’s attacks (see 16.0)."
+            "\nEffect: Resolve combat attacks against the target unit(s)."
+    );
+    normalSpells.add(fight);
+
+    widget.settings.normalAbilitys = normalSpells;
+  }
+
+  void pickIronjawzHardcoded() {
     //---------------------------------------------------------
     // Megaboss
 
@@ -380,13 +683,13 @@ class _SettingsWidget extends State<SettingsWidget> {
     ironjawzWaaagh.keywords = "WAAAGH!";
     ironjawzWaaagh.color = "Orange";
     ironjawzWaaagh.details =
-        "Declare: Pick a friendly Ironjawz Hero to be the target. You cannot pick the same Hero to be the target of this ability more than once per battle.\nEffect: For the rest of the turn, the following effects apply to friendly Ironjawz units while they are wholly within 18\" of the target:\n• Add 1 to charge rolls for those units.\n• Add 1 to the Attacks characteristic of those units’ melee weapons.";
+    "Declare: Pick a friendly Ironjawz Hero to be the target. You cannot pick the same Hero to be the target of this ability more than once per battle.\nEffect: For the rest of the turn, the following effects apply to friendly Ironjawz units while they are wholly within 18\" of the target:\n• Add 1 to charge rolls for those units.\n• Add 1 to the Attacks characteristic of those units’ melee weapons.";
 
     Ability mightyDestroyers = Ability("Mighty Destroyers");
     mightyDestroyers.timing = "Once Per Turn (Army), Any Hero Phase";
     mightyDestroyers.color = "Yellow";
     mightyDestroyers.details =
-        "Declare: Pick a friendly Ironjawz unit that was not set up this turn to be the target.\nEffect: The target can move up to 3\". It can move into combat. If it was in combat at the start of the move, it must end that move in combat.";
+    "Declare: Pick a friendly Ironjawz unit that was not set up this turn to be the target.\nEffect: The target can move up to 3\". It can move into combat. If it was in combat at the start of the move, it must end that move in combat.";
 
     BattleTraits battleTraits = BattleTraits();
     battleTraits.abilitys.add(ironjawzWaaagh);
@@ -402,7 +705,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     summonFoot.castingValue = "7";
     summonFoot.keywords = "Spell, Summon";
     summonFoot.details =
-        "Declare: If there is not a friendly Foot of Gork on the battlefield, pick a friendly Ironjawz Wizard to cast this spell, then make a casting roll of 2D6.\nEffect: Set up a Foot of Gork wholly within 12\" of the caster, visible to them and more than 9\" from all enemy units. A Foot of Gork has 2 parts that must be set up within 9\" of each other.";
+    "Declare: If there is not a friendly Foot of Gork on the battlefield, pick a friendly Ironjawz Wizard to cast this spell, then make a casting roll of 2D6.\nEffect: Set up a Foot of Gork wholly within 12\" of the caster, visible to them and more than 9\" from all enemy units. A Foot of Gork has 2 parts that must be set up within 9\" of each other.";
 
     Ability summonGork = Ability("Summon Gork-Roara");
     summonGork.timing = "Your Hero Phase";
@@ -410,7 +713,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     summonGork.castingValue = "5";
     summonGork.keywords = "Spell, Summon";
     summonGork.details =
-        "Declare: If there is not a friendly Gork-Roara on the battlefield, pick a friendly Ironjawz Wizard to cast this spell, then make a casting roll of 2D6.\nEffect: Set up a Gork-Roara wholly within 12\" of the caster, visible to them and more than 9\" from all enemy units.";
+    "Declare: If there is not a friendly Gork-Roara on the battlefield, pick a friendly Ironjawz Wizard to cast this spell, then make a casting roll of 2D6.\nEffect: Set up a Gork-Roara wholly within 12\" of the caster, visible to them and more than 9\" from all enemy units.";
 
     Ability summonMorkspit = Ability("Summon Morkspit Marsh");
     summonMorkspit.timing = "Your Hero Phase";
@@ -418,7 +721,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     summonMorkspit.castingValue = "5";
     summonMorkspit.keywords = "Spell, Summon";
     summonMorkspit.details =
-        "Declare: If there is not a friendly Morkspit Marsh on the battlefield, pick a friendly Ironjawz Wizard to cast this spell, then make a casting roll of 2D6.\nEffect: Set up a Morkspit Marsh wholly within 18\" of the caster and visible to them.";
+    "Declare: If there is not a friendly Morkspit Marsh on the battlefield, pick a friendly Ironjawz Wizard to cast this spell, then make a casting roll of 2D6.\nEffect: Set up a Morkspit Marsh wholly within 18\" of the caster and visible to them.";
 
     Ability bashEmLadz = Ability("Bash 'Em, Ladz");
     bashEmLadz.timing = "Your Hero Phase";
@@ -426,7 +729,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     bashEmLadz.castingValue = "6";
     bashEmLadz.keywords = "Spell, Unlimited";
     bashEmLadz.details =
-        "Declare: Pick a friendly Ironjawz Wizard to cast this spell, pick a visible friendly Ironjawz unit wholly within 12\" of them to be the target, then make a casting roll of 2D6.\nEffect: The target’s melee weapons have Crit (2 Hits) until the start of your next turn";
+    "Declare: Pick a friendly Ironjawz Wizard to cast this spell, pick a visible friendly Ironjawz unit wholly within 12\" of them to be the target, then make a casting roll of 2D6.\nEffect: The target’s melee weapons have Crit (2 Hits) until the start of your next turn";
 
     Ability greatHand = Ability("Da Great Big Green Hand of Gork");
     greatHand.timing = "Your Hero Phase";
@@ -434,7 +737,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     greatHand.castingValue = "7";
     greatHand.keywords = "Spell";
     greatHand.details =
-        "Declare: Pick a friendly Ironjawz Wizard to cast this spell, pick a visible friendly unit wholly within 12\" of them and not in combat to be the target, then make a casting roll of 2D6.\nEffect: Remove the target from the battlefield and set it up again wholly within 24\" of the caster and more than 9\" from all enemy units.";
+    "Declare: Pick a friendly Ironjawz Wizard to cast this spell, pick a visible friendly unit wholly within 12\" of them and not in combat to be the target, then make a casting roll of 2D6.\nEffect: Remove the target from the battlefield and set it up again wholly within 24\" of the caster and more than 9\" from all enemy units.";
 
     Ability mightyEadbutt = Ability("Mighty 'Eadbutt");
     mightyEadbutt.timing = "Your Hero Phase";
@@ -442,7 +745,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     mightyEadbutt.castingValue = "6";
     mightyEadbutt.keywords = "Spell";
     mightyEadbutt.details =
-        "Declare: Pick a friendly Ironjawz Wizard to cast this spell, pick a visible enemy unit within 18\" of them to be the target, then make a casting roll of 2D6.\nEffect: Inflict D3 mortal damage on the target. If the target is a Wizard, inflict 3 mortal damage on the target instead.";
+    "Declare: Pick a friendly Ironjawz Wizard to cast this spell, pick a visible enemy unit within 18\" of them to be the target, then make a casting roll of 2D6.\nEffect: Inflict D3 mortal damage on the target. If the target is a Wizard, inflict 3 mortal damage on the target instead.";
 
     SpellLore spellLore = SpellLore();
     spellLore.abilitys.add(summonFoot);
@@ -460,7 +763,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     naturalDisaster.timing = "Passive";
     naturalDisaster.color = "Orange";
     naturalDisaster.details =
-        "If you make an unmodified charge roll of 8+ for a friendly non-Hero Ironjawz unit, add 1 to the Attacks characteristic of that unit’s melee weapons for the rest of the turn.";
+    "If you make an unmodified charge roll of 8+ for a friendly non-Hero Ironjawz unit, add 1 to the Attacks characteristic of that unit’s melee weapons for the rest of the turn.";
 
     BattleFormation battleFormation = BattleFormation();
     battleFormation.abilitys.add(naturalDisaster);
@@ -478,83 +781,11 @@ class _SettingsWidget extends State<SettingsWidget> {
     widget.settings.army.battleFormationsList.add(battleFormation);
 
     widget.settings.army.spellLore = spellLore;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title), //Text('Logged In'),
-        centerTitle: true,
-        actions: <Widget>[],
-      ),
-      body: Container(
-          child: Column(
-              children: [
-                Text("Test-Text"),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.orange,
-                    backgroundColor: Colors.blueGrey.shade800,
-                    shadowColor: Colors.black,
-                    padding: const EdgeInsets.all(10.0),
-                    minimumSize: Size(250, 100),
-                    maximumSize: Size(510, 510),
-                  ),
-                  child: Text(
-                    'add Command-Point Spells',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  onPressed: () {
-                    addCommandSpells();
-                  },
-                ),
-              ]
-          )
-      ),
-    );
   }
 
-  Color calculateTextColor(Color background) {
-    return ThemeData.estimateBrightnessForColor(background) == Brightness.light
-        ? Colors.black
-        : Colors.white;
+  //TODO Seraphon Path to Glory Liste hinzufügen über Button Hinzufügen
+  void pickSeraphonHardcoded() {
+
   }
-
-  void addCommandSpells() {
-    List<Ability> commandSpells = [];
-
-    /*
-    Ability activatePlaceOfPower = Ability.color(
-        "Activate Place Of Power",
-        "Start of Any Turn",
-        "Black",
-        "Declare: Pick a friendly Hero within 3 inches of any Places of Power to use this ability"
-      );
-     */
-
-    Ability rally = Ability.color(
-      "Rally",
-      "Any Hero Phase",
-      "Yellow",
-      "Declare: Choose a friendly unit which is not in combat to use this ability."
-          "\nEffect: Make 6x D6 Rallyroles. For each 4+ you gain 1 Rallypoint. You can use them as following:"
-          "\n - Heal(1) this unit for each spent Rallypoint"
-          "\n - You can use Rallypoints in the amount of health of 1 model to revive it.",
-    );
-    commandSpells.add(rally);
-
-    Ability magicalIntervention = Ability.color(
-        "Magical Intervention",
-        "Enemy Hero Phase",
-        "Yellow",
-        "Declare: Pick a friendly Wizard or Priest to use this ability."
-            "\nEffect: That friendly unit can use a Spell or Prayer ability (as appropriate) as if it were your hero phase. "
-            "\nIf you do so, subtract 1 from casting rolls or chanting rolls made as part of that ability."
-    );
-    commandSpells.add(magicalIntervention);
-
-    widget.settings.commandAbilitys = commandSpells;
-  }
-
-  //TODO Seraphon Path to Glory Liste hinzufügen und Button zum Hinzufügen
 
 }

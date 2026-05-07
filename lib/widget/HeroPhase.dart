@@ -162,7 +162,7 @@ class _HeroPhase extends State<HeroPhase> {
                 ability.timing.contains("Passive")) &&
             !widget.ownPhase) {
           widget.erledigtList.add(ability.erledigt);
-          ability.originUnit = "Battle-Formation";
+          ability.originUnit = "Command-Ability";
           spellsThisPhase.add(ability);
         }
         /*
