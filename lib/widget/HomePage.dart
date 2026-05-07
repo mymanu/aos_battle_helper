@@ -1,3 +1,4 @@
+import 'package:aos_battle_helper/widget/WarScroll.dart';
 import 'package:flutter/material.dart';
 
 import '../classes/settings.dart';
@@ -147,6 +148,27 @@ class _HomePage extends State<HomePage> {
                 ),
                 onPressed: () {
                   _navigateToHero(context, widget.settings);
+                },
+              ),
+
+              SizedBox(height: 50),
+
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.orange,
+                  backgroundColor: Colors.blueGrey.shade800,
+                  shadowColor: Colors.black,
+                  padding: const EdgeInsets.all(10.0),
+                  minimumSize: Size(250, 100),
+                  maximumSize: Size(510, 510),
+                ),
+                child: Text(
+                  'Schriftrolle',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 20),
+                ),
+                onPressed: () {
+                  _navigateToWarScroll(context, widget.settings);
                 },
               ),
             ],
@@ -431,4 +453,13 @@ class _HomePage extends State<HomePage> {
       ),
     );
   }
+
+  void _navigateToWarScroll(BuildContext context, Settings settings) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => WarScroll(title: "Schriftrolle", settings: settings),
+      ),
+    );
+  }
+
 }
