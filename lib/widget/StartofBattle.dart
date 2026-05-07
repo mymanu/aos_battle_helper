@@ -273,10 +273,18 @@ class _StartofBattle extends State<StartofBattle> {
             padding: const EdgeInsets.only(right: 50),
             sliver: SliverGrid(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                /*
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 crossAxisCount: 2,
                 childAspectRatio: 1.1,
+                */
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 3,
+                childAspectRatio: 2,
+
+
               ),
               delegate: SliverChildBuilderDelegate((
                 BuildContext context,

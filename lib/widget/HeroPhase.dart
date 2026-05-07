@@ -147,6 +147,33 @@ class _HeroPhase extends State<HeroPhase> {
       }
     }
 
+    for (Ability ability in widget.settings.commandAbilitys) {
+      if (ability.color.contains(widget.phaseColorString)) {
+        if ((ability.timing.contains("Your") ||
+                ability.timing.contains("Any") ||
+                ability.timing.contains("Passive")) &&
+            widget.ownPhase) {
+          widget.erledigtList.add(ability.erledigt);
+          ability.originUnit = "Command-Ability";
+          spellsThisPhase.add(ability);
+        }
+        if ((ability.timing.contains("Enemy") ||
+                ability.timing.contains("Any") ||
+                ability.timing.contains("Passive")) &&
+            !widget.ownPhase) {
+          widget.erledigtList.add(ability.erledigt);
+          ability.originUnit = "Battle-Formation";
+          spellsThisPhase.add(ability);
+        }
+        /*
+          widget.erledigtList.add(ability.erledigt);
+          ability.originUnit = "Battle-Formation";
+          spellsThisPhase.add(ability);
+
+           */
+      }
+    }
+
     //TODO ab Hier wird das UI der Helden-Phase gebaut, ab hier kann sich Jenny austoben.
     return Scaffold(
       appBar: AppBar(
@@ -171,7 +198,10 @@ class _HeroPhase extends State<HeroPhase> {
             style: TextStyle(color: calculateTextColor(widget.phaseColor)),
           ),
           IconButton(
-            icon: Icon(Icons.remove, color: calculateTextColor(widget.phaseColor)),
+            icon: Icon(
+              Icons.remove,
+              color: calculateTextColor(widget.phaseColor),
+            ),
             onPressed: () {
               setState(() {
                 widget.settings.commandPoints =
@@ -229,17 +259,16 @@ class _HeroPhase extends State<HeroPhase> {
             padding: const EdgeInsets.only(right: 50),
             sliver: SliverGrid(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                /*
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 crossAxisCount: 2,
                 childAspectRatio: 1.1,
-                /*
+                */
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 crossAxisCount: 3,
                 childAspectRatio: 2,
-
-                 */
               ),
               delegate: SliverChildBuilderDelegate((
                 BuildContext context,
