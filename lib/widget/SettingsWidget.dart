@@ -522,6 +522,15 @@ class _SettingsWidget extends State<SettingsWidget> {
   void addCommandSpells() {
     List<Ability> commandSpells = [];
 
+    /*
+    Ability activatePlaceOfPower = Ability.color(
+        "Activate Place Of Power",
+        "Start of Any Turn",
+        "Black",
+        "Declare: Pick a friendly Hero within 3 inches of any Places of Power to use this ability"
+      );
+     */
+
     Ability rally = Ability.color(
       "Rally",
       "Any Hero Phase",
@@ -533,6 +542,19 @@ class _SettingsWidget extends State<SettingsWidget> {
     );
     commandSpells.add(rally);
 
+    Ability magicalIntervention = Ability.color(
+        "Magical Intervention",
+        "Enemy Hero Phase",
+        "Yellow",
+        "Declare: Pick a friendly Wizard or Priest to use this ability."
+            "\nEffect: That friendly unit can use a Spell or Prayer ability (as appropriate) as if it were your hero phase. "
+            "\nIf you do so, subtract 1 from casting rolls or chanting rolls made as part of that ability."
+    );
+    commandSpells.add(magicalIntervention);
+
     widget.settings.commandAbilitys = commandSpells;
   }
+
+  //TODO Seraphon Path to Glory Liste hinzufügen und Button zum Hinzufügen
+
 }
