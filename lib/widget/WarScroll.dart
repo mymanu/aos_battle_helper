@@ -136,93 +136,76 @@ class _WarScroll extends State<WarScroll> {
             ),
             SizedBox(height: 20),
 
-            //2. Row für Fernkampf-Titelleiste
-            Row(
+            //TODO Anzahl der Rows in einer Tabelle flexibel machen anhand einer Liste
+            //https://medium.com/@punithsuppar7795/creating-an-interactive-table-in-flutter-5b203d1cf875
+            //https://stackoverflow.com/questions/77487563/i-want-to-insert-the-row-at-the-top-on-data-table-when-i-click-on-addnew-but-it
+
+            //Table für Fernkampf
+            Table(
               children: [
-                Text("Icon"),
-                SizedBox(width: 5),
-                Text("Shooting Weapons"),
-                SizedBox(width: 5),
-                Text("Rng"),
-                SizedBox(width: 5),
-                Text("Att"),
-                SizedBox(width: 5),
-                Text("Hit"),
-                SizedBox(width: 5),
-                Text("Wnd"),
-                SizedBox(width: 5),
-                Text("Rnd"),
-                SizedBox(width: 5),
-                Text("Dmg"),
+                TableRow(
+                  children: [
+                    Icon(Icons.sports_football),
+                    Text("Shooting Weapons"),
+                    Text("Rng"),
+                    Text("Att"),
+                    Text("Hit"),
+                    Text("Wnd"),
+                    Text("Rnd"),
+                    Text("Dmg"),
+                    Text("Ability"),
+                  ]
+                ),
+                TableRow(
+                    children: [
+                      Text(""),
+                      Text("Ratatatata"),
+                      Text("10\""),
+                      Text("3"),
+                      Text("4+"),
+                      Text("2+"),
+                      Text("1"),
+                      Text("3"),
+                      Text("Shoot in Combat"),
+                    ]
+                ),
               ],
             ),
-            SizedBox(height: 5),
+            SizedBox(height: 20),
 
-            //3. Row für Fernkampf-Waffe 1
-            Row(
+            //Table für Nahkampf
+            Table(
               children: [
-                SizedBox(width: 33), //Leerfläche des Icons füllen
-                Text("Shooting Weapon 1"),
-                SizedBox(width: 9),
-                Text("1"),
-                SizedBox(width: 19),
-                Text("5"),
-                SizedBox(width: 11),
-                Text("3+"),
-                SizedBox(width: 10),
-                Text("2+"),
-                SizedBox(width: 19),
-                Text("1"),
-                SizedBox(width: 24),
-                Text("3"),
+                TableRow(
+                    children: [
+                      Icon(Icons.sports_martial_arts),
+                      Text("Melee Weapons"),
+                      Text(""),
+                      Text("Att"),
+                      Text("Hit"),
+                      Text("Wnd"),
+                      Text("Rnd"),
+                      Text("Dmg"),
+                      Text("Ability"),
+                    ]
+                ),
+                TableRow(
+                    children: [
+                      Text(""),
+                      Text("Ratatatata"),
+                      Text(""),
+                      Text("3"),
+                      Text("4+"),
+                      Text("2+"),
+                      Text("1"),
+                      Text("3"),
+                      Text("Crit Mortal"),
+                    ]
+                ),
               ],
             ),
-            SizedBox(height: 15),
 
-            //4. Row für Nahkampf-Titelleiste
-            Row(
-              children: [
-                Text("Icon"),
-                SizedBox(width: 5),
-                Text("Melee Weapons"),
-                SizedBox(width: 5),
-                Text("Rng"),
-                SizedBox(width: 5),
-                Text("Att"),
-                SizedBox(width: 5),
-                Text("Hit"),
-                SizedBox(width: 5),
-                Text("Wnd"),
-                SizedBox(width: 5),
-                Text("Rnd"),
-                SizedBox(width: 5),
-                Text("Dmg"),
-              ],
-            ),
-            SizedBox(height: 5),
-
-            //5. Row für Nahkampf-Waffe 1
-            Row(
-              children: [
-                SizedBox(width: 33), //Leerfläche des Icons füllen
-                Text("Melee Weapon 1"),
-                SizedBox(width: 9),
-                Text("1"),
-                SizedBox(width: 19),
-                Text("5"),
-                SizedBox(width: 11),
-                Text("3+"),
-                SizedBox(width: 10),
-                Text("2+"),
-                SizedBox(width: 19),
-                Text("1"),
-                SizedBox(width: 24),
-                Text("3"),
-              ],
-            ),
-            SizedBox(height: 10),
-
-            SizedBox(height: 30),
+            SizedBox(height: 200),
 
             //6. Row für Schlüsselworte
             Row(
