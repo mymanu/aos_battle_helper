@@ -49,21 +49,19 @@ class _WarScroll extends State<WarScroll> {
           ),
         ],
       ),
-      body: Container(
+      body: Container( //Test Schriftgröße erhöhen: style: TextStyle(height: 2.5, fontSize: 25),
         //transform: Matrix4.rotationZ(0.1),
+
+        //1. Column für 6 Rows
         child: Column(
-          //1. Column für 4 Rows
           children: [
             //1. Row für Kreis und Name der Einheit
             Row(
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Move + [value]"),
-                    Text("Save + [value]"),
-                    Text("Control + [value]"),
-                    Text("Health + [value]"),
+                  children: [ //Kreis-Werte nacheinander mit \n
+                    Text("Move + [value]\nSave + [value]\nControl + [value]\nHealth + [value]"),
                   ],
                 ),
                 SizedBox(width: 600),
@@ -71,153 +69,114 @@ class _WarScroll extends State<WarScroll> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Held der Armee",
+                      "Unit Name",
                       style: TextStyle(height: 2.5, fontSize: 25),
                     ),
                   ],
                 ),
               ],
             ),
-
             SizedBox(height: 20),
 
-            //2. Row für Fernkampf-Waffen
+            //2. Row für Fernkampf-Titelleiste
             Row(
               children: [
-                Column(
-                    children: [
-                      Text("Icon")
-                    ]
-                ),
+                Text("Icon"),
                 SizedBox(width: 5),
-                Column(
-                    children: [
-                      Text("Shooting Weapons")
-                    ]
-                ),
+                Text("Shooting Weapons"),
                 SizedBox(width: 5),
-                Column(
-                    children: [
-                      Text("Rng"),
-                      Text("1")
-                    ]
-                ),
+                Text("Rng"),
                 SizedBox(width: 5),
-                Column(
-                    children: [
-                      Text("Att"),
-                      Text("5")
-                    ]
-                ),
+                Text("Att"),
                 SizedBox(width: 5),
-                Column(
-                    children: [
-                      Text("Hit"),
-                      Text("3+")
-                    ]
-                ),
+                Text("Hit"),
                 SizedBox(width: 5),
-                Column(
-                    children: [
-                      Text("Wnd"),
-                      Text("2+")
-                    ]
-                ),
+                Text("Wnd"),
                 SizedBox(width: 5),
-                Column(
-                    children: [
-                      Text("Rnd"),
-                      Text("1")
-                    ]
-                ),
+                Text("Rnd"),
                 SizedBox(width: 5),
-                Column(
-                    children: [
-                      Text("Dmg"),
-                      Text("3")
-                    ]
-                ),
+                Text("Dmg"),
               ],
             ),
+            SizedBox(height: 5),
 
+            //3. Row für Fernkampf-Waffe 1
+            Row(
+              children: [
+                SizedBox(width: 33), //Leerfläche des Icons füllen
+                Text("Shooting Weapon 1"),
+                SizedBox(width: 9),
+                Text("1"),
+                SizedBox(width: 19),
+                Text("5"),
+                SizedBox(width: 11),
+                Text("3+"),
+                SizedBox(width: 10),
+                Text("2+"),
+                SizedBox(width: 19),
+                Text("1"),
+                SizedBox(width: 24),
+                Text("3"),
+              ],
+            ),
+            SizedBox(height: 15),
+
+            //4. Row für Nahkampf-Titelleiste
+            Row(
+              children: [
+                Text("Icon"),
+                SizedBox(width: 5),
+                Text("Melee Weapons"),
+                SizedBox(width: 5),
+                Text("Rng"),
+                SizedBox(width: 5),
+                Text("Att"),
+                SizedBox(width: 5),
+                Text("Hit"),
+                SizedBox(width: 5),
+                Text("Wnd"),
+                SizedBox(width: 5),
+                Text("Rnd"),
+                SizedBox(width: 5),
+                Text("Dmg"),
+              ],
+            ),
+            SizedBox(height: 5),
+
+            //5. Row für Nahkampf-Waffe 1
+            Row(
+              children: [
+                SizedBox(width: 33), //Leerfläche des Icons füllen
+                Text("Melee Weapon 1"),
+                SizedBox(width: 9),
+                Text("1"),
+                SizedBox(width: 19),
+                Text("5"),
+                SizedBox(width: 11),
+                Text("3+"),
+                SizedBox(width: 10),
+                Text("2+"),
+                SizedBox(width: 19),
+                Text("1"),
+                SizedBox(width: 24),
+                Text("3"),
+              ],
+            ),
             SizedBox(height: 10),
-
-            //3. Row für Nahkampf-Waffen
-            Row(
-              children: [
-                Column(
-                    children: [
-                      Text("Icon")
-                    ]
-                ),
-                SizedBox(width: 5),
-                Column(
-                    children: [
-                      Text("Melee Weapons")
-                    ]
-                ),
-                SizedBox(width: 5),
-                Column(
-                    children: [
-                      Text("Rng"),
-                      Text("1")
-                    ]
-                ),
-                SizedBox(width: 5),
-                Column(
-                    children: [
-                      Text("Att"),
-                      Text("5")
-                    ]
-                ),
-                SizedBox(width: 5),
-                Column(
-                    children: [
-                      Text("Hit"),
-                      Text("3+")
-                    ]
-                ),
-                SizedBox(width: 5),
-                Column(
-                    children: [
-                      Text("Wnd"),
-                      Text("2+")
-                    ]
-                ),
-                SizedBox(width: 5),
-                Column(
-                    children: [
-                      Text("Rnd"),
-                      Text("1")
-                    ]
-                ),
-                SizedBox(width: 5),
-                Column(
-                    children: [
-                      Text("Dmg"),
-                      Text("3")
-                    ]
-                ),
-              ],
-            ),
 
             SizedBox(height: 30),
 
-            //4. Row für Schlüsselworte
-            Row(children: [
-              Column(
-                children: [
-                  Text("Keywords")
-                ],
-              ),
-              SizedBox(width: 30),
-              Column(
-                children: [
-                  Text("Hero, Cavalry"),
-                  Text("Great Alliance, Faction"),
-                ],
-              ),
-            ]
+            //6. Row für Schlüsselworte
+            Row(
+              children: [
+                Column(children: [Text("Keywords")]),
+                SizedBox(width: 30),
+                Column(
+                  children: [
+                    Text("Hero, Cavalry \nGreat Alliance, Faction"),
+                  ],
+                ),
+              ],
             ),
           ],
         ),
