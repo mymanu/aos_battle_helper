@@ -18,6 +18,7 @@ class Unit {
 
   String details = "Details der Unit?";
   String banishment = "-";
+  bool erledigt = false;
 
   String imagePath = "";
 }
