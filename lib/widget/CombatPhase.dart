@@ -13,7 +13,6 @@ class CombatPhase extends StatefulWidget {
 
   Settings settings;
   String title;
-  List<bool> erledigtList = [];
   bool ownPhase = true;
   Color phaseColor = Colors.red;
 
@@ -31,17 +30,12 @@ class _CombatPhase extends State<CombatPhase> {
     List<Ability> spellsThisPhase = [];
 
     for(Unit unit in widget.settings.army.unitList) {
-      //for (Unit unit in units) {
       for (Ability ability in unit.abilitys) {
-        //if (ability.typeName.contains("Ability")) {
-        //if (ability.timing.contains("Hero")) {
         if(ability.color.contains(widget.phaseColorString)) {
-
           if ((ability.timing.contains("Your") ||
               ability.timing.contains("Any") ||
               ability.timing.contains("Passive")) &&
               widget.ownPhase) {
-            widget.erledigtList.add(ability.erledigt);
             ability.originUnit = unit.name;
             spellsThisPhase.add(ability);
           }
@@ -49,16 +43,9 @@ class _CombatPhase extends State<CombatPhase> {
               ability.timing.contains("Any") ||
               ability.timing.contains("Passive")) &&
               !widget.ownPhase) {
-            widget.erledigtList.add(ability.erledigt);
             ability.originUnit = unit.name;
             spellsThisPhase.add(ability);
           }
-
-          /*
-            widget.erledigtList.add(ability.erledigt);
-            ability.originUnit = unit.name;
-            spellsThisPhase.add(ability);
-           */
         }
       }
     }
@@ -69,7 +56,6 @@ class _CombatPhase extends State<CombatPhase> {
             ability.timing.contains("Any") ||
             ability.timing.contains("Passive")) &&
             widget.ownPhase) {
-          widget.erledigtList.add(ability.erledigt);
           ability.originUnit = "Spell-Lore";
           spellsThisPhase.add(ability);
         }
@@ -77,15 +63,9 @@ class _CombatPhase extends State<CombatPhase> {
             ability.timing.contains("Any") ||
             ability.timing.contains("Passive")) &&
             !widget.ownPhase) {
-          widget.erledigtList.add(ability.erledigt);
           ability.originUnit = "Spell-Lore";
           spellsThisPhase.add(ability);
         }
-        /*
-        widget.erledigtList.add(ability.erledigt);
-        ability.originUnit = "Spell-Lore";
-        spellsThisPhase.add(ability);
-         */
       }
     }
 
@@ -96,7 +76,6 @@ class _CombatPhase extends State<CombatPhase> {
               ability.timing.contains("Any") ||
               ability.timing.contains("Passive")) &&
               widget.ownPhase) {
-            widget.erledigtList.add(ability.erledigt);
             ability.originUnit = "Battle-Trait";
             spellsThisPhase.add(ability);
           }
@@ -104,16 +83,9 @@ class _CombatPhase extends State<CombatPhase> {
               ability.timing.contains("Any") ||
               ability.timing.contains("Passive")) &&
               !widget.ownPhase) {
-            widget.erledigtList.add(ability.erledigt);
             ability.originUnit = "Battle-Trait";
             spellsThisPhase.add(ability);
           }
-          /*
-          widget.erledigtList.add(ability.erledigt);
-          ability.originUnit = "Battle-Trait";
-          spellsThisPhase.add(ability);
-
-           */
         }
       }
     }
@@ -125,7 +97,6 @@ class _CombatPhase extends State<CombatPhase> {
               ability.timing.contains("Any") ||
               ability.timing.contains("Passive")) &&
               widget.ownPhase) {
-            widget.erledigtList.add(ability.erledigt);
             ability.originUnit = "Battle-Formation";
             spellsThisPhase.add(ability);
           }
@@ -133,17 +104,61 @@ class _CombatPhase extends State<CombatPhase> {
               ability.timing.contains("Any") ||
               ability.timing.contains("Passive")) &&
               !widget.ownPhase) {
-            widget.erledigtList.add(ability.erledigt);
             ability.originUnit = "Battle-Formation";
             spellsThisPhase.add(ability);
           }
-          /*
-          widget.erledigtList.add(ability.erledigt);
-          ability.originUnit = "Battle-Formation";
-          spellsThisPhase.add(ability);
-
-           */
         }
+      }
+    }
+
+    for (Ability ability in widget.settings.commandAbilitys) {
+      if (ability.color.contains(widget.phaseColorString)) {
+        if ((ability.timing.contains("Your") ||
+            ability.timing.contains("Any") ||
+            ability.timing.contains("Passive")) &&
+            widget.ownPhase) {
+          ability.originUnit = "Command-Ability";
+          spellsThisPhase.add(ability);
+        }
+        if ((ability.timing.contains("Enemy") ||
+            ability.timing.contains("Any") ||
+            ability.timing.contains("Passive")) &&
+            !widget.ownPhase) {
+          ability.originUnit = "Command-Ability";
+          spellsThisPhase.add(ability);
+        }
+      }
+    }
+
+    for (Ability ability in widget.settings.normalAbilitys) {
+      if (ability.color.contains(widget.phaseColorString)) {
+        if ((ability.timing.contains("Your") ||
+            ability.timing.contains("Any") ||
+            ability.timing.contains("Passive")) &&
+            widget.ownPhase) {
+          ability.originUnit = "Core-Ability";
+          spellsThisPhase.add(ability);
+        }
+        if ((ability.timing.contains("Enemy") ||
+            ability.timing.contains("Any") ||
+            ability.timing.contains("Passive")) &&
+            !widget.ownPhase) {
+          ability.originUnit = "Core-Ability";
+          spellsThisPhase.add(ability);
+        }
+      }
+    }
+
+    //TODO ab hier Units der zu umbauenden spellsThisPhase einbauen damit diese auch eine Kachel erhalten
+    for(Unit unit in widget.settings.army.unitList) {
+      if (unit.weapons.isNotEmpty) {
+        /*
+     //Warscroll in spellsThisPhase
+     //Timing "Any Combat Phase"
+
+    ability.originUnit = "Core-Ability";
+    spellsThisPhase.add(ability);
+     */
       }
     }
 
@@ -241,11 +256,11 @@ class _CombatPhase extends State<CombatPhase> {
               delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
                     return Card(
-                      child: widget.erledigtList[index]
+                      child: spellsThisPhase[index].erledigt
                           ? ElevatedButton(
                         onPressed: () {
                           setState(() {
-                            widget.erledigtList[index] = false;
+                            spellsThisPhase[index].erledigt = false;
                           });
                         },
                         child: Column(
@@ -315,7 +330,7 @@ class _CombatPhase extends State<CombatPhase> {
                                 child: Text("Fähigkeit erledigt"),
                                 onPressed: () {
                                   setState(() {
-                                    widget.erledigtList[index] = true;
+                                    spellsThisPhase[index].erledigt = true;
                                   });
                                 },
                               ),

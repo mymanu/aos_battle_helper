@@ -13,7 +13,6 @@ class EndOfTurn extends StatefulWidget {
 
   Settings settings;
   String title;
-  List<bool> erledigtList = [];
   bool ownPhase = true;
   Color phaseColor = Colors.purple;
 
@@ -31,17 +30,13 @@ class _EndOfTurn extends State<EndOfTurn> {
     List<Ability> spellsThisPhase = [];
 
     for(Unit unit in widget.settings.army.unitList) {
-      //for (Unit unit in units) {
       for (Ability ability in unit.abilitys) {
-        //if (ability.typeName.contains("Ability")) {
-        //if (ability.timing.contains("Hero")) {
         if(ability.color.contains(widget.phaseColorString)) {
 
           if ((ability.timing.contains("Your") ||
               ability.timing.contains("Any") ||
               ability.timing.contains("Passive")) &&
               widget.ownPhase) {
-            widget.erledigtList.add(ability.erledigt);
             ability.originUnit = unit.name;
             spellsThisPhase.add(ability);
           }
@@ -49,16 +44,9 @@ class _EndOfTurn extends State<EndOfTurn> {
               ability.timing.contains("Any") ||
               ability.timing.contains("Passive")) &&
               !widget.ownPhase) {
-            widget.erledigtList.add(ability.erledigt);
             ability.originUnit = unit.name;
             spellsThisPhase.add(ability);
           }
-
-          /*
-            widget.erledigtList.add(ability.erledigt);
-            ability.originUnit = unit.name;
-            spellsThisPhase.add(ability);
-           */
         }
       }
     }
@@ -69,7 +57,6 @@ class _EndOfTurn extends State<EndOfTurn> {
             ability.timing.contains("Any") ||
             ability.timing.contains("Passive")) &&
             widget.ownPhase) {
-          widget.erledigtList.add(ability.erledigt);
           ability.originUnit = "Spell-Lore";
           spellsThisPhase.add(ability);
         }
@@ -77,15 +64,9 @@ class _EndOfTurn extends State<EndOfTurn> {
             ability.timing.contains("Any") ||
             ability.timing.contains("Passive")) &&
             !widget.ownPhase) {
-          widget.erledigtList.add(ability.erledigt);
           ability.originUnit = "Spell-Lore";
           spellsThisPhase.add(ability);
         }
-        /*
-        widget.erledigtList.add(ability.erledigt);
-        ability.originUnit = "Spell-Lore";
-        spellsThisPhase.add(ability);
-         */
       }
     }
 
@@ -96,7 +77,6 @@ class _EndOfTurn extends State<EndOfTurn> {
               ability.timing.contains("Any") ||
               ability.timing.contains("Passive")) &&
               widget.ownPhase) {
-            widget.erledigtList.add(ability.erledigt);
             ability.originUnit = "Battle-Trait";
             spellsThisPhase.add(ability);
           }
@@ -104,16 +84,9 @@ class _EndOfTurn extends State<EndOfTurn> {
               ability.timing.contains("Any") ||
               ability.timing.contains("Passive")) &&
               !widget.ownPhase) {
-            widget.erledigtList.add(ability.erledigt);
             ability.originUnit = "Battle-Trait";
             spellsThisPhase.add(ability);
           }
-          /*
-          widget.erledigtList.add(ability.erledigt);
-          ability.originUnit = "Battle-Trait";
-          spellsThisPhase.add(ability);
-
-           */
         }
       }
     }
@@ -125,7 +98,6 @@ class _EndOfTurn extends State<EndOfTurn> {
               ability.timing.contains("Any") ||
               ability.timing.contains("Passive")) &&
               widget.ownPhase) {
-            widget.erledigtList.add(ability.erledigt);
             ability.originUnit = "Battle-Formation";
             spellsThisPhase.add(ability);
           }
@@ -133,16 +105,47 @@ class _EndOfTurn extends State<EndOfTurn> {
               ability.timing.contains("Any") ||
               ability.timing.contains("Passive")) &&
               !widget.ownPhase) {
-            widget.erledigtList.add(ability.erledigt);
             ability.originUnit = "Battle-Formation";
             spellsThisPhase.add(ability);
           }
-          /*
-          widget.erledigtList.add(ability.erledigt);
-          ability.originUnit = "Battle-Formation";
-          spellsThisPhase.add(ability);
+        }
+      }
+    }
 
-           */
+    for (Ability ability in widget.settings.commandAbilitys) {
+      if (ability.color.contains(widget.phaseColorString)) {
+        if ((ability.timing.contains("Your") ||
+            ability.timing.contains("Any") ||
+            ability.timing.contains("Passive")) &&
+            widget.ownPhase) {
+          ability.originUnit = "Command-Ability";
+          spellsThisPhase.add(ability);
+        }
+        if ((ability.timing.contains("Enemy") ||
+            ability.timing.contains("Any") ||
+            ability.timing.contains("Passive")) &&
+            !widget.ownPhase) {
+          ability.originUnit = "Command-Ability";
+          spellsThisPhase.add(ability);
+        }
+      }
+    }
+
+    for (Ability ability in widget.settings.normalAbilitys) {
+      if (ability.color.contains(widget.phaseColorString)) {
+        if ((ability.timing.contains("Your") ||
+            ability.timing.contains("Any") ||
+            ability.timing.contains("Passive")) &&
+            widget.ownPhase) {
+          ability.originUnit = "Core-Ability";
+          spellsThisPhase.add(ability);
+        }
+        if ((ability.timing.contains("Enemy") ||
+            ability.timing.contains("Any") ||
+            ability.timing.contains("Passive")) &&
+            !widget.ownPhase) {
+          ability.originUnit = "Core-Ability";
+          spellsThisPhase.add(ability);
         }
       }
     }
@@ -241,11 +244,11 @@ class _EndOfTurn extends State<EndOfTurn> {
               delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
                     return Card(
-                      child: widget.erledigtList[index]
+                      child: spellsThisPhase[index].erledigt
                           ? ElevatedButton(
                         onPressed: () {
                           setState(() {
-                            widget.erledigtList[index] = false;
+                            spellsThisPhase[index].erledigt = false;
                           });
                         },
                         child: Column(
@@ -315,7 +318,7 @@ class _EndOfTurn extends State<EndOfTurn> {
                                 child: Text("Fähigkeit erledigt"),
                                 onPressed: () {
                                   setState(() {
-                                    widget.erledigtList[index] = true;
+                                    spellsThisPhase[index].erledigt = true;
                                   });
                                 },
                               ),
