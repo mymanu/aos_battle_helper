@@ -49,6 +49,61 @@ class _WarScroll extends State<WarScroll> {
           ),
         ],
       ),
+
+
+      //TODO SliverGrid konfigurieren
+      /*
+        body: CustomScrollView(
+        slivers: <Widget>[
+          SliverPadding(
+            padding: const EdgeInsets.only(top: 10, right: 0, bottom: 10),
+            sliver: SliverGrid(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200.0,
+                mainAxisSpacing: 10.0,
+                crossAxisSpacing: 10.0,
+                childAspectRatio: 4.0,
+              ),
+              delegate: SliverChildBuilderDelegate((
+                BuildContext context,
+                int index,
+              ) {
+                return Container(
+                  alignment: Alignment.center,
+                  color: Colors.teal,
+                  child: Text('Beispiel'), //child: Text('Grid Item $index'),
+                );
+              }, childCount: 2),
+            ),
+          ),
+
+          SliverPadding(
+            padding: const EdgeInsets.only(top: 10, right: 0, bottom: 10),
+            sliver: SliverGrid(
+              delegate: SliverChildBuilderDelegate((
+                BuildContext context,
+                int index,
+              ) {
+                return Container(
+                  alignment: Alignment.center,
+                  color: Colors.teal,
+                  child: Text('Grid Item $index'),
+                );
+              }, childCount: 20),
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200.0,
+                mainAxisSpacing: 10.0,
+                crossAxisSpacing: 10.0,
+                childAspectRatio: 4.0,
+              ),
+            ),
+          ),
+        ],
+      ),
+
+      */
+      // Ab hier Original Code mit vielen Rows
+
       body: Container( //Test Schriftgröße erhöhen: style: TextStyle(height: 2.5, fontSize: 25),
         //transform: Matrix4.rotationZ(0.1),
 
@@ -61,7 +116,10 @@ class _WarScroll extends State<WarScroll> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [ //Kreis-Werte nacheinander mit \n
-                    Text("Move + [value]\nSave + [value]\nControl + [value]\nHealth + [value]"),
+                    Text("Move: + [value]"),
+                    Text("Save: + [value]"),
+                    Text("Control: + [value]"),
+                    Text("Health: + [value]"),
                   ],
                 ),
                 SizedBox(width: 600),
@@ -171,7 +229,7 @@ class _WarScroll extends State<WarScroll> {
               children: [
                 Column(children: [Text("Keywords")]),
                 SizedBox(width: 30),
-                Column(
+                Row(
                   children: [
                     Text("Hero, Cavalry \nGreat Alliance, Faction"),
                   ],
@@ -181,6 +239,8 @@ class _WarScroll extends State<WarScroll> {
           ],
         ),
       ),
+      //End Container
+
     );
   }
 
