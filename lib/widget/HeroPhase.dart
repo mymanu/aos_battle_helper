@@ -313,7 +313,7 @@ class _HeroPhase extends State<HeroPhase> {
                             ),
                             Text("Trigger: " + spellsThisPhase[index].timing),
                             Text("Effekt: " + spellsThisPhase[index].details),
-                            //Text("Ursprung: " + spellsThisPhase[index].originUnit),
+                            spellsThisPhase[index].commandPoints.contains("-") ? Text("") : Text("Command Point cost: " + spellsThisPhase[index].commandPoints),
                             /*
                             ListTile(
                               leading: Icon(Icons.album),

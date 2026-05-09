@@ -31,6 +31,7 @@ class Ability {
 
   bool erledigt = false;
   String originUnit = "Nobody";
+  String commandPoints = "-";
 
   String imagePath = "";
 }

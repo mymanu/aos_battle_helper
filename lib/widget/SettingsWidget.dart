@@ -121,6 +121,7 @@ class _SettingsWidget extends State<SettingsWidget> {
           "\n - Heal(1) this unit for each spent Rallypoint"
           "\n - You can use Rallypoints in the amount of health of 1 model to revive it.",
     );
+    rally.commandPoints = "1";
     commandSpells.add(rally);
 
     Ability magicalIntervention = Ability.color(
@@ -131,6 +132,7 @@ class _SettingsWidget extends State<SettingsWidget> {
             "\nEffect: That friendly unit can use a Spell or Prayer ability (as appropriate) as if it were your hero phase. "
             "\nIf you do so, subtract 1 from casting rolls or chanting rolls made as part of that ability."
     );
+    magicalIntervention.commandPoints = "1";
     commandSpells.add(magicalIntervention);
 
     Ability atTheDouble = Ability.color(
@@ -141,6 +143,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "\nEffect: Do not make a run roll as part of that Run ability. Instead, add 6\" to that unit’s Move characteristic to determine the distance each model"
         "in that unit can move as part of that Run ability."
     );
+    atTheDouble.commandPoints = "1";
     commandSpells.add(atTheDouble);
 
     Ability redeploy = Ability.color(
@@ -152,6 +155,7 @@ class _SettingsWidget extends State<SettingsWidget> {
             "That move cannot pass through or end within the"
             "combat range of an enemy unit."
     );
+    redeploy.commandPoints = "1";
     commandSpells.add(redeploy);
 
     Ability coveringFire = Ability.color(
@@ -162,6 +166,7 @@ class _SettingsWidget extends State<SettingsWidget> {
             "\nEffect: Resolve shooting attacks for that unit, but all of the attacks must target the nearest visible enemy"
             "unit and you must subtract 1 from the hit rolls for those attacks."
     );
+    coveringFire.commandPoints = "1";
     commandSpells.add(coveringFire);
 
     Ability forwardToVictory = Ability.color(
@@ -171,6 +176,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Used By: The unit using that Charge ability."
             "\nEffect: You can re-roll the charge roll."
     );
+    forwardToVictory.commandPoints = "1";
     commandSpells.add(forwardToVictory);
 
     Ability counterCharge = Ability.color(
@@ -180,6 +186,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Used By: The unit using that Charge ability."
             "\nEffect: You can re-roll the charge roll."
     );
+    counterCharge.commandPoints = "2";
     commandSpells.add(counterCharge);
 
     Ability allOutAttack = Ability.color(
@@ -191,6 +198,7 @@ class _SettingsWidget extends State<SettingsWidget> {
             "that Attack ability. This also affects weapons that"
             "have the Companion weapon ability."
     );
+    allOutAttack.commandPoints = "1";
     commandSpells.add(allOutAttack);
 
     Ability allOutDefence = Ability.color(
@@ -200,6 +208,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Used By: A unit targeted by that Attack ability."
             "\nEffect: Add 1 to save rolls for that unit in this phase."
     );
+    allOutDefence.commandPoints = "1";
     commandSpells.add(allOutDefence);
 
     Ability powerThrough = Ability.color(
@@ -219,6 +228,7 @@ class _SettingsWidget extends State<SettingsWidget> {
             "but not those of other enemy units. It does not have"
             "to end the move in combat."
     );
+    powerThrough.commandPoints = "1";
     commandSpells.add(powerThrough);
 
     widget.settings.commandAbilitys = commandSpells;

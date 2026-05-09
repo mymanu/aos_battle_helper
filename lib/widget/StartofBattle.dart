@@ -15,6 +15,7 @@ class StartofBattle extends StatefulWidget {
   Settings settings;
   String title;
   bool ownPhase = true;
+  bool underdog = false;
 
   //Color phaseColor = Colors.orange.shade800;
   Color phaseColor = Colors.black;
@@ -173,6 +174,20 @@ class _StartofBattle extends State<StartofBattle> {
         centerTitle: true,
         backgroundColor: widget.phaseColor,
         actions: <Widget>[
+          Text(
+            "Underdog:"
+          ),
+          Switch(
+            // This bool value toggles the switch.
+            value: widget.underdog,
+            activeThumbColor: Colors.teal,
+            onChanged: (bool value) {
+              // This is called when the user toggles the switch.
+              setState(() {
+                widget.underdog = value;
+              });
+            },
+          ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.teal,
@@ -341,6 +356,7 @@ class _StartofBattle extends State<StartofBattle> {
                             Text(spellsThisPhase[index].timing),
                             Text(spellsThisPhase[index].originUnit),
                             Text(spellsThisPhase[index].details),
+                            spellsThisPhase[index].commandPoints.contains("-") ? Text("") : Text("Command Point cost: " + spellsThisPhase[index].commandPoints),
                             /*
                             Text(cardContentList[index].ability.timing),
                             Text(cardContentList[index].ability.originUnit),
