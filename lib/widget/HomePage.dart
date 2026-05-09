@@ -2,6 +2,7 @@ import 'package:aos_battle_helper/widget/WarScroll.dart';
 import 'package:flutter/material.dart';
 
 import '../classes/settings.dart';
+import '../classes/unit.dart';
 import 'HeroPhase.dart';
 import 'StartofBattle.dart';
 import 'ArmyImport.dart';
@@ -455,9 +456,10 @@ class _HomePage extends State<HomePage> {
   }
 
   void _navigateToWarScroll(BuildContext context, Settings settings) {
+    Unit unit = Unit("ExampleUnit");
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => WarScroll(title: "Schriftrolle", settings: settings),
+        builder: (context) => WarScroll(title: "Schriftrolle", settings: settings, unit: unit),
       ),
     );
   }

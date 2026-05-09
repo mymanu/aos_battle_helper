@@ -2,14 +2,22 @@ import 'package:flutter/material.dart';
 
 import '../classes/settings.dart';
 import '../classes/unit.dart';
+import '../classes/weapon.dart';
 import 'HomePage.dart';
 import 'dart:math' as math;
 
 class WarScroll extends StatefulWidget {
-  WarScroll({super.key, required this.title, required this.settings});
+  WarScroll({
+    super.key,
+    required this.title,
+    required this.settings,
+    required this.unit,
+  });
 
   Settings settings;
   String title;
+
+  Unit unit;
 
   //List<bool> erledigtList = [];
   //bool ownPhase = true;
@@ -25,6 +33,17 @@ class _WarScroll extends State<WarScroll> {
   @override
   Widget build(BuildContext context) {
     String title = widget.title;
+
+    List<Weapon> meleeWeaponList = [];
+    List<Weapon> shootingWeaponList = [];
+
+    for (Weapon weapon in widget.unit.weapons) {
+      if (weapon.range.contains("-")) {
+        meleeWeaponList.add(weapon);
+      } else {
+        shootingWeaponList.add(weapon);
+      }
+    }
 
     //TODO ab Hier wird das UI der WarScrolls gebaut, ab hier kann sich Jenny austoben.
     return Scaffold(
@@ -60,111 +79,123 @@ class _WarScroll extends State<WarScroll> {
               Container(
                 padding: EdgeInsets.only(left: 50),
                 child:
-                    // Idee Kreis getrennt durch 2 Linien
-                    Container(
-                      width: 200,
-                      height: 200,
-                      alignment: Alignment.centerLeft,
-                      decoration: BoxDecoration(
-                        color: Colors.white, // Circle color
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Colors.yellow.shade700,
-                          width: 7,
-                        ), // Optional border
+                // Idee Kreis getrennt durch 2 Linien
+                Container(
+                  width: 200,
+                  height: 200,
+                  alignment: Alignment.centerLeft,
+                  decoration: BoxDecoration(
+                    color: Colors.white, // Circle color
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Colors.yellow.shade700,
+                      width: 7,
+                    ), // Optional border
+                  ),
+                  child: Stack(
+                    children: [
+                      // left top to right bottom
+                      Transform.rotate(
+                        angle: math.pi / 4, // 45 degrees in radians
+                        child: Center(
+                          child: Container(
+                            height: 5, // Thickness
+                            color: Colors.yellow.shade600,
+                          ),
+                        ),
                       ),
-                      child: Stack(
-                        children: [
-                          // left top to right bottom
-                          Transform.rotate(
-                            angle: math.pi / 4, // 45 degrees in radians
-                            child: Center(
-                              child: Container(
-                                height: 5, // Thickness
-                                color: Colors.yellow.shade600,
+                      Transform.rotate(
+                        angle: math.pi / 4,
+                        // right top to left bottom
+                        child: Center(
+                          child: Container(
+                            width: 5, // Thickness
+                            color: Colors.yellow.shade600,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        left: 75,
+                        child: Column(
+                          children: [
+                            Text(
+                              "Move",
+                              style: TextStyle(color: Colors.black, fontSize: 15),
+                            ),
+                            SizedBox(height: 10),
+                            Text(
+                              widget.unit.move,
+                              style: TextStyle(color: Colors.black, fontSize: 15),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Positioned(
+                        top: 80,
+                        left: -10,
+                        child: Row(
+                          children: [
+                            Transform.rotate(
+                              angle: math.pi * 1.5,
+                              child: Text(
+                                "Health",
+                                style: TextStyle(color: Colors.black, fontSize: 15),
                               ),
                             ),
-                          ),
-                          Transform.rotate(
-                            angle: math.pi / 4,
-                            // right top to left bottom
-                            child: Center(
-                              child: Container(
-                                width: 5, // Thickness
-                                color: Colors.yellow.shade600,
+                            SizedBox(width: 10),
+                            Text(
+                              widget.unit.health,
+                              style: TextStyle(color: Colors.black, fontSize: 15),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Positioned(
+                        top: 80,
+                        left: 130,
+                        child: Row(
+                          children: [
+                            Text(
+                              widget.unit.save,
+                              style: TextStyle(color: Colors.black, fontSize: 15),
+                            ),
+                            SizedBox(width: 10),
+                            Transform.rotate(
+                              angle: math.pi * 0.5,
+                              child: Text(
+                                "Save",
+                                style: TextStyle(color: Colors.black, fontSize: 15),
                               ),
                             ),
-                          ),
-                          Positioned(
-                            left: 75,
-                            child: Column(
-                              children: [
-                                Text(
-                                  "Move",
-                                  style: TextStyle(color: Colors.red),
-                                ),
-                                SizedBox(height: 10),
-                                Text(
-                                  "10\"",
-                                  style: TextStyle(color: Colors.red),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Positioned(
-                            top: 80,
-                            left: -10,
-                            child: Row(
-                              children: [
-                                Transform.rotate(
-                                  angle: math.pi * 1.5,
-                                  child: Text(
-                                    "Health",
-                                    style: TextStyle(color: Colors.red),
-                                  ),
-                                ),
-                                SizedBox(width: 10),
-                                Text("6", style: TextStyle(color: Colors.red)),
-                              ],
-                            ),
-                          ),
-                          Positioned(
-                            top: 80,
-                            left: 130,
-                            child: Row(
-                              children: [
-                                Text("4+", style: TextStyle(color: Colors.red)),
-                                SizedBox(width: 10),
-                                Transform.rotate(
-                                  angle: math.pi * 0.5,
-                                  child: Text(
-                                    "Save",
-                                    style: TextStyle(color: Colors.red),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Positioned(
-                            top: 135,
-                            left: 70,
-                            child: Column(
-                              children: [
-                                Text("2", style: TextStyle(color: Colors.red)),
-                                SizedBox(width: 10),
-                                Text(
-                                  "Control",
-                                  style: TextStyle(color: Colors.red),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
+                      Positioned(
+                        top: 135,
+                        left: 70,
+                        child: Column(
+                          children: [
+                            Text(
+                              widget.unit.control,
+                              style: TextStyle(color: Colors.black, fontSize: 15),
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              "Control",
+                              style: TextStyle(color: Colors.black, fontSize: 15),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
               Spacer(),
-              Text("Unit Name", style: TextStyle(height: 2.5, fontSize: 25)),
+              Text(
+                widget.unit.name,
+                style: TextStyle(height: 2.5, fontSize: 25),
+              ),
               Spacer(),
             ],
           ),
@@ -175,74 +206,68 @@ class _WarScroll extends State<WarScroll> {
           //https://stackoverflow.com/questions/77487563/i-want-to-insert-the-row-at-the-top-on-data-table-when-i-click-on-addnew-but-it
 
           //Table für Fernkampf
-          Table(
+          DataTable(
             border: TableBorder.all(color: Colors.white, width: 0.5),
-            children: [
-              TableRow(
-                children: [
-                  Icon(Icons.sports_football),
-                  Center(child: Text("Shooting Weapons")),
-                  Center(child: Text("Rng")),
-                  Center(child: Text("Att")),
-                  Center(child: Text("Hit")),
-                  Center(child: Text("Wnd")),
-                  Center(child: Text("Rnd")),
-                  Center(child: Text("Dmg")),
-                  Center(child: Text("Ability")),
-                ],
-              ),
-              TableRow(
-                children: [
-                  Center(child: Text("")),
-                  Center(child: Text("Ratatatata")),
-                  Center(child: Text("10\"")),
-                  Center(child: Text("3")),
-                  Center(child: Text("4+")),
-                  Center(child: Text("2+")),
-                  Center(child: Text("1")),
-                  Center(child: Text("3")),
-                  Center(child: Text("Shoot in Combat")),
-                ],
-              ),
+            columns: [
+              DataColumn(label: Icon(Icons.sports_football)),
+              DataColumn(label: Text("Shooting Weapons")),
+              DataColumn(label: Text("Rng")),
+              DataColumn(label: Text("Att")),
+              DataColumn(label: Text("Hit")),
+              DataColumn(label: Text("Wnd")),
+              DataColumn(label: Text("Rnd")),
+              DataColumn(label: Text("Dmg")),
+              DataColumn(label: Text("Ability")),
             ],
+            rows: List<DataRow>.generate(shootingWeaponList.length, (index) {
+              return DataRow(
+                cells: [
+                  DataCell(Text("")),
+                  DataCell(Text(shootingWeaponList[index].name)),
+                  DataCell(Text(shootingWeaponList[index].range)),
+                  DataCell(Text(shootingWeaponList[index].attack)),
+                  DataCell(Text(shootingWeaponList[index].hit)),
+                  DataCell(Text(shootingWeaponList[index].wound)),
+                  DataCell(Text(shootingWeaponList[index].rend)),
+                  DataCell(Text(shootingWeaponList[index].damage)),
+                  DataCell(Text(shootingWeaponList[index].ability)),
+                ],
+              );
+            }),
           ),
+
           SizedBox(height: 20),
-
           //Table für Nahkampf
-          Table(
+          DataTable(
             border: TableBorder.all(color: Colors.white, width: 0.5),
-            children: [
-              TableRow(
-                children: [
-                  Icon(Icons.sports_martial_arts),
-                  Center(child: Text("Melee Weapons")),
-                  Text(""),
-                  Center(child: Text("Att")),
-                  Center(child: Text("Hit")),
-                  Center(child: Text("Wnd")),
-                  Center(child: Text("Rnd")),
-                  Center(child: Text("Dmg")),
-                  Center(child: Text("Ability")),
-                ],
-              ),
-              TableRow(
-                children: [
-                  Text(""),
-                  Center(child: Text("Schlitz")),
-                  Center(child: Text("")),
-                  Center(child: Text("3")),
-                  Center(child: Text("4+")),
-                  Center(child: Text("2+")),
-                  Center(child: Text("1")),
-                  Center(child: Text("3")),
-                  Center(child: Text("Crit Mortal")),
-                ],
-              ),
+            columns: [
+              DataColumn(label: Icon(Icons.sports_martial_arts)),
+              DataColumn(label: Text("Melee Weapons")),
+              DataColumn(label: Text("")),
+              DataColumn(label: Text("Att")),
+              DataColumn(label: Text("Hit")),
+              DataColumn(label: Text("Wnd")),
+              DataColumn(label: Text("Rnd")),
+              DataColumn(label: Text("Dmg")),
+              DataColumn(label: Text("Ability")),
             ],
+            rows: List<DataRow>.generate(meleeWeaponList.length, (index) {
+              return DataRow(
+                cells: [
+                  DataCell(Text("")),
+                  DataCell(Text(meleeWeaponList[index].name)),
+                  DataCell(Text("")),
+                  DataCell(Text(meleeWeaponList[index].attack)),
+                  DataCell(Text(meleeWeaponList[index].hit)),
+                  DataCell(Text(meleeWeaponList[index].wound)),
+                  DataCell(Text(meleeWeaponList[index].rend)),
+                  DataCell(Text(meleeWeaponList[index].damage)),
+                  DataCell(Text(meleeWeaponList[index].ability)),
+                ],
+              );
+            }),
           ),
-
           SizedBox(height: 200),
-
           //6. Row für Schlüsselworte
           Row(
             children: [

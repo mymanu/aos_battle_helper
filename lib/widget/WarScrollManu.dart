@@ -120,12 +120,12 @@ class _WarScrollManu extends State<WarScrollManu> {
                               children: [
                                 Text(
                                   "Move",
-                                  style: TextStyle(color: Colors.red),
+                                  style: TextStyle(color: Colors.black, fontSize: 15),
                                 ),
                                 SizedBox(height: 10),
                                 Text(
                                   widget.unit.move,
-                                  style: TextStyle(color: Colors.red),
+                                  style: TextStyle(color: Colors.black, fontSize: 15),
                                 ),
                               ],
                             ),
@@ -139,13 +139,13 @@ class _WarScrollManu extends State<WarScrollManu> {
                                   angle: math.pi * 1.5,
                                   child: Text(
                                     "Health",
-                                    style: TextStyle(color: Colors.red),
+                                    style: TextStyle(color: Colors.black, fontSize: 15),
                                   ),
                                 ),
                                 SizedBox(width: 10),
                                 Text(
                                   widget.unit.health,
-                                  style: TextStyle(color: Colors.red),
+                                  style: TextStyle(color: Colors.black, fontSize: 15),
                                 ),
                               ],
                             ),
@@ -157,14 +157,14 @@ class _WarScrollManu extends State<WarScrollManu> {
                               children: [
                                 Text(
                                   widget.unit.save,
-                                  style: TextStyle(color: Colors.red),
+                                  style: TextStyle(color: Colors.black, fontSize: 15),
                                 ),
                                 SizedBox(width: 10),
                                 Transform.rotate(
                                   angle: math.pi * 0.5,
                                   child: Text(
                                     "Save",
-                                    style: TextStyle(color: Colors.red),
+                                    style: TextStyle(color: Colors.black, fontSize: 15),
                                   ),
                                 ),
                               ],
@@ -177,12 +177,12 @@ class _WarScrollManu extends State<WarScrollManu> {
                               children: [
                                 Text(
                                   widget.unit.control,
-                                  style: TextStyle(color: Colors.red),
+                                  style: TextStyle(color: Colors.black, fontSize: 15),
                                 ),
                                 SizedBox(width: 10),
                                 Text(
                                   "Control",
-                                  style: TextStyle(color: Colors.red),
+                                  style: TextStyle(color: Colors.black, fontSize: 15),
                                 ),
                               ],
                             ),
