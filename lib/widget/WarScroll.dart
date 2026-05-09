@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../classes/settings.dart';
 import '../classes/unit.dart';
 import 'HomePage.dart';
+import 'dart:math' as math;
 
 class WarScroll extends StatefulWidget {
   WarScroll({super.key, required this.title, required this.settings});
@@ -49,7 +50,6 @@ class _WarScroll extends State<WarScroll> {
           ),
         ],
       ),
-
 
       //TODO SliverGrid konfigurieren
       /*
@@ -102,20 +102,104 @@ class _WarScroll extends State<WarScroll> {
       ),
 
       */
-      // Ab hier Original Code mit vielen Rows
-
-      body: Container( //Test Schriftgröße erhöhen: style: TextStyle(height: 2.5, fontSize: 25),
-        //transform: Matrix4.rotationZ(0.1),
-
+      // Ab hier Original Code mit vielen Rows. Idee: transform: Matrix4.rotationZ(0.1),
+      body: Center( //War Container
         //1. Column für 6 Rows
         child: Column(
           children: [
+            //Idee Kreis mit Tabelle drin
+            Container(
+              width: 200,
+              height: 200,
+              padding: const EdgeInsets.all(20),
+              // Padding to keep text away from edges
+              clipBehavior: Clip.antiAlias,
+              decoration: BoxDecoration(
+                color: Colors.blue.shade50,
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.blue, width: 2),
+              ),
+          child: Transform.rotate(
+            angle: math.pi / 4, // 45 degrees in radians
+              child: Center(
+                child: Table(
+                  defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                  border: TableBorder.symmetric(
+                    inside: BorderSide(color: Colors.blue.withOpacity(0.5)),
+                  ),
+                  children: [
+                    TableRow(
+                      children: [
+                        Center(child: Text('A1')),
+                        Center(child: Text('B1')),
+                      ],
+                    ),
+                    TableRow(
+                      children: [
+                        Center(child: Text('A2')),
+                        Center(child: Text('B2')),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+          ),
+
+            ),
+
+            // Idee Kreis getrennt durch 2 Linien
+            Container(
+              width: 100,
+              height: 100,
+              alignment: Alignment.centerLeft,
+              decoration: BoxDecoration(
+                color: Colors.white, // Circle color
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Colors.orangeAccent,
+                  width: 7,
+                ), // Optional border
+              ),
+              child: Stack(
+                children: [
+                  // Horizontal Line
+                  Center(
+                    child: Container(
+                      height: 5, // Thickness
+                      color: Colors.orangeAccent,
+                    ),
+                  ),
+                  // Vertical Line
+                  Center(
+                    child: Container(
+                      width: 5, // Thickness
+                      color: Colors.orangeAccent,
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Transform.rotate(
+                        angle: 0.5,
+                        // Rotation in radians (e.g., 0.5 is approx 28.6 degrees)
+                        child: const Text(
+                          "Test 1",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
             //1. Row für Kreis und Name der Einheit
             Row(
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [ //Kreis-Werte nacheinander mit \n
+                  children: [
+                    //Kreis-Werte nacheinander mit \n
                     Text("Move: + [value]"),
                     Text("Save: + [value]"),
                     Text("Control: + [value]"),
@@ -154,20 +238,20 @@ class _WarScroll extends State<WarScroll> {
                     Text("Rnd"),
                     Text("Dmg"),
                     Text("Ability"),
-                  ]
+                  ],
                 ),
                 TableRow(
-                    children: [
-                      Text(""),
-                      Text("Ratatatata"),
-                      Text("10\""),
-                      Text("3"),
-                      Text("4+"),
-                      Text("2+"),
-                      Text("1"),
-                      Text("3"),
-                      Text("Shoot in Combat"),
-                    ]
+                  children: [
+                    Text(""),
+                    Text("Ratatatata"),
+                    Text("10\""),
+                    Text("3"),
+                    Text("4+"),
+                    Text("2+"),
+                    Text("1"),
+                    Text("3"),
+                    Text("Shoot in Combat"),
+                  ],
                 ),
               ],
             ),
@@ -177,30 +261,30 @@ class _WarScroll extends State<WarScroll> {
             Table(
               children: [
                 TableRow(
-                    children: [
-                      Icon(Icons.sports_martial_arts),
-                      Text("Melee Weapons"),
-                      Text(""),
-                      Text("Att"),
-                      Text("Hit"),
-                      Text("Wnd"),
-                      Text("Rnd"),
-                      Text("Dmg"),
-                      Text("Ability"),
-                    ]
+                  children: [
+                    Icon(Icons.sports_martial_arts),
+                    Text("Melee Weapons"),
+                    Text(""),
+                    Text("Att"),
+                    Text("Hit"),
+                    Text("Wnd"),
+                    Text("Rnd"),
+                    Text("Dmg"),
+                    Text("Ability"),
+                  ],
                 ),
                 TableRow(
-                    children: [
-                      Text(""),
-                      Text("Ratatatata"),
-                      Text(""),
-                      Text("3"),
-                      Text("4+"),
-                      Text("2+"),
-                      Text("1"),
-                      Text("3"),
-                      Text("Crit Mortal"),
-                    ]
+                  children: [
+                    Text(""),
+                    Text("Ratatatata"),
+                    Text(""),
+                    Text("3"),
+                    Text("4+"),
+                    Text("2+"),
+                    Text("1"),
+                    Text("3"),
+                    Text("Crit Mortal"),
+                  ],
                 ),
               ],
             ),
@@ -213,17 +297,15 @@ class _WarScroll extends State<WarScroll> {
                 Column(children: [Text("Keywords")]),
                 SizedBox(width: 30),
                 Row(
-                  children: [
-                    Text("Hero, Cavalry \nGreat Alliance, Faction"),
-                  ],
+                  children: [Text("Hero, Cavalry \nGreat Alliance, Faction")],
                 ),
               ],
             ),
           ],
         ),
       ),
-      //End Container
 
+      //End Container
     );
   }
 
