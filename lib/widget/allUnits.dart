@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../classes/settings.dart';
 import '../classes/unit.dart';
 import 'HomePage.dart';
+import 'WarScroll.dart';
 import 'WarScrollManu.dart';
 
 class allUnits extends StatefulWidget {
@@ -225,7 +226,7 @@ class _allUnits extends State<allUnits> {
           content: Container(
             height: 1500,
             width: 1500,
-            child: WarScrollManu(
+            child: WarScroll(
               title: currentUnit.name,
               settings: widget.settings,
               unit: currentUnit,

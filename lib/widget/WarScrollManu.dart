@@ -6,6 +6,7 @@ import '../classes/weapon.dart';
 import 'HomePage.dart';
 import 'dart:math' as math;
 
+/*
 class WarScrollManu extends StatefulWidget {
   WarScrollManu({
     super.key,
@@ -298,3 +299,4 @@ class _WarScrollManu extends State<WarScrollManu> {
     );
   }
 }
+ */
