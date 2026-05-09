@@ -6,6 +6,7 @@ import '../classes/battleTraits.dart';
 import '../classes/settings.dart';
 import '../classes/unit.dart';
 import 'HomePage.dart';
+import 'Scoring.dart';
 import 'StartofBattle.dart';
 
 class EndOfTurn extends StatefulWidget {
@@ -198,15 +199,15 @@ class _EndOfTurn extends State<EndOfTurn> {
               shadowColor: Colors.black,
             ),
             onPressed: () {
-              _navigateToStart(context, widget.settings);
+              _navigateToScoring(context, widget.settings);
             },
-            child: Text("Weiter zum Start of Battle"),
+            child: Text("To Scoring"),
           ),
           SizedBox(width: 50),
           Text(
               widget.ownPhase
-                  ? 'Meine ' + widget.title
-                  : 'Gegnerische ' + widget.title,
+                  ? 'My ' + widget.title
+                  : 'Enemy ' + widget.title,
               style: TextStyle(color: calculateTextColor(widget.phaseColor))),
           Switch(
             // Dieser bool-Wert ändert den Switch.
@@ -349,10 +350,10 @@ class _EndOfTurn extends State<EndOfTurn> {
         : Colors.white;
   }
 
-  void _navigateToStart(BuildContext context, Settings settings) {
+  void _navigateToScoring(BuildContext context, Settings settings) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => StartofBattle(title: "Start of Battle", settings: settings),
+        builder: (context) => Scoring(title: "Scoring", settings: settings),
       ),
     );
   }

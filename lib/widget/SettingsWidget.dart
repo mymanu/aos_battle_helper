@@ -14,6 +14,7 @@ class SettingsWidget extends StatefulWidget {
   Settings settings;
   String title;
 
+
   @override
   _SettingsWidget createState() => _SettingsWidget();
 }
@@ -25,6 +26,8 @@ class _SettingsWidget extends State<SettingsWidget> {
     //String title = widget.title + ' - ' + envTitle;
     String title = widget.title;
     //String title = widget.title + "Phase";
+    TextEditingController playerNameController = TextEditingController();
+    playerNameController.text = widget.settings.playerName;
 
     return Scaffold(
       appBar: AppBar(
@@ -95,6 +98,35 @@ class _SettingsWidget extends State<SettingsWidget> {
                   ),
                   onPressed: () {
                     pickSeraphonHardcoded();
+                  },
+                ),
+
+                SizedBox(height: 20,),
+
+                TextField(
+                  controller: playerNameController,
+                  onChanged: (text) {
+                    widget.settings.playerName = text;
+                  },
+                  onSubmitted: (String value) async {
+                    widget.settings.playerName = value;
+                    await showDialog<void>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Thanks!'),
+                          content: Text('Spieler 1 heißt "$value", mit der Zeichenlänge:  ${value.characters.length}.'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   },
                 ),
               ]
