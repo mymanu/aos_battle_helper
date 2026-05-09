@@ -5,8 +5,8 @@ import '../classes/unit.dart';
 import 'HomePage.dart';
 import 'dart:math' as math;
 
-class WarScroll extends StatefulWidget {
-  WarScroll({super.key, required this.title, required this.settings});
+class WarScrollManu extends StatefulWidget {
+  WarScrollManu({super.key, required this.title, required this.settings});
 
   Settings settings;
   String title;
@@ -18,10 +18,10 @@ class WarScroll extends StatefulWidget {
   //String phaseColorString = "White";
 
   @override
-  _WarScroll createState() => _WarScroll();
+  _WarScrollManu createState() => _WarScrollManu();
 }
 
-class _WarScroll extends State<WarScroll> {
+class _WarScrollManu extends State<WarScrollManu> {
   @override
   Widget build(BuildContext context) {
     String title = widget.title;
@@ -60,108 +60,108 @@ class _WarScroll extends State<WarScroll> {
               Container(
                 padding: EdgeInsets.only(left: 50),
                 child:
-                    // Idee Kreis getrennt durch 2 Linien
-                    Container(
-                      width: 200,
-                      height: 200,
-                      alignment: Alignment.centerLeft,
-                      decoration: BoxDecoration(
-                        color: Colors.white, // Circle color
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Colors.yellow.shade700,
-                          width: 7,
-                        ), // Optional border
+                // Idee Kreis getrennt durch 2 Linien
+                Container(
+                  width: 200,
+                  height: 200,
+                  alignment: Alignment.centerLeft,
+                  decoration: BoxDecoration(
+                    color: Colors.white, // Circle color
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Colors.yellow.shade700,
+                      width: 7,
+                    ), // Optional border
+                  ),
+                  child: Stack(
+                    children: [
+                      // left top to right bottom
+                      Transform.rotate(
+                        angle: math.pi / 4, // 45 degrees in radians
+                        child: Center(
+                          child: Container(
+                            height: 5, // Thickness
+                            color: Colors.yellow.shade600,
+                          ),
+                        ),
                       ),
-                      child: Stack(
-                        children: [
-                          // left top to right bottom
-                          Transform.rotate(
-                            angle: math.pi / 4, // 45 degrees in radians
-                            child: Center(
-                              child: Container(
-                                height: 5, // Thickness
-                                color: Colors.yellow.shade600,
+                      Transform.rotate(
+                        angle: math.pi / 4,
+                        // right top to left bottom
+                        child: Center(
+                          child: Container(
+                            width: 5, // Thickness
+                            color: Colors.yellow.shade600,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        left: 75,
+                        child: Column(
+                          children: [
+                            Text(
+                              "Move",
+                              style: TextStyle(color: Colors.red),
+                            ),
+                            SizedBox(height: 10),
+                            Text(
+                              "10\"",
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Positioned(
+                        top: 80,
+                        left: -10,
+                        child: Row(
+                          children: [
+                            Transform.rotate(
+                              angle: math.pi * 1.5,
+                              child: Text(
+                                "Health",
+                                style: TextStyle(color: Colors.red),
                               ),
                             ),
-                          ),
-                          Transform.rotate(
-                            angle: math.pi / 4,
-                            // right top to left bottom
-                            child: Center(
-                              child: Container(
-                                width: 5, // Thickness
-                                color: Colors.yellow.shade600,
+                            SizedBox(width: 10),
+                            Text("6", style: TextStyle(color: Colors.red)),
+                          ],
+                        ),
+                      ),
+                      Positioned(
+                        top: 80,
+                        left: 130,
+                        child: Row(
+                          children: [
+                            Text("4+", style: TextStyle(color: Colors.red)),
+                            SizedBox(width: 10),
+                            Transform.rotate(
+                              angle: math.pi * 0.5,
+                              child: Text(
+                                "Save",
+                                style: TextStyle(color: Colors.red),
                               ),
                             ),
-                          ),
-                          Positioned(
-                            left: 75,
-                            child: Column(
-                              children: [
-                                Text(
-                                  "Move",
-                                  style: TextStyle(color: Colors.red),
-                                ),
-                                SizedBox(height: 10),
-                                Text(
-                                  "10\"",
-                                  style: TextStyle(color: Colors.red),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Positioned(
-                            top: 80,
-                            left: -10,
-                            child: Row(
-                              children: [
-                                Transform.rotate(
-                                  angle: math.pi * 1.5,
-                                  child: Text(
-                                    "Health",
-                                    style: TextStyle(color: Colors.red),
-                                  ),
-                                ),
-                                SizedBox(width: 10),
-                                Text("6", style: TextStyle(color: Colors.red)),
-                              ],
-                            ),
-                          ),
-                          Positioned(
-                            top: 80,
-                            left: 130,
-                            child: Row(
-                              children: [
-                                Text("4+", style: TextStyle(color: Colors.red)),
-                                SizedBox(width: 10),
-                                Transform.rotate(
-                                  angle: math.pi * 0.5,
-                                  child: Text(
-                                    "Save",
-                                    style: TextStyle(color: Colors.red),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Positioned(
-                            top: 135,
-                            left: 70,
-                            child: Column(
-                              children: [
-                                Text("2", style: TextStyle(color: Colors.red)),
-                                SizedBox(width: 10),
-                                Text(
-                                  "Control",
-                                  style: TextStyle(color: Colors.red),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
+                      Positioned(
+                        top: 135,
+                        left: 70,
+                        child: Column(
+                          children: [
+                            Text("2", style: TextStyle(color: Colors.red)),
+                            SizedBox(width: 10),
+                            Text(
+                              "Control",
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
               Spacer(),
               Text("Unit Name", style: TextStyle(height: 2.5, fontSize: 25)),
