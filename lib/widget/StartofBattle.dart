@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 
 import '../classes/battleFormation.dart';
 import '../classes/settings.dart';
-import '../classes/cardContent.dart';
 import 'HeroPhase.dart';
 import 'HomePage.dart';
+import 'allUnits.dart';
 
 class StartofBattle extends StatefulWidget {
   StartofBattle({super.key, required this.title, required this.settings});
@@ -33,7 +33,8 @@ class _StartofBattle extends State<StartofBattle> {
     String title = widget.title;
     //String title = widget.title + "Phase";
 
-    List<CardContent> cardContentList = [];
+    List<Unit> unitsThisPhase = [];
+    List<Ability> spellsThisPhase = [];
 
     for (Unit unit in widget.settings.army.unitList) {
       for (Ability ability in unit.abilitys) {
@@ -43,24 +44,14 @@ class _StartofBattle extends State<StartofBattle> {
                   ability.timing.contains("Passive")) &&
               widget.ownPhase) {
             ability.originUnit = unit.name;
-
-            //TODO Merker für 4 Test-Zeilen
-            CardContent cardContent = CardContent(true);
-            cardContent.ability = ability;
-            cardContent.erledigt = ability.erledigt;
-            cardContentList.add(cardContent);
+            spellsThisPhase.add(ability);
           }
           if ((ability.timing.contains("Enemy") ||
                   ability.timing.contains("Any") ||
                   ability.timing.contains("Passive")) &&
               !widget.ownPhase) {
             ability.originUnit = unit.name;
-
-            //TODO Merker für 4 Test-Zeilen
-            CardContent cardContent = CardContent(true);
-            cardContent.ability = ability;
-            cardContent.erledigt = ability.erledigt;
-            cardContentList.add(cardContent);
+            spellsThisPhase.add(ability);
           }
         }
       }
@@ -73,24 +64,14 @@ class _StartofBattle extends State<StartofBattle> {
                 ability.timing.contains("Passive")) &&
             widget.ownPhase) {
           ability.originUnit = "Spell-Lore";
-
-          //TODO Merker für 4 Test-Zeilen
-          CardContent cardContent = CardContent(true);
-          cardContent.ability = ability;
-          cardContent.erledigt = ability.erledigt;
-          cardContentList.add(cardContent);
+          spellsThisPhase.add(ability);
         }
         if ((ability.timing.contains("Enemy") ||
                 ability.timing.contains("Any") ||
                 ability.timing.contains("Passive")) &&
             !widget.ownPhase) {
           ability.originUnit = "Spell-Lore";
-
-          //TODO Merker für 4 Test-Zeilen
-          CardContent cardContent = CardContent(true);
-          cardContent.ability = ability;
-          cardContent.erledigt = ability.erledigt;
-          cardContentList.add(cardContent);
+          spellsThisPhase.add(ability);
         }
       }
     }
@@ -103,24 +84,14 @@ class _StartofBattle extends State<StartofBattle> {
                   ability.timing.contains("Passive")) &&
               widget.ownPhase) {
             ability.originUnit = "Battle-Trait";
-
-            //TODO Merker für 4 Test-Zeilen
-            CardContent cardContent = CardContent(true);
-            cardContent.ability = ability;
-            cardContent.erledigt = ability.erledigt;
-            cardContentList.add(cardContent);
+            spellsThisPhase.add(ability);
           }
           if ((ability.timing.contains("Enemy") ||
                   ability.timing.contains("Any") ||
                   ability.timing.contains("Passive")) &&
               !widget.ownPhase) {
             ability.originUnit = "Battle-Trait";
-
-            //TODO Merker für 4 Test-Zeilen
-            CardContent cardContent = CardContent(true);
-            cardContent.ability = ability;
-            cardContent.erledigt = ability.erledigt;
-            cardContentList.add(cardContent);
+            spellsThisPhase.add(ability);
           }
         }
       }
@@ -135,24 +106,14 @@ class _StartofBattle extends State<StartofBattle> {
                   ability.timing.contains("Passive")) &&
               widget.ownPhase) {
             ability.originUnit = "Battle-Formation";
-
-            //TODO Merker für 4 Test-Zeilen
-            CardContent cardContent = CardContent(true);
-            cardContent.ability = ability;
-            cardContent.erledigt = ability.erledigt;
-            cardContentList.add(cardContent);
+            spellsThisPhase.add(ability);
           }
           if ((ability.timing.contains("Enemy") ||
                   ability.timing.contains("Any") ||
                   ability.timing.contains("Passive")) &&
               !widget.ownPhase) {
             ability.originUnit = "Battle-Formation";
-
-            //TODO Merker für 4 Test-Zeilen
-            CardContent cardContent = CardContent(true);
-            cardContent.ability = ability;
-            cardContent.erledigt = ability.erledigt;
-            cardContentList.add(cardContent);
+            spellsThisPhase.add(ability);
           }
         }
       }
@@ -165,24 +126,14 @@ class _StartofBattle extends State<StartofBattle> {
                 ability.timing.contains("Passive")) &&
             widget.ownPhase) {
           ability.originUnit = "Command-Ability";
-
-          //TODO Merker für 4 Test-Zeilen
-          CardContent cardContent = CardContent(true);
-          cardContent.ability = ability;
-          cardContent.erledigt = ability.erledigt;
-          cardContentList.add(cardContent);
+          spellsThisPhase.add(ability);
         }
         if ((ability.timing.contains("Enemy") ||
                 ability.timing.contains("Any") ||
                 ability.timing.contains("Passive")) &&
             !widget.ownPhase) {
           ability.originUnit = "Command-Ability";
-
-          //TODO Merker für 4 Test-Zeilen
-          CardContent cardContent = CardContent(true);
-          cardContent.ability = ability;
-          cardContent.erledigt = ability.erledigt;
-          cardContentList.add(cardContent);
+          spellsThisPhase.add(ability);
         }
       }
     }
@@ -194,46 +145,26 @@ class _StartofBattle extends State<StartofBattle> {
                 ability.timing.contains("Passive")) &&
             widget.ownPhase) {
           ability.originUnit = "Core-Ability";
-
-          //TODO Merker für 4 Test-Zeilen
-          CardContent cardContent = CardContent(true);
-          cardContent.ability = ability;
-          cardContent.erledigt = ability.erledigt;
-          cardContentList.add(cardContent);
+          spellsThisPhase.add(ability);
         }
         if ((ability.timing.contains("Enemy") ||
                 ability.timing.contains("Any") ||
                 ability.timing.contains("Passive")) &&
             !widget.ownPhase) {
           ability.originUnit = "Core-Ability";
-
-          //TODO Merker für 4 Test-Zeilen
-          CardContent cardContent = CardContent(true);
-          cardContent.ability = ability;
-          cardContent.erledigt = ability.erledigt;
-          cardContentList.add(cardContent);
+          spellsThisPhase.add(ability);
         }
       }
     }
 
-    //TODO ab hier Units der zu umbauenden spellsThisPhase einbauen damit diese auch eine Kachel erhalten
+    //Ab hier Units in unitsThisPhase
     for (Unit unit in widget.settings.army.unitList) {
       if (unit.weapons.isNotEmpty) {
-        //TODO Merker für 4 Test-Zeilen
-        CardContent cardContent = CardContent(false);
-        cardContent.unit = unit;
-        cardContent.erledigt = unit.erledigt;
-        cardContentList.add(cardContent);
-
-        /*
-     //Warscroll in spellsThisPhase
-     //Timing "Any Combat Phase"
-
-    ability.originUnit = "Core-Ability";
-    spellsThisPhase.add(ability);
-     */
+        unitsThisPhase.add(unit);
       }
     }
+
+
 
     //TODO ab Hier wird das UI gebaut, ab hier kannst du dich dann austoben
     return Scaffold(
@@ -242,6 +173,18 @@ class _StartofBattle extends State<StartofBattle> {
         centerTitle: true,
         backgroundColor: widget.phaseColor,
         actions: <Widget>[
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.teal,
+              backgroundColor: Colors.blueGrey.shade800,
+              shadowColor: Colors.black,
+            ),
+            onPressed: () {
+              _navigateToAllUnits(context, widget.settings);
+            },
+            child: Text("WarScrolls"),
+          ),
+          SizedBox(width: 10,),
           IconButton(
             icon: Icon(Icons.add, color: calculateTextColor(widget.phaseColor)),
             onPressed: () {
@@ -341,19 +284,19 @@ class _StartofBattle extends State<StartofBattle> {
                 int index,
               ) {
                 return Card(
-                  child: cardContentList[index].erledigt ?
+                  child: spellsThisPhase[index].erledigt ?
                   //Ab hier Card wenn die Ability erledigt ist
                   ElevatedButton(
                           onPressed: () {
                             setState(() {
-                              cardContentList[index].unit.erledigt = false;
-                              cardContentList[index].ability.erledigt = false;
+                              spellsThisPhase[index].erledigt = false;
                             });
                           },
                           child: Column(
                             children: [
                               Text(
-                                cardContentList[index].ability.name.contains("-1") ? cardContentList[index].unit.name : cardContentList[index].ability.name,
+                                spellsThisPhase[index].name,
+                                //cardContentList[index].ability.name.contains("-1") ? cardContentList[index].unit.name : cardContentList[index].ability.name,
                                 style: TextStyle(fontSize: 20),
                               ),
                               Icon(Icons.done, size: 100),
@@ -375,8 +318,6 @@ class _StartofBattle extends State<StartofBattle> {
                           ),
                         )
                       :
-                  //Abfrage ob cardContent eine Ability ist
-                  cardContentList[index].isAbility ?
                   //Ab hier Card wenn es eine Ability ist
                   Column(
                           mainAxisSize: MainAxisSize.min,
@@ -385,7 +326,8 @@ class _StartofBattle extends State<StartofBattle> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  cardContentList[index].ability.name,
+                                  spellsThisPhase[index].name,
+                                  //cardContentList[index].ability.name,
                                   style: TextStyle(
                                     backgroundColor: widget.phaseColor,
                                     fontWeight: FontWeight.bold,
@@ -396,9 +338,14 @@ class _StartofBattle extends State<StartofBattle> {
                                 ),
                               ],
                             ),
+                            Text(spellsThisPhase[index].timing),
+                            Text(spellsThisPhase[index].originUnit),
+                            Text(spellsThisPhase[index].details),
+                            /*
                             Text(cardContentList[index].ability.timing),
                             Text(cardContentList[index].ability.originUnit),
                             Text(cardContentList[index].ability.details),
+                             */
                             /*
                             ListTile(
                               leading: Icon(Icons.album),
@@ -413,68 +360,7 @@ class _StartofBattle extends State<StartofBattle> {
                                   child: Text("Fähigkeit erledigt"),
                                   onPressed: () {
                                     setState(() {
-                                      cardContentList[index].unit.erledigt =
-                                          true;
-                                      cardContentList[index].ability.erledigt =
-                                          true;
-                                    });
-                                  },
-                                ),
-                                const SizedBox(width: 8),
-                                TextButton(
-                                  child: Text("Item $index"),
-                                  onPressed: () {
-                                    /* ... */
-                                  },
-                                ),
-                                const SizedBox(width: 8),
-                              ],
-                            ),
-                          ],
-                        )
-                      :
-                  //Ab hier Card wenn es eine Unit ist
-                  Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  cardContentList[index].unit.name,
-                                  style: TextStyle(
-                                    backgroundColor: widget.phaseColor,
-                                    fontWeight: FontWeight.bold,
-                                    color: calculateTextColor(
-                                      widget.phaseColor,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            //TODO Hier Content der Card einfügen einer Unit
-                            Text("Health: " + cardContentList[index].unit.health),
-                            Text("Move: " + cardContentList[index].unit.move),
-                            Text("Save: " + cardContentList[index].unit.save),
-                            Text("Control: " + cardContentList[index].unit.control),
-                            /*
-                            ListTile(
-                              leading: Icon(Icons.album),
-                              title: Text(spells[index].title),
-                              subtitle: Text(spells[index].details),
-                            ),
-                            */
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: <Widget>[
-                                TextButton(
-                                  child: Text("Unit erledigt"),
-                                  onPressed: () {
-                                    setState(() {
-                                      cardContentList[index].unit.erledigt =
-                                          true;
-                                      cardContentList[index].ability.erledigt =
-                                          true;
+                                      spellsThisPhase[index].erledigt = true;
                                     });
                                   },
                                 ),
@@ -491,11 +377,118 @@ class _StartofBattle extends State<StartofBattle> {
                           ],
                         ),
                 );
-              }, childCount: cardContentList.length),
+              }, childCount: spellsThisPhase.length),
             ),
           ),
-          //TODO Hier 2. SliverPadding einfügen für 2. Grid, Jenny ist voll glug
-
+          SliverPadding(
+            padding: const EdgeInsets.only(right: 50),
+            sliver: SliverGrid(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                /*
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 2,
+                childAspectRatio: 1.1,
+                */
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 3,
+                childAspectRatio: 2,
+              ),
+              delegate: SliverChildBuilderDelegate((
+                  BuildContext context,
+                  int index,
+                  ) {
+                return Card(
+                  child: unitsThisPhase[index].erledigt
+                      ? ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        unitsThisPhase[index].erledigt = false;
+                      });
+                    },
+                    child: Column(
+                      children: [
+                        Text(
+                          unitsThisPhase[index].name,
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        Icon(Icons.done, size: 100),
+                        /*
+                              Container(
+                                height: 100,
+                                width: 100,
+                                child: LayoutBuilder(
+                                  builder: (context, constraint) {
+                                    return new Icon(
+                                      Icons.done,
+                                      size: constraint.biggest.height,
+                                    );
+                                  },
+                                ),
+                              ),
+                              */
+                      ],
+                    ),
+                  )
+                      :  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            unitsThisPhase[index].name,
+                            style: TextStyle(
+                              backgroundColor: widget.phaseColor,
+                              fontWeight: FontWeight.bold,
+                              color: calculateTextColor(
+                                widget.phaseColor,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      //TODO Hier Content der Card einfügen einer Unit
+                      Text("Health: " + unitsThisPhase[index].health),
+                      Text("Move: " + unitsThisPhase[index].move),
+                      Text("Save: " + unitsThisPhase[index].save),
+                      Text("Control: " + unitsThisPhase[index].control),
+                      /*
+                            ListTile(
+                              leading: Icon(Icons.album),
+                              title: Text(spells[index].title),
+                              subtitle: Text(spells[index].details),
+                            ),
+                            */
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          TextButton(
+                            child: Text("Unit erledigt"),
+                            onPressed: () {
+                              setState(() {
+                                unitsThisPhase[index].erledigt =
+                                true;
+                              });
+                            },
+                          ),
+                          const SizedBox(width: 8),
+                          TextButton(
+                            child: Text("Item $index"),
+                            onPressed: () {
+                              /* ... */
+                            },
+                          ),
+                          const SizedBox(width: 8),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              }, childCount: unitsThisPhase.length),
+            ),
+          ),
         ],
       ),
     );
@@ -521,6 +514,15 @@ class _StartofBattle extends State<StartofBattle> {
       MaterialPageRoute(
         builder: (context) =>
             HomePage(title: "Age of Sigmar Battle Helper", settings: settings),
+      ),
+    );
+  }
+
+  void _navigateToAllUnits(BuildContext context, Settings settings) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) =>
+            allUnits(title: "All Warscrolls", settings: settings),
       ),
     );
   }
