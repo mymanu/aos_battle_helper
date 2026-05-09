@@ -3,13 +3,13 @@ class Weapon {
 
   String id;
   String name;
-  String typeName = "-0";
+  String typeName = "-";
 
-  String range = "-0,5";
-  String attack = "-1";
-  String hit = "-2";
-  String wound = "-3";
-  String rend = "-4";
-  String damage = "-5";
-  String ability = "-6";
+  String range = "-";
+  String attack = "-";
+  String hit = "-";
+  String wound = "-";
+  String rend = "-";
+  String damage = "-";
+  String ability = "-";
 }
