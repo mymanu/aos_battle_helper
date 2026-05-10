@@ -114,6 +114,21 @@ class _WarScroll extends State<WarScroll> {
                               ),
                             ),
                           ),
+                          //TODO Positioned für grünen Kasten
+                          //https://pub.dev/packages/flutter_custom_clippers
+                          Positioned(
+                            top: 55,
+                            left: 112,
+                            child: Container(
+                              height: 75,
+                              width: 75,
+                              decoration: BoxDecoration(
+                                color: Colors.green,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                          ),
+
                           Positioned(
                             left: 75,
                             child: Column(
