@@ -93,328 +93,361 @@ class _Scoring extends State<Scoring> {
         ],
       ),
       body: Center(
-        child: Table(
+        child: Column(
           children: [
-            TableRow(
+            Table(
               children: [
-                Text(widget.settings.playerName),
-                Text("vs"),
-                widget.settings.playerName.contains("Edi")
-                    ? Text("Victim")
-                    : Text("Enemy"),
+                TableRow(
+                  children: [
+                    Text(widget.settings.playerName),
+                    Text("vs"),
+                    widget.settings.playerName.contains("Edi")
+                        ? Text("Victim")
+                        : Text("Enemy"),
+                  ],
+                ),
+                TableRow(
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.add,
+                            color: calculateTextColor(widget.phaseColor),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.settings.scoresPlayer1[0] =
+                                  widget.settings.scoresPlayer1[0] + 1;
+                            });
+                          },
+                        ),
+                        Text(widget.settings.scoresPlayer1[0].toString()),
+                        IconButton(
+                          icon: Icon(
+                            Icons.remove,
+                            color: calculateTextColor(widget.phaseColor),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.settings.scoresPlayer1[0] =
+                                  widget.settings.scoresPlayer1[0] - 1;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                    Text("Round 1"),
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.add,
+                            color: calculateTextColor(widget.phaseColor),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.settings.scoresPlayer2[0] =
+                                  widget.settings.scoresPlayer2[0] + 1;
+                            });
+                          },
+                        ),
+                        Text(widget.settings.scoresPlayer2[0].toString()),
+                        IconButton(
+                          icon: Icon(
+                            Icons.remove,
+                            color: calculateTextColor(widget.phaseColor),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.settings.scoresPlayer2[0] =
+                                  widget.settings.scoresPlayer2[0] - 1;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                TableRow(
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.add,
+                            color: calculateTextColor(widget.phaseColor),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.settings.scoresPlayer1[1] =
+                                  widget.settings.scoresPlayer1[1] + 1;
+                            });
+                          },
+                        ),
+                        Text(widget.settings.scoresPlayer1[1].toString()),
+                        IconButton(
+                          icon: Icon(
+                            Icons.remove,
+                            color: calculateTextColor(widget.phaseColor),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.settings.scoresPlayer1[1] =
+                                  widget.settings.scoresPlayer1[1] - 1;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                    Text("Round 2"),
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.add,
+                            color: calculateTextColor(widget.phaseColor),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.settings.scoresPlayer2[1] =
+                                  widget.settings.scoresPlayer2[1] + 1;
+                            });
+                          },
+                        ),
+                        Text(widget.settings.scoresPlayer2[1].toString()),
+                        IconButton(
+                          icon: Icon(
+                            Icons.remove,
+                            color: calculateTextColor(widget.phaseColor),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.settings.scoresPlayer2[1] =
+                                  widget.settings.scoresPlayer2[1] - 1;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                TableRow(
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.add,
+                            color: calculateTextColor(widget.phaseColor),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.settings.scoresPlayer1[2] =
+                                  widget.settings.scoresPlayer1[2] + 1;
+                            });
+                          },
+                        ),
+                        Text(widget.settings.scoresPlayer1[2].toString()),
+                        IconButton(
+                          icon: Icon(
+                            Icons.remove,
+                            color: calculateTextColor(widget.phaseColor),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.settings.scoresPlayer1[2] =
+                                  widget.settings.scoresPlayer1[2] - 1;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                    Text("Round 3"),
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.add,
+                            color: calculateTextColor(widget.phaseColor),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.settings.scoresPlayer2[2] =
+                                  widget.settings.scoresPlayer2[2] + 1;
+                            });
+                          },
+                        ),
+                        Text(widget.settings.scoresPlayer2[2].toString()),
+                        IconButton(
+                          icon: Icon(
+                            Icons.remove,
+                            color: calculateTextColor(widget.phaseColor),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.settings.scoresPlayer2[2] =
+                                  widget.settings.scoresPlayer2[2] - 1;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                TableRow(
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.add,
+                            color: calculateTextColor(widget.phaseColor),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.settings.scoresPlayer1[3] =
+                                  widget.settings.scoresPlayer1[3] + 1;
+                            });
+                          },
+                        ),
+                        Text(widget.settings.scoresPlayer1[3].toString()),
+                        IconButton(
+                          icon: Icon(
+                            Icons.remove,
+                            color: calculateTextColor(widget.phaseColor),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.settings.scoresPlayer1[3] =
+                                  widget.settings.scoresPlayer1[3] - 1;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                    Text("Round 4"),
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.add,
+                            color: calculateTextColor(widget.phaseColor),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.settings.scoresPlayer2[3] =
+                                  widget.settings.scoresPlayer2[3] + 1;
+                            });
+                          },
+                        ),
+                        Text(widget.settings.scoresPlayer2[3].toString()),
+                        IconButton(
+                          icon: Icon(
+                            Icons.remove,
+                            color: calculateTextColor(widget.phaseColor),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.settings.scoresPlayer2[3] =
+                                  widget.settings.scoresPlayer2[3] - 1;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                TableRow(
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.add,
+                            color: calculateTextColor(widget.phaseColor),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.settings.scoresPlayer1[4] =
+                                  widget.settings.scoresPlayer1[4] + 1;
+                            });
+                          },
+                        ),
+                        Text(widget.settings.scoresPlayer1[4].toString()),
+                        IconButton(
+                          icon: Icon(
+                            Icons.remove,
+                            color: calculateTextColor(widget.phaseColor),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.settings.scoresPlayer1[4] =
+                                  widget.settings.scoresPlayer1[4] - 1;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                    Text("Round 5"),
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.add,
+                            color: calculateTextColor(widget.phaseColor),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.settings.scoresPlayer2[4] =
+                                  widget.settings.scoresPlayer2[4] + 1;
+                            });
+                          },
+                        ),
+                        Text(widget.settings.scoresPlayer2[4].toString()),
+                        IconButton(
+                          icon: Icon(
+                            Icons.remove,
+                            color: calculateTextColor(widget.phaseColor),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.settings.scoresPlayer2[4] =
+                                  widget.settings.scoresPlayer2[4] - 1;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                TableRow(
+                  children: [
+                    Text(finalScorePlayer1.toString()),
+                    Text("Score"),
+                    Text(finalScorePlayer2.toString()),
+                  ],
+                ),
               ],
             ),
-            TableRow(
-              children: [
-                Row(
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.add, color: calculateTextColor(widget.phaseColor)),
-                        onPressed: () {
-                          setState(() {
-                            widget.settings.scoresPlayer1[0] =
-                                widget.settings.scoresPlayer1[0] + 1;
-                          });
-                        },
-                      ),
-                      Text(
-                        widget.settings.scoresPlayer1[0].toString(),
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.remove,
-                          color: calculateTextColor(widget.phaseColor),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            widget.settings.scoresPlayer1[0] =
-                                widget.settings.scoresPlayer1[0] - 1;
-                          });
-                        },
-                      ),
-                    ]
+            SizedBox(height: 20,),
+            Card(
+              child: ListTile(
+                leading: Icon(Icons.album),
+                title: Text("Tactic Card 1 Header"),
+                subtitle: Text(
+                  "Hier steht die Beschrebung der Tactic Card\nmehrere\nZeilen\nText",
                 ),
-                Text("Round 1"),
-                Row(
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.add, color: calculateTextColor(widget.phaseColor)),
-                        onPressed: () {
-                          setState(() {
-                            widget.settings.scoresPlayer2[0] =
-                                widget.settings.scoresPlayer2[0] + 1;
-                          });
-                        },
-                      ),
-                      Text(
-                        widget.settings.scoresPlayer2[0].toString(),
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.remove,
-                          color: calculateTextColor(widget.phaseColor),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            widget.settings.scoresPlayer2[0] =
-                                widget.settings.scoresPlayer2[0] - 1;
-                          });
-                        },
-                      ),
-                    ]
-                ),
-              ],
+              ),
             ),
-            TableRow(
-              children: [
-                Row(
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.add, color: calculateTextColor(widget.phaseColor)),
-                        onPressed: () {
-                          setState(() {
-                            widget.settings.scoresPlayer1[1] =
-                                widget.settings.scoresPlayer1[1] + 1;
-                          });
-                        },
-                      ),
-                      Text(
-                        widget.settings.scoresPlayer1[1].toString(),
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.remove,
-                          color: calculateTextColor(widget.phaseColor),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            widget.settings.scoresPlayer1[1] =
-                                widget.settings.scoresPlayer1[1] - 1;
-                          });
-                        },
-                      ),
-                    ]
+            Card(
+              child: ListTile(
+                leading: Icon(Icons.child_care),
+                title: Text("Tactic Card 2 Header"),
+                subtitle: Text(
+                  "Hier steht die Beschrebung der Tactic Card\nmehrere\nZeilen\nText",
                 ),
-                Text("Round 2"),
-                Row(
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.add, color: calculateTextColor(widget.phaseColor)),
-                        onPressed: () {
-                          setState(() {
-                            widget.settings.scoresPlayer2[1] =
-                                widget.settings.scoresPlayer2[1] + 1;
-                          });
-                        },
-                      ),
-                      Text(
-                        widget.settings.scoresPlayer2[1].toString(),
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.remove,
-                          color: calculateTextColor(widget.phaseColor),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            widget.settings.scoresPlayer2[1] =
-                                widget.settings.scoresPlayer2[1] - 1;
-                          });
-                        },
-                      ),
-                    ]
-                ),
-              ],
-            ),
-            TableRow(
-              children: [
-                Row(
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.add, color: calculateTextColor(widget.phaseColor)),
-                        onPressed: () {
-                          setState(() {
-                            widget.settings.scoresPlayer1[2] =
-                                widget.settings.scoresPlayer1[2] + 1;
-                          });
-                        },
-                      ),
-                      Text(
-                        widget.settings.scoresPlayer1[2].toString(),
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.remove,
-                          color: calculateTextColor(widget.phaseColor),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            widget.settings.scoresPlayer1[2] =
-                                widget.settings.scoresPlayer1[2] - 1;
-                          });
-                        },
-                      ),
-                    ]
-                ),
-                Text("Round 3"),
-                Row(
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.add, color: calculateTextColor(widget.phaseColor)),
-                        onPressed: () {
-                          setState(() {
-                            widget.settings.scoresPlayer2[2] =
-                                widget.settings.scoresPlayer2[2] + 1;
-                          });
-                        },
-                      ),
-                      Text(
-                        widget.settings.scoresPlayer2[2].toString(),
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.remove,
-                          color: calculateTextColor(widget.phaseColor),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            widget.settings.scoresPlayer2[2] =
-                                widget.settings.scoresPlayer2[2] - 1;
-                          });
-                        },
-                      ),
-                    ]
-                ),
-              ],
-            ),
-            TableRow(
-              children: [
-                Row(
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.add, color: calculateTextColor(widget.phaseColor)),
-                        onPressed: () {
-                          setState(() {
-                            widget.settings.scoresPlayer1[3] =
-                                widget.settings.scoresPlayer1[3] + 1;
-                          });
-                        },
-                      ),
-                      Text(
-                        widget.settings.scoresPlayer1[3].toString(),
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.remove,
-                          color: calculateTextColor(widget.phaseColor),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            widget.settings.scoresPlayer1[3] =
-                                widget.settings.scoresPlayer1[3] - 1;
-                          });
-                        },
-                      ),
-                    ]
-                ),
-                Text("Round 4"),
-                Row(
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.add, color: calculateTextColor(widget.phaseColor)),
-                        onPressed: () {
-                          setState(() {
-                            widget.settings.scoresPlayer2[3] =
-                                widget.settings.scoresPlayer2[3] + 1;
-                          });
-                        },
-                      ),
-                      Text(
-                        widget.settings.scoresPlayer2[3].toString(),
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.remove,
-                          color: calculateTextColor(widget.phaseColor),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            widget.settings.scoresPlayer2[3] =
-                                widget.settings.scoresPlayer2[3] - 1;
-                          });
-                        },
-                      ),
-                    ]
-                ),
-              ],
-            ),
-            TableRow(
-              children: [
-                Row(
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.add, color: calculateTextColor(widget.phaseColor)),
-                        onPressed: () {
-                          setState(() {
-                            widget.settings.scoresPlayer1[4] =
-                                widget.settings.scoresPlayer1[4] + 1;
-                          });
-                        },
-                      ),
-                      Text(
-                        widget.settings.scoresPlayer1[4].toString(),
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.remove,
-                          color: calculateTextColor(widget.phaseColor),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            widget.settings.scoresPlayer1[4] =
-                                widget.settings.scoresPlayer1[4] - 1;
-                          });
-                        },
-                      ),
-                    ]
-                ),
-                Text("Round 5"),
-                Row(
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.add, color: calculateTextColor(widget.phaseColor)),
-                        onPressed: () {
-                          setState(() {
-                            widget.settings.scoresPlayer2[4] =
-                                widget.settings.scoresPlayer2[4] + 1;
-                          });
-                        },
-                      ),
-                      Text(
-                        widget.settings.scoresPlayer2[4].toString(),
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.remove,
-                          color: calculateTextColor(widget.phaseColor),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            widget.settings.scoresPlayer2[4] =
-                                widget.settings.scoresPlayer2[4] - 1;
-                          });
-                        },
-                      ),
-                    ]
-                ),
-              ],
-            ),
-            TableRow(
-              children: [
-                Text(finalScorePlayer1.toString()),
-                Text("Score"),
-                Text(finalScorePlayer2.toString()),
-              ]
+              ),
             ),
           ],
         ),

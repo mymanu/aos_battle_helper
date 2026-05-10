@@ -15,10 +15,7 @@ class StartofBattle extends StatefulWidget {
 
   Settings settings;
   String title;
-  bool ownPhase = true;
-  bool underdog = false;
 
-  //Color phaseColor = Colors.orange.shade800;
   Color phaseColor = Colors.black;
 
   String phaseColorString = "Black";
@@ -39,17 +36,17 @@ class _StartofBattle extends State<StartofBattle> {
 
     Functions functions = Functions();
 
-    spellsThisPhase.addAll(functions.unitAbilitys(widget.settings.army.unitList, widget.phaseColorString, widget.ownPhase));
+    spellsThisPhase.addAll(functions.unitAbilitys(widget.settings.army.unitList, widget.phaseColorString, widget.settings.ownPhase));
 
-    spellsThisPhase.addAll(functions.spellLoreAbilitys(widget.settings.army.spellLore, widget.phaseColorString, widget.ownPhase));
+    spellsThisPhase.addAll(functions.spellLoreAbilitys(widget.settings.army.spellLore, widget.phaseColorString, widget.settings.ownPhase));
 
-    spellsThisPhase.addAll(functions.battleTraitAbilitys(widget.settings.army.battleTraitsList, widget.phaseColorString, widget.ownPhase));
+    spellsThisPhase.addAll(functions.battleTraitAbilitys(widget.settings.army.battleTraitsList, widget.phaseColorString, widget.settings.ownPhase));
 
-    spellsThisPhase.addAll(functions.battleFormationAbilitys(widget.settings.army.battleFormationsList, widget.phaseColorString, widget.ownPhase));
+    spellsThisPhase.addAll(functions.battleFormationAbilitys(widget.settings.army.battleFormationsList, widget.phaseColorString, widget.settings.ownPhase));
 
-    spellsThisPhase.addAll(functions.commandAbilitys(widget.settings.commandAbilitys, widget.phaseColorString, widget.ownPhase));
+    spellsThisPhase.addAll(functions.commandAbilitys(widget.settings.commandAbilitys, widget.phaseColorString, widget.settings.ownPhase));
 
-    spellsThisPhase.addAll(functions.normalAbilitys(widget.settings.normalAbilitys, widget.phaseColorString, widget.ownPhase));
+    spellsThisPhase.addAll(functions.normalAbilitys(widget.settings.normalAbilitys, widget.phaseColorString, widget.settings.ownPhase));
 
     //TODO ab Hier wird das UI gebaut, ab hier kannst du dich dann austoben
     return Scaffold(
@@ -64,12 +61,12 @@ class _StartofBattle extends State<StartofBattle> {
           ),
           Switch(
             // This bool value toggles the switch.
-            value: widget.underdog,
+            value: widget.settings.underdog,
             activeThumbColor: Colors.teal,
             onChanged: (bool value) {
               // This is called when the user toggles the switch.
               setState(() {
-                widget.underdog = value;
+                widget.settings.underdog = value;
               });
             },
           ),
@@ -135,18 +132,18 @@ class _StartofBattle extends State<StartofBattle> {
           ),
           SizedBox(width: 50),
           Text(
-            widget.ownPhase
-                ? 'Meine ' + widget.title
-                : 'Gegnerische ' + widget.title,
+            widget.settings.ownPhase
+                ? 'My ' + widget.title
+                : 'Enemy ' + widget.title,
           ),
           Switch(
             // This bool value toggles the switch.
-            value: widget.ownPhase,
+            value: widget.settings.ownPhase,
             activeThumbColor: Colors.teal,
             onChanged: (bool value) {
               // This is called when the user toggles the switch.
               setState(() {
-                widget.ownPhase = value;
+                widget.settings.ownPhase = value;
               });
             },
           ),

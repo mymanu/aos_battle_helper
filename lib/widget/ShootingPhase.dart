@@ -16,8 +16,7 @@ class ShootingPhase extends StatefulWidget {
 
   Settings settings;
   String title;
-  bool ownPhase = true;
-  bool underdog = false;
+
   Color phaseColor = Colors.blue;
 
   String phaseColorString = "Blue";
@@ -36,17 +35,17 @@ class _ShootingPhase extends State<ShootingPhase> {
 
     Functions functions = Functions();
 
-    spellsThisPhase.addAll(functions.unitAbilitys(widget.settings.army.unitList, widget.phaseColorString, widget.ownPhase));
+    spellsThisPhase.addAll(functions.unitAbilitys(widget.settings.army.unitList, widget.phaseColorString, widget.settings.ownPhase));
 
-    spellsThisPhase.addAll(functions.spellLoreAbilitys(widget.settings.army.spellLore, widget.phaseColorString, widget.ownPhase));
+    spellsThisPhase.addAll(functions.spellLoreAbilitys(widget.settings.army.spellLore, widget.phaseColorString, widget.settings.ownPhase));
 
-    spellsThisPhase.addAll(functions.battleTraitAbilitys(widget.settings.army.battleTraitsList, widget.phaseColorString, widget.ownPhase));
+    spellsThisPhase.addAll(functions.battleTraitAbilitys(widget.settings.army.battleTraitsList, widget.phaseColorString, widget.settings.ownPhase));
 
-    spellsThisPhase.addAll(functions.battleFormationAbilitys(widget.settings.army.battleFormationsList, widget.phaseColorString, widget.ownPhase));
+    spellsThisPhase.addAll(functions.battleFormationAbilitys(widget.settings.army.battleFormationsList, widget.phaseColorString, widget.settings.ownPhase));
 
-    spellsThisPhase.addAll(functions.commandAbilitys(widget.settings.commandAbilitys, widget.phaseColorString, widget.ownPhase));
+    spellsThisPhase.addAll(functions.commandAbilitys(widget.settings.commandAbilitys, widget.phaseColorString, widget.settings.ownPhase));
 
-    spellsThisPhase.addAll(functions.normalAbilitys(widget.settings.normalAbilitys, widget.phaseColorString, widget.ownPhase));
+    spellsThisPhase.addAll(functions.normalAbilitys(widget.settings.normalAbilitys, widget.phaseColorString, widget.settings.ownPhase));
 
     //Ab hier Units mit Ranged Waffen in die unitsThisPhase Liste hinzufügen
     for(Unit unit in widget.settings.army.unitList) {
@@ -76,12 +75,12 @@ class _ShootingPhase extends State<ShootingPhase> {
           ),
           Switch(
             // This bool value toggles the switch.
-            value: widget.underdog,
+            value: widget.settings.underdog,
             activeThumbColor: Colors.teal,
             onChanged: (bool value) {
               // This is called when the user toggles the switch.
               setState(() {
-                widget.underdog = value;
+                widget.settings.underdog = value;
               });
             },
           ),
@@ -144,18 +143,18 @@ class _ShootingPhase extends State<ShootingPhase> {
           ),
           SizedBox(width: 50),
           Text(
-              widget.ownPhase
-                  ? 'Meine ' + widget.title
-                  : 'Gegnerische ' + widget.title,
+              widget.settings.ownPhase
+                  ? 'My ' + widget.title
+                  : 'Enemy ' + widget.title,
               style: TextStyle(color: calculateTextColor(widget.phaseColor))),
           Switch(
             // Dieser bool-Wert ändert den Switch.
-            value: widget.ownPhase,
+            value: widget.settings.ownPhase,
             activeThumbColor: Colors.black,
             onChanged: (bool value) {
               // Wird aufgerufen, wenn der user den Switch anklickt.
               setState(() {
-                widget.ownPhase = value;
+                widget.settings.ownPhase = value;
               });
             },
           ),
