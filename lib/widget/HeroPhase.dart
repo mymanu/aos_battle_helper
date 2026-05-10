@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 
 import '../classes/ability.dart';
 import '../classes/battleTraits.dart';
+import '../classes/functions.dart';
 import '../classes/settings.dart';
 import '../classes/unit.dart';
 import 'HomePage.dart';
 import 'MovementPhase.dart';
+import 'allUnits.dart';
 
 class HeroPhase extends StatefulWidget {
   HeroPhase({super.key, required this.title, required this.settings});
@@ -14,6 +16,7 @@ class HeroPhase extends StatefulWidget {
   Settings settings;
   String title;
   bool ownPhase = true;
+  bool underdog = false;
   Color phaseColor = Colors.yellow.shade800;
 
   String phaseColorString = "Yellow";
@@ -29,126 +32,19 @@ class _HeroPhase extends State<HeroPhase> {
 
     List<Ability> spellsThisPhase = [];
 
-    for (Unit unit in widget.settings.army.unitList) {
-      for (Ability ability in unit.abilitys) {
-        if (ability.color.contains(widget.phaseColorString)) {
-          if ((ability.timing.contains("Your") ||
-                  ability.timing.contains("Any") ||
-                  ability.timing.contains("Passive")) &&
-              widget.ownPhase) {
-            ability.originUnit = unit.name;
-            spellsThisPhase.add(ability);
-          }
-          if ((ability.timing.contains("Enemy") ||
-                  ability.timing.contains("Any") ||
-                  ability.timing.contains("Passive")) &&
-              !widget.ownPhase) {
-            ability.originUnit = unit.name;
-            spellsThisPhase.add(ability);
-          }
-        }
-      }
-    }
+    Functions functions = Functions();
 
-    for (Ability ability in widget.settings.army.spellLore.abilitys) {
-      if (ability.color.contains(widget.phaseColorString)) {
-        if ((ability.timing.contains("Your") ||
-                ability.timing.contains("Any") ||
-                ability.timing.contains("Passive")) &&
-            widget.ownPhase) {
-          ability.originUnit = "Spell-Lore";
-          spellsThisPhase.add(ability);
-        }
-        if ((ability.timing.contains("Enemy") ||
-                ability.timing.contains("Any") ||
-                ability.timing.contains("Passive")) &&
-            !widget.ownPhase) {
-          ability.originUnit = "Spell-Lore";
-          spellsThisPhase.add(ability);
-        }
-      }
-    }
+    spellsThisPhase.addAll(functions.unitAbilitys(widget.settings.army.unitList, widget.phaseColorString, widget.ownPhase));
 
-    for (BattleTraits battleTrait in widget.settings.army.battleTraitsList) {
-      for (Ability ability in battleTrait.abilitys) {
-        if (ability.color.contains(widget.phaseColorString)) {
-          if ((ability.timing.contains("Your") ||
-                  ability.timing.contains("Any") ||
-                  ability.timing.contains("Passive")) &&
-              widget.ownPhase) {
-            ability.originUnit = "Battle-Trait";
-            spellsThisPhase.add(ability);
-          }
-          if ((ability.timing.contains("Enemy") ||
-                  ability.timing.contains("Any") ||
-                  ability.timing.contains("Passive")) &&
-              !widget.ownPhase) {
-            ability.originUnit = "Battle-Trait";
-            spellsThisPhase.add(ability);
-          }
-        }
-      }
-    }
+    spellsThisPhase.addAll(functions.spellLoreAbilitys(widget.settings.army.spellLore, widget.phaseColorString, widget.ownPhase));
 
-    for (BattleFormation battleFormation
-        in widget.settings.army.battleFormationsList) {
-      for (Ability ability in battleFormation.abilitys) {
-        if (ability.color.contains(widget.phaseColorString)) {
-          if ((ability.timing.contains("Your") ||
-                  ability.timing.contains("Any") ||
-                  ability.timing.contains("Passive")) &&
-              widget.ownPhase) {
-            ability.originUnit = "Battle-Formation";
-            spellsThisPhase.add(ability);
-          }
-          if ((ability.timing.contains("Enemy") ||
-                  ability.timing.contains("Any") ||
-                  ability.timing.contains("Passive")) &&
-              !widget.ownPhase) {
-            ability.originUnit = "Battle-Formation";
-            spellsThisPhase.add(ability);
-          }
-        }
-      }
-    }
+    spellsThisPhase.addAll(functions.battleTraitAbilitys(widget.settings.army.battleTraitsList, widget.phaseColorString, widget.ownPhase));
 
-    for (Ability ability in widget.settings.commandAbilitys) {
-      if (ability.color.contains(widget.phaseColorString)) {
-        if ((ability.timing.contains("Your") ||
-                ability.timing.contains("Any") ||
-                ability.timing.contains("Passive")) &&
-            widget.ownPhase) {
-          ability.originUnit = "Command-Ability";
-          spellsThisPhase.add(ability);
-        }
-        if ((ability.timing.contains("Enemy") ||
-                ability.timing.contains("Any") ||
-                ability.timing.contains("Passive")) &&
-            !widget.ownPhase) {
-          ability.originUnit = "Command-Ability";
-          spellsThisPhase.add(ability);
-        }
-      }
-    }
+    spellsThisPhase.addAll(functions.battleFormationAbilitys(widget.settings.army.battleFormationsList, widget.phaseColorString, widget.ownPhase));
 
-    for (Ability ability in widget.settings.normalAbilitys) {
-      if (ability.color.contains(widget.phaseColorString)) {
-        if ((ability.timing.contains("Your") ||
-            ability.timing.contains("Any") ||
-            ability.timing.contains("Passive")) &&
-            widget.ownPhase) {
-          ability.originUnit = "Core-Ability";
-          spellsThisPhase.add(ability);
-        }
-        if ((ability.timing.contains("Enemy") ||
-            ability.timing.contains("Any") ||
-            ability.timing.contains("Passive")) &&
-            !widget.ownPhase) {
-          ability.originUnit = "Core-Ability";
-          spellsThisPhase.add(ability);
-        }
-      }
-    }
+    spellsThisPhase.addAll(functions.commandAbilitys(widget.settings.commandAbilitys, widget.phaseColorString, widget.ownPhase));
+
+    spellsThisPhase.addAll(functions.normalAbilitys(widget.settings.normalAbilitys, widget.phaseColorString, widget.ownPhase));
 
     //TODO ab Hier wird das UI der Helden-Phase gebaut, ab hier kann sich Jenny austoben.
     return Scaffold(
@@ -160,6 +56,33 @@ class _HeroPhase extends State<HeroPhase> {
         centerTitle: true,
         backgroundColor: widget.phaseColor,
         actions: <Widget>[
+          Text(
+              "Underdog:",
+              style: TextStyle(color: calculateTextColor(widget.phaseColor))
+          ),
+          Switch(
+            // This bool value toggles the switch.
+            value: widget.underdog,
+            activeThumbColor: Colors.teal,
+            onChanged: (bool value) {
+              // This is called when the user toggles the switch.
+              setState(() {
+                widget.underdog = value;
+              });
+            },
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.teal,
+              backgroundColor: Colors.blueGrey.shade800,
+              shadowColor: Colors.black,
+            ),
+            onPressed: () {
+              _navigateToAllUnits(context, widget.settings);
+            },
+            child: Text("WarScrolls"),
+          ),
+          SizedBox(width: 10,),
           IconButton(
             icon: Icon(Icons.add, color: calculateTextColor(widget.phaseColor)),
             onPressed: () {
@@ -373,6 +296,14 @@ class _HeroPhase extends State<HeroPhase> {
       MaterialPageRoute(
         builder: (context) =>
             HomePage(title: "Age of Sigmar Battle Helper", settings: settings),
+      ),
+    );
+  }
+  void _navigateToAllUnits(BuildContext context, Settings settings) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) =>
+            allUnits(title: "All Warscrolls", settings: settings),
       ),
     );
   }

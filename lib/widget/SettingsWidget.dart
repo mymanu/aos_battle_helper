@@ -613,7 +613,6 @@ class _SettingsWidget extends State<SettingsWidget> {
     tower.move = "-";
     tower.health = "12";
     tower.save = "4+";
-    tower.control = "-";
 
     // Bossrokk Tower
     //---------------------------------------------------------
