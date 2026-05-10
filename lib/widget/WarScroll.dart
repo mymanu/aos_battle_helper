@@ -70,148 +70,169 @@ class _WarScroll extends State<WarScroll> {
         ],
       ),
 
-      // Ab hier Original Code mit vielen Rows. Idee: transform: Matrix4.rotationZ(0.1),
+      // Start vom body
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
               Container(
-                padding: EdgeInsets.only(left: 50),
+                padding: EdgeInsets.only(left: 50, top: 10),
                 child:
-                // Idee Kreis getrennt durch 2 Linien
-                Container(
-                  width: 200,
-                  height: 200,
-                  alignment: Alignment.centerLeft,
-                  decoration: BoxDecoration(
-                    color: Colors.white, // Circle color
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: Colors.yellow.shade700,
-                      width: 7,
-                    ), // Optional border
-                  ),
-                  child: Stack(
-                    children: [
-                      // left top to right bottom
-                      Transform.rotate(
-                        angle: math.pi / 4, // 45 degrees in radians
-                        child: Center(
-                          child: Container(
-                            height: 5, // Thickness
-                            color: Colors.yellow.shade600,
-                          ),
-                        ),
+                    // Kreis diagonal getrennt durch 2 Linien
+                    Container(
+                      width: 200,
+                      height: 200,
+                      alignment: Alignment.centerLeft,
+                      decoration: BoxDecoration(
+                        color: Colors.white, // Circle color
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Colors.yellow.shade700,
+                          width: 7,
+                        ), // Optional border
                       ),
-                      Transform.rotate(
-                        angle: math.pi / 4,
-                        // right top to left bottom
-                        child: Center(
-                          child: Container(
-                            width: 5, // Thickness
-                            color: Colors.yellow.shade600,
+                      child: Stack(
+                        children: [
+                          // left top to right bottom
+                          Transform.rotate(
+                            angle: math.pi / 4, // 45 degrees in radians
+                            child: Center(
+                              child: Container(
+                                height: 5, // Thickness
+                                color: Colors.yellow.shade600,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      //TODO Positioned für grünen Kasten
-                      //https://pub.dev/packages/flutter_custom_clippers
-                      Positioned(
-                        top: 50,
-                        left: 110,
-                        child: Container(
-                          height: 80,
-                          width: 80,
-                          decoration: BoxDecoration(
-                            color: Colors.green,
-                            shape: BoxShape.circle,
+                          Transform.rotate(
+                            angle: math.pi / 4,
+                            // right top to left bottom
+                            child: Center(
+                              child: Container(
+                                width: 5, // Thickness
+                                color: Colors.yellow.shade600,
+                              ),
+                            ),
                           ),
-                        ),
+                          Positioned(
+                            left: 75,
+                            child: Column(
+                              children: [
+                                Text(
+                                  "Move",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  widget.unit.move,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Positioned(
+                            top: 80,
+                            left: -10,
+                            child: Row(
+                              children: [
+                                Transform.rotate(
+                                  angle: math.pi * 1.5,
+                                  child: Text(
+                                    "Health",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                Text(
+                                  widget.unit.health,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Positioned(
+                            top: 80,
+                            left: 130,
+                            child: Row(
+                              children: [
+                                Text(
+                                  widget.unit.save,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                Transform.rotate(
+                                  angle: math.pi * 0.5,
+                                  child: Text(
+                                    "Save",
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Positioned(
+                            top: 135,
+                            left: 70,
+                            child: Column(
+                              children: [
+                                Text(
+                                  widget.unit.control,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                Text(
+                                  "Control",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
+                    ),
+              ),
 
-                      Positioned(
-                        left: 75,
-                        child: Column(
-                          children: [
-                            Text(
-                              "Move",
-                              style: TextStyle(color: Colors.black, fontSize: 15),
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              widget.unit.move,
-                              style: TextStyle(color: Colors.black, fontSize: 15),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Positioned(
-                        top: 80,
-                        left: -10,
-                        child: Row(
-                          children: [
-                            Transform.rotate(
-                              angle: math.pi * 1.5,
-                              child: Text(
-                                "Health",
-                                style: TextStyle(color: Colors.black, fontSize: 15),
-                              ),
-                            ),
-                            SizedBox(width: 10),
-                            Text(
-                              widget.unit.health,
-                              style: TextStyle(color: Colors.black, fontSize: 15),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Positioned(
-                        top: 80,
-                        left: 130,
-                        child: Row(
-                          children: [
-                            Text(
-                              widget.unit.save,
-                              style: TextStyle(color: Colors.black, fontSize: 15),
-                            ),
-                            SizedBox(width: 10),
-                            Transform.rotate(
-                              angle: math.pi * 0.5,
-                              child: Text(
-                                "Save",
-                                style: TextStyle(color: Colors.black, fontSize: 15),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Positioned(
-                        top: 135,
-                        left: 70,
-                        child: Column(
-                          children: [
-                            Text(
-                              widget.unit.control,
-                              style: TextStyle(color: Colors.black, fontSize: 15),
-                            ),
-                            SizedBox(width: 10),
-                            Text(
-                              "Control",
-                              style: TextStyle(color: Colors.black, fontSize: 15),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+              Expanded(
+                flex: 1,
+                child: Container(
+                  height: 190,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Colors.teal.shade400,
+                    borderRadius: BorderRadius.all(
+                      const Radius.circular(15.0),
+                    ),
+                  ),
+                  child: Text(
+                    widget.unit.name,
+                    style: TextStyle(height: 2.5, fontSize: 25),
                   ),
                 ),
               ),
-              Spacer(),
-              Text(
-                widget.unit.name,
-                style: TextStyle(height: 2.5, fontSize: 25),
-              ),
-              Spacer(),
             ],
           ),
           SizedBox(height: 20),
