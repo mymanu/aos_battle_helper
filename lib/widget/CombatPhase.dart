@@ -35,6 +35,7 @@ class _CombatPhase extends State<CombatPhase> {
     Functions functions = Functions();
 
     spellsThisPhase.addAll(functions.unitAbilitys(widget.settings.army.unitList, widget.phaseColorString, widget.settings.ownPhase));
+    spellsThisPhase.addAll(functions.unitAbilitys(widget.settings.army.unitList, "Green", widget.settings.ownPhase));
 
     spellsThisPhase.addAll(functions.spellLoreAbilitys(widget.settings.army.spellLore, widget.phaseColorString, widget.settings.ownPhase));
 

@@ -324,7 +324,7 @@ class _WarScroll extends State<WarScroll> {
             children: [
               Column(children: [Text("Keywords")]),
               Spacer(),
-              Row(children: [Text("Hero, Cavalry \nGreat Alliance, Faction")]),
+              Row(children: [Text(widget.unit.keywords)]),
               Spacer(),
             ],
           ),

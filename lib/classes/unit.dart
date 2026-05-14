@@ -16,6 +16,8 @@ class Unit {
   String save = "-";
   String control = "-";
 
+  String keywords = "-";
+
   String details = "Details der Unit?";
   String banishment = "-";
   bool erledigt = false;
