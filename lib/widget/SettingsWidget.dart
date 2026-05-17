@@ -409,6 +409,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     megaboss.health = "6";
     megaboss.save = "3+";
     megaboss.control = "2";
+    megaboss.keywords = "Destruction, Ironjawz, Hero, Infantry";
 
     // Megaboss
     //---------------------------------------------------------
@@ -449,6 +450,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     ardboyz.health = "2";
     ardboyz.save = "3+";
     ardboyz.control = "1";
+    ardboyz.keywords = "Destruction, Ironjawz, Infantry, Champion, Standard Bearer";
 
     // Ardboyz
     //---------------------------------------------------------
@@ -491,6 +493,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     brutes.health = "3";
     brutes.save = "3+";
     brutes.control = "1";
+    brutes.keywords = "Destruction, Ironjawz, Infantry, Champion, Brute";
 
     // Brutes
     //---------------------------------------------------------
@@ -534,6 +537,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     goreGruntas.health = "5";
     goreGruntas.save = "3+";
     goreGruntas.control = "2";
+    goreGruntas.keywords = "Destruction, Ironjawz, Cavalry, Champion";
 
     // Gore-gruntas
     //---------------------------------------------------------
@@ -577,6 +581,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     weirdnobShaman.health = "6";
     weirdnobShaman.save = "6+";
     weirdnobShaman.control = "2";
+    weirdnobShaman.keywords = "Destruction, Ironjawz, Infantry, Hero, Wizard (1)";
 
     // Weirdnob Shaman
     //---------------------------------------------------------
@@ -613,6 +618,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     tower.move = "-";
     tower.health = "12";
     tower.save = "4+";
+    tower.keywords = "Destruction, Ironjawz, Faction Terrain";
 
     // Bossrokk Tower
     //---------------------------------------------------------
@@ -643,6 +649,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     foot.health = "8";
     foot.save = "4+";
     foot.banishment = "7+";
+    foot.keywords = "Destruction, Ironjawz, Manifestation, Endless Spell, Ward (6+)";
 
     List<Ability> gorkSpells = [
       Ability.color(
@@ -672,6 +679,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     gork.health = "6";
     gork.save = "5+";
     gork.banishment = "7+";
+    gork.keywords = "Destruction, Ironjawz, Manifestation, Endless Spell, Ward (6+)";
 
     List<Ability> morkspitSpells = [
       Ability.color(
@@ -698,6 +706,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     morkspit.health = "8";
     morkspit.save = "5+";
     morkspit.banishment = "7+";
+    morkspit.keywords = "Destruction, Ironjawz, Manifestation, Endless Spell, Ward (6+)";
 
     // Manifestation
     //---------------------------------------------------------
