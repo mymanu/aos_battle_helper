@@ -224,7 +224,7 @@ class _ChargePhase extends State<ChargePhase> {
                             ],
                           ),
                           Text("Trigger: " + spellsThisPhase[index].timing),
-                          Text("Effekt: " + spellsThisPhase[index].details),
+                          Text(spellsThisPhase[index].details),
                           spellsThisPhase[index].commandPoints.contains("-") ? Text("") : Text("Command Point cost: " + spellsThisPhase[index].commandPoints),
                           /*
                             ListTile(
