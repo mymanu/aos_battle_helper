@@ -7,6 +7,7 @@ import '../classes/settings.dart';
 import '../classes/spellLore.dart';
 import '../classes/unit.dart';
 import '../classes/weapon.dart';
+import '../widget/RegimentChooser.dart';
 
 class SettingsWidget extends StatefulWidget {
   SettingsWidget({super.key, required this.title, required this.settings});
@@ -201,6 +202,30 @@ class _SettingsWidget extends State<SettingsWidget> {
                       ),
                       onPressed: () {
                         pickStarscaleWarhost();
+                      },
+                    ),
+
+                    SizedBox(height: 20),
+
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.orange,
+                        backgroundColor: Colors.blueGrey.shade800,
+                        shadowColor: Colors.black,
+                        padding: const EdgeInsets.all(10.0),
+                        minimumSize: Size(250, 100),
+                        maximumSize: Size(510, 510),
+                      ),
+                      child: Text(
+                        'Choose Regiment Ability and Enhancement',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        pickRegimentAbilityAndEnhancement(
+                          context,
+                          widget.settings,
+                        );
                       },
                     ),
                   ],
@@ -1621,6 +1646,8 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Used By: Your Stormfiends unit."
         "\n\nEffect: Your Stormfiends unit has WARD (5+) for the rest of the turn.";
 
+    List<Ability> regimentAbilies = [endlessSwarmofRats, warpstoneLacedArmour];
+
     // Regiment Abilities
     //---------------------------------------------------------
     // Enhancements
@@ -1661,6 +1688,8 @@ class _SettingsWidget extends State<SettingsWidget> {
 
     widget.settings.army.battleTraitsList.clear();
     widget.settings.army.battleTraitsList.add(battleTraits);
+
+    widget.settings.regimentAbilities = regimentAbilies;
   }
 
   void pickStarscaleWarhost() {
@@ -1846,7 +1875,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     threeClawsteps.timing = "Once Per Phase, Enemy Movement Phase";
     threeClawsteps.color = "Gray";
     threeClawsteps.details =
-    "Declare: Pick a friendly unit that is not in combat."
+        "Declare: Pick a friendly unit that is not in combat."
         "\n\nEffect: That unit can use the `Normal Move` ability as if it were your movement phase.";
 
     BattleTraits battleTraits = BattleTraits();
@@ -1860,16 +1889,18 @@ class _SettingsWidget extends State<SettingsWidget> {
     endlessSwarmofRats.timing = "Any end of turn";
     endlessSwarmofRats.color = "Purple";
     endlessSwarmofRats.details =
-    "Effect: When a friendly Clanrats unit uses its `Seething Swarm` ability, you can return D6 slain"
+        "Effect: When a friendly Clanrats unit uses its `Seething Swarm` ability, you can return D6 slain"
         "models to that unit instead of D3.";
 
     Ability warpstoneLacedArmour = Ability("Warpstone-laced Armour");
     warpstoneLacedArmour.timing =
-    "Once Per Battle, Reaction: Opponent declared an ATTACK ability and targeted your Stormfiends unit";
+        "Once Per Battle, Reaction: Opponent declared an ATTACK ability and targeted your Stormfiends unit";
     warpstoneLacedArmour.color = "Red";
     warpstoneLacedArmour.details =
-    "Used By: Your Stormfiends unit."
+        "Used By: Your Stormfiends unit."
         "\n\nEffect: Your Stormfiends unit has WARD (5+) for the rest of the turn.";
+
+    List<Ability> regimentAbilies = [endlessSwarmofRats, warpstoneLacedArmour];
 
     // Regiment Abilities
     //---------------------------------------------------------
@@ -1879,27 +1910,27 @@ class _SettingsWidget extends State<SettingsWidget> {
     cageOfWarpLightning.timing = "Once Per Battle, Any Combat Phase";
     cageOfWarpLightning.color = "Red";
     cageOfWarpLightning.details =
-    "Declare: Pick a visible enemy unit within 6\" of your general and roll a dice"
+        "Declare: Pick a visible enemy unit within 6\" of your general and roll a dice"
         "\n\nEffect: On a 2+, the enemy unit has STRIKE-LAST this phase. On a 1, inflict 1 mortal damage on your general";
 
     Ability scurryAway = Ability("Scurry Away");
     scurryAway.timing = "Any Combat Phase";
     scurryAway.color = "Red";
     scurryAway.details =
-    "Effect: Roll a dice. On a 3+, this unit can immediately use the `Retreat` ability as if it were your movement"
+        "Effect: Roll a dice. On a 3+, this unit can immediately use the `Retreat` ability as if it were your movement"
         "phase. If it does so, no mortal damage is inflicted on it.";
 
     Ability skilledManipulator = Ability("Skilled Manipulator");
     skilledManipulator.timing = "Passive";
     skilledManipulator.color = "Red";
     skilledManipulator.details =
-    "Effect: Your general has WARD (4+) while they are within 1\" of any friendly CLanrats units.";
+        "Effect: Your general has WARD (4+) while they are within 1\" of any friendly CLanrats units.";
 
     Ability skitterleap = Ability("Skitterleap");
     skitterleap.timing = "Your Hero Phase";
     skitterleap.color = "Yellow";
     skitterleap.details =
-    "Declare: Make a casting roll of 2D6."
+        "Declare: Make a casting roll of 2D6."
         "\n\nEffect: On a 6+, remove your general from the battlefield and set them up again on the battlefield"
         "more than 6\" from all enemy units. They cannot use MOVE abilities in the following movement phase.";
 
@@ -1911,5 +1942,51 @@ class _SettingsWidget extends State<SettingsWidget> {
 
     widget.settings.army.battleTraitsList.clear();
     widget.settings.army.battleTraitsList.add(battleTraits);
+
+    widget.settings.regimentAbilities = regimentAbilies;
+  }
+
+  Future<void> pickRegimentAbilityAndEnhancement(
+    BuildContext context,
+    Settings settings,
+  ) {
+    //Ability? regimentAbility = Ability("chosenAbility");
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          insetPadding: EdgeInsets.zero,
+          title: Text("Choose Regiment Ability and Enhancement"),
+          content: Container(
+            height: 1000,
+            width: 1000,
+            child: RegimentChooser(
+              settings: settings,
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Back'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Save'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                //_navigateToMenu(context, settings);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

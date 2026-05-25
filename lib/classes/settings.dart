@@ -11,4 +11,6 @@ class Settings {
   List<int> scoresPlayer2 = [0,0,0,0,0];
   bool ownPhase = true;
   bool underdog = false;
+  List<Ability> regimentAbilities = [];
+  List<Ability> enhancements = [];
 }
