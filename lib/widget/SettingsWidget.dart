@@ -191,7 +191,7 @@ class _SettingsWidget extends State<SettingsWidget> {
       "Any Hero Phase",
       "Yellow",
       "Declare: Choose a friendly unit which is not in combat to use this ability."
-          "\nEffect: Make 6x D6 Rallyroles. For each 4+ you gain 1 Rallypoint. You can use them as following:"
+          "\n\nEffect: Make 6x D6 Rallyroles. For each 4+ you gain 1 Rallypoint. You can use them as following:"
           "\n - Heal(1) this unit for each spent Rallypoint"
           "\n - You can use Rallypoints in the amount of health of 1 model to revive it.",
     );
@@ -203,7 +203,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Enemy Hero Phase",
         "Yellow",
         "Declare: Pick a friendly Wizard or Priest to use this ability."
-            "\nEffect: That friendly unit can use a Spell or Prayer ability (as appropriate) as if it were your hero phase. "
+            "\n\nEffect: That friendly unit can use a Spell or Prayer ability (as appropriate) as if it were your hero phase. "
             "\nIf you do so, subtract 1 from casting rolls or chanting rolls made as part of that ability."
     );
     magicalIntervention.commandPoints = "1";
@@ -214,7 +214,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Reaction: You declared a RUN Ability",
         "Gray",
         "Used By: The unit using that Run ability."
-        "\nEffect: Do not make a run roll as part of that Run ability. Instead, add 6\" to that unit’s Move characteristic to determine the distance each model"
+        "\n\nEffect: Do not make a run roll as part of that Run ability. Instead, add 6\" to that unit’s Move characteristic to determine the distance each model"
         "in that unit can move as part of that Run ability."
     );
     atTheDouble.commandPoints = "1";
@@ -225,7 +225,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Enemy Movement Phase",
         "Gray",
         "Declare: Pick a friendly unit that is not in combat to use this ability."
-            "\nEffect: Each model in that unit can move up to D6\"."
+            "\n\nEffect: Each model in that unit can move up to D6\"."
             "That move cannot pass through or end within the"
             "combat range of an enemy unit."
     );
@@ -237,7 +237,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Enemy Shooting Phase",
         "Blue",
         "Declare: Pick a friendly unit that is not in combat to use this ability."
-            "\nEffect: Resolve shooting attacks for that unit, but all of the attacks must target the nearest visible enemy"
+            "\n\nEffect: Resolve shooting attacks for that unit, but all of the attacks must target the nearest visible enemy"
             "unit and you must subtract 1 from the hit rolls for those attacks."
     );
     coveringFire.commandPoints = "1";
@@ -248,7 +248,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Reaction: You declared a CHARGE Ability",
         "Orange",
         "Used By: The unit using that Charge ability."
-            "\nEffect: You can re-roll the charge roll."
+            "\n\nEffect: You can re-roll the charge roll."
     );
     forwardToVictory.commandPoints = "1";
     commandSpells.add(forwardToVictory);
@@ -258,7 +258,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Enemy Charge Phase",
         "Orange",
         "Used By: The unit using that Charge ability."
-            "\nEffect: You can re-roll the charge roll."
+            "\n\nEffect: You can re-roll the charge roll."
     );
     counterCharge.commandPoints = "2";
     commandSpells.add(counterCharge);
@@ -268,7 +268,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Reaction: You declared an ATTACK Ability",
         "Red",
         "Used By: The unit using that Attack ability."
-            "\nEffect: Add 1 to hit rolls for attacks made as part of"
+            "\n\nEffect: Add 1 to hit rolls for attacks made as part of"
             "that Attack ability. This also affects weapons that"
             "have the Companion weapon ability."
     );
@@ -280,7 +280,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Reaction: Opponent declared an ATTACK Ability",
         "Red",
         "Used By: A unit targeted by that Attack ability."
-            "\nEffect: Add 1 to save rolls for that unit in this phase."
+            "\n\nEffect: Add 1 to save rolls for that unit in this phase."
     );
     allOutDefence.commandPoints = "1";
     commandSpells.add(allOutDefence);
@@ -294,7 +294,7 @@ class _SettingsWidget extends State<SettingsWidget> {
             "in combat with it to be the target. The target must"
             "have a lower Health characteristic than the unit"
             "using this ability."
-            "\nEffect: Inflict D3 mortal damage on the target. Then,"
+            "\n\nEffect: Inflict D3 mortal damage on the target. Then,"
             "the unit using this ability can move a distance up to"
             "its Move characteristic. It can pass through and end"
             "that move within the combat ranges of enemy units"
@@ -316,7 +316,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Start of Any Turn",
         "Black",
         "Declare: Pick a friendly Hero within 3\" of any Places of Power to use this ability."
-        "\nEffect: Roll a dice. On a 1, inflict D3 mortal damage on that Hero. On a 2+:"
+        "\n\nEffect: Roll a dice. On a 1, inflict D3 mortal damage on that Hero. On a 2+:"
             "\n• If that Hero is a Wizard or Priest, add 1 to casting rolls or chanting rolls for that Hero this turn."
             "\n• If that Hero is not a Wizard or Priest, they can use the ‘Unbind’ or ‘Banish Manifestation’ ability this turn as if they had Wizard (1)."
       );
@@ -328,7 +328,7 @@ class _SettingsWidget extends State<SettingsWidget> {
       "Yellow",
       "Declare: Pick a friendly Wizard or Priest to use this ability, pick a manifestation within 30\" of them"
           "to be the target, then make a banishment roll of 2D6."
-          "\nEffect: If the banishment roll equals or exceeds the banishment value listed on the manifestation’s"
+          "\n\nEffect: If the banishment roll equals or exceeds the banishment value listed on the manifestation’s"
           "warscroll, it is banished and removed from play. You cannot pick the same manifestation as the target of this ability more than once per turn."
     );
     normalSpells.add(banishManifestation);
@@ -338,7 +338,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Reaction: Opponent declared a SPELL ability",
         "Yellow",
         "Used By: A friendly Wizard within 30\" of the enemy Wizard casting the spell."
-            "\nEffect: Make an unbinding roll of 2D6. If the roll exceeds the casting roll for the spell, then the spell is"
+            "\n\nEffect: Make an unbinding roll of 2D6. If the roll exceeds the casting roll for the spell, then the spell is"
             "unbound and its effect is not resolved. This reaction cannot be used more than once per casting roll."
     );
     normalSpells.add(unbind);
@@ -348,7 +348,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Your Movement Phase",
         "Gray",
         "Declare: Pick a friendly unit that is not in combat to use this ability."
-            "\nEffect: That unit can move a distance up to its Move characteristic. That unit cannot move into combat"
+            "\n\nEffect: That unit can move a distance up to its Move characteristic. That unit cannot move into combat"
             "during any part of that move."
     );
     normalSpells.add(normalMove);
@@ -358,7 +358,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Your Movement Phase",
         "Gray",
         "Declare: Pick a friendly unit that is not in combat to use this ability."
-            "\nEffect: Make a run roll of D6. That unit can move a distance up to its Move characteristic added to the"
+            "\n\nEffect: Make a run roll of D6. That unit can move a distance up to its Move characteristic added to the"
             "run roll. That unit cannot move into combat during"
             "any part of that move."
     );
@@ -369,7 +369,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Your Movement Phase",
         "Gray",
         "Declare: Pick a friendly unit that is in combat to use this ability."
-            "\nEffect: Inflict D3 mortal damage on that unit. That unit can move a distance up to its Move"
+            "\n\nEffect: Inflict D3 mortal damage on that unit. That unit can move a distance up to its Move"
             "characteristic. That unit can move through the"
             "combat ranges of any enemy units but cannot end"
             "that move within an enemy unit’s combat range."
@@ -382,7 +382,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Blue",
         "Declare: Pick a friendly unit that has not used a Run or Retreat ability this turn to use this ability. Then,"
             "pick one or more enemy units as the target(s) of that unit’s attacks (see 16.0)."
-            "\nEffect: Resolve shooting attacks against the target unit(s)."
+            "\n\nEffect: Resolve shooting attacks against the target unit(s)."
     );
     normalSpells.add(shoot);
 
@@ -392,7 +392,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Orange",
         "Declare: Pick a friendly unit that is not in combat and has not used a Run or Retreat ability this turn"
             "to use this ability. Then, make a charge roll of 2D6."
-            "\nEffect: That unit can move a distance up to the value of the charge roll. That unit can move through the"
+            "\n\nEffect: That unit can move a distance up to the value of the charge roll. That unit can move through the"
             "combat ranges of any enemy units and must end that move within ½\" of a visible enemy unit. If it does so,"
             "the unit using this ability has charged."
     );
@@ -405,7 +405,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Declare: Pick a friendly unit that is in combat or that charged this turn to use this ability. That unit can"
             "make a pile‑in move (see 15.4). Then, if that unit is in combat, you must pick one or more enemy units as"
             "the target(s) of that unit’s attacks (see 16.0)."
-            "\nEffect: Resolve combat attacks against the target unit(s)."
+            "\n\nEffect: Resolve combat attacks against the target unit(s)."
     );
     normalSpells.add(fight);
 
@@ -420,7 +420,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Once Per Turn, Your Movement Phase",
         "Gray",
         "Declare: Pick a friendly REINFORCEMENTS unit that has been destroyed."
-            "\nEffect: Set up an identical replacement unit on the battlefield, wholly within fiendly territory,"
+            "\n\nEffect: Set up an identical replacement unit on the battlefield, wholly within fiendly territory,"
             "wholly within 6\" of the battlefield edge and not in combat."
             "\nEach REINFORCEMENTS unit can only be replaced once. Replacement units cannot themselves be replaced."
     );
@@ -431,7 +431,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Your Movement Phase",
         "Gray",
         "Declare: Pick a friendly unit that is not in combat to use this ability."
-            "\nEffect: That unit can move a distance up to its Move characteristic. That unit cannot move into combat"
+            "\n\nEffect: That unit can move a distance up to its Move characteristic. That unit cannot move into combat"
             "during any part of that move."
     );
     normalSpells.add(normalMove);
@@ -441,7 +441,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Your Movement Phase",
         "Gray",
         "Declare: Pick a friendly unit that is not in combat to use this ability."
-            "\nEffect: Make a run roll of D6. That unit can move a distance up to its Move characteristic added to the"
+            "\n\nEffect: Make a run roll of D6. That unit can move a distance up to its Move characteristic added to the"
             "run roll. That unit cannot move into combat during"
             "any part of that move."
     );
@@ -452,7 +452,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Your Movement Phase",
         "Gray",
         "Declare: Pick a friendly unit that is in combat to use this ability."
-            "\nEffect: Inflict D3 mortal damage on that unit. That unit can move a distance up to its Move"
+            "\n\nEffect: Inflict D3 mortal damage on that unit. That unit can move a distance up to its Move"
             "characteristic. That unit can move through the"
             "combat ranges of any enemy units but cannot end"
             "that move within an enemy unit’s combat range."
@@ -465,7 +465,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Blue",
         "Declare: Pick a friendly unit that has not used a Run or Retreat ability this turn to use this ability. Then,"
             "pick one or more enemy units as the target(s) of that unit’s attacks (see 16.0)."
-            "\nEffect: Resolve shooting attacks against the target unit(s)."
+            "\n\nEffect: Resolve shooting attacks against the target unit(s)."
     );
     normalSpells.add(shoot);
 
@@ -475,7 +475,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Orange",
         "Declare: Pick a friendly unit that is not in combat and has not used a Run or Retreat ability this turn"
             "to use this ability. Then, make a charge roll of 2D6."
-            "\nEffect: That unit can move a distance up to the value of the charge roll. That unit can move through the"
+            "\n\nEffect: That unit can move a distance up to the value of the charge roll. That unit can move through the"
             "combat ranges of any enemy units and must end that move within ½\" of a visible enemy unit. If it does so,"
             "the unit using this ability has charged."
     );
@@ -488,7 +488,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Declare: Pick a friendly unit that is in combat or that charged this turn to use this ability. That unit can"
             "make a pile‑in move (see 15.4). Then, if that unit is in combat, you must pick one or more enemy units as"
             "the target(s) of that unit’s attacks (see 16.0)."
-            "\nEffect: Resolve combat attacks against the target unit(s)."
+            "\n\nEffect: Resolve combat attacks against the target unit(s)."
     );
     normalSpells.add(fight);
 
@@ -1383,7 +1383,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     warpstoneStaff.rend = "1";
     warpstoneStaff.damage = "D3";
 
-    Unit greySeer = Unit.withSpells("Megaboss", greySeerSpells);
+    Unit greySeer = Unit.withSpells("Grey Seer", greySeerSpells);
     greySeer.weapons.add(warpstoneStaff);
     greySeer.move = "6\"";
     greySeer.health = "5";
