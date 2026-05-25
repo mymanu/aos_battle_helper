@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../classes/ability.dart';
 import '../classes/battleFormation.dart';
@@ -8,6 +9,7 @@ import '../classes/spellLore.dart';
 import '../classes/unit.dart';
 import '../classes/weapon.dart';
 import '../widget/RegimentChooser.dart';
+import 'BattleTactics.dart';
 
 class SettingsWidget extends StatefulWidget {
   SettingsWidget({super.key, required this.title, required this.settings});
@@ -15,6 +17,14 @@ class SettingsWidget extends StatefulWidget {
   Settings settings;
   String title;
   bool firstRun = true;
+
+  bool? masterThePaths = false;
+  bool? restlessEnergy = false;
+  bool? interceptAndRecover = false;
+  bool? wrathfulCycles = false;
+  bool? scoutingForce = false;
+  bool? attunedToGhyran = false;
+
 
   @override
   _SettingsWidget createState() => _SettingsWidget();
@@ -29,7 +39,6 @@ class _SettingsWidget extends State<SettingsWidget> {
     //String title = widget.title + "Phase";
     TextEditingController playerNameController = TextEditingController();
     playerNameController.text = widget.settings.playerName;
-
 
     return Scaffold(
       appBar: AppBar(
@@ -74,9 +83,11 @@ class _SettingsWidget extends State<SettingsWidget> {
             ),
 
             SizedBox(height: 20),
+
             Row(
               children: [
                 Spacer(),
+
                 Column(
                   //crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -143,7 +154,395 @@ class _SettingsWidget extends State<SettingsWidget> {
                     ),
                   ],
                 ),
+
                 Spacer(),
+
+                Column(
+                  //crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text("Please choose TWO Battle Tactics"),
+
+                    SizedBox(height: 10),
+
+                    Row(
+                      children: [
+                        Column(
+                          children: [
+                            Transform.scale(
+                              scale: 2,
+                              child: CupertinoCheckbox(
+                                checkColor: CupertinoColors.white,
+                                activeColor: Colors.teal,
+                                // Set tristate to true to make the checkbox display a null value
+                                // in addition to the default true and false values.
+                                tristate: false,
+                                value: widget.masterThePaths,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    widget.masterThePaths = value;
+                                    //directoriesFill();
+                                  });
+                                },
+                              ),
+                            ),
+                            Transform.scale(
+                              scale: 2,
+                              child: CupertinoCheckbox(
+                                checkColor: CupertinoColors.white,
+                                activeColor: Colors.teal,
+                                // Set tristate to true to make the checkbox display a null value
+                                // in addition to the default true and false values.
+                                tristate: false,
+                                value: widget.restlessEnergy,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    widget.restlessEnergy = value;
+                                    //directoriesFill();
+                                  });
+                                },
+                              ),
+                            ),
+
+                            Transform.scale(
+                              scale: 2,
+                              child: CupertinoCheckbox(
+                                checkColor: CupertinoColors.white,
+                                activeColor: Colors.teal,
+                                // Set tristate to true to make the checkbox display a null value
+                                // in addition to the default true and false values.
+                                tristate: false,
+                                value: widget.interceptAndRecover,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    widget.interceptAndRecover = value;
+                                    //directoriesFill();
+                                  });
+                                },
+                              ),
+                            ),
+
+                            Transform.scale(
+                              scale: 2,
+                              child: CupertinoCheckbox(
+                                checkColor: CupertinoColors.white,
+                                activeColor: Colors.teal,
+                                // Set tristate to true to make the checkbox display a null value
+                                // in addition to the default true and false values.
+                                tristate: false,
+                                value: widget.wrathfulCycles,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    widget.wrathfulCycles = value;
+                                    //directoriesFill();
+                                  });
+                                },
+                              ),
+                            ),
+
+                            Transform.scale(
+                              scale: 2,
+                              child: CupertinoCheckbox(
+                                checkColor: CupertinoColors.white,
+                                activeColor: Colors.teal,
+                                // Set tristate to true to make the checkbox display a null value
+                                // in addition to the default true and false values.
+                                tristate: false,
+                                value: widget.scoutingForce,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    widget.scoutingForce = value;
+                                    //directoriesFill();
+                                  });
+                                },
+                              ),
+                            ),
+
+                            Transform.scale(
+                              scale: 2,
+                              child: CupertinoCheckbox(
+                                checkColor: CupertinoColors.white,
+                                activeColor: Colors.teal,
+                                // Set tristate to true to make the checkbox display a null value
+                                // in addition to the default true and false values.
+                                tristate: false,
+                                value: widget.attunedToGhyran,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    widget.attunedToGhyran = value;
+                                    //directoriesFill();
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(width: 10),
+
+                        Column(
+                          children: [
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.orange,
+                                backgroundColor: Colors.blueGrey.shade800,
+                                shadowColor: Colors.black,
+                              ),
+                              child: Text("Master the Paths"),
+                              onPressed: () {
+                                showDialog<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text("Master the Paths"),
+                                      content:
+                                      Text(BattleTactics().masterThePaths[0]
+                                          + "\n\n" +
+                                          BattleTactics().masterThePaths[1]
+                                          + "\n\n" +
+                                          BattleTactics().masterThePaths[2]
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+
+                            SizedBox(height: 12),
+
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.orange,
+                                backgroundColor: Colors.blueGrey.shade800,
+                                shadowColor: Colors.black,
+                              ),
+                              child: Text("Restless Energy"),
+                              onPressed: () {
+                                showDialog<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text("Restless Energy"),
+                                      content:
+                                      Text(BattleTactics().restlessEnergy[0]
+                                          + "\n\n" +
+                                          BattleTactics().restlessEnergy[1]
+                                          + "\n\n" +
+                                          BattleTactics().restlessEnergy[2]
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+
+                            SizedBox(height: 12),
+
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.orange,
+                                backgroundColor: Colors.blueGrey.shade800,
+                                shadowColor: Colors.black,
+                              ),
+                              child: Text("Intercept and Recover"),
+                              onPressed: () {
+                                showDialog<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text("Intercept and Recover"),
+                                      content:
+                                      Text(BattleTactics().interceptAndRecover[0]
+                                          + "\n\n" +
+                                          BattleTactics().interceptAndRecover[1]
+                                          + "\n\n" +
+                                          BattleTactics().interceptAndRecover[2]
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+
+                            SizedBox(height: 12),
+
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.orange,
+                                backgroundColor: Colors.blueGrey.shade800,
+                                shadowColor: Colors.black,
+                              ),
+                              child: Text("Wrathful Cycles"),
+                              onPressed: () {
+                                showDialog<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text("Wrathful Cycles"),
+                                      content:
+                                      Text(BattleTactics().wrathfulCycles[0]
+                                          + "\n\n" +
+                                          BattleTactics().wrathfulCycles[1]
+                                          + "\n\n" +
+                                          BattleTactics().wrathfulCycles[2]
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+
+                            SizedBox(height: 12),
+
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.orange,
+                                backgroundColor: Colors.blueGrey.shade800,
+                                shadowColor: Colors.black,
+                              ),
+                              child: Text("Scouting Force"),
+                              onPressed: () {
+                                showDialog<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text("Scouting Force"),
+                                      content:
+                                      Text(BattleTactics().scoutingForce[0]
+                                          + "\n\n" +
+                                          BattleTactics().scoutingForce[1]
+                                          + "\n\n" +
+                                          BattleTactics().scoutingForce[2]
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+
+                            SizedBox(height: 12),
+
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.orange,
+                                backgroundColor: Colors.blueGrey.shade800,
+                                shadowColor: Colors.black,
+                              ),
+                              child: Text("Attuned to Ghyran"),
+                              onPressed: () {
+                                showDialog<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text("Attuned to Ghyran"),
+                                      content:
+                                      Text(BattleTactics().attunedToGhyran[0]
+                                          + "\n\n" +
+                                          BattleTactics().attunedToGhyran[1]
+                                          + "\n\n" +
+                                          BattleTactics().attunedToGhyran[2]
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.orange,
+                            backgroundColor: Colors.blueGrey.shade800,
+                            shadowColor: Colors.black,
+                            padding: const EdgeInsets.all(10.0),
+                            minimumSize: Size(250, 100),
+                            maximumSize: Size(510, 510),
+                          ),
+                          child: Text(
+                            '2 Battle Tactics chosen',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          onPressed: () {
+                            widget.settings.chosenBattleTactics.clear();
+                            if(widget.masterThePaths!) {
+                              widget.settings.chosenBattleTactics.add("masterThePaths");
+                            }
+                            if(widget.restlessEnergy!) {
+                              widget.settings.chosenBattleTactics.add("restlessEnergy");
+                            }
+                            if(widget.interceptAndRecover!) {
+                              widget.settings.chosenBattleTactics.add("interceptAndRecover");
+                            }
+                            if(widget.wrathfulCycles!) {
+                              widget.settings.chosenBattleTactics.add("wrathfulCycles");
+                            }
+                            if(widget.scoutingForce!) {
+                              widget.settings.chosenBattleTactics.add("scoutingForce");
+                            }
+                            if(widget.attunedToGhyran!) {
+                              widget.settings.chosenBattleTactics.add("attunedToGhyran");
+                            }
+                          },
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+
+                Spacer(),
+
                 Column(
                   children: [
                     ElevatedButton(
@@ -240,7 +639,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                         maximumSize: Size(510, 510),
                       ),
                       child: Text(
-                        'Choose Regiment Ability and Enhancement',
+                        'Choose Regiment Ability\nand Enhancement',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 20),
                       ),
@@ -1708,7 +2107,12 @@ class _SettingsWidget extends State<SettingsWidget> {
         "\n\nEffect: On a 6+, remove your general from the battlefield and set them up again on the battlefield"
         "more than 6\" from all enemy units. They cannot use MOVE abilities in the following movement phase.";
 
-    List<Ability> enhancements = [cageOfWarpLightning, scurryAway, skilledManipulator, skitterleap];
+    List<Ability> enhancements = [
+      cageOfWarpLightning,
+      scurryAway,
+      skilledManipulator,
+      skitterleap,
+    ];
 
     // Enhancements
     //---------------------------------------------------------
@@ -1723,6 +2127,7 @@ class _SettingsWidget extends State<SettingsWidget> {
 
     widget.settings.enhancements = enhancements;
   }
+
   void pickStarscaleWarhost() {
     //---------------------------------------------------------
     // General SAURUS OLDBLOOD ON CARNOSAUR
@@ -1767,7 +2172,10 @@ class _SettingsWidget extends State<SettingsWidget> {
     jaws.damage = "3";
     jaws.ability = "Companion";
 
-    Unit general = Unit.withSpells("Saurus Oldblood on Carnosaur", generalSpells);
+    Unit general = Unit.withSpells(
+      "Saurus Oldblood on Carnosaur",
+      generalSpells,
+    );
     general.weapons.add(sunboltGauntlet);
     general.weapons.add(relicWeapon);
     general.weapons.add(jaws);
@@ -1798,7 +2206,10 @@ class _SettingsWidget extends State<SettingsWidget> {
     celestiteClub.rend = "1";
     celestiteClub.damage = "1";
 
-    Unit saurusWarriors = Unit.withSpells("Saurus Warriors", saurusWarriorSpells);
+    Unit saurusWarriors = Unit.withSpells(
+      "Saurus Warriors",
+      saurusWarriorSpells,
+    );
     saurusWarriors.weapons.add(celestiteClub);
     saurusWarriors.move = "5\"";
     saurusWarriors.health = "2";
@@ -1848,7 +2259,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     BeastOfJungle.timing = "Any Combat Phase";
     BeastOfJungle.color = "Red";
     BeastOfJungle.details =
-    "Declare: Pick your general to use this ability if they are in combat."
+        "Declare: Pick your general to use this ability if they are in combat."
         "\n\nEffect: Pick 1 of the following:"
         "\nGargantuan Jaws: Pick an enemy unit in combat with your general and roll a dice. If the roll exceeds"
         "that unit’s Health characteristic, 1 model in that unit is slain."
@@ -1865,14 +2276,14 @@ class _SettingsWidget extends State<SettingsWidget> {
     predatoryFighters.timing = "Once Per Phase, End of Any Turn";
     predatoryFighters.color = "Purple";
     predatoryFighters.details =
-    "Declare: Roll a dice for each enemy unit in combat with any friendly units."
+        "Declare: Roll a dice for each enemy unit in combat with any friendly units."
         "\n\nEffect: On a 3+, inflict 1 mortal damage on the unit being rolled for.";
 
     Ability templeGuardians = Ability("Temple-City Guardians");
     templeGuardians.timing = "Passive";
     templeGuardians.color = "Green";
     templeGuardians.details =
-    "Effect: Friendly units have Ward (6+) while they are wholly within friendly territory.";
+        "Effect: Friendly units have Ward (6+) while they are wholly within friendly territory.";
 
     List<Ability> regimentAbilies = [predatoryFighters, templeGuardians];
 
@@ -1885,14 +2296,14 @@ class _SettingsWidget extends State<SettingsWidget> {
     sotekGaze.timing = "End of Any Turn";
     sotekGaze.color = "Purple";
     sotekGaze.details =
-    "Effect: Roll a dice. Add the roll to your general’s control score this turn.";
+        "Effect: Roll a dice. Add the roll to your general’s control score this turn.";
 
     Ability ancientStrategist = Ability("Ancient Strategist");
     ancientStrategist.keywords = "Enhancement";
     ancientStrategist.timing = "Once Per Battle, Any Movement Phase";
     ancientStrategist.color = "Grey";
     ancientStrategist.details =
-    "Declare: Pick a friendly unit wholly within 12\" of your general. You cannot pick your general."
+        "Declare: Pick a friendly unit wholly within 12\" of your general. You cannot pick your general."
         "\n\nEffect: That unit can use the ‘Normal Move’ ability as if it were your movement phase.";
 
     Ability bladeRealities = Ability("Blade of Realities");
@@ -1900,16 +2311,21 @@ class _SettingsWidget extends State<SettingsWidget> {
     bladeRealities.timing = "Passive";
     bladeRealities.color = "Red";
     bladeRealities.details =
-    "Effect: Add 1 to the Rend characteristic of your general’s Relic Celestite Weapon.";
+        "Effect: Add 1 to the Rend characteristic of your general’s Relic Celestite Weapon.";
 
     Ability wrathChotec = Ability("The Wrath of Chotec");
     wrathChotec.keywords = "Enhancement";
     wrathChotec.timing = "Passive";
     wrathChotec.color = "Blue";
     wrathChotec.details =
-    "Effect: The Attacks characteristic of your general’s Sunbolt Gauntlet is 6 instead of D6.";
+        "Effect: The Attacks characteristic of your general’s Sunbolt Gauntlet is 6 instead of D6.";
 
-    List<Ability> enhancements = [sotekGaze, ancientStrategist, bladeRealities, wrathChotec];
+    List<Ability> enhancements = [
+      sotekGaze,
+      ancientStrategist,
+      bladeRealities,
+      wrathChotec,
+    ];
 
     // Enhancements
     //---------------------------------------------------------
@@ -2062,13 +2478,13 @@ class _SettingsWidget extends State<SettingsWidget> {
     ereWeGo.timing = "Passive";
     ereWeGo.color = "Green";
     ereWeGo.details =
-    "3rd Battle Round or later used by Brutes:\nEffect: Set up this unit anywhere on the battlefield more than 6\" from all enemy units.";
+        "3rd Battle Round or later used by Brutes:\nEffect: Set up this unit anywhere on the battlefield more than 6\" from all enemy units.";
 
     Ability mightyDestroyers = Ability("Mighty Destroyers");
     mightyDestroyers.timing = "Once Per Turn (Army), Any Hero Phase";
     mightyDestroyers.color = "Yellow";
     mightyDestroyers.details =
-    "Declare: Pick a friendly unit that was not set up this turn to be the target."
+        "Declare: Pick a friendly unit that was not set up this turn to be the target."
         "\n\nEffect: The target can move up to 3\". It can move into combat. "
         "\nIf it was in combat at the start of the move, it must end that move in combat.";
 
@@ -2083,14 +2499,15 @@ class _SettingsWidget extends State<SettingsWidget> {
     naturalDisaster.timing = "Passive";
     naturalDisaster.color = "Orange";
     naturalDisaster.details =
-    "Effect: If you make an unmodified charge roll of 8+ for a friendly unit, "
+        "Effect: If you make an unmodified charge roll of 8+ for a friendly unit, "
         "\nadd 1 to the Attacks characteristic of that unit’s melee weapons for the rest of the turn.";
 
     Ability properRuckus = Ability("A Proper Ruckus");
-    properRuckus.timing = "Once Per Battle, Reaction: You declared the ´Mighty Destroyers´ ability";
+    properRuckus.timing =
+        "Once Per Battle, Reaction: You declared the ´Mighty Destroyers´ ability";
     properRuckus.color = "Yellow";
     properRuckus.details =
-    "Effect: All friendly units on the battlefield that were not set up this turn are the targets of that ability instead.";
+        "Effect: All friendly units on the battlefield that were not set up this turn are the targets of that ability instead.";
 
     List<Ability> regimentAbilies = [naturalDisaster, properRuckus];
 
@@ -2103,28 +2520,26 @@ class _SettingsWidget extends State<SettingsWidget> {
     amberstone.timing = "Passive";
     amberstone.color = "Red";
     amberstone.details =
-    "Effect: The Rend characteristic of your general’s melee weapons is 2";
+        "Effect: The Rend characteristic of your general’s melee weapons is 2";
 
     Ability skulls = Ability("Trophy Skulls");
     skulls.keywords = "Enhancement";
     skulls.timing = "Passive";
     skulls.color = "Purple";
-    skulls.details =
-    "Effect: Your general’s Control characteristic is 5.";
+    skulls.details = "Effect: Your general’s Control characteristic is 5.";
 
     Ability armourGork = Ability("Armour of Gork");
     armourGork.keywords = "Enhancement";
     armourGork.timing = "Passive";
     armourGork.color = "Green";
-    armourGork.details =
-    "Effect: Your general has Ward (6+).";
+    armourGork.details = "Effect: Your general has Ward (6+).";
 
     Ability megaBossy = Ability("Mega Bossy");
     megaBossy.keywords = "Enhancement";
     megaBossy.timing = "Passive";
     megaBossy.color = "Orange";
     megaBossy.details =
-    "Effect: If this unit charged this turn, for the rest of the turn, "
+        "Effect: If this unit charged this turn, for the rest of the turn, "
         "add 1 to charge rolls for friendly units while they are wholly within 12\" of this unit.";
 
     List<Ability> enhancements = [amberstone, skulls, armourGork, megaBossy];
@@ -2156,9 +2571,7 @@ class _SettingsWidget extends State<SettingsWidget> {
           content: Container(
             height: 1000,
             width: 1000,
-            child: RegimentChooser(
-              settings: settings,
-            ),
+            child: RegimentChooser(settings: settings),
           ),
           actions: <Widget>[
             TextButton(
@@ -2168,19 +2581,17 @@ class _SettingsWidget extends State<SettingsWidget> {
               child: const Text('Save'),
               onPressed: () {
                 Navigator.of(context).pop();
-                setState(() {
-                });
+                setState(() {});
                 for (Unit unit in widget.settings.army.unitList) {
-                  if(unit.id.contains("General")){
-                    if(!widget.firstRun){
+                  if (unit.id.contains("General")) {
+                    if (!widget.firstRun) {
                       unit.abilitys.removeLast();
                     }
                     unit.abilitys.add(widget.settings.chosenEnhancement);
                     widget.firstRun = false;
                   }
                 }
-                setState(() {
-                });
+                setState(() {});
               },
             ),
             /*TextButton(

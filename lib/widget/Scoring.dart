@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../classes/settings.dart';
 import '../classes/unit.dart';
+import 'BattleTactics.dart';
 import 'HomePage.dart';
 import 'StartofBattle.dart';
 
@@ -29,6 +31,31 @@ class _Scoring extends State<Scoring> {
     }
     for (int score in widget.settings.scoresPlayer2) {
       finalScorePlayer2 = finalScorePlayer2 + score;
+    }
+
+    List<String> battleTacticStringList = [];
+
+    for(String battleTacticName in widget.settings.chosenBattleTactics){
+      switch(battleTacticName) {
+        case "masterThePaths":
+          battleTacticStringList.addAll(BattleTactics().masterThePaths);
+          break;
+        case "restlessEnergy":
+          battleTacticStringList.addAll(BattleTactics().restlessEnergy);
+          break;
+        case "interceptAndRecover":
+          battleTacticStringList.addAll(BattleTactics().interceptAndRecover);
+          break;
+        case "wrathfulCycles":
+          battleTacticStringList.addAll(BattleTactics().wrathfulCycles);
+          break;
+        case "scoutingForce":
+          battleTacticStringList.addAll(BattleTactics().scoutingForce);
+          break;
+        case "attunedToGhyran":
+          battleTacticStringList.addAll(BattleTactics().attunedToGhyran);
+          break;
+      }
     }
 
     //TODO ab Hier wird das UI gebaut, ab hier kann sich Jenny austoben.
@@ -430,22 +457,157 @@ class _Scoring extends State<Scoring> {
                 ),
               ],
             ),
-            SizedBox(height: 20,),
+            SizedBox(height: 20),
             Card(
               child: ListTile(
-                leading: Icon(Icons.album),
-                title: Text("Tactic Card 1 Header"),
-                subtitle: Text(
-                  "Hier steht die Beschrebung der Tactic Card\nmehrere\nZeilen\nText",
+                leading: Icon(Icons.looks_one_outlined),
+                title: Text(widget.settings.chosenBattleTactics.first),
+                subtitle: Column(
+                  children: [
+                    Row(children: [
+                      Transform.scale(
+                        scale: 2,
+                        child: CupertinoCheckbox(
+                          checkColor: CupertinoColors.white,
+                          activeColor: Colors.teal,
+                          // Set tristate to true to make the checkbox display a null value
+                          // in addition to the default true and false values.
+                          tristate: false,
+                          value: widget.settings.firstBattleTacticAffray,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              widget.settings.firstBattleTacticAffray = value;
+                            });
+                          },
+                        ),
+                      ),
+                      SizedBox(width: 10,),
+                      Text(battleTacticStringList[0]),
+                    ],),
+
+                    SizedBox(height: 10),
+
+                    Row(children: [
+                      Transform.scale(
+                        scale: 2,
+                        child: CupertinoCheckbox(
+                          checkColor: CupertinoColors.white,
+                          activeColor: Colors.teal,
+                          // Set tristate to true to make the checkbox display a null value
+                          // in addition to the default true and false values.
+                          tristate: false,
+                          value: widget.settings.firstBattleTacticStrike,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              widget.settings.firstBattleTacticStrike = value;
+                            });
+                          },
+                        ),
+                      ),
+                      SizedBox(width: 10,),
+                      Text(battleTacticStringList[1]),
+                    ],),
+
+                    SizedBox(height: 10),
+
+                    Row(children: [
+                      Transform.scale(
+                        scale: 2,
+                        child: CupertinoCheckbox(
+                          checkColor: CupertinoColors.white,
+                          activeColor: Colors.teal,
+                          // Set tristate to true to make the checkbox display a null value
+                          // in addition to the default true and false values.
+                          tristate: false,
+                          value: widget.settings.firstBattleTacticDomination,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              widget.settings.firstBattleTacticDomination = value;
+                            });
+                          },
+                        ),
+                      ),
+                      SizedBox(width: 10,),
+                      Text(battleTacticStringList[2]),
+                    ],),
+                  ],
                 ),
               ),
             ),
+            SizedBox(height: 10,),
             Card(
               child: ListTile(
-                leading: Icon(Icons.child_care),
-                title: Text("Tactic Card 2 Header"),
-                subtitle: Text(
-                  "Hier steht die Beschrebung der Tactic Card\nmehrere\nZeilen\nText",
+                leading: Icon(Icons.looks_two_outlined),
+                title: Text(widget.settings.chosenBattleTactics.last),
+                subtitle: Column(
+                  children: [
+                    Row(children: [
+                      Transform.scale(
+                        scale: 2,
+                        child: CupertinoCheckbox(
+                          checkColor: CupertinoColors.white,
+                          activeColor: Colors.teal,
+                          // Set tristate to true to make the checkbox display a null value
+                          // in addition to the default true and false values.
+                          tristate: false,
+                          value: widget.settings.secondBattleTacticAffray,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              widget.settings.secondBattleTacticAffray = value;
+                            });
+                          },
+                        ),
+                      ),
+                      SizedBox(width: 10,),
+                      Text(battleTacticStringList[3]),
+                    ],),
+
+                    SizedBox(height: 10),
+
+                    Row(children: [
+                      Transform.scale(
+                        scale: 2,
+                        child: CupertinoCheckbox(
+                          checkColor: CupertinoColors.white,
+                          activeColor: Colors.teal,
+                          // Set tristate to true to make the checkbox display a null value
+                          // in addition to the default true and false values.
+                          tristate: false,
+                          value: widget.settings.secondBattleTacticStrike,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              widget.settings.secondBattleTacticStrike = value;
+                            });
+                          },
+                        ),
+                      ),
+                      SizedBox(width: 10,),
+                      Text(battleTacticStringList[4]),
+                    ],),
+
+                    SizedBox(height: 10),
+
+                    Row(children: [
+                      Transform.scale(
+                        scale: 2,
+                        child: CupertinoCheckbox(
+                          checkColor: CupertinoColors.white,
+                          activeColor: Colors.teal,
+                          // Set tristate to true to make the checkbox display a null value
+                          // in addition to the default true and false values.
+                          tristate: false,
+                          value: widget.settings.secondBattleTacticDomination,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              widget.settings.secondBattleTacticDomination = value;
+                            });
+                          },
+                        ),
+                      ),
+                      SizedBox(width: 10,),
+                      Text(battleTacticStringList[5]),
+                    ],),
+                  ],
                 ),
               ),
             ),
