@@ -33,6 +33,7 @@ class _Scoring extends State<Scoring> {
       finalScorePlayer2 = finalScorePlayer2 + score;
     }
 
+    //List<String> battleTacticStringList = ["You play Spearhead or forgot something","Battle Tactics","are", "pretty", "cool", "!"];
     List<String> battleTacticStringList = [];
 
     for(String battleTacticName in widget.settings.chosenBattleTactics){

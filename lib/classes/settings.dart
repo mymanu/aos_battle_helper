@@ -14,7 +14,7 @@ class Settings {
   List<Ability> regimentAbilities = [];
   List<Ability> enhancements = [];
   Ability chosenEnhancement = Ability("AbilityToChoose");
-  List<String> chosenBattleTactics = [];
+  List<String> chosenBattleTactics = ["masterThePaths", "restlessEnergy"];
 
   bool? firstBattleTacticAffray = false;
   bool? firstBattleTacticStrike = false;
