@@ -8,17 +8,17 @@ import '../classes/spellLore.dart';
 import '../classes/unit.dart';
 import '../classes/weapon.dart';
 
-class SettingsWidget extends StatefulWidget {
-  SettingsWidget({super.key, required this.title, required this.settings});
+class SettingsWidgetBackup extends StatefulWidget {
+  SettingsWidgetBackup({super.key, required this.title, required this.settings});
 
   Settings settings;
   String title;
 
   @override
-  _SettingsWidget createState() => _SettingsWidget();
+  _SettingsWidgetBackup createState() => _SettingsWidgetBackup();
 }
 
-class _SettingsWidget extends State<SettingsWidget> {
+class _SettingsWidgetBackup extends State<SettingsWidgetBackup> {
   @override
   Widget build(BuildContext context) {
     //String envTitle = Env.environmentName ?? "";
@@ -38,6 +38,10 @@ class _SettingsWidget extends State<SettingsWidget> {
         child: Column(
           //crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Text("Jennys-Baukasten"),
+
+            SizedBox(height: 20),
+
             Container(
               width: 300,
               child: TextField(
@@ -71,6 +75,7 @@ class _SettingsWidget extends State<SettingsWidget> {
             ),
 
             SizedBox(height: 20),
+
             Row(
               children: [
                 Spacer(),

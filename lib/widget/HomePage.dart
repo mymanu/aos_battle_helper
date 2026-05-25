@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../classes/settings.dart';
 import '../classes/unit.dart';
 import 'HeroPhase.dart';
+import 'SettingsWidget-Backup.dart';
 import 'StartofBattle.dart';
 import 'ArmyImport.dart';
 import 'SettingsWidget.dart';
@@ -442,7 +443,7 @@ class _HomePage extends State<HomePage> {
   void _navigateToSettings(BuildContext context, Settings settings) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => SettingsWidget(title: "Einstellungen", settings: settings),
+        builder: (context) => SettingsWidgetBackup(title: "Settings", settings: settings),
       ),
     );
   }
