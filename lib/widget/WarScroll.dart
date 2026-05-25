@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../classes/ability.dart';
 import '../classes/settings.dart';
 import '../classes/unit.dart';
 import '../classes/weapon.dart';
@@ -42,6 +43,13 @@ class _WarScroll extends State<WarScroll> {
         meleeWeaponList.add(weapon);
       } else {
         shootingWeaponList.add(weapon);
+      }
+    }
+
+    List<Ability> passiveAbilities = [];
+    for(Ability abi in widget.unit.abilitys) {
+      if(abi.timing.contains("Passive")) {
+        passiveAbilities.add(abi);
       }
     }
 
@@ -318,8 +326,136 @@ class _WarScroll extends State<WarScroll> {
               );
             }),
           ),
-          SizedBox(height: 200),
-          //6. Row für Schlüsselworte
+
+          Container(
+            width: 1300,
+            height: 300,
+            child: CustomScrollView(
+              primary: false,
+              slivers: <Widget>[
+                SliverPadding(
+                  padding: const EdgeInsets.all(10),
+                  //padding: const EdgeInsets.only(right: 50),
+                  sliver: SliverGrid(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      /*
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 2,
+                childAspectRatio: 1.1,
+                */
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      crossAxisCount: 3,
+                      childAspectRatio: 1.5,
+                    ),
+                    delegate: SliverChildBuilderDelegate((
+                        BuildContext context,
+                        int index,
+                        ) {
+                      return Card(
+                        child: passiveAbilities[index].erledigt ?
+                        //Ab hier Card wenn die Ability erledigt ist
+                        ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              passiveAbilities[index].erledigt = false;
+                            });
+                          },
+                          child: Column(
+                            children: [
+                              Text(
+                                passiveAbilities[index].name,
+                                //cardContentList[index].ability.name.contains("-1") ? cardContentList[index].unit.name : cardContentList[index].ability.name,
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Icon(Icons.done, size: 100),
+                              /*
+                              Container(
+                                height: 100,
+                                width: 100,
+                                child: LayoutBuilder(
+                                  builder: (context, constraint) {
+                                    return new Icon(
+                                      Icons.done,
+                                      size: constraint.biggest.height,
+                                    );
+                                  },
+                                ),
+                              ),
+                              */
+                            ],
+                          ),
+                        )
+                            :
+                        //Ab hier Card wenn es eine Ability ist
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  passiveAbilities[index].name,
+                                  //cardContentList[index].ability.name,
+                                  style: TextStyle(
+                                    backgroundColor: widget.phaseColor,
+                                    fontWeight: FontWeight.bold,
+                                    color: calculateTextColor(
+                                      widget.phaseColor,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Text(passiveAbilities[index].timing),
+                            Text(passiveAbilities[index].details),
+                            passiveAbilities[index].commandPoints.contains("-") ? Text("") : Text("Command Point cost: " + passiveAbilities[index].commandPoints),
+                            /*
+                            Text(cardContentList[index].ability.timing),
+                            Text(cardContentList[index].ability.originUnit),
+                            Text(cardContentList[index].ability.details),
+                             */
+                            /*
+                            ListTile(
+                              leading: Icon(Icons.album),
+                              title: Text(spells[index].title),
+                              subtitle: Text(spells[index].details),
+                            ),
+                            */
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                TextButton(
+                                  child: Text("Fähigkeit erledigt"),
+                                  onPressed: () {
+                                    setState(() {
+                                      passiveAbilities[index].erledigt = true;
+                                    });
+                                  },
+                                ),
+                                const SizedBox(width: 8),
+                                TextButton(
+                                  child: Text("Item $index"),
+                                  onPressed: () {
+                                    /* ... */
+                                  },
+                                ),
+                                const SizedBox(width: 8),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    }, childCount: passiveAbilities.length),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          SizedBox(height: 10),
+          //2. Row für Schlüsselworte
           Row(
             children: [
               Column(children: [Text("Keywords")]),

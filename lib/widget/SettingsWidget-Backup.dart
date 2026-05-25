@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 
 import '../classes/ability.dart';
@@ -2071,3 +2072,4 @@ class _SettingsWidgetBackup extends State<SettingsWidgetBackup> {
     widget.settings.army.battleTraitsList.add(battleTraits);
   }
 }
+*/
