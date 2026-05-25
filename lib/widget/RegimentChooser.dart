@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 
 import '../classes/ability.dart';
+import '../classes/battleFormation.dart';
 import '../classes/settings.dart';
+import '../classes/unit.dart';
 import 'HomePage.dart';
 
 class RegimentChooser extends StatefulWidget {
-  RegimentChooser({
-    super.key,
-    required this.settings,
-  });
+  RegimentChooser({super.key, required this.settings});
 
   Settings settings;
 
-  String? test = "-3";
-  Ability? regimentAbility = Ability("chosenAbility");
+  Ability? regimentAbility = Ability("chosen Regiment Ability");
+  Ability? enhancement = Ability("chosen Enhancement");
 
   @override
   _Regimentchooser createState() => _Regimentchooser();
@@ -22,38 +21,154 @@ class RegimentChooser extends StatefulWidget {
 class _Regimentchooser extends State<RegimentChooser> {
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return SingleChildScrollView(
       child: Column(
         children: [
-          Text("Choose Regiment Ability"),
+          Text("Please choose ONE Regiment Ability"),
 
-          SizedBox(height: 10,),
+          SizedBox(height: 10),
 
-          RadioGroup<String>(
-            groupValue: widget.test,
-            onChanged: (String? value) {
+          RadioGroup<Ability>(
+            groupValue: widget.regimentAbility,
+            onChanged: (Ability? value) {
               setState(() {
-                widget.test = value;
+                widget.regimentAbility = value;
+
+                List<Ability> regimentAsBattleFormation = [value!];
+                BattleFormation battleForm = BattleFormation();
+                battleForm.abilitys = regimentAsBattleFormation;
+                List<BattleFormation> battleFormationList = [battleForm];
+                widget.settings.army.battleFormationsList = battleFormationList;
               });
             },
             child: Column(
               //crossAxisAlignment: .start,
               children: <Widget>[
-                Text("Selected: " + widget.test!),
+                Text("Selected Ability: " + widget.regimentAbility!.name),
                 ListTile(
                   title: Text(widget.settings.regimentAbilities[0].name),
-                  leading: Radio<String>(
-                    toggleable: true,
-                    //value: widget.settings.regimentAbilities[0],
-                    value: "1",
+                  leading: Radio<Ability>(
+                    value: widget.settings.regimentAbilities[0],
+                  ),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Trigger: " +
+                            widget.settings.regimentAbilities[0].timing,
+                      ),
+                      Text(""),
+                      Text(widget.settings.regimentAbilities[0].details),
+                    ],
                   ),
                 ),
                 ListTile(
                   title: Text(widget.settings.regimentAbilities[1].name),
-                  leading: Radio<String>(
-                    //toggleable: true,
-                    //value: widget.settings.regimentAbilities[1],
-                    value: "2",
+                  leading: Radio<Ability>(
+                    value: widget.settings.regimentAbilities[1],
+                  ),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Trigger: " +
+                            widget.settings.regimentAbilities[1].timing,
+                      ),
+                      Text(""),
+                      Text(widget.settings.regimentAbilities[1].details),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          //-------------------------------------------------------------------
+
+          SizedBox(height: 10),
+
+          Text("Please choose ONE Enhancement"),
+
+          SizedBox(height: 10),
+
+          RadioGroup<Ability>(
+            groupValue: widget.enhancement,
+            onChanged: (Ability? value) {
+              setState(() {
+                widget.enhancement = value;
+                widget.settings.chosenEnhancement = value!;
+              });
+            },
+            child: Column(
+              //crossAxisAlignment: .start,
+              children: <Widget>[
+                Text("Selected Ability: " + widget.enhancement!.name),
+                ListTile(
+                  title: Text(widget.settings.enhancements[0].name),
+                  leading: Radio<Ability>(
+                    value: widget.settings.enhancements[0],
+                  ),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Trigger: " +
+                            widget.settings.enhancements[0].timing,
+                      ),
+                      Text(""),
+                      Text(widget.settings.enhancements[0].details),
+                    ],
+                  ),
+                ),
+                ListTile(
+                  title: Text(widget.settings.enhancements[1].name),
+                  leading: Radio<Ability>(
+                    value: widget.settings.enhancements[1],
+                  ),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Trigger: " +
+                            widget.settings.enhancements[1].timing,
+                      ),
+                      Text(""),
+                      Text(widget.settings.enhancements[1].details),
+                    ],
+                  ),
+                ),
+                ListTile(
+                  title: Text(widget.settings.enhancements[2].name),
+                  leading: Radio<Ability>(
+                    value: widget.settings.enhancements[2],
+                  ),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Trigger: " +
+                            widget.settings.enhancements[2].timing,
+                      ),
+                      Text(""),
+                      Text(widget.settings.enhancements[2].details),
+                    ],
+                  ),
+                ),
+                ListTile(
+                  title: Text(widget.settings.enhancements[3].name),
+                  leading: Radio<Ability>(
+                    value: widget.settings.enhancements[3],
+                  ),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Trigger: " +
+                            widget.settings.enhancements[3].timing,
+                      ),
+                      Text(""),
+                      Text(widget.settings.enhancements[3].details),
+                    ],
                   ),
                 ),
               ],

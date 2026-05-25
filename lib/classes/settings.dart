@@ -13,4 +13,6 @@ class Settings {
   bool underdog = false;
   List<Ability> regimentAbilities = [];
   List<Ability> enhancements = [];
+  Ability chosenEnhancement = Ability("AbilityToChoose");
+  //Ability chosenRegimentAbility = Ability("AbilityToChoose");
 }

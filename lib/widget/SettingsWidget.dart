@@ -1475,6 +1475,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     warpstoneStaff.damage = "D3";
 
     Unit general = Unit.withSpells("Grey Seer", generalSpells);
+    general.id = "General";
     general.weapons.add(warpstoneStaff);
     general.move = "6\"";
     general.health = "5";
@@ -1680,6 +1681,8 @@ class _SettingsWidget extends State<SettingsWidget> {
         "\n\nEffect: On a 6+, remove your general from the battlefield and set them up again on the battlefield"
         "more than 6\" from all enemy units. They cannot use MOVE abilities in the following movement phase.";
 
+    List<Ability> enhancements = [cageOfWarpLightning, scurryAway, skilledManipulator, skitterleap];
+
     // Enhancements
     //---------------------------------------------------------
     //
@@ -1690,6 +1693,8 @@ class _SettingsWidget extends State<SettingsWidget> {
     widget.settings.army.battleTraitsList.add(battleTraits);
 
     widget.settings.regimentAbilities = regimentAbilies;
+
+    widget.settings.enhancements = enhancements;
   }
 
   void pickStarscaleWarhost() {
@@ -1729,6 +1734,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     warpstoneStaff.damage = "D3";
 
     Unit general = Unit.withSpells("Grey Seer", generalSpells);
+    general.id = "General";
     general.weapons.add(warpstoneStaff);
     general.move = "6\"";
     general.health = "5";
@@ -1934,6 +1940,8 @@ class _SettingsWidget extends State<SettingsWidget> {
         "\n\nEffect: On a 6+, remove your general from the battlefield and set them up again on the battlefield"
         "more than 6\" from all enemy units. They cannot use MOVE abilities in the following movement phase.";
 
+    List<Ability> enhancements = [cageOfWarpLightning, scurryAway, skilledManipulator, skitterleap];
+
     // Enhancements
     //---------------------------------------------------------
     //
@@ -1944,13 +1952,14 @@ class _SettingsWidget extends State<SettingsWidget> {
     widget.settings.army.battleTraitsList.add(battleTraits);
 
     widget.settings.regimentAbilities = regimentAbilies;
+
+    widget.settings.enhancements = enhancements;
   }
 
   Future<void> pickRegimentAbilityAndEnhancement(
     BuildContext context,
     Settings settings,
   ) {
-    //Ability? regimentAbility = Ability("chosenAbility");
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
@@ -1969,12 +1978,19 @@ class _SettingsWidget extends State<SettingsWidget> {
               style: TextButton.styleFrom(
                 textStyle: Theme.of(context).textTheme.labelLarge,
               ),
-              child: const Text('Back'),
+              child: const Text('Save'),
               onPressed: () {
                 Navigator.of(context).pop();
+                for (Unit unit in widget.settings.army.unitList) {
+                  if(unit.id.contains("General")){
+                    unit.abilitys.add(widget.settings.chosenEnhancement);
+                  }
+                }
+                setState(() {
+                });
               },
             ),
-            TextButton(
+            /*TextButton(
               style: TextButton.styleFrom(
                 textStyle: Theme.of(context).textTheme.labelLarge,
               ),
@@ -1983,7 +1999,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                 Navigator.of(context).pop();
                 //_navigateToMenu(context, settings);
               },
-            ),
+            ),*/
           ],
         );
       },
