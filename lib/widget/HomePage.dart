@@ -443,7 +443,7 @@ class _HomePage extends State<HomePage> {
   void _navigateToSettings(BuildContext context, Settings settings) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => SettingsWidgetBackup(title: "Settings", settings: settings),
+        builder: (context) => SettingsWidget(title: "Settings", settings: settings),
       ),
     );
   }
