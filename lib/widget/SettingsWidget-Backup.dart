@@ -1670,243 +1670,396 @@ class _SettingsWidgetBackup extends State<SettingsWidgetBackup> {
 
   void pickStarscaleWarhost() {
     //---------------------------------------------------------
-    // Grey Seer
+    // General SAURUS OLDBLOOD ON CARNOSAUR
 
     List<Ability> generalSpells = [
       Ability.color(
-        "Guarded Hero",
+        "Ancient Warlord",
+        "Your Hero Phase",
+        "Yellow",
+        "Declare: Pick a friendly unit wholly within 12\" of this unit to be the target. You cannot pick this unit."
+            "\n\nEffect: Until the start of your next turn, add 1 to charge rolls for the target.",
+      ),
+      Ability.color(
+        "Battle Damaged",
         "Passive",
         "Black",
-        "If this Hero is within the combat range of a friendly unit that is not a Hero:"
-            "\n• Subtract 1 from hit rolls for shooting attacks that target this Hero."
-            "\n• If this Hero is Infantry, they cannot be picked as the target of shooting attacks made by models more than 12\" from them.",
-      ),
-      Ability.color(
-        "Will of the Hornet Rat",
-        "Your Hero Phase",
-        "Yellow",
-        "Declare: Pick a friendly unit wholly within 13\" of this unit to be the target, then roll a dice."
-            "\n\nEffect: On a 3+, add the roll to the target`s control score until the start of your next turn.",
-      ),
-      Ability.color(
-        "Wither",
-        "Your Hero Phase",
-        "Yellow",
-        "Declare: Pick a visible enemy unit within 13\" of this unit to be the target, then make a casting roll of 2D6."
-            "\n\nEffect: On a 6+, inflict D3 mortal damage on the target.",
+        "Effect: While this unit has 10 or more damage points, the Attacks characteristic of its Carnosaur’s Massive Jaws is 1.",
       ),
     ];
 
-    Weapon warpstoneStaff = Weapon("warpstoneStaff", "Warpstone Staff");
-    warpstoneStaff.attack = "3";
-    warpstoneStaff.hit = "4+";
-    warpstoneStaff.wound = "4+";
-    warpstoneStaff.rend = "1";
-    warpstoneStaff.damage = "D3";
+    Weapon sunboltGauntlet = Weapon("sunboltGauntlet", "Sunbolt Gauntlet");
+    sunboltGauntlet.range = "12";
+    sunboltGauntlet.attack = "D6";
+    sunboltGauntlet.hit = "3+";
+    sunboltGauntlet.wound = "3+";
+    sunboltGauntlet.rend = "1";
+    sunboltGauntlet.damage = "1";
+    sunboltGauntlet.ability = "Shoot in Combat";
 
-    Unit general = Unit.withSpells("Grey Seer", generalSpells);
-    general.weapons.add(warpstoneStaff);
-    general.move = "6\"";
-    general.health = "5";
-    general.save = "6+";
-    general.control = "2";
-    general.keywords = "Hero, Wizard, Infantry";
+    Weapon relicWeapon = Weapon("relicWeapon", "Relic Celestite Weapon");
+    relicWeapon.attack = "5";
+    relicWeapon.hit = "3+";
+    relicWeapon.wound = "3+";
+    relicWeapon.rend = "1";
+    relicWeapon.damage = "2";
 
-    // Grey Seer
+    Weapon jaws = Weapon("jaws", "Carnosaur´s Massive Jaws");
+    jaws.attack = "3";
+    jaws.hit = "4+";
+    jaws.wound = "2+";
+    jaws.rend = "2";
+    jaws.damage = "3";
+    jaws.ability = "Companion";
+
+    Unit general = Unit.withSpells("Saurus Oldblood on Carnosaur", generalSpells);
+    general.weapons.add(sunboltGauntlet);
+    general.weapons.add(relicWeapon);
+    general.weapons.add(jaws);
+    general.move = "10\"";
+    general.health = "14";
+    general.save = "4+";
+    general.control = "5";
+    general.keywords = "Hero, Monster";
+
+    // General SAURUS OLDBLOOD ON CARNOSAUR
     //---------------------------------------------------------
-    // Clanrats
+    // SAURUS WARRIORS
 
-    List<Ability> clanratsSpells = [
+    List<Ability> saurusWarriorSpells = [
       Ability.color(
-        "Seething Swarm",
-        "End of Any Turn",
-        "Purple",
-        "Effect: You can return D3 slain models to this unit",
+        "Ordered Cohorts",
+        "Passive",
+        "Green",
+        "Effect: Add 1 to save rolls for this unit while it is contesting an objective you control.",
       ),
     ];
 
-    Weapon rustyBlade = Weapon("rustyBlade", "RustyBlade");
-    rustyBlade.attack = "2";
-    rustyBlade.hit = "4+";
-    rustyBlade.wound = "5+";
-    rustyBlade.damage = "1";
+    Weapon celestiteClub = Weapon("celestiteClub", "Celestite Club");
+    celestiteClub.attack = "2";
+    celestiteClub.hit = "3+";
+    celestiteClub.wound = "3+";
+    celestiteClub.rend = "1";
+    celestiteClub.damage = "1";
 
-    Unit clanrats = Unit.withSpells("Clanrats", clanratsSpells);
-    clanrats.weapons.add(rustyBlade);
-    clanrats.move = "6\"";
-    clanrats.health = "1";
-    clanrats.save = "5+";
-    clanrats.control = "1";
-    clanrats.keywords = "Infantry, Reinforcements";
+    Unit saurusWarriors = Unit.withSpells("Saurus Warriors", saurusWarriorSpells);
+    saurusWarriors.weapons.add(celestiteClub);
+    saurusWarriors.move = "5\"";
+    saurusWarriors.health = "2";
+    saurusWarriors.save = "4+";
+    saurusWarriors.control = "1";
+    saurusWarriors.keywords = "Infantry";
 
-    // Clanrats
+    // SAURUS WARRIORS
     //---------------------------------------------------------
-    // Stormfiends
+    // KROXIGOR
 
-    List<Ability> stormfiendsSpells = [
+    List<Ability> kroxigorSpells = [
       Ability.color(
-        "Shock Gauntlets",
+        "Brutal BLows",
         "Passive",
         "Red",
-        "Effect: Each time an attack made with this unit`s Shock Gauntlets scores a critical hit, that attack scores D6 hits"
-            "instead of 1 (make a wound roll for each hit).",
+        "Effect: This unit’s melee weapons have Crit (2 Hits) if the target unit has 5 or more models.",
       ),
     ];
 
-    Weapon ratlingCannons = Weapon("ratlingCannons", "Ratling Cannons");
-    ratlingCannons.range = "15\"";
-    ratlingCannons.attack = "3D6";
-    ratlingCannons.hit = "4+";
-    ratlingCannons.wound = "3+";
-    ratlingCannons.rend = "1";
-    ratlingCannons.damage = "1";
+    Weapon drakebite = Weapon("drakebite", "Drakebite Maul");
+    drakebite.attack = "4";
+    drakebite.hit = "4+";
+    drakebite.wound = "2+";
+    drakebite.rend = "1";
+    drakebite.damage = "2";
 
-    Weapon windlaunchers = Weapon("windlaunchers", "Windlaunchers");
-    windlaunchers.range = "15\"";
-    windlaunchers.attack = "3";
-    windlaunchers.hit = "4+";
-    windlaunchers.wound = "3+";
-    windlaunchers.rend = "2";
-    windlaunchers.damage = "D3";
+    Unit kroxigor = Unit.withSpells("Kroxigor", kroxigorSpells);
+    kroxigor.weapons.add(drakebite);
+    kroxigor.move = "5\"";
+    kroxigor.health = "6";
+    kroxigor.save = "4+";
+    kroxigor.control = "2";
+    kroxigor.keywords = "Infantry";
 
-    Weapon clubbingBlows = Weapon("clubbingBlows", "Clubbing Blows");
-    clubbingBlows.attack = "4";
-    clubbingBlows.hit = "4+";
-    clubbingBlows.wound = "2+";
-    clubbingBlows.rend = "-";
-    clubbingBlows.damage = "2";
-
-    Weapon shockGauntlets = Weapon("shockGauntlets", "Shock Gauntlets");
-    shockGauntlets.attack = "4";
-    shockGauntlets.hit = "4+";
-    shockGauntlets.wound = "2+";
-    shockGauntlets.rend = "1";
-    shockGauntlets.damage = "2";
-
-    Unit stormfiends = Unit.withSpells("Stormfiends", stormfiendsSpells);
-    stormfiends.weapons.add(ratlingCannons);
-    stormfiends.weapons.add(windlaunchers);
-    stormfiends.weapons.add(clubbingBlows);
-    stormfiends.weapons.add(shockGauntlets);
-    stormfiends.move = "6\"";
-    stormfiends.health = "6";
-    stormfiends.save = "4+";
-    stormfiends.control = "2";
-    stormfiends.keywords = "Infantry";
-
-    // Stormfiends
-    //---------------------------------------------------------
-    // Warp Lightning Cannon
-
-    List<Ability> warpLightningCannonSpells = [
-      Ability.color(
-        "Warp Lightning Blast",
-        "Passive",
-        "Blue",
-        "Effect: Each attack made with this weapon in a single phase must target the same enemy unit."
-            "Each hit inflicts 1 mortal damage on the target and the attack sequence ends.",
-      ),
-    ];
-
-    Weapon warpLightningBlast = Weapon(
-      "warpLightningBlast",
-      "Warp Lightning Blast",
-    );
-    warpLightningBlast.range = "20\"";
-    warpLightningBlast.attack = "2D6";
-    warpLightningBlast.hit = "4+";
-    warpLightningBlast.wound = "*";
-    warpLightningBlast.rend = "*";
-    warpLightningBlast.damage = "*";
-
-    Weapon teeth = Weapon("teeth", "Crew`s Teeth and Knives");
-    teeth.attack = "D6";
-    teeth.hit = "4+";
-    teeth.wound = "5+";
-    teeth.damage = "1";
-
-    Unit warpLightningCannon = Unit.withSpells(
-      "Warp Lightning Cannon",
-      warpLightningCannonSpells,
-    );
-    warpLightningCannon.weapons.add(warpLightningBlast);
-    warpLightningCannon.weapons.add(teeth);
-    warpLightningCannon.move = "3\"";
-    warpLightningCannon.health = "8";
-    warpLightningCannon.save = "4+";
-    warpLightningCannon.control = "2";
-    warpLightningCannon.keywords = "War Machine";
-
-    // Warp Lightning Cannon
+    // KROXIGOR
     //---------------------------------------------------------
     // Unit-List Build
 
-    List<Unit> units = [general, clanrats, stormfiends, warpLightningCannon];
+    List<Unit> units = [general, saurusWarriors, kroxigor];
 
     // Unit-List Build
     //---------------------------------------------------------
     // Battle Traits
 
-    Ability threeClawsteps = Ability("Always three Clawsteps Ahead");
-    threeClawsteps.timing = "Once Per Phase, Enemy Movement Phase";
-    threeClawsteps.color = "Gray";
-    threeClawsteps.details =
-    "Declare: Pick a friendly unit that is not in combat."
-        "\n\nEffect: That unit can use the `Normal Move` ability as if it were your movement phase.";
+    Ability BeastOfJungle = Ability("Beast of the Dark Jungles");
+    BeastOfJungle.timing = "Any Combat Phase";
+    BeastOfJungle.color = "Red";
+    BeastOfJungle.details =
+    "Declare: Pick your general to use this ability if they are in combat."
+        "\n\nEffect: Pick 1 of the following:"
+        "\nGargantuan Jaws: Pick an enemy unit in combat with your general and roll a dice. If the roll exceeds"
+        "that unit’s Health characteristic, 1 model in that unit is slain."
+        "\nRoar: Pick an enemy unit in combat with your general. Subtract D6 from that unit’s control score this turn.";
 
     BattleTraits battleTraits = BattleTraits();
-    battleTraits.abilitys.add(threeClawsteps);
+    battleTraits.abilitys.add(BeastOfJungle);
 
     // Battle Traits
     //---------------------------------------------------------
     // Regiment Abilities
 
-    Ability endlessSwarmofRats = Ability("Endless Swarm of Rats");
-    endlessSwarmofRats.timing = "Any end of turn";
-    endlessSwarmofRats.color = "Purple";
-    endlessSwarmofRats.details =
-    "Effect: When a friendly Clanrats unit uses its `Seething Swarm` ability, you can return D6 slain"
-        "models to that unit instead of D3.";
+    Ability predatoryFighters = Ability("Predatory Fighters");
+    predatoryFighters.timing = "Once Per Phase, End of Any Turn";
+    predatoryFighters.color = "Purple";
+    predatoryFighters.details =
+    "Declare: Roll a dice for each enemy unit in combat with any friendly units."
+        "\n\nEffect: On a 3+, inflict 1 mortal damage on the unit being rolled for.";
 
-    Ability warpstoneLacedArmour = Ability("Warpstone-laced Armour");
-    warpstoneLacedArmour.timing =
-    "Once Per Battle, Reaction: Opponent declared an ATTACK ability and targeted your Stormfiends unit";
-    warpstoneLacedArmour.color = "Red";
-    warpstoneLacedArmour.details =
-    "Used By: Your Stormfiends unit."
-        "\n\nEffect: Your Stormfiends unit has WARD (5+) for the rest of the turn.";
+    Ability templeGuardians = Ability("Temple-City Guardians");
+    templeGuardians.timing = "Passive";
+    templeGuardians.color = "Green";
+    templeGuardians.details =
+    "Effect: Friendly units have Ward (6+) while they are wholly within friendly territory.";
 
     // Regiment Abilities
     //---------------------------------------------------------
     // Enhancements
 
-    Ability cageOfWarpLightning = Ability("Cage of Warp Lightning");
-    cageOfWarpLightning.timing = "Once Per Battle, Any Combat Phase";
-    cageOfWarpLightning.color = "Red";
-    cageOfWarpLightning.details =
-    "Declare: Pick a visible enemy unit within 6\" of your general and roll a dice"
-        "\n\nEffect: On a 2+, the enemy unit has STRIKE-LAST this phase. On a 1, inflict 1 mortal damage on your general";
+    Ability sotekGaze = Ability("Sotek´s Gaze");
+    sotekGaze.timing = "End of Any Turn";
+    sotekGaze.color = "Purple";
+    sotekGaze.details =
+    "Effect: Roll a dice. Add the roll to your general’s control score this turn.";
 
-    Ability scurryAway = Ability("Scurry Away");
-    scurryAway.timing = "Any Combat Phase";
-    scurryAway.color = "Red";
-    scurryAway.details =
-    "Effect: Roll a dice. On a 3+, this unit can immediately use the `Retreat` ability as if it were your movement"
-        "phase. If it does so, no mortal damage is inflicted on it.";
+    Ability ancientStrategist = Ability("Ancient Strategist");
+    ancientStrategist.timing = "Once Per Battle, Any Movement Phase";
+    ancientStrategist.color = "Grey";
+    ancientStrategist.details =
+    "Declare: Pick a friendly unit wholly within 12\" of your general. You cannot pick your general."
+        "\n\nEffect: That unit can use the ‘Normal Move’ ability as if it were your movement phase.";
 
-    Ability skilledManipulator = Ability("Skilled Manipulator");
-    skilledManipulator.timing = "Passive";
-    skilledManipulator.color = "Red";
-    skilledManipulator.details =
-    "Effect: Your general has WARD (4+) while they are within 1\" of any friendly CLanrats units.";
+    Ability bladeRealities = Ability("Blade of Realities");
+    bladeRealities.timing = "Passive";
+    bladeRealities.color = "Red";
+    bladeRealities.details =
+    "Effect: Add 1 to the Rend characteristic of your general’s Relic Celestite Weapon.";
 
-    Ability skitterleap = Ability("Skitterleap");
-    skitterleap.timing = "Your Hero Phase";
-    skitterleap.color = "Yellow";
-    skitterleap.details =
-    "Declare: Make a casting roll of 2D6."
-        "\n\nEffect: On a 6+, remove your general from the battlefield and set them up again on the battlefield"
-        "more than 6\" from all enemy units. They cannot use MOVE abilities in the following movement phase.";
+    Ability wrathChotec = Ability("The Wrath of Chotec");
+    wrathChotec.timing = "Passive";
+    wrathChotec.color = "Blue";
+    wrathChotec.details =
+    "Effect: The Attacks characteristic of your general’s Sunbolt Gauntlet is 6 instead of D6.";
+
+    // Enhancements
+    //---------------------------------------------------------
+    //
+
+    widget.settings.army.unitList = units;
+
+    widget.settings.army.battleTraitsList.clear();
+    widget.settings.army.battleTraitsList.add(battleTraits);
+  }
+
+  void pickIronjawzBigmob() {
+    //---------------------------------------------------------
+    // General MEGABOSS
+
+    List<Ability> generalSpells = [
+      Ability.color(
+        "Get Stuck In, Ladz!",
+        "Your Hero Phase",
+        "Yellow",
+        "Declare: Pick this unit or a friendly Brute unit wholly within 12\" of this unit to be the target."
+            "\n\nEffect: Roll a dice. On a 2+, add 1 to the Attacks characteristic of the target’s melee weapons until the start of your next turn.",
+      ),
+    ];
+
+    Weapon bossChoppa = Weapon("bossChoppa", "Boss-choppa");
+    bossChoppa.attack = "8";
+    bossChoppa.hit = "4+";
+    bossChoppa.wound = "2+";
+    bossChoppa.rend = "1";
+    bossChoppa.damage = "2";
+
+    Unit general = Unit.withSpells("Megaboss", generalSpells);
+    general.weapons.add(bossChoppa);
+    general.move = "4\"";
+    general.health = "8";
+    general.save = "3+";
+    general.control = "2";
+    general.keywords = "Hero, Infantry";
+
+    // General MEGABOSS
+    //---------------------------------------------------------
+    // ARDBOYZ
+
+    List<Ability> ardboyzSpells = [
+      Ability.color(
+        "Shield Bash",
+        "Any Combat Phase",
+        "Red",
+        "Declare: Pick an enemy unit within 1\" of this unit to be the target."
+            "\n\nEffect: Make a shield bash roll of D6 for each model in this unit that is within 3\" of the target. "
+            "For each 6, inflict 1 mortal damage on the target.",
+      ),
+    ];
+
+    Weapon choppa = Weapon("choppa", "Choppa or Stikka");
+    choppa.attack = "2";
+    choppa.hit = "4+";
+    choppa.wound = "3+";
+    choppa.rend = "1";
+    choppa.damage = "1";
+    choppa.ability = "Anti-charge (+1 Rend)";
+
+    Unit ardboyz = Unit.withSpells("Saurus Warriors", ardboyzSpells);
+    ardboyz.weapons.add(choppa);
+    ardboyz.move = "4\"";
+    ardboyz.health = "2";
+    ardboyz.save = "3+";
+    ardboyz.control = "1";
+    ardboyz.keywords = "Infantry";
+
+    // ARDBOYZ
+    //---------------------------------------------------------
+    // BRUTE RAGERZ
+
+    List<Ability> bruteRagerzSpells = [
+      Ability.color(
+        "Unleashed Rage",
+        "Passive",
+        "Red",
+        "Effect: This unit has Strike-first if it charged in the same turn.",
+      ),
+    ];
+
+    Weapon ragerWeapon = Weapon("ragerWeapon", "Rager Weapons");
+    ragerWeapon.attack = "3";
+    ragerWeapon.hit = "4+";
+    ragerWeapon.wound = "2+";
+    ragerWeapon.rend = "1";
+    ragerWeapon.damage = "2";
+
+    Unit bruteRagerz = Unit.withSpells("bruteRagerz", bruteRagerzSpells);
+    bruteRagerz.weapons.add(ragerWeapon);
+    bruteRagerz.move = "4\"";
+    bruteRagerz.health = "3";
+    bruteRagerz.save = "5+";
+    bruteRagerz.control = "1";
+    bruteRagerz.keywords = "Infantry, Brute, Reinforcements";
+
+    // BRUTE RAGERZ
+    //---------------------------------------------------------
+    // Brutes
+
+    List<Ability> brutesSpells = [
+      Ability.color(
+        "You Messin'?",
+        "Passive",
+        "Purple",
+        "Enemy units with a Health characteristic of 1 or 2 cannot contest objectives while they are in combat with this unit.",
+      ),
+      Ability.color(
+        "Champion",
+        "Passive",
+        "Red",
+        "Add 1 to the Attacks characteristic of weapons used by champions in this unit.",
+      ),
+    ];
+
+    Weapon bruteWeapons = Weapon("bruteWeapons", "Brute Weapons");
+    bruteWeapons.attack = "3";
+    bruteWeapons.hit = "4+";
+    bruteWeapons.wound = "3+";
+    bruteWeapons.rend = "1";
+    bruteWeapons.damage = "2";
+    bruteWeapons.ability = "Anti-Infantry (+1 Rend)";
+
+    Weapon goreChoppa = Weapon("goreChoppa", "Gore-choppa");
+    goreChoppa.attack = "3";
+    goreChoppa.hit = "4+";
+    goreChoppa.wound = "3+";
+    goreChoppa.rend = "2";
+    goreChoppa.damage = "3";
+
+    Unit brutes = Unit.withSpells("Brutes", brutesSpells);
+    brutes.weapons.add(bruteWeapons);
+    brutes.weapons.add(goreChoppa);
+    brutes.move = "4\"";
+    brutes.health = "3";
+    brutes.save = "3+";
+    brutes.control = "1";
+    brutes.keywords = "Destruction, Ironjawz, Infantry, Champion, Brute";
+
+    // Brutes
+    //---------------------------------------------------------
+    // Unit-List Build
+
+    List<Unit> units = [general, ardboyz, bruteRagerz];
+
+    // Unit-List Build
+    //---------------------------------------------------------
+    // Battle Traits
+
+    Ability ereWeGo = Ability("´ere We Go");
+    ereWeGo.timing = "Passive";
+    ereWeGo.color = "Green";
+    ereWeGo.details =
+    "Effect: Set up this unit anywhere on the battlefield more than 6\" from all enemy units.";
+
+    Ability mightyDestroyers = Ability("Mighty Destroyers");
+    mightyDestroyers.timing = "Once Per Turn (Army), Any Hero Phase";
+    mightyDestroyers.color = "Yellow";
+    mightyDestroyers.details =
+    "Declare: Pick a friendly unit that was not set up this turn to be the target."
+        "\n\nEffect: The target can move up to 3\". It can move into combat. "
+        "\nIf it was in combat at the start of the move, it must end that move in combat.";
+
+    BattleTraits battleTraits = BattleTraits();
+    battleTraits.abilitys.add(mightyDestroyers);
+
+    // Battle Traits
+    //---------------------------------------------------------
+    // Regiment Abilities
+
+    Ability naturalDisaster = Ability("Natural Disaster");
+    naturalDisaster.timing = "Passive";
+    naturalDisaster.color = "Orange";
+    naturalDisaster.details =
+    "Effect: If you make an unmodified charge roll of 8+ for a friendly unit, "
+        "\nadd 1 to the Attacks characteristic of that unit’s melee weapons for the rest of the turn.";
+
+    Ability properRuckus = Ability("A Proper Ruckus");
+    properRuckus.timing = "Once Per Battle, Reaction: You declared the ´Mighty Destroyers´ ability";
+    properRuckus.color = "Yellow";
+    properRuckus.details =
+    "Effect: All friendly units on the battlefield that were not set up this turn are the targets of that ability instead.";
+
+    // Regiment Abilities
+    //---------------------------------------------------------
+    // Enhancements
+
+    Ability amberbone = Ability("Amberbone Whetstone");
+    amberbone.timing = "Passive";
+    amberbone.color = "Red";
+    amberbone.details =
+    "Effect: The Rend characteristic of your general’s melee weapons is 2";
+
+    Ability skulls = Ability("Trophy Skulls");
+    skulls.timing = "Passive";
+    skulls.color = "Purple";
+    skulls.details =
+    "Effect: Your general’s Control characteristic is 5.";
+
+    Ability armourGork = Ability("Armour of Gork");
+    armourGork.timing = "Passive";
+    armourGork.color = "Green";
+    armourGork.details =
+    "Effect: Your general has Ward (6+).";
+
+    Ability megaBossy = Ability("Mega Bossy");
+    megaBossy.timing = "Passive";
+    megaBossy.color = "Orange";
+    megaBossy.details =
+    "Effect: If this unit charged this turn, for the rest of the turn, "
+        "add 1 to charge rolls for friendly units while they are wholly within 12\" of this unit.";
 
     // Enhancements
     //---------------------------------------------------------
