@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import '../classes/ability.dart';
@@ -47,15 +49,15 @@ class _WarScroll extends State<WarScroll> {
     }
 
     List<Ability> passiveAbilities = [];
-    for(Ability abi in widget.unit.abilitys) {
-      if(abi.timing.contains("Passive")) {
+    for (Ability abi in widget.unit.abilitys) {
+      if (abi.timing.contains("Passive")) {
         passiveAbilities.add(abi);
       }
     }
 
     //TODO ab Hier wird das UI der WarScrolls gebaut, ab hier kann sich Jenny austoben.
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         title: Text(
           title,
           style: TextStyle(color: calculateTextColor(widget.phaseColor)),
@@ -76,10 +78,13 @@ class _WarScroll extends State<WarScroll> {
             child: Text("Menü"),
           ),
         ],
-      ),
+      ),*/
 
       // Start vom body
-      body: Column(
+      body:
+        SingleChildScrollView(
+      child:
+      Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
@@ -241,19 +246,43 @@ class _WarScroll extends State<WarScroll> {
 
               Expanded(
                 flex: 1,
-                child: Container(
-                  height: 190,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Colors.teal.shade400,
-                    borderRadius: BorderRadius.all(
-                      const Radius.circular(15.0),
+                child: Stack(
+                  children: [
+                    Container(
+                      height: 190,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.teal.shade400,
+                        borderRadius: BorderRadius.all(
+                          const Radius.circular(15.0),
+                        ),
+                      ),
+                      child: Text(
+                        widget.unit.name,
+                        style: TextStyle(height: 2.5, fontSize: 25),
+                      ),
                     ),
-                  ),
-                  child: Text(
-                    widget.unit.name,
-                    style: TextStyle(height: 2.5, fontSize: 25),
-                  ),
+                    widget.unit.keywords.contains("Reinforcement") ?
+                    Positioned(
+                      top: -10,
+                      right: -28,
+                      child: //Icon(Icons.warehouse),
+                      IconButton(
+                          icon: Image.file(
+                            //Nur bei Windows --debug exe benötigt
+                            //File("data/flutter_assets/assets/AoS_Reinforcement_Symbol.png"),
+
+                            //Nur in Android Studio
+                            File('./assets/AoS_Reinforcement_Symbol.png'),
+                            //scale: 0.5,
+                            height: 100,
+                            width: 100,
+                          ),
+                          onPressed: (){
+                          }
+                      ),
+                    ) : Text(""),
+                  ],
                 ),
               ),
             ],
@@ -302,7 +331,6 @@ class _WarScroll extends State<WarScroll> {
             columns: [
               DataColumn(label: Icon(Icons.sports_martial_arts)),
               DataColumn(label: Text("Melee Weapons")),
-              DataColumn(label: Text("")),
               DataColumn(label: Text("Att")),
               DataColumn(label: Text("Hit")),
               DataColumn(label: Text("Wnd")),
@@ -315,7 +343,6 @@ class _WarScroll extends State<WarScroll> {
                 cells: [
                   DataCell(Text("")),
                   DataCell(Text(meleeWeaponList[index].name)),
-                  DataCell(Text("")),
                   DataCell(Text(meleeWeaponList[index].attack)),
                   DataCell(Text(meleeWeaponList[index].hit)),
                   DataCell(Text(meleeWeaponList[index].wound)),
@@ -347,105 +374,100 @@ class _WarScroll extends State<WarScroll> {
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
                       crossAxisCount: 3,
-                      childAspectRatio: 1.5,
+                      childAspectRatio: 1.3,
                     ),
                     delegate: SliverChildBuilderDelegate((
-                        BuildContext context,
-                        int index,
-                        ) {
+                      BuildContext context,
+                      int index,
+                    ) {
                       return Card(
-                        child: passiveAbilities[index].erledigt ?
-                        //Ab hier Card wenn die Ability erledigt ist
-                        ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              passiveAbilities[index].erledigt = false;
-                            });
-                          },
-                          child: Column(
-                            children: [
-                              Text(
-                                passiveAbilities[index].name,
-                                //cardContentList[index].ability.name.contains("-1") ? cardContentList[index].unit.name : cardContentList[index].ability.name,
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Icon(Icons.done, size: 100),
-                              /*
-                              Container(
-                                height: 100,
-                                width: 100,
-                                child: LayoutBuilder(
-                                  builder: (context, constraint) {
-                                    return new Icon(
-                                      Icons.done,
-                                      size: constraint.biggest.height,
-                                    );
-                                  },
-                                ),
-                              ),
-                              */
-                            ],
-                          ),
-                        )
-                            :
-                        //Ab hier Card wenn es eine Ability ist
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  passiveAbilities[index].name,
-                                  //cardContentList[index].ability.name,
-                                  style: TextStyle(
-                                    backgroundColor: widget.phaseColor,
-                                    fontWeight: FontWeight.bold,
-                                    color: calculateTextColor(
-                                      widget.phaseColor,
+                        child: passiveAbilities[index].erledigt
+                            ?
+                              //Ab hier Card wenn die Ability erledigt ist
+                              ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    passiveAbilities[index].erledigt = false;
+                                  });
+                                },
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      passiveAbilities[index].name,
+                                      //cardContentList[index].ability.name.contains("-1") ? cardContentList[index].unit.name : cardContentList[index].ability.name,
+                                      style: TextStyle(fontSize: 20),
                                     ),
-                                  ),
+                                    Icon(Icons.done, size: 100),
+                                  ],
                                 ),
-                              ],
-                            ),
-                            Text(passiveAbilities[index].timing),
-                            Text(passiveAbilities[index].details),
-                            passiveAbilities[index].commandPoints.contains("-") ? Text("") : Text("Command Point cost: " + passiveAbilities[index].commandPoints),
-                            /*
+                              )
+                            :
+                              //Ab hier Card wenn es eine Ability ist
+                              Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        passiveAbilities[index].name,
+                                        //cardContentList[index].ability.name,
+                                        style: TextStyle(
+                                          backgroundColor: widget.phaseColor,
+                                          fontWeight: FontWeight.bold,
+                                          color: calculateTextColor(
+                                            widget.phaseColor,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(passiveAbilities[index].timing),
+                                  Text(passiveAbilities[index].details),
+                                  passiveAbilities[index].commandPoints
+                                          .contains("-")
+                                      ? Text("")
+                                      : Text(
+                                          "Command Point cost: " +
+                                              passiveAbilities[index]
+                                                  .commandPoints,
+                                        ),
+                                  /*
                             Text(cardContentList[index].ability.timing),
                             Text(cardContentList[index].ability.originUnit),
                             Text(cardContentList[index].ability.details),
                              */
-                            /*
+                                  /*
                             ListTile(
                               leading: Icon(Icons.album),
                               title: Text(spells[index].title),
                               subtitle: Text(spells[index].details),
                             ),
                             */
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: <Widget>[
-                                TextButton(
-                                  child: Text("Fähigkeit erledigt"),
-                                  onPressed: () {
-                                    setState(() {
-                                      passiveAbilities[index].erledigt = true;
-                                    });
-                                  },
-                                ),
-                                const SizedBox(width: 8),
-                                TextButton(
-                                  child: Text("Item $index"),
-                                  onPressed: () {
-                                    /* ... */
-                                  },
-                                ),
-                                const SizedBox(width: 8),
-                              ],
-                            ),
-                          ],
-                        ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: <Widget>[
+                                      TextButton(
+                                        child: Text("Fähigkeit erledigt"),
+                                        onPressed: () {
+                                          setState(() {
+                                            passiveAbilities[index].erledigt =
+                                                true;
+                                          });
+                                        },
+                                      ),
+                                      const SizedBox(width: 8),
+                                      TextButton(
+                                        child: Text("Item $index"),
+                                        onPressed: () {
+                                          /* ... */
+                                        },
+                                      ),
+                                      const SizedBox(width: 8),
+                                    ],
+                                  ),
+                                ],
+                              ),
                       );
                     }, childCount: passiveAbilities.length),
                   ),
@@ -454,7 +476,7 @@ class _WarScroll extends State<WarScroll> {
             ),
           ),
 
-          SizedBox(height: 10),
+          SizedBox(height: 50),
           //2. Row für Schlüsselworte
           Row(
             children: [
@@ -465,6 +487,7 @@ class _WarScroll extends State<WarScroll> {
             ],
           ),
         ],
+      ),
       ),
       //End Container
     );
