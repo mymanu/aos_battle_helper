@@ -2935,6 +2935,12 @@ class _SettingsWidget extends State<SettingsWidget> {
 
     List<Ability> deathmasterCrixxitSpells = [
       Ability.color(
+        "Guarded Hero",
+        "Passive",
+        "Black",
+        "If this Hero is within the combat range of a friendly unit that is not a Hero:\n• Subtract 1 from hit rolls for shooting attacks that target this Hero.\n• If this Hero is Infantry, they cannot be picked as the target of shooting attacks made by models more than 12\" from them.",
+      ),
+      Ability.color(
         "Go-Go, Hunt Them Down",
         "Your Hero Phase",
         "Yellow",
@@ -3011,8 +3017,16 @@ class _SettingsWidget extends State<SettingsWidget> {
     slings.damage = "1";
     slings.ability = "Crit (Auto-wound), Shoot in Combat";
 
+    Weapon blades = Weapon("slings", "Poisoned Blades");
+    blades.attack = "2";
+    blades.hit = "4+";
+    blades.wound = "5+";
+    blades.damage = "1";
+    blades.ability = "Crit (Mortal)";
+
     Unit nightRunner = Unit.withSpells("Night Runners", nightRunnerSpells);
     nightRunner.weapons.add(slings);
+    nightRunner.weapons.add(blades);
     nightRunner.move = "7\"";
     nightRunner.health = "1";
     nightRunner.save = "6+";

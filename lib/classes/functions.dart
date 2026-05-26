@@ -32,6 +32,8 @@ class Functions {
             abilitys.add(ability);
           }
           //Für Hard Coded Spells Ende
+
+          //TODO Kann aktuell zu doppelten Spells führen -> Hard Coded anpassen, sodass nur noch JSON Version vorhanden ist
           //Für JSON Spells Anfang
           if ((ability.timing.contains("Your") ||
               ability.timing.contains("Any") ||
