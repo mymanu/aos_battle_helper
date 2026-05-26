@@ -16,6 +16,7 @@ class Functions {
     for (Unit unit in unitList) {
       for (Ability ability in unit.abilitys) {
         if (ability.color.contains(phaseColorString)) {
+          //Für Hard Coded Spells Anfang
           if ((ability.timing.contains("Your") ||
               ability.timing.contains("Any") ||
               ability.timing.contains("Passive")) &&
@@ -30,6 +31,23 @@ class Functions {
             ability.originUnit = unit.name;
             abilitys.add(ability);
           }
+          //Für Hard Coded Spells Ende
+          //Für JSON Spells Anfang
+          if ((ability.timing.contains("Your") ||
+              ability.timing.contains("Any") ||
+              ability.typeName.contains("Passive")) &&
+              ownPhase) {
+            ability.originUnit = unit.name;
+            abilitys.add(ability);
+          }
+          if ((ability.timing.contains("Enemy") ||
+              ability.timing.contains("Any") ||
+              ability.typeName.contains("Passive")) &&
+              !ownPhase) {
+            ability.originUnit = unit.name;
+            abilitys.add(ability);
+          }
+          //Für JSON Spells Ende
         }
       }
     }

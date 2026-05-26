@@ -235,9 +235,9 @@ class _StartofBattle extends State<StartofBattle> {
                                 ),
                               ],
                             ),
-                            Text(spellsThisPhase[index].timing),
+                            spellsThisPhase[index].typeName.contains("Passive") ? Text(spellsThisPhase[index].typeName) : Text(spellsThisPhase[index].timing),
                             Text(spellsThisPhase[index].originUnit),
-                            Text(spellsThisPhase[index].details),
+                            spellsThisPhase[index].details.contains("Details der Unit") ? Text(spellsThisPhase[index].declare + "\n\n" + spellsThisPhase[index].effect): Text(spellsThisPhase[index].details),
                             spellsThisPhase[index].commandPoints.contains("-") ? Text("") : Text("Command Point cost: " + spellsThisPhase[index].commandPoints),
                             /*
                             Text(cardContentList[index].ability.timing),
