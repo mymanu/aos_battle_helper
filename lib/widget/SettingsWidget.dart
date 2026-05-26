@@ -576,28 +576,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                         maximumSize: Size(510, 510),
                       ),
                       child: Text(
-                        'Warpspark Clawpack',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      onPressed: () {
-                        pickWarpsparkClawpack();
-                      },
-                    ),
-
-                    SizedBox(height: 20),
-
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.orange,
-                        backgroundColor: Colors.blueGrey.shade800,
-                        shadowColor: Colors.black,
-                        padding: const EdgeInsets.all(10.0),
-                        minimumSize: Size(250, 100),
-                        maximumSize: Size(510, 510),
-                      ),
-                      child: Text(
-                        'Starscale Warhost',
+                        'Seraphon \nStarscale Warhost',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 20),
                       ),
@@ -618,12 +597,75 @@ class _SettingsWidget extends State<SettingsWidget> {
                         maximumSize: Size(510, 510),
                       ),
                       child: Text(
-                        'Ironjawz Bigmob',
+                        'Orruk Warclans \nIronjawz Bigmob',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 20),
                       ),
                       onPressed: () {
                         pickIronjawzBigmob();
+                      },
+                    ),
+
+                    SizedBox(height: 20),
+
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.orange,
+                        backgroundColor: Colors.blueGrey.shade800,
+                        shadowColor: Colors.black,
+                        padding: const EdgeInsets.all(10.0),
+                        minimumSize: Size(250, 100),
+                        maximumSize: Size(510, 510),
+                      ),
+                      child: Text(
+                        'Skaven \nWarpspark Clawpack',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        pickWarpsparkClawpack();
+                      },
+                    ),
+
+                    SizedBox(height: 20),
+
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.orange,
+                        backgroundColor: Colors.blueGrey.shade800,
+                        shadowColor: Colors.black,
+                        padding: const EdgeInsets.all(10.0),
+                        minimumSize: Size(250, 100),
+                        maximumSize: Size(510, 510),
+                      ),
+                      child: Text(
+                        'Skaven \nGnawfeast Clawpack',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        pickSkavenGnawfeastClawpack();
+                      },
+                    ),
+
+                    SizedBox(height: 20),
+
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.orange,
+                        backgroundColor: Colors.blueGrey.shade800,
+                        shadowColor: Colors.black,
+                        padding: const EdgeInsets.all(10.0),
+                        minimumSize: Size(250, 100),
+                        maximumSize: Size(510, 510),
+                      ),
+                      child: Text(
+                        'Skaven \nCrixxit´s Kill-Pack',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        pickSkavenCrixxitKillPack();
                       },
                     ),
 
@@ -1922,6 +1964,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     rustyBlade.attack = "2";
     rustyBlade.hit = "4+";
     rustyBlade.wound = "5+";
+    rustyBlade.rend = "-";
     rustyBlade.damage = "1";
 
     Unit clanrats = Unit.withSpells("Clanrats", clanratsSpells);
@@ -2149,7 +2192,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     ];
 
     Weapon sunboltGauntlet = Weapon("sunboltGauntlet", "Sunbolt Gauntlet");
-    sunboltGauntlet.range = "12";
+    sunboltGauntlet.range = "12\"";
     sunboltGauntlet.attack = "D6";
     sunboltGauntlet.hit = "3+";
     sunboltGauntlet.wound = "3+";
@@ -2543,6 +2586,513 @@ class _SettingsWidget extends State<SettingsWidget> {
         "add 1 to charge rolls for friendly units while they are wholly within 12\" of this unit.";
 
     List<Ability> enhancements = [amberstone, skulls, armourGork, megaBossy];
+
+    // Enhancements
+    //---------------------------------------------------------
+    //
+
+    widget.settings.army.unitList = units;
+
+    widget.settings.army.battleTraitsList.clear();
+    widget.settings.army.battleTraitsList.add(battleTraits);
+
+    widget.settings.regimentAbilities = regimentAbilies;
+
+    widget.settings.enhancements = enhancements;
+  }
+
+  void pickSkavenGnawfeastClawpack() {
+    //---------------------------------------------------------
+    // General CLAWLORD ON GNAW-BEAST
+
+    List<Ability> generalSpells = [
+      Ability.color(
+        "Guarded Hero",
+        "Passive",
+        "Black",
+        "If this Hero is within the combat range of a friendly unit that is not a Hero:\n• Subtract 1 from hit rolls for shooting attacks that target this Hero.\n• If this Hero is Infantry, they cannot be picked as the target of shooting attacks made by models more than 12\" from them.",
+      ),
+      Ability.color(
+        "Cornered Rat",
+        "Passive",
+        "Red",
+        "Effect: While this unit is damaged, add 3 to the Attacks characteristic of its Warpforged Halberd.",
+      ),
+    ];
+
+    Weapon ratlingPistol = Weapon("ratlingPistol", "Ratling Pistol");
+    ratlingPistol.range = "10\"";
+    ratlingPistol.attack = "D6";
+    ratlingPistol.hit = "3+";
+    ratlingPistol.wound = "3+";
+    ratlingPistol.rend = "1";
+    ratlingPistol.damage = "1";
+    ratlingPistol.ability = "Crit (Auto-wound), Shoot in Combat";
+
+    Weapon warpforgedHalberd = Weapon("warpforgedHalberd", "Warpforged Halberd");
+    warpforgedHalberd.attack = "5";
+    warpforgedHalberd.hit = "3+";
+    warpforgedHalberd.wound = "4+";
+    warpforgedHalberd.rend = "1";
+    warpforgedHalberd.damage = "2";
+
+    Weapon fangs = Weapon("fangs", "Gnaw-beast’s Chisel Fangs");
+    fangs.attack = "4";
+    fangs.hit = "4+";
+    fangs.wound = "3+";
+    fangs.rend = "1";
+    fangs.damage = "D3";
+    fangs.ability = "Companion";
+
+    Unit general = Unit.withSpells("Clawlord on Gnaw-Beast", generalSpells);
+    general.id = "General";
+    general.weapons.add(ratlingPistol);
+    general.weapons.add(warpforgedHalberd);
+    general.weapons.add(fangs);
+    general.move = "9\"";
+    general.health = "7";
+    general.save = "4+";
+    general.control = "2";
+    general.keywords = "Hero, Cavalry, Ward (6+)";
+
+    // General CLAWLORD ON GNAW-BEAST
+    //---------------------------------------------------------
+    // Grey Seer
+
+    List<Ability> greySeerSpells = [
+      Ability.color(
+        "Will of the Hornet Rat",
+        "Your Hero Phase",
+        "Yellow",
+        "Declare: Pick a friendly unit wholly within 13\" of this unit to be the target, then roll a dice."
+            "\n\nEffect: On a 3+, add the roll to the target`s control score until the start of your next turn.",
+      ),
+      Ability.color(
+        "Wither",
+        "Your Hero Phase",
+        "Yellow",
+        "Declare: Pick a visible enemy unit within 13\" of this unit to be the target, then make a casting roll of 2D6."
+            "\n\nEffect: On a 6+, inflict D3 mortal damage on the target.",
+      ),
+    ];
+
+    Weapon warpstoneStaff = Weapon("warpstoneStaff", "Warpstone Staff");
+    warpstoneStaff.attack = "3";
+    warpstoneStaff.hit = "4+";
+    warpstoneStaff.wound = "4+";
+    warpstoneStaff.rend = "1";
+    warpstoneStaff.damage = "D3";
+
+    Unit greySeer = Unit.withSpells("Grey Seer", greySeerSpells);
+    greySeer.weapons.add(warpstoneStaff);
+    greySeer.move = "6\"";
+    greySeer.health = "5";
+    greySeer.save = "6+";
+    greySeer.control = "2";
+    greySeer.keywords = "Hero, Wizard, Infantry";
+
+    // Grey Seer
+    //---------------------------------------------------------
+    // BRUTE WARLOCK ENGINEER
+
+    List<Ability> warlockSpells = [
+      Ability.color(
+        "More-More Warp Energy!",
+        "Reaction: You declared a SHOOT ability for this unit and it has not used a MOVE ability this turn",
+        "Blue",
+        "Effect: Roll a dice. On a 2+, set the Damage characteristic of its Warplock Musket to 3 this phase. "
+            "\nOn a 1, inflict D3 mortal damage on this unit.",
+      ),
+    ];
+
+    Weapon warplockMusket = Weapon("warplockMusket", "Warplock Musket");
+    warplockMusket.range = "24\"";
+    warplockMusket.attack = "2";
+    warplockMusket.hit = "3+";
+    warplockMusket.wound = "3+";
+    warplockMusket.rend = "2";
+    warplockMusket.damage = "D3";
+    warplockMusket.ability = "Crit (Auto-wound)";
+
+    Weapon warpforgedDagger = Weapon("warpforgedDagger", "Warpforged Dagger");
+    warpforgedDagger.attack = "3";
+    warpforgedDagger.hit = "4+";
+    warpforgedDagger.wound = "4+";
+    warpforgedDagger.rend = "-";
+    warpforgedDagger.damage = "2";
+
+    Unit warlock = Unit.withSpells("Warlock Engineer", warlockSpells);
+    warlock.weapons.add(warplockMusket);
+    warlock.weapons.add(warpforgedDagger);
+    warlock.move = "4\"";
+    warlock.health = "3";
+    warlock.save = "5+";
+    warlock.control = "1";
+    warlock.keywords = "Hero, Infantry";
+
+    // WARLOCK ENGINEER
+    //---------------------------------------------------------
+    // Clanrats
+
+    List<Ability> clanratsSpells = [
+      Ability.color(
+        "Seething Swarm",
+        "End of Any Turn",
+        "Purple",
+        "Effect: You can return D3 slain models to this unit",
+      ),
+    ];
+
+    Weapon rustyBlade = Weapon("rustyBlade", "Rusty Blade");
+    rustyBlade.attack = "2";
+    rustyBlade.hit = "4+";
+    rustyBlade.wound = "5+";
+    rustyBlade.rend = "-";
+    rustyBlade.damage = "1";
+
+    Unit clanrats = Unit.withSpells("Clanrats", clanratsSpells);
+    clanrats.weapons.add(rustyBlade);
+    clanrats.move = "6\"";
+    clanrats.health = "1";
+    clanrats.save = "5+";
+    clanrats.control = "1";
+    clanrats.keywords = "Infantry, Reinforcements";
+
+    // Clanrats
+    //---------------------------------------------------------
+
+    //---------------------------------------------------------
+    // RAT OGORS
+
+    List<Ability> ratOgorsSpells = [
+      Ability.color(
+        "Unleashed Warp-Fury",
+        "Any Combat Phase, Once Per Battle",
+        "Red",
+        "Effect: Inflict D3 mortal damage on this unit. Then, add 1 to the Attacks characteristic of its melee weapons this phase.",
+      ),
+    ];
+
+    Weapon warpfireGun = Weapon("warpfireGun", "Warpfire Gun");
+    warpfireGun.range = "10\"";
+    warpfireGun.attack = "2D6";
+    warpfireGun.hit = "2+";
+    warpfireGun.wound = "4+";
+    warpfireGun.rend = "2";
+    warpfireGun.damage = "1";
+    warpfireGun.ability = "Shoot in Combat";
+
+    Weapon claws = Weapon("claws", "Claws, Blades and Fangs");
+    claws.attack = "5";
+    claws.hit = "4+";
+    claws.wound = "3+";
+    claws.rend = "1";
+    claws.damage = "2";
+
+    Unit ratOgors = Unit.withSpells("ratOgors", ratOgorsSpells);
+    ratOgors.weapons.add(claws);
+    ratOgors.move = "6\"";
+    ratOgors.health = "1";
+    ratOgors.save = "5+";
+    ratOgors.control = "1";
+    ratOgors.keywords = "Infantry";
+
+    // RAT OGORS
+    //---------------------------------------------------------
+    // Unit-List Build
+
+    List<Unit> units = [general, greySeer, warlock, clanrats, ratOgors];
+
+    // Unit-List Build
+    //---------------------------------------------------------
+    // Battle Traits
+
+    Ability vermintide = Ability("The Lurking Vermintide");
+    vermintide.timing = "Once Per Battle, Deployment Phase";
+    vermintide.color = "Black";
+    vermintide.details =
+    "Declare: Pick a friendly unit that has not been deployed to be the target."
+        "\n\nEffect: The target unit is set up in reserve in the tunnels below. "
+        "Units in the tunnels below that have not used the ‘Gnawhole Ambush’ ability "
+        "by the end of the third battle round are destroyed.";
+
+    Ability ambush = Ability("Gnawhole Ambush");
+    ambush.timing = "Your Movement Phase";
+    ambush.color = "Grey";
+    ambush.details =
+    "Declare: Pick a friendly unit that is in the tunnels below to use this ability."
+        "\n\nEffect: Set up that unit wholly within 6\" of a corner of the battlefield and more than 9\" from all enemy units.";
+
+    BattleTraits battleTraits = BattleTraits();
+    battleTraits.abilitys.add(vermintide);
+    battleTraits.abilitys.add(ambush);
+
+    // Battle Traits
+    //---------------------------------------------------------
+    // Regiment Abilities
+
+    Ability bullets = Ability("Warpstone-Laced Bullets");
+    bullets.timing = "Once Per Battle, Your Shooting Phase";
+    bullets.color = "Blue";
+    bullets.details =
+    "Declare: Pick a ranged weapon a friendly unit is armed with."
+        "\n\nEffect: That weapon has Crit (Mortal) this phase.";
+
+    Ability tooquick = Ability("Too Quick Too Hit-Hit");
+    tooquick.timing = "Passive";
+    tooquick.color = "Grey";
+    tooquick.details =
+    "Effect: No mortal damage is inflicted on friendly units when they use Retreat abilities.";
+
+    List<Ability> regimentAbilies = [bullets, tooquick];
+
+    // Regiment Abilities
+    //---------------------------------------------------------
+    // Enhancements
+
+    Ability horde = Ability("Lead The Seething Horde");
+    horde.keywords = "Enhancement";
+    horde.timing = "Reaction. You declared the ´Call for Reinforcments´ ability";
+    horde.color = "Red";
+    horde.details =
+    "Effect: Instead of using the set-up instructions in the ‘Call for Reinforcements’ ability, "
+        "the replacement unit can be set up wholly within 13\" of this unit and not in combat.";
+
+    Ability connections = Ability("Skyre Connections");
+    connections.keywords = "Enhancement";
+    connections.timing = "Passive";
+    connections.color = "Blue";
+    connections.details = "Effect: Your general’s Ratling Pistol has an Attacks characteristic of 2D6 instead of D6.";
+
+    Ability charm = Ability("Warpstone Charm");
+    charm.keywords = "Enhancement";
+    charm.timing = "Passive";
+    charm.color = "Red";
+    charm.details = "Effect: Subtract 1 from save rolls for enemy units in combat with your general.";
+
+    Ability stitched = Ability("Cloak of Stitched Victories");
+    stitched.keywords = "Enhancement";
+    stitched.timing = "Passive";
+    stitched.color = "Green";
+    stitched.details =
+    "Effect: Your general has Ward (5+)";
+
+    List<Ability> enhancements = [horde, connections, charm, stitched];
+
+    // Enhancements
+    //---------------------------------------------------------
+    //
+
+    widget.settings.army.unitList = units;
+
+    widget.settings.army.battleTraitsList.clear();
+    widget.settings.army.battleTraitsList.add(battleTraits);
+
+    widget.settings.regimentAbilities = regimentAbilies;
+
+    widget.settings.enhancements = enhancements;
+  }
+
+  void pickSkavenCrixxitKillPack() {
+    //---------------------------------------------------------
+    // General DEATHMASTER
+
+    List<Ability> generalSpells = [
+      Ability.color(
+        "Guarded Hero",
+        "Passive",
+        "Black",
+        "If this Hero is within the combat range of a friendly unit that is not a Hero:\n• Subtract 1 from hit rolls for shooting attacks that target this Hero.\n• If this Hero is Infantry, they cannot be picked as the target of shooting attacks made by models more than 12\" from them.",
+      ),
+      Ability.color(
+        "Shadowy Killers",
+        "Passive",
+        "Green",
+        "Effect: If the unmodified hit roll for an attack that targets this unit is 1-4,"
+            "the attack fails and the attack sequence ends.",
+      ),
+    ];
+
+    Weapon weepingBlade = Weapon("weepingBlade", "Weeping Blade");
+    weepingBlade.attack = "5";
+    weepingBlade.hit = "3+";
+    weepingBlade.wound = "4+";
+    weepingBlade.rend = "1";
+    weepingBlade.damage = "D3";
+
+    Unit general = Unit.withSpells("Deathmaster", generalSpells);
+    general.id = "General";
+    general.weapons.add(weepingBlade);
+    general.move = "7\"";
+    general.health = "5";
+    general.save = "5+";
+    general.control = "2";
+    general.keywords = "Hero, Infantry, Ward (6+)";
+
+    // General DEATHMASTER
+    //---------------------------------------------------------
+    // DEATHMASTER  CRIXXIT
+
+    List<Ability> deathmasterCrixxitSpells = [
+      Ability.color(
+        "Go-Go, Hunt Them Down",
+        "Your Hero Phase",
+        "Yellow",
+        "Declare: Pick a visible friendly Gutter Runners unit wholly within 12\" of this unit to be the target, then roll a dice."
+            "\n\nEffect: On a 3+, add 1 to charge rolls for the rest of the turn.",
+      ),
+    ];
+
+    Weapon cuts = Weapon("cuts", "The Blades of Thirteen Cuts");
+    cuts.attack = "13";
+    cuts.hit = "2+";
+    cuts.wound = "4+";
+    cuts.rend = "1";
+    cuts.damage = "1";
+
+    Unit deathmasterCrixxit = Unit.withSpells("Deathmaster Crixxit", deathmasterCrixxitSpells);
+    deathmasterCrixxit.weapons.add(cuts);
+    deathmasterCrixxit.move = "7\"";
+    deathmasterCrixxit.health = "6";
+    deathmasterCrixxit.save = "5+";
+    deathmasterCrixxit.control = "2";
+    deathmasterCrixxit.keywords = "Hero, Infantry, Ward (5+)";
+
+    // DEATHMASTER  CRIXXIT
+    //---------------------------------------------------------
+    // GUTTER RUNNERS
+
+    List<Ability> gutterSpells = [
+      Ability.color(
+        "Bomb Rats",
+        "Once Per Turn (Army), Your Charge Phase",
+        "Orange",
+        "Declare: You can only use this ability if this unit has a Bomb Rat token."
+            "\nPick an enemy unit within 9\" of this unit to be the target. Then, roll a dice."
+            "\n\nEffect: On a 3+, inflict 1 mortal damage on the target. On a 1-2, remove this units Bomb Rat token from the battlefield.",
+      ),
+    ];
+
+    Weapon eshin = Weapon("eshin", "Eshin Specialist Blades");
+    eshin.attack = "3";
+    eshin.hit = "3+";
+    eshin.wound = "4+";
+    eshin.rend = "1";
+    eshin.damage = "1";
+    eshin.ability = "Crit (Mortal)";
+
+    Unit gutter = Unit.withSpells("Gutter Runners", gutterSpells);
+    gutter.weapons.add(eshin);
+    gutter.move = "7\"";
+    gutter.health = "1";
+    gutter.save = "6+";
+    gutter.control = "1";
+    gutter.keywords = "Infantry, Reinforcements, Ward (6+)";
+
+    // GUTTER RUNNERS
+    //---------------------------------------------------------
+    // NIGHT RUNNERS
+
+    List<Ability> nightRunnerSpells = [
+      Ability.color(
+        "Smoke Bombs",
+        "Once Per Turn (Army), Any Combat Phase",
+        "Red",
+        "Effect: On a 4+, this unit can immediately use the ´Retreat´ ability as if it were your movement phase.",
+      ),
+    ];
+
+    Weapon slings = Weapon("slings", "Slings and Poisoned Stars");
+    slings.range = "10\"";
+    slings.attack = "2";
+    slings.hit = "4+";
+    slings.wound = "4+";
+    slings.rend = "-";
+    slings.damage = "1";
+    slings.ability = "Crit (Auto-wound), Shoot in Combat";
+
+    Unit nightRunner = Unit.withSpells("Night Runners", nightRunnerSpells);
+    nightRunner.weapons.add(slings);
+    nightRunner.move = "7\"";
+    nightRunner.health = "1";
+    nightRunner.save = "6+";
+    nightRunner.control = "1";
+    nightRunner.keywords = "Infantry, Reinforcements, Ward (6+)";
+
+    // NIGHT RUNNERS
+    //---------------------------------------------------------
+    // Unit-List Build
+
+    List<Unit> units = [general, deathmasterCrixxit, gutter, nightRunner];
+
+    // Unit-List Build
+    //---------------------------------------------------------
+    // Battle Traits
+
+    Ability shadow = Ability("Cloaked in Shadow");
+    shadow.timing = "Once Per Turn (Army), Combat Phase";
+    shadow.color = "Red";
+    shadow.details =
+    "Declare: Pick a friendly HERO unit to use this ability. Then, pick a different friendly unit that has 2 or more models to be the target."
+        "\n\nEffect: Make a shadow-travel roll of D6. On a 3+, remove the HERO using this ability from the battlefield "
+        "and set them up again wholly within 6\" of the target. They can be set up in combat with any enemy units that are already in combat.";
+
+    BattleTraits battleTraits = BattleTraits();
+    battleTraits.abilitys.add(shadow);
+
+    // Battle Traits
+    //---------------------------------------------------------
+    // Regiment Abilities
+
+    Ability shade = Ability("Way of the Skittering Shade");
+    shade.timing = "Once Per Battle, Your Movement Phase";
+    shade.color = "Grey";
+    shade.details =
+    "Declare: Pick a friendly unit that is wholly within 6\" of a battlefield edge to be the target."
+        "\n\nEffect: Remove the target from the battlefield and set it up again wholly within 3\" of a battlefield edge"
+        "and more than 6\" from all enemy units.";
+
+    Ability clawWay = Ability("Way of the Fiendish Claw");
+    clawWay.timing = "Once Per Battle (Army), Any Combat Phase";
+    clawWay.color = "Red";
+    clawWay.details =
+    "Declare: Pick a friendly HERO to be the target"
+        "\n\nEffect: The target has STRIKE-FIRST for the rest of the turn.";
+
+    List<Ability> regimentAbilies = [shade, clawWay];
+
+    // Regiment Abilities
+    //---------------------------------------------------------
+    // Enhancements
+
+    Ability acrobatic = Ability("Murderous Acrobatics");
+    acrobatic.keywords = "Enhancement";
+    acrobatic.timing = "Passive";
+    acrobatic.color = "Orange";
+    acrobatic.details =
+    "Effect: When your general uses the ´Charge´ ability, they can pass through enemy models.";
+
+    Ability masterShadows = Ability("Master of Shadows");
+    masterShadows.keywords = "Enhancement";
+    masterShadows.timing = "Passive";
+    masterShadows.color = "Red";
+    masterShadows.details = "Effect: When your general uses the ´Cloaked in Shadow´ ability, add 1 to the shadow-travel roll.";
+
+    Ability anotherShadow = Ability("Just Another Shadow");
+    anotherShadow.keywords = "Enhancement";
+    anotherShadow.timing = "Passive";
+    anotherShadow.color = "Green";
+    anotherShadow.details = "Effect: While your general is wholly within the combat range of a friendly unit that has 3 or more models,"
+        "your general has WARD (4+).";
+
+    Ability screech = Ability("Death Screech");
+    screech.keywords = "Enhancement";
+    screech.timing = "Passive";
+    screech.color = "Red";
+    screech.details = "Declare: Pick an enemy unit within 6\" of your general to be the target."
+        "\n\nEffect: Roll a dice. On a 3+, for the rest of the turn, subtract 1 from hit rolls for the target´s attacks.";
+
+    List<Ability> enhancements = [acrobatic, masterShadows, anotherShadow, screech];
 
     // Enhancements
     //---------------------------------------------------------
