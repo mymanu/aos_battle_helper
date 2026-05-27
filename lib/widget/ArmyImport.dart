@@ -55,7 +55,6 @@ class _ArmyImport extends State<ArmyImport> {
       }
 
       //TODO hier wir die Funktion zum JSON decoden gestartet
-      //readJson();
       readArmyOfJSON(fileToDisplay);
       setState(() {
         isLoading = false;
@@ -65,437 +64,7 @@ class _ArmyImport extends State<ArmyImport> {
     }
   }
 
-  Future<void> readJson() async {
-    widget.settings.army.unitList.clear();
 
-    final String response = await fileToDisplay!.readAsString();
-    //final String response = await rootBundle.loadString('assets/import.json');
-    final data = await json.decode(response);
-    //final data = await jsonDecode(response) ;
-
-    setState(() {
-      Roster roster = Roster("id", "name");
-      Map<String, dynamic> rosterMap = data["roster"];
-
-      roster.name = rosterMap["name"];
-      roster.id = rosterMap["id"];
-      roster.costDynamic = rosterMap["costs"];
-      roster.costLimitsDynamic = rosterMap["costLimits"];
-      roster.forcesDynamic = rosterMap["forces"];
-
-      //roster -> forces
-      for (Map<String, dynamic> forcesMapJSON in roster.forcesDynamic) {
-        Forces forces = Forces(forcesMapJSON["id"], forcesMapJSON["name"]);
-
-        if (forcesMapJSON.containsKey("forces")) {
-          forces.forcesTwoDynamic = forcesMapJSON["forces"];
-        }
-        if (forcesMapJSON.containsKey("selections")) {
-          forces.selectionsDynamic = forcesMapJSON["selections"];
-        }
-
-        //roster -> forces -> forcesTwo
-        for (Map<String, dynamic> forcesTwoMapJSON in forces.forcesTwoDynamic) {
-          ForcesTwo forcesTwo = ForcesTwo(
-            forcesTwoMapJSON["id"],
-            forcesTwoMapJSON["name"],
-          );
-
-          if (forcesTwoMapJSON.containsKey("selections")) {
-            forcesTwo.selectionsDynamic = forcesTwoMapJSON["selections"];
-          }
-
-          //roster -> forces -> forcesTwo -> selections
-          for (Map<String, dynamic> selectionMapJSON
-              in forcesTwo.selectionsDynamic) {
-            Selections select = Selections(
-              selectionMapJSON["id"],
-              selectionMapJSON["name"],
-            );
-
-            if (selectionMapJSON.containsKey("profiles")) {
-              select.profilesDynamic = selectionMapJSON["profiles"];
-            }
-            if (selectionMapJSON.containsKey("selections")) {
-              select.selectionsDynamic = selectionMapJSON["selections"];
-            }
-            if (selectionMapJSON.containsKey("type")) {
-              select.type = selectionMapJSON["type"];
-            }
-
-            if (select.type.contains("unit")) {
-              Unit unit = Unit(select.name);
-              unit.id = select.id;
-
-              //Ab hier den Profiles Pfad paralell zu Selections bauen
-              //roster -> forces -> forcesTwo -> selections -> profiles
-              for (Map<String, dynamic> unitMapJSON in select.profilesDynamic) {
-                Profiles profile = Profiles(
-                  unitMapJSON["id"],
-                  unitMapJSON["name"],
-                );
-
-                if (unitMapJSON.containsKey("characteristics")) {
-                  profile.characteristics = unitMapJSON["characteristics"];
-                }
-                if (unitMapJSON.containsKey("typeName")) {
-                  profile.typeName = unitMapJSON["typeName"];
-                }
-                if (unitMapJSON.containsKey("attributes")) {
-                  profile.attributes = unitMapJSON["attributes"];
-                }
-
-                //Characteristics für Units
-                for (Map<String, dynamic> charMapJSON
-                    in profile.characteristics) {
-                  if (charMapJSON["name"].contains("Move")) {
-                    unit.move = charMapJSON["\$text"].toString();
-                    print("");
-                    print("ACHTUNG ACHTUNG");
-                    print(
-                      "Hier der Move der Unit ausgegeben: " +
-                          charMapJSON["\$text"].toString(),
-                    );
-                    print("DURCHSAGE BEENDET");
-                    print("");
-                  }
-                  if (charMapJSON["name"].contains("Health")) {
-                    unit.health = charMapJSON["\$text"].toString();
-                  }
-                  if (charMapJSON["name"].contains("Save")) {
-                    unit.save = charMapJSON["\$text"].toString();
-                  }
-                  if (charMapJSON["name"].contains("Control")) {
-                    unit.control = charMapJSON["\$text"].toString();
-                  }
-                }
-
-                //--------------------------------------------------------------------
-
-                if (profile.typeName.contains("Ability")) {
-                  Ability ability = Ability(profile.name);
-                  ability.id = profile.id;
-                  ability.typeName = profile.typeName;
-
-                  ////Characteristics für Abilitys
-                  for (Map<String, dynamic> charMapJSON
-                      in profile.characteristics) {
-                    if (charMapJSON["name"].contains("Timing")) {
-                      ability.timing = charMapJSON["\$text"].toString();
-                    }
-                    if (charMapJSON["name"].contains("Declare")) {
-                      ability.declare = charMapJSON["\$text"].toString();
-                    }
-                    if (charMapJSON["name"].contains("Effect")) {
-                      ability.effect = charMapJSON["\$text"].toString();
-                    }
-                    if (charMapJSON["name"].contains("Keywords")) {
-                      ability.keywords = charMapJSON["\$text"].toString();
-                    }
-                    if (charMapJSON["name"].contains("Used By")) {
-                      ability.usedBy = charMapJSON["\$text"].toString();
-                    }
-                  }
-                  ////Attributes für Abilitys
-                  for (Map<String, dynamic> attributesMapJSON
-                      in profile.attributes) {
-                    if (attributesMapJSON["name"].contains("Color")) {
-                      ability.color = attributesMapJSON["\$text"].toString();
-                    }
-                  }
-                  unit.abilitys.add(ability);
-                }
-              }
-
-              //Ab hier den Selections Pfad paralell zu Profiles bauen
-              //roster -> forces -> forcesTwo -> selections -> selections
-              for (Map<String, dynamic> selectionMapTwoJSON
-                  in select.selectionsDynamic) {
-                Selections selectTwo = Selections(
-                  selectionMapTwoJSON["id"],
-                  selectionMapTwoJSON["name"],
-                );
-
-                if (selectionMapTwoJSON.containsKey("selections")) {
-                  selectTwo.selectionsDynamic =
-                      selectionMapTwoJSON["selections"];
-                }
-
-                if (selectionMapTwoJSON.containsKey("profiles")) {
-                  selectTwo.profilesDynamic = selectionMapTwoJSON["profiles"];
-                }
-
-                //roster -> forces -> forcesTwo -> selections -> selectTwo -> profiles
-                for (Map<String, dynamic> profileMapJSON
-                    in selectTwo.profilesDynamic) {
-                  Profiles profile = Profiles(
-                    profileMapJSON["id"],
-                    profileMapJSON["name"],
-                  );
-
-                  if (profileMapJSON.containsKey("characteristics")) {
-                    profile.characteristics = profileMapJSON["characteristics"];
-                  }
-                  if (profileMapJSON.containsKey("typeName")) {
-                    profile.typeName = profileMapJSON["typeName"];
-                  }
-                  if (profileMapJSON.containsKey("attributes")) {
-                    profile.attributes = profileMapJSON["attributes"];
-                  }
-
-                  if (profile.typeName.contains("Ability")) {
-                    Ability ability = Ability(profile.name);
-                    ability.id = profile.id;
-                    ability.typeName = profile.typeName;
-
-                    ////Characteristics für Abilitys
-                    for (Map<String, dynamic> charMapJSON
-                        in profile.characteristics) {
-                      if (charMapJSON["name"].contains("Timing")) {
-                        ability.timing = charMapJSON["\$text"].toString();
-                      }
-                      if (charMapJSON["name"].contains("Declare")) {
-                        ability.declare = charMapJSON["\$text"].toString();
-                      }
-                      if (charMapJSON["name"].contains("Effect")) {
-                        ability.effect = charMapJSON["\$text"].toString();
-                      }
-                      if (charMapJSON["name"].contains("Keywords")) {
-                        ability.keywords = charMapJSON["\$text"].toString();
-                      }
-                      if (charMapJSON["name"].contains("Used By")) {
-                        ability.usedBy = charMapJSON["\$text"].toString();
-                      }
-                    }
-                    ////Attributes für Abilitys
-                    for (Map<String, dynamic> attributesMapJSON
-                        in profile.attributes) {
-                      if (attributesMapJSON["name"].contains("Color")) {
-                        ability.color = attributesMapJSON["\$text"].toString();
-                      }
-                    }
-                    unit.abilitys.add(ability);
-                  }
-                }
-
-                //roster -> forces -> forcesTwo -> selections -> selectTwo -> selectThree
-                for (Map<String, dynamic> selectionThreeMapJSON
-                    in selectTwo.selectionsDynamic) {
-                  Selections selectThree = Selections(
-                    selectionThreeMapJSON["id"],
-                    selectionThreeMapJSON["name"],
-                  );
-
-                  if (selectionThreeMapJSON.containsKey("profiles")) {
-                    selectThree.profilesDynamic =
-                        selectionThreeMapJSON["profiles"];
-                  }
-
-                  //roster -> forces -> forcesTwo -> selections -> selections -> selections -> profiles
-                  for (Map<String, dynamic> profileMapJSON
-                      in selectThree.profilesDynamic) {
-                    Profiles profile = Profiles(
-                      profileMapJSON["id"],
-                      profileMapJSON["name"],
-                    );
-
-                    if (profileMapJSON.containsKey("characteristics")) {
-                      profile.characteristics =
-                          profileMapJSON["characteristics"];
-                    }
-                    if (profileMapJSON.containsKey("typeName")) {
-                      profile.typeName = profileMapJSON["typeName"];
-                    }
-
-                    if (profileMapJSON["typeName"].toString().contains(
-                      "Weapon",
-                    )) {
-                      Weapon weapon = Weapon(
-                        profileMapJSON["id"],
-                        profileMapJSON["name"],
-                      );
-
-                      //roster -> forces -> forcesTwo -> selections -> selections -> selections -> profiles -> characteristics
-                      for (Map<String, dynamic> weaponMapJSON
-                          in profile.characteristics) {
-                        if (weaponMapJSON["name"].contains("Atk")) {
-                          weapon.attack = weaponMapJSON["\$text"].toString();
-                        }
-                        if (weaponMapJSON["name"].contains("Hit")) {
-                          weapon.hit = weaponMapJSON["\$text"].toString();
-                        }
-                        if (weaponMapJSON["name"].contains("Wnd")) {
-                          weapon.wound = weaponMapJSON["\$text"].toString();
-                        }
-                        if (weaponMapJSON["name"].contains("Rnd")) {
-                          weapon.rend = weaponMapJSON["\$text"].toString();
-                        }
-                        if (weaponMapJSON["name"].contains("Dmg")) {
-                          weapon.damage = weaponMapJSON["\$text"].toString();
-                        }
-                        if (weaponMapJSON["name"].contains("Ability")) {
-                          weapon.ability = weaponMapJSON["\$text"].toString();
-                        }
-                      }
-                      unit.weapons.add(weapon);
-                    }
-                  }
-                }
-              }
-              widget.settings.army.unitList.add(unit);
-            }
-          }
-        }
-
-        //roster -> forces -> selections
-        for (Map<String, dynamic> selectionMapJSON
-            in forces.selectionsDynamic) {
-          Selections select = Selections(
-            selectionMapJSON["id"],
-            selectionMapJSON["name"],
-          );
-
-          if (selectionMapJSON.containsKey("profiles")) {
-            select.profilesDynamic = selectionMapJSON["profiles"];
-          }
-          if (selectionMapJSON.containsKey("categories")) {
-            select.categoriesDynamic = selectionMapJSON["categories"];
-          }
-          if (selectionMapJSON.containsKey("selections")) {
-            select.selectionsDynamic = selectionMapJSON["selections"];
-          }
-          if (selectionMapJSON.containsKey("type")) {
-            select.type = selectionMapJSON["type"];
-          }
-          if (selectionMapJSON.containsKey("rules")) {
-            select.rulesDynamic = selectionMapJSON["rules"];
-          }
-
-          if (select.name.contains("Battle Trait")) {
-            BattleTraits battleTrait = BattleTraits();
-
-            //roster -> forces -> selections -> profiles
-            for (Map<String, dynamic> profilesMapJSON
-                in select.profilesDynamic) {
-              Profiles profile = Profiles(
-                profilesMapJSON["id"],
-                profilesMapJSON["name"],
-              );
-
-              if (profilesMapJSON.containsKey("characteristics")) {
-                profile.characteristics = profilesMapJSON["characteristics"];
-              }
-              if (profilesMapJSON.containsKey("attributes")) {
-                profile.attributes = profilesMapJSON["attributes"];
-              }
-              if (profilesMapJSON.containsKey("typeName")) {
-                profile.typeName = profilesMapJSON["typeName"];
-              }
-
-              if (profile.typeName.contains("Ability")) {
-                Ability ability = Ability(profile.name);
-                ability.id = profile.id;
-                ability.typeName = profile.typeName;
-
-                ////Characteristics für Abilitys
-                for (Map<String, dynamic> charMapJSON
-                    in profile.characteristics) {
-                  if (charMapJSON["name"].contains("Timing")) {
-                    ability.timing = charMapJSON["\$text"].toString();
-                  }
-                  if (charMapJSON["name"].contains("Declare")) {
-                    ability.declare = charMapJSON["\$text"].toString();
-                  }
-                  if (charMapJSON["name"].contains("Effect")) {
-                    ability.effect = charMapJSON["\$text"].toString();
-                  }
-                  if (charMapJSON["name"].contains("Keywords")) {
-                    ability.keywords = charMapJSON["\$text"].toString();
-                  }
-                  if (charMapJSON["name"].contains("Used By")) {
-                    ability.usedBy = charMapJSON["\$text"].toString();
-                  }
-                }
-                ////Attributes für Abilitys
-                for (Map<String, dynamic> attributesMapJSON
-                    in profile.attributes) {
-                  if (attributesMapJSON["name"].contains("Color")) {
-                    ability.color = attributesMapJSON["\$text"].toString();
-                  }
-                }
-                battleTrait.abilitys.add(ability);
-                print(
-                  "Battle-Trait Ausgabe: " +
-                      battleTrait.abilitys.length.toString(),
-                );
-              }
-            }
-            widget.settings.army.battleTraitsList.add(battleTrait);
-          }
-
-          //TODO hier demnächst Manifestation ableiten und Manifestation Object erstellen, befüllen und in Army abspeichern
-          //roster -> forces -> selections -> selectionsTwo
-          for (Map<String, dynamic> selectionMapTwoJSON
-              in select.selectionsDynamic) {
-            Selections selectTwo = Selections(
-              selectionMapTwoJSON["id"],
-              selectionMapTwoJSON["name"],
-            );
-
-            if (selectionMapTwoJSON.containsKey("categories")) {
-              selectTwo.categoriesDynamic = selectionMapTwoJSON["categories"];
-            }
-
-            if (selectionMapTwoJSON.containsKey("profiles")) {
-              selectTwo.profilesDynamic = selectionMapTwoJSON["profiles"];
-            }
-          }
-        }
-      }
-
-      for (Unit unit in widget.settings.army.unitList) {
-        print("-------------------------------------------------------------");
-        print("");
-        print("Unit aus dem großen neuen Decode Block:");
-        print("Name der Unit: " + unit.name);
-        print("Move: " + unit.move);
-        print("Health: " + unit.health);
-        print("Save: " + unit.save);
-        print("Control: " + unit.control);
-        print("-------------");
-        print("Fähigkeiten:");
-
-        for (Ability abi in unit.abilitys) {
-          print("Name: " + abi.name);
-          print("Typ: " + abi.typeName);
-          print("Effekt: " + abi.effect);
-          print("Timing: " + abi.timing);
-          print("Farbe: " + abi.color);
-          print("-----");
-        }
-        print("-------------");
-        print("Waffen:");
-        for (Weapon weap in unit.weapons) {
-          print("Name: " + weap.name);
-          print("Typ: " + weap.typeName);
-          print("Anzahl Attacken: " + weap.attack);
-          print("Treffen: " + weap.hit);
-          print("Verwunden: " + weap.wound);
-          print("Durchschlag: " + weap.rend);
-          print("Schaden pro Würfel: " + weap.damage);
-          print("Fähigkeit: " + weap.ability);
-          print("------------------");
-        }
-
-        print("-------------------------------------------------------------");
-        print("");
-      }
-
-      print(
-        "Anzahl der Units in der Unit-List: ${widget.settings.army.unitList.length}",
-      );
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -535,7 +104,7 @@ class _ArmyImport extends State<ArmyImport> {
                 : */
             ElevatedButton(
               onPressed: () {
-                readJson();
+                readArmyOfJSON(File("./assets/import.json"));
               },
               child: Center(child: Text("Load Json")),
             ),
@@ -597,6 +166,11 @@ class _ArmyImport extends State<ArmyImport> {
       if (forcesMapJSON.containsKey("forces")) {
         for (Map<String, dynamic> entry in forcesMapJSON["forces"]) {
           forces.forcesTwoDynamic.add(entry);
+        }
+      }
+      if (forcesMapJSON.containsKey("selections")) {
+        for (Map<String, dynamic> entry in forcesMapJSON["selections"]) {
+          forces.selectionsDynamic.add(entry);
         }
       }
       forcesList.add(forces);
@@ -700,8 +274,7 @@ class _ArmyImport extends State<ArmyImport> {
 
     //TODO Ab hier BattleTraits etc neu heraussuchen, vermutlich müssen neue Listen befüllt werden, in denen die Infos drinstecken
 
-    //TODO Bis hier den JSON Export sinnvoll mit Ifs in Listen befüllt -> weniger Verschachtelung von for Schleifen
-
+    List<Selections> selectionsList = [];
     //roster -> forces -> selections
     for (Forces forces in forcesList) {
       for (Map<String, dynamic> selectionMapJSON in forces.selectionsDynamic) {
@@ -711,83 +284,37 @@ class _ArmyImport extends State<ArmyImport> {
         );
 
         if (selectionMapJSON.containsKey("profiles")) {
-          select.profilesDynamic = selectionMapJSON["profiles"];
+          for (Map<String, dynamic> entry in selectionMapJSON["profiles"]) {
+            select.profilesDynamic.add(entry);
+          }
         }
         if (selectionMapJSON.containsKey("categories")) {
-          select.categoriesDynamic = selectionMapJSON["categories"];
+          for (Map<String, dynamic> entry in selectionMapJSON["categories"]) {
+            select.categoriesDynamic.add(entry);
+          }
         }
         if (selectionMapJSON.containsKey("selections")) {
-          select.selectionsDynamic = selectionMapJSON["selections"];
+          for (Map<String, dynamic> entry in selectionMapJSON["selections"]) {
+            select.selectionsDynamic.add(entry);
+          }
         }
         if (selectionMapJSON.containsKey("type")) {
           select.type = selectionMapJSON["type"];
         }
         if (selectionMapJSON.containsKey("rules")) {
-          select.rulesDynamic = selectionMapJSON["rules"];
-        }
-
-        if (select.name.contains("Battle Trait")) {
-          BattleTraits battleTrait = BattleTraits();
-
-          //roster -> forces -> selections -> profiles
-          for (Map<String, dynamic> profilesMapJSON in select.profilesDynamic) {
-            Profiles profile = Profiles(
-              profilesMapJSON["id"],
-              profilesMapJSON["name"],
-            );
-
-            if (profilesMapJSON.containsKey("characteristics")) {
-              profile.characteristics = profilesMapJSON["characteristics"];
-            }
-            if (profilesMapJSON.containsKey("attributes")) {
-              profile.attributes = profilesMapJSON["attributes"];
-            }
-            if (profilesMapJSON.containsKey("typeName")) {
-              profile.typeName = profilesMapJSON["typeName"];
-            }
-
-            if (profile.typeName.contains("Ability")) {
-              Ability ability = Ability(profile.name);
-              ability.id = profile.id;
-              ability.typeName = profile.typeName;
-
-              ////Characteristics für Abilitys
-              for (Map<String, dynamic> charMapJSON
-                  in profile.characteristics) {
-                if (charMapJSON["name"].contains("Timing")) {
-                  ability.timing = charMapJSON["\$text"].toString();
-                }
-                if (charMapJSON["name"].contains("Declare")) {
-                  ability.declare = charMapJSON["\$text"].toString();
-                }
-                if (charMapJSON["name"].contains("Effect")) {
-                  ability.effect = charMapJSON["\$text"].toString();
-                }
-                if (charMapJSON["name"].contains("Keywords")) {
-                  ability.keywords = charMapJSON["\$text"].toString();
-                }
-                if (charMapJSON["name"].contains("Used By")) {
-                  ability.usedBy = charMapJSON["\$text"].toString();
-                }
-              }
-              ////Attributes für Abilitys
-              for (Map<String, dynamic> attributesMapJSON
-                  in profile.attributes) {
-                if (attributesMapJSON["name"].contains("Color")) {
-                  ability.color = attributesMapJSON["\$text"].toString();
-                }
-              }
-              battleTrait.abilitys.add(ability);
-              print(
-                "Battle-Trait Ausgabe: " +
-                    battleTrait.abilitys.length.toString(),
-              );
-            }
+          for (Map<String, dynamic> entry in selectionMapJSON["rules"]) {
+            select.rulesDynamic.add(entry);
           }
-          widget.settings.army.battleTraitsList.add(battleTrait);
+        }
+        selectionsList.add(select);
+      }
+
+      for (Selections select in selectionsList) {
+        if (select.name.contains("Battle Trait")) {
+          readBattleTrait(select);
         }
 
-        //TODO hier demnächst Manifestation ableiten und Manifestation Object erstellen, befüllen und in Army abspeichern
+        List<Selections> selectionsTwoList = [];
         //roster -> forces -> selections -> selectionsTwo
         for (Map<String, dynamic> selectionMapTwoJSON
             in select.selectionsDynamic) {
@@ -797,15 +324,31 @@ class _ArmyImport extends State<ArmyImport> {
           );
 
           if (selectionMapTwoJSON.containsKey("categories")) {
-            selectTwo.categoriesDynamic = selectionMapTwoJSON["categories"];
+            for (Map<String, dynamic> entry in selectionMapTwoJSON["categories"]) {
+              selectTwo.categoriesDynamic.add(entry);
+            }
           }
 
           if (selectionMapTwoJSON.containsKey("profiles")) {
-            selectTwo.profilesDynamic = selectionMapTwoJSON["profiles"];
+            for (Map<String, dynamic> entry in selectionMapTwoJSON["profiles"]) {
+              selectTwo.profilesDynamic.add(entry);
+            }
+          }
+
+          if (selectionMapTwoJSON.containsKey("type")) {
+            selectTwo.type = selectionMapTwoJSON["type"];
+          }
+
+          selectionsTwoList.add(selectTwo);
+        }
+        for (Selections selectTwo in selectionsTwoList) {
+          if (selectTwo.type.contains("unit")) {
+            widget.settings.army.unitList.add(readUnitOfJSON(selectTwo));
           }
         }
       }
     }
+    //TODO Bis hier den JSON Export sinnvoll mit Ifs in Listen befüllt -> weniger Verschachtelung von for Schleifen
   }
 
   Unit readUnitOfJSON(Selections mySelection) {
@@ -862,12 +405,20 @@ class _ArmyImport extends State<ArmyImport> {
         if (charMapJSON["name"].contains("Control")) {
           unit.control = charMapJSON["\$text"].toString();
         }
+        if (charMapJSON["name"].contains("Banishment")) {
+          unit.banishment = charMapJSON["\$text"].toString();
+        }
       }
 
       //--------------------------------------------------------------------
       if (profile.typeName.contains("Ability")) {
         bool abilityAlreadyAdded = false;
-        unit = readAbilityOfJSON(unit, profile, abilityAlreadyAdded);
+        unit = readUnitAbilityOfJSON(unit, profile, abilityAlreadyAdded);
+      }
+
+      if (profile.typeName.contains("Weapon")) {
+        bool weaponNew = true;
+        unit = readWeaponJSON(unit, profile, weaponNew);
       }
 
       List<Selections> selectTwoList = [];
@@ -923,7 +474,7 @@ class _ArmyImport extends State<ArmyImport> {
           bool abilityAlreadyAdded = false;
           if (profile.typeName.contains("Ability")) {
             //unit = readAbilityOfJSON(unit, profile);
-            unit = readAbilityOfJSON(unit, profile, abilityAlreadyAdded);
+            unit = readUnitAbilityOfJSON(unit, profile, abilityAlreadyAdded);
           }
         }
 
@@ -1004,7 +555,7 @@ class _ArmyImport extends State<ArmyImport> {
             bool abilityAlreadyAdded = false;
             if (profile.typeName.contains("Ability")) {
               //unit = readAbilityOfJSON(unit, profile);
-              unit = readAbilityOfJSON(unit, profile, abilityAlreadyAdded);
+              unit = readUnitAbilityOfJSON(unit, profile, abilityAlreadyAdded);
             }
           }
         }
@@ -1013,7 +564,7 @@ class _ArmyImport extends State<ArmyImport> {
     return unit;
   }
 
-  Unit readAbilityOfJSON(Unit unit, Profiles profile, bool abilityAlreadyAdded) {
+  Unit readUnitAbilityOfJSON(Unit unit, Profiles profile, bool abilityAlreadyAdded) {
     //Unit readAbilityOfJSON(Unit unit, Profiles profile) {
     Ability ability = Ability(profile.name);
     ability.id = profile.id;
@@ -1057,12 +608,47 @@ class _ArmyImport extends State<ArmyImport> {
     return unit;
   }
 
+  Ability readAbilityOfJSON(Profiles profile) {
+    Ability ability = Ability(profile.name);
+    ability.id = profile.id;
+    ability.typeName = profile.typeName;
+
+    ////Characteristics für Abilitys
+    for (Map<String, dynamic> charMapJSON in profile.characteristics) {
+      if (charMapJSON["name"].contains("Timing")) {
+        ability.timing = charMapJSON["\$text"].toString();
+      }
+      if (charMapJSON["name"].contains("Declare")) {
+        ability.declare = charMapJSON["\$text"].toString();
+      }
+      if (charMapJSON["name"].contains("Effect")) {
+        ability.effect = charMapJSON["\$text"].toString();
+      }
+      if (charMapJSON["name"].contains("Keywords")) {
+        ability.keywords = charMapJSON["\$text"].toString();
+      }
+      if (charMapJSON["name"].contains("Used By")) {
+        ability.usedBy = charMapJSON["\$text"].toString();
+      }
+    }
+    ////Attributes für Abilitys
+    for (Map<String, dynamic> attributesMapJSON in profile.attributes) {
+      if (attributesMapJSON["name"].contains("Color")) {
+        ability.color = attributesMapJSON["\$text"].toString();
+      }
+    }
+    return ability;
+  }
+
   Unit readWeaponJSON(Unit unit, Profiles profile, bool weaponNew) {
     Weapon weapon = Weapon(profile.id, profile.name,);
 
     //roster -> forces -> forcesTwo -> selections -> selections -> selections -> profiles -> characteristics
     for (Map<String, dynamic> weaponMapJSON
     in profile.characteristics) {
+      if (weaponMapJSON["name"].contains("Rng")) {
+        weapon.range = weaponMapJSON["\$text"].toString();
+      }
       if (weaponMapJSON["name"].contains("Atk")) {
         weapon.attack = weaponMapJSON["\$text"].toString();
       }
@@ -1091,5 +677,38 @@ class _ArmyImport extends State<ArmyImport> {
       unit.weapons.add(weapon);
     }
     return unit;
+  }
+
+  void readBattleTrait(Selections select) {
+    BattleTraits battleTrait = BattleTraits();
+
+    //roster -> forces -> selections -> profiles
+    for (Map<String, dynamic> profilesMapJSON in select.profilesDynamic) {
+      Profiles profile = Profiles(
+        profilesMapJSON["id"],
+        profilesMapJSON["name"],
+      );
+
+      if (profilesMapJSON.containsKey("characteristics")) {
+        profile.characteristics = profilesMapJSON["characteristics"];
+      }
+      if (profilesMapJSON.containsKey("attributes")) {
+        profile.attributes = profilesMapJSON["attributes"];
+      }
+      if (profilesMapJSON.containsKey("typeName")) {
+        profile.typeName = profilesMapJSON["typeName"];
+      }
+
+      if (profile.typeName.contains("Ability")) {
+        Ability ability = readAbilityOfJSON(profile);
+
+        battleTrait.abilitys.add(ability);
+        print(
+          "Battle-Trait Ausgabe: " +
+              battleTrait.abilitys.length.toString(),
+        );
+      }
+    }
+    widget.settings.army.battleTraitsList.add(battleTrait);
   }
 }

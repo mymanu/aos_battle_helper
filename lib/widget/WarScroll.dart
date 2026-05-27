@@ -220,7 +220,8 @@ class _WarScroll extends State<WarScroll> {
                               child: Column(
                                 children: [
                                   Text(
-                                    widget.unit.control,
+                                    widget.unit.banishment.contains("-") ?
+                                    widget.unit.control : widget.unit.banishment,
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,
@@ -228,7 +229,10 @@ class _WarScroll extends State<WarScroll> {
                                   ),
                                   SizedBox(width: 10),
                                   Text(
-                                    "Control",
+                                    widget.unit.banishment
+                                        .contains("-")
+                                        ? "Control"
+                                        : "Banish",
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,
