@@ -637,6 +637,11 @@ class _ArmyImport extends State<ArmyImport> {
             currentSelections.selectionsDynamic.add(entry);
           }
         }
+        if (selectionMapJSON.containsKey("categories")) {
+          for (Map<String, dynamic> entry in selectionMapJSON["categories"]) {
+            currentSelections.categoriesDynamic.add(entry);
+          }
+        }
         if (selectionMapJSON.containsKey("type")) {
           currentSelections.type = selectionMapJSON["type"];
         }
@@ -827,21 +832,24 @@ class _ArmyImport extends State<ArmyImport> {
       profileList.add(profile);
     }
 
-    //TODO Bis hier den JSON Export sinnvoll mit Ifs in Listen befüllt -> weniger Verschachtelung von for Schleifen
+    //Keywords befüllen, beim ersten wird der "-" ersetzt, weitere ergänzt
+    bool firstKeyword = true;
+    for (Map<String, dynamic> categoriesMapJSON in mySelection.categoriesDynamic) {
+      if (categoriesMapJSON.containsKey("name")) {
+        if(firstKeyword) {
+          unit.keywords = categoriesMapJSON["name"];
+          firstKeyword = false;
+        } else {
+          unit.keywords = unit.keywords + ", " + categoriesMapJSON["name"];
+        }
+      }
+    }
 
     //Characteristics für Units
     for (Profiles profile in profileList) {
       for (Map<String, dynamic> charMapJSON in profile.characteristics) {
         if (charMapJSON["name"].contains("Move")) {
           unit.move = charMapJSON["\$text"].toString();
-          print("");
-          print("ACHTUNG ACHTUNG");
-          print(
-            "Hier der Move der Unit ausgegeben: " +
-                charMapJSON["\$text"].toString(),
-          );
-          print("DURCHSAGE BEENDET");
-          print("");
         }
         if (charMapJSON["name"].contains("Health")) {
           unit.health = charMapJSON["\$text"].toString();
@@ -855,39 +863,14 @@ class _ArmyImport extends State<ArmyImport> {
       }
 
       //--------------------------------------------------------------------
-
+      //bool abilityAlreadyAdded = false;
       if (profile.typeName.contains("Ability")) {
-        Ability ability = Ability(profile.name);
-        ability.id = profile.id;
-        ability.typeName = profile.typeName;
-
-        ////Characteristics für Abilitys
-        for (Map<String, dynamic> charMapJSON in profile.characteristics) {
-          if (charMapJSON["name"].contains("Timing")) {
-            ability.timing = charMapJSON["\$text"].toString();
-          }
-          if (charMapJSON["name"].contains("Declare")) {
-            ability.declare = charMapJSON["\$text"].toString();
-          }
-          if (charMapJSON["name"].contains("Effect")) {
-            ability.effect = charMapJSON["\$text"].toString();
-          }
-          if (charMapJSON["name"].contains("Keywords")) {
-            ability.keywords = charMapJSON["\$text"].toString();
-          }
-          if (charMapJSON["name"].contains("Used By")) {
-            ability.usedBy = charMapJSON["\$text"].toString();
-          }
-        }
-        ////Attributes für Abilitys
-        for (Map<String, dynamic> attributesMapJSON in profile.attributes) {
-          if (attributesMapJSON["name"].contains("Color")) {
-            ability.color = attributesMapJSON["\$text"].toString();
-          }
-        }
-        unit.abilitys.add(ability);
+        //unit = readAbilityOfJSON(unit, profile, abilityAlreadyAdded);
+        unit = readAbilityOfJSON(unit, profile);
       }
 
+      //TODO Bis hier den JSON Export sinnvoll mit Ifs in Listen befüllt -> weniger Verschachtelung von for Schleifen
+/*
       //Ab hier den Selections Pfad paralell zu Profiles bauen
       //roster -> forces -> forcesTwo -> selections -> selections
       for (Map<String, dynamic> selectionMapTwoJSON
@@ -1022,9 +1005,52 @@ class _ArmyImport extends State<ArmyImport> {
             }
           }
         }
-      }
+      } */
     }
     widget.settings.army.unitList.add(unit);
+    return unit;
+  }
+
+  //Unit readAbilityOfJSON(Unit unit, Profiles profile, bool abilityAlreadyAdded) {
+  Unit readAbilityOfJSON(Unit unit, Profiles profile) {
+    Ability ability = Ability(profile.name);
+    ability.id = profile.id;
+    ability.typeName = profile.typeName;
+
+    ////Characteristics für Abilitys
+    for (Map<String, dynamic> charMapJSON in profile.characteristics) {
+      if (charMapJSON["name"].contains("Timing")) {
+        ability.timing = charMapJSON["\$text"].toString();
+      }
+      if (charMapJSON["name"].contains("Declare")) {
+        ability.declare = charMapJSON["\$text"].toString();
+      }
+      if (charMapJSON["name"].contains("Effect")) {
+        ability.effect = charMapJSON["\$text"].toString();
+      }
+      if (charMapJSON["name"].contains("Keywords")) {
+        ability.keywords = charMapJSON["\$text"].toString();
+      }
+      if (charMapJSON["name"].contains("Used By")) {
+        ability.usedBy = charMapJSON["\$text"].toString();
+      }
+    }
+    ////Attributes für Abilitys
+    for (Map<String, dynamic> attributesMapJSON in profile.attributes) {
+      if (attributesMapJSON["name"].contains("Color")) {
+        ability.color = attributesMapJSON["\$text"].toString();
+      }
+    }
+    /*
+    for(Ability abi in unit.abilitys) {
+      if(abi.id == ability.id){
+        abilityAlreadyAdded = true;
+      }
+    }
+    if(!abilityAlreadyAdded){
+      unit.abilitys.add(ability);
+    }*/
+    unit.abilitys.add(ability);
     return unit;
   }
 }
