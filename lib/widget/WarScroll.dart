@@ -281,8 +281,8 @@ class _WarScroll extends State<WarScroll> {
                             )
                           : Text(""),
                       //2. Row für Schlüsselworte
-                      Positioned(bottom: 0,left: 330, child: Text("Keywords:")),
-                      Positioned(bottom: 0, left: 520, child: Text(widget.unit.keywords)),
+                      Positioned(bottom: 0,left: 130, child: Text("Keywords:")),
+                      Positioned(bottom: 0, left: 320, child: Text(widget.unit.keywords)),
                     ],
                   ),
                 ),

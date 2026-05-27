@@ -892,6 +892,13 @@ class _ArmyImport extends State<ArmyImport> {
             selectTwo.profilesDynamic.add(entry);
           }
         }
+
+        if (selectionMapTwoJSON.containsKey("categories")) {
+          for (Map<String,
+              dynamic> entry in selectionMapTwoJSON["categories"]) {
+            selectTwo.categoriesDynamic.add(entry);
+          }
+        }
         selectTwoList.add(selectTwo);
       }
 
@@ -920,6 +927,35 @@ class _ArmyImport extends State<ArmyImport> {
           }
         }
 
+        for(Map<String, dynamic> catMap in selectTwo.categoriesDynamic) {
+          if(catMap.containsKey("name")) {
+            if(catMap["name"].contains("WIZARD")) {
+              if(!unit.keywords.contains("WIZARD")) {
+                unit.keywords = unit.keywords + ", " + catMap["name"];
+              } else {
+                unit.keywords = unit.keywords.replaceAll("WIZARD(1)", catMap["name"]);
+                unit.keywords = unit.keywords.replaceAll("WIZARD (1)", catMap["name"]);
+                unit.keywords = unit.keywords.replaceAll("WIZARD(2)", catMap["name"]);
+                unit.keywords = unit.keywords.replaceAll("WIZARD (2)", catMap["name"]);
+                unit.keywords = unit.keywords.replaceAll("WIZARD(3)", catMap["name"]);
+                unit.keywords = unit.keywords.replaceAll("WIZARD (3)", catMap["name"]);
+              }
+            }
+            if(catMap["name"].contains("PRIEST")) {
+              if(!unit.keywords.contains("PRIEST")) {
+                unit.keywords = unit.keywords + ", " + catMap["name"];
+              } else {
+                unit.keywords = unit.keywords.replaceAll("PRIEST(1)", catMap["name"]);
+                unit.keywords = unit.keywords.replaceAll("PRIEST (1)", catMap["name"]);
+                unit.keywords = unit.keywords.replaceAll("PRIEST(2)", catMap["name"]);
+                unit.keywords = unit.keywords.replaceAll("PRIEST (2)", catMap["name"]);
+                unit.keywords = unit.keywords.replaceAll("PRIEST(3)", catMap["name"]);
+                unit.keywords = unit.keywords.replaceAll("PRIEST (3)", catMap["name"]);
+              }
+            }
+          }
+        }
+
         List<Selections> selectThreeList = [];
         //roster -> forces -> forcesTwo -> selections -> selectTwo -> selectThree
         for (Map<String, dynamic> selectionThreeMapJSON
@@ -940,6 +976,13 @@ class _ArmyImport extends State<ArmyImport> {
 
         //roster -> forces -> forcesTwo -> selections -> selections -> selections -> profiles
          for(Selections selectThree in selectThreeList) {
+           if(selectThree.name.contains("WIZARD") && !unit.keywords.contains("WIZARD")) {
+             unit.keywords = unit.keywords + ", " + selectThree.name;
+           }
+           if(selectThree.name.contains("PRIEST") && !unit.keywords.contains("PRIEST")) {
+             unit.keywords = unit.keywords + ", " + selectThree.name;
+           }
+
            bool weaponNew = true;
           for (Map<String, dynamic> profileMapJSON
               in selectThree.profilesDynamic) {
