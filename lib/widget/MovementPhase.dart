@@ -226,8 +226,8 @@ class _MovementPhase extends State<MovementPhase> {
                           spellsThisPhase[index].typeName.contains("Passive") ? Text(spellsThisPhase[index].typeName) : Text(spellsThisPhase[index].timing),
                           Text(spellsThisPhase[index].originUnit),
                           Text(""),
-                          spellsThisPhase[index].effect.contains("-") ?
-                          Text(spellsThisPhase[index].declare) : spellsThisPhase[index].declare.contains("-") ?
+                          spellsThisPhase[index].effect.contains("-1") ?
+                          Text(spellsThisPhase[index].declare) : spellsThisPhase[index].declare.contains("-1") ?
                           Text(spellsThisPhase[index].effect) :
                           Text(spellsThisPhase[index].declare + "\n\n" + spellsThisPhase[index].effect) ,
 
