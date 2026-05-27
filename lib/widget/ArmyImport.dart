@@ -566,7 +566,7 @@ class _ArmyImport extends State<ArmyImport> {
 
   Unit readUnitAbilityOfJSON(Unit unit, Profiles profile, bool abilityAlreadyAdded) {
     //Unit readAbilityOfJSON(Unit unit, Profiles profile) {
-    Ability ability = Ability(profile.name,"-","-","-","-");
+    Ability ability = Ability(profile.name,);
     ability.id = profile.id;
     ability.typeName = profile.typeName;
 
@@ -609,7 +609,7 @@ class _ArmyImport extends State<ArmyImport> {
   }
 
   Ability readAbilityOfJSON(Profiles profile) {
-    Ability ability = Ability(profile.name,"-","-","-","-");
+    Ability ability = Ability(profile.name,);
     ability.id = profile.id;
     ability.typeName = profile.typeName;
 

@@ -1,12 +1,12 @@
 class Ability {
-  Ability(this.name, this.timing, this.typeName, this.declare, this.effect);
+  Ability(this.name);
 
-  Ability.example(this.name, this.timing, this.details);
-  Ability.color(this.name, this.timing, this.color, this.details);
+  //Ability.example(this.name, this.timing, this.details);
+  //Ability.color(this.name, this.timing, this.color, this.details);
 
   /*
- Spell (this.title, this.phase, this.details);
-  Spell.trigger (this.title, this.phase, this.trigger, this.details);
+ typeName: Ability (Activated)
+ typeName: Ability (Passive)
   */
 
   //Profiles
