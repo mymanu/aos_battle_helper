@@ -810,6 +810,19 @@ class _ArmyImport extends State<ArmyImport> {
     Unit unit = Unit(mySelection.name);
     unit.id = mySelection.id;
 
+    //Keywords befüllen, beim ersten wird der "-" ersetzt, weitere ergänzt
+    bool firstKeyword = true;
+    for (Map<String, dynamic> categoriesMapJSON in mySelection.categoriesDynamic) {
+      if (categoriesMapJSON.containsKey("name")) {
+        if(firstKeyword) {
+          unit.keywords = categoriesMapJSON["name"];
+          firstKeyword = false;
+        } else {
+          unit.keywords = unit.keywords + ", " + categoriesMapJSON["name"];
+        }
+      }
+    }
+
     //Ab hier den Profiles Pfad paralell zu Selections bauen
     //roster -> forces -> forcesTwo -> selections -> profiles
     List<Profiles> profileList = [];
@@ -832,19 +845,6 @@ class _ArmyImport extends State<ArmyImport> {
       profileList.add(profile);
     }
 
-    //Keywords befüllen, beim ersten wird der "-" ersetzt, weitere ergänzt
-    bool firstKeyword = true;
-    for (Map<String, dynamic> categoriesMapJSON in mySelection.categoriesDynamic) {
-      if (categoriesMapJSON.containsKey("name")) {
-        if(firstKeyword) {
-          unit.keywords = categoriesMapJSON["name"];
-          firstKeyword = false;
-        } else {
-          unit.keywords = unit.keywords + ", " + categoriesMapJSON["name"];
-        }
-      }
-    }
-
     //Characteristics für Units
     for (Profiles profile in profileList) {
       for (Map<String, dynamic> charMapJSON in profile.characteristics) {
@@ -863,14 +863,11 @@ class _ArmyImport extends State<ArmyImport> {
       }
 
       //--------------------------------------------------------------------
-      //bool abilityAlreadyAdded = false;
       if (profile.typeName.contains("Ability")) {
-        //unit = readAbilityOfJSON(unit, profile, abilityAlreadyAdded);
         unit = readAbilityOfJSON(unit, profile);
       }
 
-      //TODO Bis hier den JSON Export sinnvoll mit Ifs in Listen befüllt -> weniger Verschachtelung von for Schleifen
-/*
+      List<Selections> selectTwoList = [];
       //Ab hier den Selections Pfad paralell zu Profiles bauen
       //roster -> forces -> forcesTwo -> selections -> selections
       for (Map<String, dynamic> selectionMapTwoJSON
@@ -881,13 +878,23 @@ class _ArmyImport extends State<ArmyImport> {
         );
 
         if (selectionMapTwoJSON.containsKey("selections")) {
-          selectTwo.selectionsDynamic = selectionMapTwoJSON["selections"];
+          for (Map<String,
+              dynamic> entry in selectionMapTwoJSON["selections"]) {
+            selectTwo.selectionsDynamic.add(entry);
+          }
         }
 
         if (selectionMapTwoJSON.containsKey("profiles")) {
-          selectTwo.profilesDynamic = selectionMapTwoJSON["profiles"];
+          for (Map<String, dynamic> entry in selectionMapTwoJSON["profiles"]) {
+            selectTwo.profilesDynamic.add(entry);
+          }
         }
+        selectTwoList.add(selectTwo);
+      }
 
+      //TODO doppeltes Obesessed with Violence muss von hier unten irgendwo kommen
+
+      for(Selections selectTwo in selectTwoList) {
         //roster -> forces -> forcesTwo -> selections -> selectTwo -> profiles
         for (Map<String, dynamic> profileMapJSON in selectTwo.profilesDynamic) {
           Profiles profile = Profiles(
@@ -906,37 +913,11 @@ class _ArmyImport extends State<ArmyImport> {
           }
 
           if (profile.typeName.contains("Ability")) {
-            Ability ability = Ability(profile.name);
-            ability.id = profile.id;
-            ability.typeName = profile.typeName;
-
-            ////Characteristics für Abilitys
-            for (Map<String, dynamic> charMapJSON in profile.characteristics) {
-              if (charMapJSON["name"].contains("Timing")) {
-                ability.timing = charMapJSON["\$text"].toString();
-              }
-              if (charMapJSON["name"].contains("Declare")) {
-                ability.declare = charMapJSON["\$text"].toString();
-              }
-              if (charMapJSON["name"].contains("Effect")) {
-                ability.effect = charMapJSON["\$text"].toString();
-              }
-              if (charMapJSON["name"].contains("Keywords")) {
-                ability.keywords = charMapJSON["\$text"].toString();
-              }
-              if (charMapJSON["name"].contains("Used By")) {
-                ability.usedBy = charMapJSON["\$text"].toString();
-              }
-            }
-            ////Attributes für Abilitys
-            for (Map<String, dynamic> attributesMapJSON in profile.attributes) {
-              if (attributesMapJSON["name"].contains("Color")) {
-                ability.color = attributesMapJSON["\$text"].toString();
-              }
-            }
-            unit.abilitys.add(ability);
+            unit = readAbilityOfJSON(unit, profile);
           }
         }
+
+        //TODO Bis hier den JSON Export sinnvoll mit Ifs in Listen befüllt -> weniger Verschachtelung von for Schleifen
 
         //roster -> forces -> forcesTwo -> selections -> selectTwo -> selectThree
         for (Map<String, dynamic> selectionThreeMapJSON
@@ -1005,13 +986,12 @@ class _ArmyImport extends State<ArmyImport> {
             }
           }
         }
-      } */
+      }
     }
     widget.settings.army.unitList.add(unit);
     return unit;
   }
 
-  //Unit readAbilityOfJSON(Unit unit, Profiles profile, bool abilityAlreadyAdded) {
   Unit readAbilityOfJSON(Unit unit, Profiles profile) {
     Ability ability = Ability(profile.name);
     ability.id = profile.id;
@@ -1041,15 +1021,6 @@ class _ArmyImport extends State<ArmyImport> {
         ability.color = attributesMapJSON["\$text"].toString();
       }
     }
-    /*
-    for(Ability abi in unit.abilitys) {
-      if(abi.id == ability.id){
-        abilityAlreadyAdded = true;
-      }
-    }
-    if(!abilityAlreadyAdded){
-      unit.abilitys.add(ability);
-    }*/
     unit.abilitys.add(ability);
     return unit;
   }
