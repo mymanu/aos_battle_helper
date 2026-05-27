@@ -13,7 +13,7 @@ class Settings {
   bool underdog = false;
   List<Ability> regimentAbilities = [];
   List<Ability> enhancements = [];
-  Ability chosenEnhancement = Ability("AbilityToChoose");
+  Ability chosenEnhancement = Ability("AbilityToChoose","-","-","-","-");
   List<String> chosenBattleTactics = ["masterThePaths", "restlessEnergy"];
 
   bool? firstBattleTacticAffray = false;

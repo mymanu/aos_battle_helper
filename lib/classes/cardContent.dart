@@ -1,6 +1,6 @@
 import 'ability.dart';
 import 'unit.dart';
-
+/*
 class CardContent {
   CardContent(this.isAbility);
 
@@ -9,3 +9,4 @@ class CardContent {
   bool erledigt = false;
   bool isAbility;
 }
+ */

@@ -1,5 +1,5 @@
 class Ability {
-  Ability(this.name);
+  Ability(this.name, this.timing, this.typeName, this.declare, this.effect);
 
   Ability.example(this.name, this.timing, this.details);
   Ability.color(this.name, this.timing, this.color, this.details);

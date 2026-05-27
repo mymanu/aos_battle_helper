@@ -11,8 +11,8 @@ class RegimentChooser extends StatefulWidget {
 
   Settings settings;
 
-  Ability? regimentAbility = Ability("chosen Regiment Ability");
-  Ability? enhancement = Ability("chosen Enhancement");
+  Ability? regimentAbility = Ability("chosen Regiment Ability","-","-","-","-");
+  Ability? enhancement = Ability("chosen Enhancement","-","-","-","-");
 
   @override
   _Regimentchooser createState() => _Regimentchooser();

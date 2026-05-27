@@ -1384,14 +1384,14 @@ class _SettingsWidget extends State<SettingsWidget> {
     //---------------------------------------------------------
     // Battle Traits
 
-    Ability ironjawzWaaagh = Ability("Ironjawz Waaagh!");
+    Ability ironjawzWaaagh = Ability("Ironjawz Waaagh!","-","-","-","-");
     ironjawzWaaagh.timing = "Once Per Turn (Army), Your Charge Phase";
     ironjawzWaaagh.keywords = "WAAAGH!";
     ironjawzWaaagh.color = "Orange";
     ironjawzWaaagh.details =
         "Declare: Pick a friendly Ironjawz Hero to be the target. You cannot pick the same Hero to be the target of this ability more than once per battle.\nEffect: For the rest of the turn, the following effects apply to friendly Ironjawz units while they are wholly within 18\" of the target:\n• Add 1 to charge rolls for those units.\n• Add 1 to the Attacks characteristic of those units’ melee weapons.";
 
-    Ability mightyDestroyers = Ability("Mighty Destroyers");
+    Ability mightyDestroyers = Ability("Mighty Destroyers","-","-","-","-");
     mightyDestroyers.timing = "Once Per Turn (Army), Any Hero Phase";
     mightyDestroyers.color = "Yellow";
     mightyDestroyers.details =
@@ -1405,7 +1405,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     //---------------------------------------------------------
     // Spell Lore
 
-    Ability summonFoot = Ability("Summon Foot of Gork");
+    Ability summonFoot = Ability("Summon Foot of Gork","-","-","-","-");
     summonFoot.timing = "Your Hero Phase";
     summonFoot.color = "Yellow";
     summonFoot.castingValue = "7";
@@ -1413,7 +1413,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     summonFoot.details =
         "Declare: If there is not a friendly Foot of Gork on the battlefield, pick a friendly Ironjawz Wizard to cast this spell, then make a casting roll of 2D6.\nEffect: Set up a Foot of Gork wholly within 12\" of the caster, visible to them and more than 9\" from all enemy units. A Foot of Gork has 2 parts that must be set up within 9\" of each other.";
 
-    Ability summonGork = Ability("Summon Gork-Roara");
+    Ability summonGork = Ability("Summon Gork-Roara","-","-","-","-");
     summonGork.timing = "Your Hero Phase";
     summonGork.color = "Yellow";
     summonGork.castingValue = "5";
@@ -1421,7 +1421,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     summonGork.details =
         "Declare: If there is not a friendly Gork-Roara on the battlefield, pick a friendly Ironjawz Wizard to cast this spell, then make a casting roll of 2D6.\nEffect: Set up a Gork-Roara wholly within 12\" of the caster, visible to them and more than 9\" from all enemy units.";
 
-    Ability summonMorkspit = Ability("Summon Morkspit Marsh");
+    Ability summonMorkspit = Ability("Summon Morkspit Marsh","-","-","-","-");
     summonMorkspit.timing = "Your Hero Phase";
     summonMorkspit.color = "Yellow";
     summonMorkspit.castingValue = "5";
@@ -1429,7 +1429,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     summonMorkspit.details =
         "Declare: If there is not a friendly Morkspit Marsh on the battlefield, pick a friendly Ironjawz Wizard to cast this spell, then make a casting roll of 2D6.\nEffect: Set up a Morkspit Marsh wholly within 18\" of the caster and visible to them.";
 
-    Ability bashEmLadz = Ability("Bash 'Em, Ladz");
+    Ability bashEmLadz = Ability("Bash 'Em, Ladz","-","-","-","-");
     bashEmLadz.timing = "Your Hero Phase";
     bashEmLadz.color = "Yellow";
     bashEmLadz.castingValue = "6";
@@ -1437,7 +1437,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     bashEmLadz.details =
         "Declare: Pick a friendly Ironjawz Wizard to cast this spell, pick a visible friendly Ironjawz unit wholly within 12\" of them to be the target, then make a casting roll of 2D6.\nEffect: The target’s melee weapons have Crit (2 Hits) until the start of your next turn";
 
-    Ability greatHand = Ability("Da Great Big Green Hand of Gork");
+    Ability greatHand = Ability("Da Great Big Green Hand of Gork","-","-","-","-");
     greatHand.timing = "Your Hero Phase";
     greatHand.color = "Yellow";
     greatHand.castingValue = "7";
@@ -1445,7 +1445,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     greatHand.details =
         "Declare: Pick a friendly Ironjawz Wizard to cast this spell, pick a visible friendly unit wholly within 12\" of them and not in combat to be the target, then make a casting roll of 2D6.\nEffect: Remove the target from the battlefield and set it up again wholly within 24\" of the caster and more than 9\" from all enemy units.";
 
-    Ability mightyEadbutt = Ability("Mighty 'Eadbutt");
+    Ability mightyEadbutt = Ability("Mighty 'Eadbutt","-","-","-","-");
     mightyEadbutt.timing = "Your Hero Phase";
     mightyEadbutt.color = "Yellow";
     mightyEadbutt.castingValue = "6";
@@ -1465,7 +1465,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     //---------------------------------------------------------
     // Battle Formation
 
-    Ability naturalDisaster = Ability("Natural Disaster");
+    Ability naturalDisaster = Ability("Natural Disaster","-","-","-","-");
     naturalDisaster.timing = "Passive";
     naturalDisaster.color = "Orange";
     naturalDisaster.details =
@@ -1765,13 +1765,13 @@ class _SettingsWidget extends State<SettingsWidget> {
     //---------------------------------------------------------
     // Battle Traits
 
-    Ability theGreatPlan = Ability("The Great Plan");
+    Ability theGreatPlan = Ability("The Great Plan","-","-","-","-");
     theGreatPlan.timing = "Once Per Battle, Deployment Phase";
     theGreatPlan.color = "Black";
     theGreatPlan.details =
         "Declare: Pick an Asterism ability.Effect: That Asterism ability can be used for the rest of the battle, but the others cannot, unless allowed by the ‘Further the Great Plan’ ability.";
 
-    Ability furtherTheGreatPlan = Ability("Further the Great Plan");
+    Ability furtherTheGreatPlan = Ability("Further the Great Plan","-","-","-","-");
     furtherTheGreatPlan.timing =
         "Once Per Battle, Start of the Third Battle Round";
     furtherTheGreatPlan.color = "Black";
@@ -1782,28 +1782,28 @@ class _SettingsWidget extends State<SettingsWidget> {
         "\nSotek the Deliverer: The enemy general is in combat or has been destroyed."
         "\nTepok the Seer: There are any friendly Slann units on the battlefield and no friendly Slann units are in combat or have been destroyed.Effect: Pick a different Asterism ability. It can be used in addition to the one you picked in the deployment phase.";
 
-    Ability itzlTheTamer = Ability("Itzl the Tamer");
+    Ability itzlTheTamer = Ability("Itzl the Tamer","-","-","-","-");
     itzlTheTamer.timing = "Passive";
     itzlTheTamer.color = "Red";
     itzlTheTamer.details =
         "Companion weapons used by friendly Seraphon units have Crit (2 Hits).";
     itzlTheTamer.keywords = "Asterism";
 
-    Ability quetzlThePreserver = Ability("Quetzl the Preserver");
+    Ability quetzlThePreserver = Ability("Quetzl the Preserver","-","-","-","-");
     quetzlThePreserver.timing = "Passive";
     quetzlThePreserver.color = "Red";
     quetzlThePreserver.details =
         "Subtract 1 from the Rend characteristic of melee weapons for attacks that target friendly Seraphon units that are wholly within friendly territory.";
     quetzlThePreserver.keywords = "Asterism";
 
-    Ability sotekTheDeliverer = Ability("Sotek the Deliverer");
+    Ability sotekTheDeliverer = Ability("Sotek the Deliverer","-","-","-","-");
     sotekTheDeliverer.timing = "Passive";
     sotekTheDeliverer.color = "Gray";
     sotekTheDeliverer.details =
         "Add 2 to the Move characteristic of friendly Seraphon units.";
     sotekTheDeliverer.keywords = "Asterism";
 
-    Ability tepokTheSeer = Ability("Tepok the Seer");
+    Ability tepokTheSeer = Ability("Tepok the Seer","-","-","-","-");
     tepokTheSeer.timing = "Passive";
     tepokTheSeer.color = "Yellow";
     tepokTheSeer.details =
@@ -1848,7 +1848,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     "Declare: If there is not a friendly Morkspit Marsh on the battlefield, pick a friendly Ironjawz Wizard to cast this spell, then make a casting roll of 2D6.\nEffect: Set up a Morkspit Marsh wholly within 18\" of the caster and visible to them.";
     */
 
-    Ability cometsCall = Ability("Comet's Call");
+    Ability cometsCall = Ability("Comet's Call","-","-","-","-");
     cometsCall.timing = "Your Hero Phase";
     cometsCall.color = "Yellow";
     cometsCall.castingValue = "7";
@@ -1856,7 +1856,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     cometsCall.details =
         "Declare: Pick a friendly Seraphon Wizard to cast this spell, pick a visible enemy unit within 18\" of them to be the target, then make a casting roll of 2D6.\nEffect: Roll a dice for each model in the target unit. For each 5+, inflict 1 mortal damage on the target.";
 
-    Ability mysticalUnforging = Ability("Mystical Unforging");
+    Ability mysticalUnforging = Ability("Mystical Unforging","-","-","-","-");
     mysticalUnforging.timing = "Your Hero Phase";
     mysticalUnforging.color = "Yellow";
     mysticalUnforging.castingValue = "6";
@@ -1864,7 +1864,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     mysticalUnforging.details =
         "Declare: Pick a friendly Seraphon Wizard to cast this spell, pick a visible enemy unit within 12\" of them to be the target, then make a casting roll of 2D6.\nEffect: Subtract 1 from the Rend characteristic of the target’s weapons until the start of your next turn.";
 
-    Ability speedOfHuanchi = Ability("Speed of Huanchi");
+    Ability speedOfHuanchi = Ability("Speed of Huanchi","-","-","-","-");
     speedOfHuanchi.timing = "Your Hero Phase";
     speedOfHuanchi.color = "Yellow";
     speedOfHuanchi.castingValue = "6";
@@ -2083,7 +2083,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     //---------------------------------------------------------
     // Battle Traits
 
-    Ability threeClawsteps = Ability("Always three Clawsteps Ahead");
+    Ability threeClawsteps = Ability("Always three Clawsteps Ahead","-","-","-","-");
     threeClawsteps.timing = "Once Per Phase, Enemy Movement Phase";
     threeClawsteps.color = "Gray";
     threeClawsteps.details =
@@ -2097,14 +2097,14 @@ class _SettingsWidget extends State<SettingsWidget> {
     //---------------------------------------------------------
     // Regiment Abilities
 
-    Ability endlessSwarmofRats = Ability("Endless Swarm of Rats");
+    Ability endlessSwarmofRats = Ability("Endless Swarm of Rats","-","-","-","-");
     endlessSwarmofRats.timing = "Any end of turn";
     endlessSwarmofRats.color = "Purple";
     endlessSwarmofRats.details =
         "Effect: When a friendly Clanrats unit uses its `Seething Swarm` ability, you can return D6 slain"
         "models to that unit instead of D3.";
 
-    Ability warpstoneLacedArmour = Ability("Warpstone-laced Armour");
+    Ability warpstoneLacedArmour = Ability("Warpstone-laced Armour","-","-","-","-");
     warpstoneLacedArmour.timing =
         "Once Per Battle, Reaction: Opponent declared an ATTACK ability and targeted your Stormfiends unit";
     warpstoneLacedArmour.color = "Red";
@@ -2118,7 +2118,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     //---------------------------------------------------------
     // Enhancements
 
-    Ability cageOfWarpLightning = Ability("Cage of Warp Lightning");
+    Ability cageOfWarpLightning = Ability("Cage of Warp Lightning","-","-","-","-");
     cageOfWarpLightning.keywords = "Enhancement";
     cageOfWarpLightning.timing = "Once Per Battle, Any Combat Phase";
     cageOfWarpLightning.color = "Red";
@@ -2126,7 +2126,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Declare: Pick a visible enemy unit within 6\" of your general and roll a dice"
         "\n\nEffect: On a 2+, the enemy unit has STRIKE-LAST this phase. On a 1, inflict 1 mortal damage on your general";
 
-    Ability scurryAway = Ability("Scurry Away");
+    Ability scurryAway = Ability("Scurry Away","-","-","-","-");
     scurryAway.keywords = "Enhancement";
     scurryAway.timing = "Any Combat Phase";
     scurryAway.color = "Red";
@@ -2134,14 +2134,14 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Effect: Roll a dice. On a 3+, this unit can immediately use the `Retreat` ability as if it were your movement"
         "phase. If it does so, no mortal damage is inflicted on it.";
 
-    Ability skilledManipulator = Ability("Skilled Manipulator");
+    Ability skilledManipulator = Ability("Skilled Manipulator","-","-","-","-");
     skilledManipulator.keywords = "Enhancement";
     skilledManipulator.timing = "Passive";
     skilledManipulator.color = "Red";
     skilledManipulator.details =
         "Effect: Your general has WARD (4+) while they are within 1\" of any friendly CLanrats units.";
 
-    Ability skitterleap = Ability("Skitterleap");
+    Ability skitterleap = Ability("Skitterleap","-","-","-","-");
     skitterleap.keywords = "Enhancement";
     skitterleap.timing = "Your Hero Phase";
     skitterleap.color = "Yellow";
@@ -2298,7 +2298,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     //---------------------------------------------------------
     // Battle Traits
 
-    Ability BeastOfJungle = Ability("Beast of the Dark Jungles");
+    Ability BeastOfJungle = Ability("Beast of the Dark Jungles","-","-","-","-");
     BeastOfJungle.timing = "Any Combat Phase";
     BeastOfJungle.color = "Red";
     BeastOfJungle.details =
@@ -2315,14 +2315,14 @@ class _SettingsWidget extends State<SettingsWidget> {
     //---------------------------------------------------------
     // Regiment Abilities
 
-    Ability predatoryFighters = Ability("Predatory Fighters");
+    Ability predatoryFighters = Ability("Predatory Fighters","-","-","-","-");
     predatoryFighters.timing = "Once Per Phase, End of Any Turn";
     predatoryFighters.color = "Purple";
     predatoryFighters.details =
         "Declare: Roll a dice for each enemy unit in combat with any friendly units."
         "\n\nEffect: On a 3+, inflict 1 mortal damage on the unit being rolled for.";
 
-    Ability templeGuardians = Ability("Temple-City Guardians");
+    Ability templeGuardians = Ability("Temple-City Guardians","-","-","-","-");
     templeGuardians.timing = "Passive";
     templeGuardians.color = "Green";
     templeGuardians.details =
@@ -2334,14 +2334,14 @@ class _SettingsWidget extends State<SettingsWidget> {
     //---------------------------------------------------------
     // Enhancements
 
-    Ability sotekGaze = Ability("Sotek´s Gaze");
+    Ability sotekGaze = Ability("Sotek´s Gaze","-","-","-","-");
     sotekGaze.keywords = "Enhancement";
     sotekGaze.timing = "End of Any Turn";
     sotekGaze.color = "Purple";
     sotekGaze.details =
         "Effect: Roll a dice. Add the roll to your general’s control score this turn.";
 
-    Ability ancientStrategist = Ability("Ancient Strategist");
+    Ability ancientStrategist = Ability("Ancient Strategist","-","-","-","-");
     ancientStrategist.keywords = "Enhancement";
     ancientStrategist.timing = "Once Per Battle, Any Movement Phase";
     ancientStrategist.color = "Grey";
@@ -2349,14 +2349,14 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Declare: Pick a friendly unit wholly within 12\" of your general. You cannot pick your general."
         "\n\nEffect: That unit can use the ‘Normal Move’ ability as if it were your movement phase.";
 
-    Ability bladeRealities = Ability("Blade of Realities");
+    Ability bladeRealities = Ability("Blade of Realities","-","-","-","-");
     bladeRealities.keywords = "Enhancement";
     bladeRealities.timing = "Passive";
     bladeRealities.color = "Red";
     bladeRealities.details =
         "Effect: Add 1 to the Rend characteristic of your general’s Relic Celestite Weapon.";
 
-    Ability wrathChotec = Ability("The Wrath of Chotec");
+    Ability wrathChotec = Ability("The Wrath of Chotec","-","-","-","-");
     wrathChotec.keywords = "Enhancement";
     wrathChotec.timing = "Passive";
     wrathChotec.color = "Blue";
@@ -2517,13 +2517,13 @@ class _SettingsWidget extends State<SettingsWidget> {
     //---------------------------------------------------------
     // Battle Traits
 
-    Ability ereWeGo = Ability("´Ere We Go");
+    Ability ereWeGo = Ability("´Ere We Go","-","-","-","-");
     ereWeGo.timing = "Passive";
     ereWeGo.color = "Green";
     ereWeGo.details =
         "3rd Battle Round or later used by Brutes:\nEffect: Set up this unit anywhere on the battlefield more than 6\" from all enemy units.";
 
-    Ability mightyDestroyers = Ability("Mighty Destroyers");
+    Ability mightyDestroyers = Ability("Mighty Destroyers","-","-","-","-");
     mightyDestroyers.timing = "Once Per Turn (Army), Any Hero Phase";
     mightyDestroyers.color = "Yellow";
     mightyDestroyers.details =
@@ -2538,14 +2538,14 @@ class _SettingsWidget extends State<SettingsWidget> {
     //---------------------------------------------------------
     // Regiment Abilities
 
-    Ability naturalDisaster = Ability("Natural Disaster");
+    Ability naturalDisaster = Ability("Natural Disaster","-","-","-","-");
     naturalDisaster.timing = "Passive";
     naturalDisaster.color = "Orange";
     naturalDisaster.details =
         "Effect: If you make an unmodified charge roll of 8+ for a friendly unit, "
         "\nadd 1 to the Attacks characteristic of that unit’s melee weapons for the rest of the turn.";
 
-    Ability properRuckus = Ability("A Proper Ruckus");
+    Ability properRuckus = Ability("A Proper Ruckus","-","-","-","-");
     properRuckus.timing =
         "Once Per Battle, Reaction: You declared the ´Mighty Destroyers´ ability";
     properRuckus.color = "Yellow";
@@ -2558,26 +2558,26 @@ class _SettingsWidget extends State<SettingsWidget> {
     //---------------------------------------------------------
     // Enhancements
 
-    Ability amberstone = Ability("Amberstone Whetstone");
+    Ability amberstone = Ability("Amberstone Whetstone","-","-","-","-");
     amberstone.keywords = "Enhancement";
     amberstone.timing = "Passive";
     amberstone.color = "Red";
     amberstone.details =
         "Effect: The Rend characteristic of your general’s melee weapons is 2";
 
-    Ability skulls = Ability("Trophy Skulls");
+    Ability skulls = Ability("Trophy Skulls","-","-","-","-");
     skulls.keywords = "Enhancement";
     skulls.timing = "Passive";
     skulls.color = "Purple";
     skulls.details = "Effect: Your general’s Control characteristic is 5.";
 
-    Ability armourGork = Ability("Armour of Gork");
+    Ability armourGork = Ability("Armour of Gork","-","-","-","-");
     armourGork.keywords = "Enhancement";
     armourGork.timing = "Passive";
     armourGork.color = "Green";
     armourGork.details = "Effect: Your general has Ward (6+).";
 
-    Ability megaBossy = Ability("Mega Bossy");
+    Ability megaBossy = Ability("Mega Bossy","-","-","-","-");
     megaBossy.keywords = "Enhancement";
     megaBossy.timing = "Passive";
     megaBossy.color = "Orange";
@@ -2807,7 +2807,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     //---------------------------------------------------------
     // Battle Traits
 
-    Ability vermintide = Ability("The Lurking Vermintide");
+    Ability vermintide = Ability("The Lurking Vermintide","-","-","-","-");
     vermintide.timing = "Once Per Battle, Deployment Phase";
     vermintide.color = "Black";
     vermintide.details =
@@ -2816,7 +2816,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "Units in the tunnels below that have not used the ‘Gnawhole Ambush’ ability "
         "by the end of the third battle round are destroyed.";
 
-    Ability ambush = Ability("Gnawhole Ambush");
+    Ability ambush = Ability("Gnawhole Ambush","-","-","-","-");
     ambush.timing = "Your Movement Phase";
     ambush.color = "Grey";
     ambush.details =
@@ -2831,14 +2831,14 @@ class _SettingsWidget extends State<SettingsWidget> {
     //---------------------------------------------------------
     // Regiment Abilities
 
-    Ability bullets = Ability("Warpstone-Laced Bullets");
+    Ability bullets = Ability("Warpstone-Laced Bullets","-","-","-","-");
     bullets.timing = "Once Per Battle, Your Shooting Phase";
     bullets.color = "Blue";
     bullets.details =
     "Declare: Pick a ranged weapon a friendly unit is armed with."
         "\n\nEffect: That weapon has Crit (Mortal) this phase.";
 
-    Ability tooquick = Ability("Too Quick Too Hit-Hit");
+    Ability tooquick = Ability("Too Quick Too Hit-Hit","-","-","-","-");
     tooquick.timing = "Passive";
     tooquick.color = "Grey";
     tooquick.details =
@@ -2850,7 +2850,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     //---------------------------------------------------------
     // Enhancements
 
-    Ability horde = Ability("Lead The Seething Horde");
+    Ability horde = Ability("Lead The Seething Horde","-","-","-","-");
     horde.keywords = "Enhancement";
     horde.timing = "Reaction. You declared the ´Call for Reinforcments´ ability";
     horde.color = "Red";
@@ -2858,19 +2858,19 @@ class _SettingsWidget extends State<SettingsWidget> {
     "Effect: Instead of using the set-up instructions in the ‘Call for Reinforcements’ ability, "
         "the replacement unit can be set up wholly within 13\" of this unit and not in combat.";
 
-    Ability connections = Ability("Skyre Connections");
+    Ability connections = Ability("Skyre Connections","-","-","-","-");
     connections.keywords = "Enhancement";
     connections.timing = "Passive";
     connections.color = "Blue";
     connections.details = "Effect: Your general’s Ratling Pistol has an Attacks characteristic of 2D6 instead of D6.";
 
-    Ability charm = Ability("Warpstone Charm");
+    Ability charm = Ability("Warpstone Charm","-","-","-","-");
     charm.keywords = "Enhancement";
     charm.timing = "Passive";
     charm.color = "Red";
     charm.details = "Effect: Subtract 1 from save rolls for enemy units in combat with your general.";
 
-    Ability stitched = Ability("Cloak of Stitched Victories");
+    Ability stitched = Ability("Cloak of Stitched Victories","-","-","-","-");
     stitched.keywords = "Enhancement";
     stitched.timing = "Passive";
     stitched.color = "Green";
@@ -3043,7 +3043,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     //---------------------------------------------------------
     // Battle Traits
 
-    Ability shadow = Ability("Cloaked in Shadow");
+    Ability shadow = Ability("Cloaked in Shadow","-","-","-","-");
     shadow.timing = "Once Per Turn (Army), Combat Phase";
     shadow.color = "Red";
     shadow.details =
@@ -3058,7 +3058,7 @@ class _SettingsWidget extends State<SettingsWidget> {
     //---------------------------------------------------------
     // Regiment Abilities
 
-    Ability shade = Ability("Way of the Skittering Shade");
+    Ability shade = Ability("Way of the Skittering Shade","-","-","-","-");
     shade.timing = "Once Per Battle, Your Movement Phase";
     shade.color = "Grey";
     shade.details =
@@ -3066,7 +3066,7 @@ class _SettingsWidget extends State<SettingsWidget> {
         "\n\nEffect: Remove the target from the battlefield and set it up again wholly within 3\" of a battlefield edge"
         "and more than 6\" from all enemy units.";
 
-    Ability clawWay = Ability("Way of the Fiendish Claw");
+    Ability clawWay = Ability("Way of the Fiendish Claw","-","-","-","-");
     clawWay.timing = "Once Per Battle (Army), Any Combat Phase";
     clawWay.color = "Red";
     clawWay.details =
@@ -3079,27 +3079,27 @@ class _SettingsWidget extends State<SettingsWidget> {
     //---------------------------------------------------------
     // Enhancements
 
-    Ability acrobatic = Ability("Murderous Acrobatics");
+    Ability acrobatic = Ability("Murderous Acrobatics","-","-","-","-");
     acrobatic.keywords = "Enhancement";
     acrobatic.timing = "Passive";
     acrobatic.color = "Orange";
     acrobatic.details =
     "Effect: When your general uses the ´Charge´ ability, they can pass through enemy models.";
 
-    Ability masterShadows = Ability("Master of Shadows");
+    Ability masterShadows = Ability("Master of Shadows","-","-","-","-");
     masterShadows.keywords = "Enhancement";
     masterShadows.timing = "Passive";
     masterShadows.color = "Red";
     masterShadows.details = "Effect: When your general uses the ´Cloaked in Shadow´ ability, add 1 to the shadow-travel roll.";
 
-    Ability anotherShadow = Ability("Just Another Shadow");
+    Ability anotherShadow = Ability("Just Another Shadow","-","-","-","-");
     anotherShadow.keywords = "Enhancement";
     anotherShadow.timing = "Passive";
     anotherShadow.color = "Green";
     anotherShadow.details = "Effect: While your general is wholly within the combat range of a friendly unit that has 3 or more models,"
         "your general has WARD (4+).";
 
-    Ability screech = Ability("Death Screech");
+    Ability screech = Ability("Death Screech","-","-","-","-");
     screech.keywords = "Enhancement";
     screech.timing = "Passive";
     screech.color = "Red";
