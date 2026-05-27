@@ -3,7 +3,7 @@ import '../classes/battleTraits.dart';
 import '../classes/settings.dart';
 import '../classes/unit.dart';
 import '../classes/weapon.dart';
-import 'generalSpells.dart';
+import 'spearheadGeneralSpells.dart';
 
 class CrixxitKillPack {
   Settings pickCrixxitKillPack(Settings settings){

@@ -1,7 +1,7 @@
 import '../classes/ability.dart';
 import '../classes/settings.dart';
 
-class GeneralSpells {
+class SpearheadGeneralSpells {
   Ability getGuardedHero() {
     Ability guardedHero = Ability("Guarded Hero",);
     guardedHero.typeName = "Ability (Passive)";

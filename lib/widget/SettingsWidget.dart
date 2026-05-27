@@ -9,7 +9,7 @@ import '../classes/spellLore.dart';
 import '../classes/unit.dart';
 import '../classes/weapon.dart';
 import '../spearhead/crixxitKillPack.dart';
-import '../spearhead/generalSpells.dart';
+import '../spearhead/spearheadGeneralSpells.dart';
 import '../spearhead/gnawfeastClawpack.dart';
 import '../spearhead/irojawzBigMob.dart';
 import '../spearhead/starscaleWarhost.dart';
@@ -960,7 +960,7 @@ class _SettingsWidget extends State<SettingsWidget> {
   }
 
   void addSpearheadSpells() {
-    widget.settings = GeneralSpells().addSpearheadSpells(widget.settings);
+    widget.settings = SpearheadGeneralSpells().addSpearheadSpells(widget.settings);
   }
 
   void pickIronjawzHardcoded() {

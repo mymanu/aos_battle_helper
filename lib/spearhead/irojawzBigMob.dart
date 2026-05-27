@@ -1,11 +1,9 @@
-import 'dart:ffi';
-
 import '../classes/ability.dart';
 import '../classes/battleTraits.dart';
 import '../classes/settings.dart';
 import '../classes/unit.dart';
 import '../classes/weapon.dart';
-import 'generalSpells.dart';
+import 'spearheadGeneralSpells.dart';
 
 class IronjawzBigMob {
   Settings pickIronjawzBigMob(Settings settings) {
@@ -26,7 +24,7 @@ class IronjawzBigMob {
     getStuck.declare = "Pick a friendly unit wholly within 12\" of this unit to be the target.";
     getStuck.effect = "Roll a dice. On a 2+, add 1 to the Attacks characteristic of the target’s melee weapons until the start of your next turn.";
 
-    List<Ability> generalSpells = [GeneralSpells().getGuardedHero(),getStuck,];
+    List<Ability> generalSpells = [SpearheadGeneralSpells().getGuardedHero(),getStuck,];
 
     Unit general = Unit.withSpells("Megaboss", generalSpells);
     general.id = "General";
@@ -79,8 +77,7 @@ class IronjawzBigMob {
     ragerWeapon.damage = "2";
 
     Ability unleashedRage = Ability("Unleashed Rage");
-    unleashedRage.typeName = "-";
-    unleashedRage.timing = "-";
+    unleashedRage.typeName = "Ability (Passive)";
     unleashedRage.color = "Red";
     unleashedRage.effect = "This unit has Strike-first if it charged in the same turn.";
 
@@ -106,7 +103,7 @@ class IronjawzBigMob {
     bruteWeapons.damage = "2";
 
     Ability messin = Ability("You Messin'?");
-    messin.timing = "Ability (Passive)";
+    messin.typeName = "Ability (Passive)";
     messin.color = "Purple";
     messin.effect = "Enemy models with a Health characteristic of 1 or 2 cannot contest objectives while they are in combat with this unit.";
 
@@ -131,13 +128,14 @@ class IronjawzBigMob {
     // Battle Traits
 
     Ability ereWeGo = Ability("´Ere We Go");
-    ereWeGo.timing = "Passive";
+    ereWeGo.typeName = "Ability (Passive)";
     ereWeGo.color = "Green";
     ereWeGo.effect =
     "3rd Battle Round or later used by Brutes:\nEffect: Set up this unit anywhere on the battlefield more than 6\" from all enemy units.";
 
     Ability mightyDestroyers = Ability("Mighty Destroyers");
     mightyDestroyers.timing = "Once Per Turn (Army), Any Hero Phase";
+    mightyDestroyers.typeName = "Ability (Activated)";
     mightyDestroyers.color = "Yellow";
     mightyDestroyers.declare = "Pick a friendly unit that was not set up this turn to be the target.";
     mightyDestroyers.effect = "The target can move up to 3\". It can move into combat. "
@@ -151,7 +149,7 @@ class IronjawzBigMob {
     // Regiment Abilities
 
     Ability naturalDisaster = Ability("Natural Disaster");
-    naturalDisaster.timing = "Passive";
+    naturalDisaster.typeName = "Ability (Passive)";
     naturalDisaster.color = "Orange";
     naturalDisaster.effect = "If you make an unmodified charge roll of 8+ for a friendly unit, "
         "\nadd 1 to the Attacks characteristic of that unit’s melee weapons for the rest of the turn.";
@@ -159,6 +157,7 @@ class IronjawzBigMob {
     Ability properRuckus = Ability("A Proper Ruckus");
     properRuckus.timing =
     "Once Per Battle, Reaction: You declared the ´Mighty Destroyers´ ability";
+    properRuckus.typeName = "Ability (Activated)";
     properRuckus.color = "Yellow";
     properRuckus.effect =
     "All friendly units on the battlefield that were not set up this turn are the targets of that ability instead.";
@@ -171,26 +170,26 @@ class IronjawzBigMob {
 
     Ability amberstone = Ability("Amberstone Whetstone");
     amberstone.keywords = "Enhancement";
-    amberstone.timing = "Passive";
+    amberstone.typeName = "Ability (Passive)";
     amberstone.color = "Red";
     amberstone.effect =
     "The Rend characteristic of your general’s melee weapons is 2";
 
     Ability skulls = Ability("Trophy Skulls");
     skulls.keywords = "Enhancement";
-    skulls.timing = "Passive";
+    skulls.typeName = "Ability (Passive)";
     skulls.color = "Purple";
     skulls.effect = "Your general’s Control characteristic is 5.";
 
     Ability armourGork = Ability("Armour of Gork");
     armourGork.keywords = "Enhancement";
-    armourGork.timing = "Passive";
+    armourGork.typeName = "Ability (Passive)";
     armourGork.color = "Green";
     armourGork.effect = "Your general has Ward (6+).";
 
     Ability megaBossy = Ability("Mega Bossy");
     megaBossy.keywords = "Enhancement";
-    megaBossy.timing = "Passive";
+    megaBossy.typeName = "Ability (Passive)";
     megaBossy.color = "Orange";
     megaBossy.effect =
     "If this unit charged this turn, for the rest of the turn, "
