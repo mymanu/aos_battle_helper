@@ -10,21 +10,6 @@ class GnawfeastClawpack{
     //---------------------------------------------------------
     // General CLAWLORD ON GNAW-BEAST
 
-    List<Ability> generalSpells = [
-      Ability.color(
-        "Guarded Hero",
-        "Passive",
-        "Black",
-        "If this Hero is within the combat range of a friendly unit that is not a Hero:\n• Subtract 1 from hit rolls for shooting attacks that target this Hero.\n• If this Hero is Infantry, they cannot be picked as the target of shooting attacks made by models more than 12\" from them.",
-      ),
-      Ability.color(
-        "Cornered Rat",
-        "Passive",
-        "Red",
-        "Effect: While this unit is damaged, add 3 to the Attacks characteristic of its Warpforged Halberd.",
-      ),
-    ];
-
     Weapon ratlingPistol = Weapon("ratlingPistol", "Ratling Pistol");
     ratlingPistol.range = "10\"";
     ratlingPistol.attack = "D6";
@@ -52,6 +37,13 @@ class GnawfeastClawpack{
     fangs.damage = "D3";
     fangs.ability = "Companion";
 
+    Ability corner = Ability("Cornered Rat");
+    corner.typeName = "Ability (Passive)";
+    corner.color = "Red";
+    corner.effect = "While this unit is damaged, add 3 to the Attacks characteristic of its Warpforged Halberd.";
+
+    List<Ability> generalSpells = [SpearheadGeneralSpells().getGuardedHero(), corner];
+
     Unit general = Unit.withSpells("Clawlord on Gnaw-Beast", generalSpells);
     general.id = "General";
     general.weapons.add(ratlingPistol);
@@ -67,29 +59,28 @@ class GnawfeastClawpack{
     //---------------------------------------------------------
     // Grey Seer
 
-    List<Ability> greySeerSpells = [
-      Ability.color(
-        "Will of the Hornet Rat",
-        "Your Hero Phase",
-        "Yellow",
-        "Declare: Pick a friendly unit wholly within 13\" of this unit to be the target, then roll a dice."
-            "\n\nEffect: On a 3+, add the roll to the target`s control score until the start of your next turn.",
-      ),
-      Ability.color(
-        "Wither",
-        "Your Hero Phase",
-        "Yellow",
-        "Declare: Pick a visible enemy unit within 13\" of this unit to be the target, then make a casting roll of 2D6."
-            "\n\nEffect: On a 6+, inflict D3 mortal damage on the target.",
-      ),
-    ];
-
     Weapon warpstoneStaff = Weapon("warpstoneStaff", "Warpstone Staff");
     warpstoneStaff.attack = "3";
     warpstoneStaff.hit = "4+";
     warpstoneStaff.wound = "4+";
     warpstoneStaff.rend = "1";
     warpstoneStaff.damage = "D3";
+
+    Ability hornet = Ability("Will of the Hornet Rat");
+    hornet.typeName = "Ability (Activated)";
+    hornet.timing = "Your Hero Phase";
+    hornet.color = "Yellow";
+    hornet.declare = "Pick a friendly unit wholly within 13\" of this unit to be the target, then roll a dice.";
+    hornet.effect = "On a 3+, add the roll to the target`s control score until the start of your next turn.";
+
+    Ability wither = Ability("Wither");
+    wither.typeName = "Ability (Activated)";
+    wither.timing = "Your Hero Phase";
+    wither.color = "Yellow";
+    wither.declare = "Pick a visible enemy unit within 13\" of this unit to be the target, then make a casting roll of 2D6.";
+    wither.effect = "On a 6+, inflict D3 mortal damage on the target.";
+
+    List<Ability> greySeerSpells = [SpearheadGeneralSpells().getGuardedHero(), hornet, wither];
 
     Unit greySeer = Unit.withSpells("Grey Seer", greySeerSpells);
     greySeer.weapons.add(warpstoneStaff);
@@ -102,16 +93,6 @@ class GnawfeastClawpack{
     // Grey Seer
     //---------------------------------------------------------
     // BRUTE WARLOCK ENGINEER
-
-    List<Ability> warlockSpells = [
-      Ability.color(
-        "More-More Warp Energy!",
-        "Reaction: You declared a SHOOT ability for this unit and it has not used a MOVE ability this turn",
-        "Blue",
-        "Effect: Roll a dice. On a 2+, set the Damage characteristic of its Warplock Musket to 3 this phase. "
-            "\nOn a 1, inflict D3 mortal damage on this unit.",
-      ),
-    ];
 
     Weapon warplockMusket = Weapon("warplockMusket", "Warplock Musket");
     warplockMusket.range = "24\"";
@@ -129,27 +110,27 @@ class GnawfeastClawpack{
     warpforgedDagger.rend = "-";
     warpforgedDagger.damage = "2";
 
+    Ability warp = Ability("More-More Warp Energy!");
+    warp.typeName = "Ability (Activated)";
+    warp.timing = "Reaction: You declared a SHOOT ability for this unit and it has not used a MOVE ability this turn.";
+    warp.color = "Blue";
+    warp.effect = "Roll a dice. On a 2+, set the Damage characteristic of its Warplock Musket to 3 this phase. "
+        "\nOn a 1, inflict D3 mortal damage on this unit.";
+
+    List<Ability> warlockSpells = [SpearheadGeneralSpells().getGuardedHero(), warp,];
+
     Unit warlock = Unit.withSpells("Warlock Engineer", warlockSpells);
     warlock.weapons.add(warplockMusket);
     warlock.weapons.add(warpforgedDagger);
-    warlock.move = "4\"";
-    warlock.health = "3";
+    warlock.move = "6\"";
+    warlock.health = "5";
     warlock.save = "5+";
-    warlock.control = "1";
+    warlock.control = "2";
     warlock.keywords = "Hero, Infantry";
 
     // WARLOCK ENGINEER
     //---------------------------------------------------------
     // Clanrats
-
-    List<Ability> clanratsSpells = [
-      Ability.color(
-        "Seething Swarm",
-        "End of Any Turn",
-        "Purple",
-        "Effect: You can return D3 slain models to this unit",
-      ),
-    ];
 
     Weapon rustyBlade = Weapon("rustyBlade", "Rusty Blade");
     rustyBlade.attack = "2";
@@ -157,6 +138,14 @@ class GnawfeastClawpack{
     rustyBlade.wound = "5+";
     rustyBlade.rend = "-";
     rustyBlade.damage = "1";
+
+    Ability seething = Ability("Seething Swarm");
+    seething.typeName = "Ability (Activated)";
+    seething.timing = "End of Any Turn";
+    seething.color = "Purple";
+    seething.effect = "You can return D3 slain models to this unit.";
+
+    List<Ability> clanratsSpells = [seething];
 
     Unit clanrats = Unit.withSpells("Clanrats", clanratsSpells);
     clanrats.weapons.add(rustyBlade);
@@ -171,15 +160,6 @@ class GnawfeastClawpack{
 
     //---------------------------------------------------------
     // RAT OGORS
-
-    List<Ability> ratOgorsSpells = [
-      Ability.color(
-        "Unleashed Warp-Fury",
-        "Any Combat Phase, Once Per Battle",
-        "Red",
-        "Effect: Inflict D3 mortal damage on this unit. Then, add 1 to the Attacks characteristic of its melee weapons this phase.",
-      ),
-    ];
 
     Weapon warpfireGun = Weapon("warpfireGun", "Warpfire Gun");
     warpfireGun.range = "10\"";
@@ -197,10 +177,18 @@ class GnawfeastClawpack{
     claws.rend = "1";
     claws.damage = "2";
 
+    Ability fury = Ability("Unleashed Warp-Fury");
+    fury.typeName = "Ability (Activated)";
+    fury.timing = "Any Combat Phase, Once Per Battle";
+    fury.color = "Red";
+    fury.effect = "Inflict D3 mortal damage on this unit. Then, add 1 to the Attacks characteristic of its melee weapons this phase.";
+
+    List<Ability> ratOgorsSpells = [fury];
+
     Unit ratOgors = Unit.withSpells("ratOgors", ratOgorsSpells);
     ratOgors.weapons.add(claws);
     ratOgors.move = "6\"";
-    ratOgors.health = "1";
+    ratOgors.health = "4";
     ratOgors.save = "5+";
     ratOgors.control = "1";
     ratOgors.keywords = "Infantry";
@@ -215,21 +203,23 @@ class GnawfeastClawpack{
     //---------------------------------------------------------
     // Battle Traits
 
-    Ability vermintide = Ability("The Lurking Vermintide", "-", "-", "-", "-");
+    Ability vermintide = Ability("The Lurking Vermintide");
+    vermintide.typeName = "Ability (Activated)";
     vermintide.timing = "Once Per Battle, Deployment Phase";
     vermintide.color = "Black";
-    vermintide.details =
-    "Declare: Pick a friendly unit that has not been deployed to be the target."
-        "\n\nEffect: The target unit is set up in reserve in the tunnels below. "
+    vermintide.declare = "Pick a friendly unit that has not been deployed to be the target.";
+    vermintide.effect =
+        "The target unit is set up in reserve in the tunnels below. "
         "Units in the tunnels below that have not used the ‘Gnawhole Ambush’ ability "
         "by the end of the third battle round are destroyed.";
 
-    Ability ambush = Ability("Gnawhole Ambush", "-", "-", "-", "-");
+    Ability ambush = Ability("Gnawhole Ambush");
+    ambush.typeName = "Ability (Activated)";
     ambush.timing = "Your Movement Phase";
     ambush.color = "Grey";
-    ambush.details =
-    "Declare: Pick a friendly unit that is in the tunnels below to use this ability."
-        "\n\nEffect: Set up that unit wholly within 6\" of a corner of the battlefield and more than 9\" from all enemy units.";
+    ambush.declare = "Pick a friendly unit that is in the tunnels below to use this ability.";
+    ambush.effect =
+        "Set up that unit wholly within 6\" of a corner of the battlefield and more than 9\" from all enemy units.";
 
     BattleTraits battleTraits = BattleTraits();
     battleTraits.abilitys.add(vermintide);
@@ -239,18 +229,20 @@ class GnawfeastClawpack{
     //---------------------------------------------------------
     // Regiment Abilities
 
-    Ability bullets = Ability("Warpstone-Laced Bullets", "-", "-", "-", "-");
+    Ability bullets = Ability("Warpstone-Laced Bullets");
+    bullets.typeName = "Ability (Activated)";
     bullets.timing = "Once Per Battle, Your Shooting Phase";
     bullets.color = "Blue";
-    bullets.details =
-    "Declare: Pick a ranged weapon a friendly unit is armed with."
-        "\n\nEffect: That weapon has Crit (Mortal) this phase.";
+    bullets.declare = "Pick a ranged weapon a friendly unit is armed with.";
+    bullets.effect =
+        "That weapon has Crit (Mortal) this phase.";
 
-    Ability tooquick = Ability("Too Quick Too Hit-Hit", "-", "-", "-", "-");
+    Ability tooquick = Ability("Too Quick Too Hit-Hit");
+    tooquick.typeName = "Ability (Passive)";
     tooquick.timing = "Passive";
     tooquick.color = "Grey";
-    tooquick.details =
-    "Effect: No mortal damage is inflicted on friendly units when they use Retreat abilities.";
+    tooquick.effect =
+    "No mortal damage is inflicted on friendly units when they use Retreat abilities.";
 
     List<Ability> regimentAbilies = [bullets, tooquick];
 
@@ -258,36 +250,34 @@ class GnawfeastClawpack{
     //---------------------------------------------------------
     // Enhancements
 
-    Ability horde = Ability("Lead The Seething Horde", "-", "-", "-", "-");
+    Ability horde = Ability("Lead The Seething Horde");
+    horde.typeName = "Ability (Activated)";
     horde.keywords = "Enhancement";
     horde.timing =
     "Reaction. You declared the ´Call for Reinforcments´ ability";
     horde.color = "Red";
-    horde.details =
-    "Effect: Instead of using the set-up instructions in the ‘Call for Reinforcements’ ability, "
+    horde.effect =
+    "Instead of using the set-up instructions in the ‘Call for Reinforcements’ ability, "
         "the replacement unit can be set up wholly within 13\" of this unit and not in combat.";
 
-    Ability connections = Ability("Skyre Connections", "-", "-", "-", "-");
+    Ability connections = Ability("Skyre Connections");
+    connections.typeName = "Ability (Passive)";
     connections.keywords = "Enhancement";
     connections.timing = "Passive";
     connections.color = "Blue";
-    connections.details =
-    "Effect: Your general’s Ratling Pistol has an Attacks characteristic of 2D6 instead of D6.";
+    connections.effect =
+    "Your general’s Ratling Pistol has an Attacks characteristic of 2D6 instead of D6.";
 
-    Ability charm = Ability("Warpstone Charm", "-", "-", "-", "-");
+    Ability charm = Ability("Warpstone Charm");
+    charm.typeName = "Ability (Passive)";
     charm.keywords = "Enhancement";
     charm.timing = "Passive";
     charm.color = "Red";
-    charm.details =
-    "Effect: Subtract 1 from save rolls for enemy units in combat with your general.";
+    charm.effect =
+    "Subtract 1 from save rolls for enemy units in combat with your general.";
 
-    Ability stitched = Ability(
-      "Cloak of Stitched Victories",
-      "-",
-      "-",
-      "-",
-      "-",
-    );
+    Ability stitched = Ability("Cloak of Stitched Victories");
+    stitched.typeName = "Ability (Passive)";
     stitched.keywords = "Enhancement";
     stitched.timing = "Passive";
     stitched.color = "Green";

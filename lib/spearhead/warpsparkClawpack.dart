@@ -10,35 +10,35 @@ class WarpsparkClawpack {
     //---------------------------------------------------------
     // Grey Seer
 
-    List<Ability> generalSpells = [
-      Ability.color(
-        "Guarded Hero",
-        "Passive",
-        "Black",
-        "If this Hero is within the combat range of a friendly unit that is not a Hero:\n• Subtract 1 from hit rolls for shooting attacks that target this Hero.\n• If this Hero is Infantry, they cannot be picked as the target of shooting attacks made by models more than 12\" from them.",
-      ),
-      Ability.color(
-        "Will of the Hornet Rat",
-        "Your Hero Phase",
-        "Yellow",
-        "Declare: Pick a friendly unit wholly within 13\" of this unit to be the target, then roll a dice."
-            "\n\nEffect: On a 3+, add the roll to the target`s control score until the start of your next turn.",
-      ),
-      Ability.color(
-        "Wither",
-        "Your Hero Phase",
-        "Yellow",
-        "Declare: Pick a visible enemy unit within 13\" of this unit to be the target, then make a casting roll of 2D6."
-            "\n\nEffect: On a 6+, inflict D3 mortal damage on the target.",
-      ),
-    ];
-
     Weapon warpstoneStaff = Weapon("warpstoneStaff", "Warpstone Staff");
     warpstoneStaff.attack = "3";
     warpstoneStaff.hit = "4+";
     warpstoneStaff.wound = "4+";
     warpstoneStaff.rend = "1";
     warpstoneStaff.damage = "D3";
+
+    Ability hornet = Ability("Will of the Hornet Rat");
+    hornet.typeName = "Ability (Activated)";
+    hornet.timing = "Your Hero Phase";
+    hornet.color = "Yellow";
+    hornet.declare =
+        "Pick a friendly unit wholly within 13\" of this unit to be the target, then roll a dice.";
+    hornet.effect =
+        "On a 3+, add the roll to the target`s control score until the start of your next turn.";
+
+    Ability wither = Ability("Wither");
+    wither.typeName = "Ability (Activated)";
+    wither.timing = "Your Hero Phase";
+    wither.color = "Yellow";
+    wither.declare =
+        "Pick a visible enemy unit within 13\" of this unit to be the target, then make a casting roll of 2D6.";
+    wither.effect = "On a 6+, inflict D3 mortal damage on the target.";
+
+    List<Ability> generalSpells = [
+      SpearheadGeneralSpells().getGuardedHero(),
+      hornet,
+      wither,
+    ];
 
     Unit general = Unit.withSpells("Grey Seer", generalSpells);
     general.id = "General";
@@ -53,21 +53,20 @@ class WarpsparkClawpack {
     //---------------------------------------------------------
     // Clanrats
 
-    List<Ability> clanratsSpells = [
-      Ability.color(
-        "Seething Swarm",
-        "End of Any Turn",
-        "Purple",
-        "Effect: You can return D3 slain models to this unit",
-      ),
-    ];
-
     Weapon rustyBlade = Weapon("rustyBlade", "RustyBlade");
     rustyBlade.attack = "2";
     rustyBlade.hit = "4+";
     rustyBlade.wound = "5+";
     rustyBlade.rend = "-";
     rustyBlade.damage = "1";
+
+    Ability seething = Ability("Seething Swarm");
+    seething.typeName = "Ability (Activated)";
+    seething.timing = "End of Any Turn";
+    seething.color = "Purple";
+    seething.effect = "You can return D3 slain models to this unit.";
+
+    List<Ability> clanratsSpells = [seething];
 
     Unit clanrats = Unit.withSpells("Clanrats", clanratsSpells);
     clanrats.weapons.add(rustyBlade);
@@ -80,16 +79,6 @@ class WarpsparkClawpack {
     // Clanrats
     //---------------------------------------------------------
     // Stormfiends
-
-    List<Ability> stormfiendsSpells = [
-      Ability.color(
-        "Shock Gauntlets",
-        "Passive",
-        "Red",
-        "Effect: Each time an attack made with this unit`s Shock Gauntlets scores a critical hit, that attack scores D6 hits"
-            "instead of 1 (make a wound roll for each hit).",
-      ),
-    ];
 
     Weapon ratlingCannons = Weapon("ratlingCannons", "Ratling Cannons");
     ratlingCannons.range = "15\"";
@@ -121,6 +110,15 @@ class WarpsparkClawpack {
     shockGauntlets.rend = "1";
     shockGauntlets.damage = "2";
 
+    Ability gauntlets = Ability("Shock Gauntlets");
+    gauntlets.typeName = "Ability (Passive)";
+    gauntlets.color = "Red";
+    gauntlets.effect =
+        "Each time an attack made with this unit`s Shock Gauntlets scores a critical hit, that attack scores D6 hits"
+        "instead of 1 (make a wound roll for each hit).";
+
+    List<Ability> stormfiendsSpells = [gauntlets];
+
     Unit stormfiends = Unit.withSpells("Stormfiends", stormfiendsSpells);
     stormfiends.weapons.add(ratlingCannons);
     stormfiends.weapons.add(windlaunchers);
@@ -135,16 +133,6 @@ class WarpsparkClawpack {
     // Stormfiends
     //---------------------------------------------------------
     // Warp Lightning Cannon
-
-    List<Ability> warpLightningCannonSpells = [
-      Ability.color(
-        "Warp Lightning Blast",
-        "Passive",
-        "Blue",
-        "Effect: Each attack made with this weapon in a single phase must target the same enemy unit."
-            "Each hit inflicts 1 mortal damage on the target and the attack sequence ends.",
-      ),
-    ];
 
     Weapon warpLightningBlast = Weapon(
       "warpLightningBlast",
@@ -162,6 +150,15 @@ class WarpsparkClawpack {
     teeth.hit = "4+";
     teeth.wound = "5+";
     teeth.damage = "1";
+
+    Ability blast = Ability("Warp Lightning Blast");
+    blast.typeName = "Ability (Passive)";
+    blast.color = "Blue";
+    blast.effect =
+        "Each attack made with this weapon in a single phase must target the same enemy unit."
+        "Each hit inflicts 1 mortal damage on the target and the attack sequence ends.";
+
+    List<Ability> warpLightningCannonSpells = [blast];
 
     Unit warpLightningCannon = Unit.withSpells(
       "Warp Lightning Cannon",
@@ -185,18 +182,13 @@ class WarpsparkClawpack {
     //---------------------------------------------------------
     // Battle Traits
 
-    Ability threeClawsteps = Ability(
-      "Always three Clawsteps Ahead",
-      "-",
-      "-",
-      "-",
-      "-",
-    );
+    Ability threeClawsteps = Ability("Always three Clawsteps Ahead");
+    threeClawsteps.typeName = "Ability (Activated)";
     threeClawsteps.timing = "Once Per Phase, Enemy Movement Phase";
     threeClawsteps.color = "Gray";
-    threeClawsteps.details =
-    "Declare: Pick a friendly unit that is not in combat."
-        "\n\nEffect: That unit can use the `Normal Move` ability as if it were your movement phase.";
+    threeClawsteps.declare = "Pick a friendly unit that is not in combat.";
+    threeClawsteps.effect =
+        "That unit can use the `Normal Move` ability as if it were your movement phase.";
 
     BattleTraits battleTraits = BattleTraits();
     battleTraits.abilitys.add(threeClawsteps);
@@ -205,31 +197,21 @@ class WarpsparkClawpack {
     //---------------------------------------------------------
     // Regiment Abilities
 
-    Ability endlessSwarmofRats = Ability(
-      "Endless Swarm of Rats",
-      "-",
-      "-",
-      "-",
-      "-",
-    );
+    Ability endlessSwarmofRats = Ability("Endless Swarm of Rats");
+    endlessSwarmofRats.typeName = "Ability (Activated)";
     endlessSwarmofRats.timing = "Any end of turn";
     endlessSwarmofRats.color = "Purple";
-    endlessSwarmofRats.details =
-    "Effect: When a friendly Clanrats unit uses its `Seething Swarm` ability, you can return D6 slain"
+    endlessSwarmofRats.effect =
+        "When a friendly Clanrats unit uses its `Seething Swarm` ability, you can return D6 slain"
         "models to that unit instead of D3.";
 
-    Ability warpstoneLacedArmour = Ability(
-      "Warpstone-laced Armour",
-      "-",
-      "-",
-      "-",
-      "-",
-    );
+    Ability warpstoneLacedArmour = Ability("Warpstone-laced Armour");
+    warpstoneLacedArmour.typeName = "Ability (Activated)";
     warpstoneLacedArmour.timing =
-    "Once Per Battle, Reaction: Opponent declared an ATTACK ability and targeted your Stormfiends unit";
+        "Once Per Battle, Reaction: Opponent declared an ATTACK ability and targeted your Stormfiends unit";
     warpstoneLacedArmour.color = "Red";
-    warpstoneLacedArmour.details =
-    "Used By: Your Stormfiends unit."
+    warpstoneLacedArmour.effect =
+        "Used By: Your Stormfiends unit."
         "\n\nEffect: Your Stormfiends unit has WARD (5+) for the rest of the turn.";
 
     List<Ability> regimentAbilies = [endlessSwarmofRats, warpstoneLacedArmour];
@@ -238,48 +220,40 @@ class WarpsparkClawpack {
     //---------------------------------------------------------
     // Enhancements
 
-    Ability cageOfWarpLightning = Ability(
-      "Cage of Warp Lightning",
-      "-",
-      "-",
-      "-",
-      "-",
-    );
+    Ability cageOfWarpLightning = Ability("Cage of Warp Lightning");
+    cageOfWarpLightning.typeName = "Ability (Activated)";
     cageOfWarpLightning.keywords = "Enhancement";
     cageOfWarpLightning.timing = "Once Per Battle, Any Combat Phase";
     cageOfWarpLightning.color = "Red";
-    cageOfWarpLightning.details =
-    "Declare: Pick a visible enemy unit within 6\" of your general and roll a dice"
-        "\n\nEffect: On a 2+, the enemy unit has STRIKE-LAST this phase. On a 1, inflict 1 mortal damage on your general";
+    cageOfWarpLightning.declare =
+        "Pick a visible enemy unit within 6\" of your general and roll a dice.";
+    cageOfWarpLightning.effect =
+        "On a 2+, the enemy unit has STRIKE-LAST this phase. On a 1, inflict 1 mortal damage on your general.";
 
-    Ability scurryAway = Ability("Scurry Away", "-", "-", "-", "-");
+    Ability scurryAway = Ability("Scurry Away");
+    scurryAway.typeName = "Ability (Activated)";
     scurryAway.keywords = "Enhancement";
     scurryAway.timing = "Any Combat Phase";
     scurryAway.color = "Red";
-    scurryAway.details =
-    "Effect: Roll a dice. On a 3+, this unit can immediately use the `Retreat` ability as if it were your movement"
+    scurryAway.effect =
+        "Roll a dice. On a 3+, this unit can immediately use the `Retreat` ability as if it were your movement"
         "phase. If it does so, no mortal damage is inflicted on it.";
 
-    Ability skilledManipulator = Ability(
-      "Skilled Manipulator",
-      "-",
-      "-",
-      "-",
-      "-",
-    );
+    Ability skilledManipulator = Ability("Skilled Manipulator");
+    skilledManipulator.typeName = "Ability (Passive)";
     skilledManipulator.keywords = "Enhancement";
     skilledManipulator.timing = "Passive";
     skilledManipulator.color = "Red";
     skilledManipulator.details =
-    "Effect: Your general has WARD (4+) while they are within 1\" of any friendly CLanrats units.";
+        "Effect: Your general has WARD (4+) while they are within 1\" of any friendly CLanrats units.";
 
-    Ability skitterleap = Ability("Skitterleap", "-", "-", "-", "-");
+    Ability skitterleap = Ability("Skitterleap");
+    skitterleap.typeName = "Ability (Activated)";
     skitterleap.keywords = "Enhancement";
     skitterleap.timing = "Your Hero Phase";
     skitterleap.color = "Yellow";
-    skitterleap.details =
-    "Declare: Make a casting roll of 2D6."
-        "\n\nEffect: On a 6+, remove your general from the battlefield and set them up again on the battlefield"
+    skitterleap.declare = "Make a casting roll of 2D6.";
+    skitterleap.effect = "On a 6+, remove your general from the battlefield and set them up again on the battlefield"
         "more than 6\" from all enemy units. They cannot use MOVE abilities in the following movement phase.";
 
     List<Ability> enhancements = [
