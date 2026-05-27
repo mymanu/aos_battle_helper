@@ -207,7 +207,7 @@ class _CombatPhase extends State<CombatPhase> {
                       )
                           : Column(
                         mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        //crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -231,8 +231,14 @@ class _CombatPhase extends State<CombatPhase> {
                               Text("Ursprung: " + spellsThisPhase[index].originUnit),
                             ],
                           ),
-                          Text("Trigger: " + spellsThisPhase[index].timing),
-                          Text(spellsThisPhase[index].details),
+                          spellsThisPhase[index].typeName.contains("Passive") ? Text(spellsThisPhase[index].typeName) : Text(spellsThisPhase[index].timing),
+                          Text(spellsThisPhase[index].originUnit),
+                          Text(""),
+                          spellsThisPhase[index].effect.contains("-") ?
+                          Text(spellsThisPhase[index].declare) : spellsThisPhase[index].declare.contains("-") ?
+                          Text(spellsThisPhase[index].effect) :
+                          Text(spellsThisPhase[index].declare + "\n\n" + spellsThisPhase[index].effect) ,
+
                           spellsThisPhase[index].commandPoints.contains("-") ? Text("") : Text("Command Point cost: " + spellsThisPhase[index].commandPoints),
                           /*
                             ListTile(

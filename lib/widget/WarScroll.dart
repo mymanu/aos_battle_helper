@@ -50,7 +50,7 @@ class _WarScroll extends State<WarScroll> {
 
     List<Ability> passiveAbilities = [];
     for (Ability abi in widget.unit.abilitys) {
-      if (abi.timing.contains("Passive")) {
+      if (abi.typeName.contains("Passive")) {
         passiveAbilities.add(abi);
       }
     }
@@ -428,16 +428,15 @@ class _WarScroll extends State<WarScroll> {
                                         ),
                                       ],
                                     ),
-                                    Text(passiveAbilities[index].timing),
-                                    Text(passiveAbilities[index].details),
-                                    passiveAbilities[index].commandPoints
-                                            .contains("-")
-                                        ? Text("")
-                                        : Text(
-                                            "Command Point cost: " +
-                                                passiveAbilities[index]
-                                                    .commandPoints,
-                                          ),
+                                    passiveAbilities[index].typeName.contains("Passive") ? Text(passiveAbilities[index].typeName) : Text(passiveAbilities[index].timing),
+                                    Text(passiveAbilities[index].originUnit),
+                                    Text(""),
+                                    passiveAbilities[index].effect.contains("-") ?
+                                    Text(passiveAbilities[index].declare) : passiveAbilities[index].declare.contains("-") ?
+                                    Text(passiveAbilities[index].effect) :
+                                    Text(passiveAbilities[index].declare + "\n\n" + passiveAbilities[index].effect) ,
+
+                                    passiveAbilities[index].commandPoints.contains("-") ? Text("") : Text("Command Point cost: " + passiveAbilities[index].commandPoints),
                                     /*
                             Text(cardContentList[index].ability.timing),
                             Text(cardContentList[index].ability.originUnit),
