@@ -651,7 +651,7 @@ class _ArmyImport extends State<ArmyImport> {
 
     for (Selections mySelection in selections) {
       if (mySelection.type.contains("unit")) {
-        readUnitOfJSON(mySelection);
+        widget.settings.army.unitList.add(readUnitOfJSON(mySelection));
       }
     }
 
@@ -699,6 +699,8 @@ class _ArmyImport extends State<ArmyImport> {
     );
 
     //TODO Ab hier BattleTraits etc neu heraussuchen, vermutlich müssen neue Listen befüllt werden, in denen die Infos drinstecken
+
+    //TODO Bis hier den JSON Export sinnvoll mit Ifs in Listen befüllt -> weniger Verschachtelung von for Schleifen
 
     //roster -> forces -> selections
     for (Forces forces in forcesList) {
@@ -864,7 +866,8 @@ class _ArmyImport extends State<ArmyImport> {
 
       //--------------------------------------------------------------------
       if (profile.typeName.contains("Ability")) {
-        unit = readAbilityOfJSON(unit, profile);
+        bool abilityAlreadyAdded = false;
+        unit = readAbilityOfJSON(unit, profile, abilityAlreadyAdded);
       }
 
       List<Selections> selectTwoList = [];
@@ -892,8 +895,6 @@ class _ArmyImport extends State<ArmyImport> {
         selectTwoList.add(selectTwo);
       }
 
-      //TODO doppeltes Obesessed with Violence muss von hier unten irgendwo kommen
-
       for(Selections selectTwo in selectTwoList) {
         //roster -> forces -> forcesTwo -> selections -> selectTwo -> profiles
         for (Map<String, dynamic> profileMapJSON in selectTwo.profilesDynamic) {
@@ -912,13 +913,14 @@ class _ArmyImport extends State<ArmyImport> {
             profile.attributes = profileMapJSON["attributes"];
           }
 
+          bool abilityAlreadyAdded = false;
           if (profile.typeName.contains("Ability")) {
-            unit = readAbilityOfJSON(unit, profile);
+            //unit = readAbilityOfJSON(unit, profile);
+            unit = readAbilityOfJSON(unit, profile, abilityAlreadyAdded);
           }
         }
 
-        //TODO Bis hier den JSON Export sinnvoll mit Ifs in Listen befüllt -> weniger Verschachtelung von for Schleifen
-
+        List<Selections> selectThreeList = [];
         //roster -> forces -> forcesTwo -> selections -> selectTwo -> selectThree
         for (Map<String, dynamic> selectionThreeMapJSON
             in selectTwo.selectionsDynamic) {
@@ -928,12 +930,17 @@ class _ArmyImport extends State<ArmyImport> {
           );
 
           if (selectionThreeMapJSON.containsKey("profiles")) {
-            selectThree.profilesDynamic = selectionThreeMapJSON["profiles"];
+            for (Map<String,
+                dynamic> entry in selectionThreeMapJSON["profiles"]) {
+              selectThree.profilesDynamic.add(entry);
+            }
           }
-          bool weaponNew = true;
+          selectThreeList.add(selectThree);
+        }
 
-
-          //roster -> forces -> forcesTwo -> selections -> selections -> selections -> profiles
+        //roster -> forces -> forcesTwo -> selections -> selections -> selections -> profiles
+         for(Selections selectThree in selectThreeList) {
+           bool weaponNew = true;
           for (Map<String, dynamic> profileMapJSON
               in selectThree.profilesDynamic) {
             Profiles profile = Profiles(
@@ -948,51 +955,23 @@ class _ArmyImport extends State<ArmyImport> {
               profile.typeName = profileMapJSON["typeName"];
             }
 
-            if (profileMapJSON["typeName"].toString().contains("Weapon")) {
-              Weapon weapon = Weapon("id", "name",);
-              weapon.id = profileMapJSON["id"];
-              weapon.name = profileMapJSON["name"];
-
-              //roster -> forces -> forcesTwo -> selections -> selections -> selections -> profiles -> characteristics
-              for (Map<String, dynamic> weaponMapJSON
-                  in profile.characteristics) {
-                if (weaponMapJSON["name"].contains("Atk")) {
-                  weapon.attack = weaponMapJSON["\$text"].toString();
-                }
-                if (weaponMapJSON["name"].contains("Hit")) {
-                  weapon.hit = weaponMapJSON["\$text"].toString();
-                }
-                if (weaponMapJSON["name"].contains("Wnd")) {
-                  weapon.wound = weaponMapJSON["\$text"].toString();
-                }
-                if (weaponMapJSON["name"].contains("Rnd")) {
-                  weapon.rend = weaponMapJSON["\$text"].toString();
-                }
-                if (weaponMapJSON["name"].contains("Dmg")) {
-                  weapon.damage = weaponMapJSON["\$text"].toString();
-                }
-                if (weaponMapJSON["name"].contains("Ability")) {
-                  weapon.ability = weaponMapJSON["\$text"].toString();
-                }
-              }
-              for(Weapon thisWeapon in unit.weapons) {
-                if(thisWeapon.id == weapon.id){
-                  weaponNew = false;
-                }
-              }
-              if(weaponNew) {
-                unit.weapons.add(weapon);
-              }
+            if (profile.typeName.contains("Weapon")) {
+              unit = readWeaponJSON(unit, profile, weaponNew);
+            }
+            bool abilityAlreadyAdded = false;
+            if (profile.typeName.contains("Ability")) {
+              //unit = readAbilityOfJSON(unit, profile);
+              unit = readAbilityOfJSON(unit, profile, abilityAlreadyAdded);
             }
           }
         }
       }
     }
-    widget.settings.army.unitList.add(unit);
     return unit;
   }
 
-  Unit readAbilityOfJSON(Unit unit, Profiles profile) {
+  Unit readAbilityOfJSON(Unit unit, Profiles profile, bool abilityAlreadyAdded) {
+    //Unit readAbilityOfJSON(Unit unit, Profiles profile) {
     Ability ability = Ability(profile.name);
     ability.id = profile.id;
     ability.typeName = profile.typeName;
@@ -1021,7 +1000,53 @@ class _ArmyImport extends State<ArmyImport> {
         ability.color = attributesMapJSON["\$text"].toString();
       }
     }
-    unit.abilitys.add(ability);
+
+    for (Ability abi in unit.abilitys) {
+      if (abi.id == ability.id) {
+        abilityAlreadyAdded = true;
+      }
+    }
+    if (!abilityAlreadyAdded) {
+      unit.abilitys.add(ability);
+    }
+    abilityAlreadyAdded = false;
+    //unit.abilitys.add(ability);
+    return unit;
+  }
+
+  Unit readWeaponJSON(Unit unit, Profiles profile, bool weaponNew) {
+    Weapon weapon = Weapon(profile.id, profile.name,);
+
+    //roster -> forces -> forcesTwo -> selections -> selections -> selections -> profiles -> characteristics
+    for (Map<String, dynamic> weaponMapJSON
+    in profile.characteristics) {
+      if (weaponMapJSON["name"].contains("Atk")) {
+        weapon.attack = weaponMapJSON["\$text"].toString();
+      }
+      if (weaponMapJSON["name"].contains("Hit")) {
+        weapon.hit = weaponMapJSON["\$text"].toString();
+      }
+      if (weaponMapJSON["name"].contains("Wnd")) {
+        weapon.wound = weaponMapJSON["\$text"].toString();
+      }
+      if (weaponMapJSON["name"].contains("Rnd")) {
+        weapon.rend = weaponMapJSON["\$text"].toString();
+      }
+      if (weaponMapJSON["name"].contains("Dmg")) {
+        weapon.damage = weaponMapJSON["\$text"].toString();
+      }
+      if (weaponMapJSON["name"].contains("Ability")) {
+        weapon.ability = weaponMapJSON["\$text"].toString();
+      }
+    }
+    for(Weapon thisWeapon in unit.weapons) {
+      if(thisWeapon.id == weapon.id){
+        weaponNew = false;
+      }
+    }
+    if(weaponNew) {
+      unit.weapons.add(weapon);
+    }
     return unit;
   }
 }
