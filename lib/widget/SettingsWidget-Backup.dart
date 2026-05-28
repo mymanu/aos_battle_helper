@@ -1006,7 +1006,6 @@ class _SettingsWidgetBackup extends State<SettingsWidgetBackup> {
     widget.settings.army.spellLore = spellLore;
   }
 
-  //TODO Seraphon Path to Glory Liste hinzufügen über Button Hinzufügen
   void pickSeraphonHardcoded() {
     // Slann Solo (Special Boss)
 
@@ -1263,7 +1262,6 @@ class _SettingsWidgetBackup extends State<SettingsWidgetBackup> {
     //---------------------------------------------------------
     // Manifestation
 
-    //TODO muss Jenny definieren welche Manifestation sie spielen will !!!
 
     // Manifestation
     //---------------------------------------------------------
@@ -1338,7 +1336,6 @@ class _SettingsWidgetBackup extends State<SettingsWidgetBackup> {
     // Battle Traits
     //---------------------------------------------------------
     // Spell Lore
-    //TODO hier Summon Spells für Jennys Manifestation einbauen
     /*
     Ability summonFoot = Ability("Summon Foot of Gork");
     summonFoot.timing = "Your Hero Phase";
@@ -1403,7 +1400,6 @@ class _SettingsWidgetBackup extends State<SettingsWidgetBackup> {
     //---------------------------------------------------------
     // Battle Formation
 
-    //TODO muss Jenny definieren welchen Battle Formation sie spielen will !!!
     BattleFormation battleFormation = BattleFormation();
 
     // Battle Formation

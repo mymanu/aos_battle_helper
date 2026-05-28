@@ -451,7 +451,6 @@ class _CombatPhase extends State<CombatPhase> {
                                   ),
                                 ],
                               ),
-                              //TODO Hier Content der Card einfügen einer Unit
                               Container(
                                 padding: EdgeInsets.only(top: 10),
                                 child:
@@ -492,7 +491,6 @@ class _CombatPhase extends State<CombatPhase> {
                                               ),
                                             ),
                                           ),
-                                          //TODO Positioned für grünen Kasten
                                           //https://pub.dev/packages/flutter_custom_clippers
                                           Positioned(
                                             top: 55,

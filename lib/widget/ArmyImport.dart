@@ -274,8 +274,6 @@ class _ArmyImport extends State<ArmyImport> {
           .length}",
     );
 
-    //TODO Ab hier BattleTraits etc neu heraussuchen, vermutlich müssen neue Listen befüllt werden, in denen die Infos drinstecken
-
     List<Selections> selectionsList = [];
     //roster -> forces -> selections
     for (Forces forces in forcesList) {
@@ -362,7 +360,6 @@ class _ArmyImport extends State<ArmyImport> {
         }
       }
     }
-    //TODO Bis hier den JSON Export sinnvoll mit Ifs in Listen befüllt -> weniger Verschachtelung von for Schleifen
   }
 
   Unit readUnitOfJSON(Selections mySelection) {

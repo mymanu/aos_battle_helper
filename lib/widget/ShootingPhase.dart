@@ -458,7 +458,6 @@ class _ShootingPhase extends State<ShootingPhase> {
                                               ),
                                             ),
                                           ),
-                                          //TODO Positioned für grünen Kasten
                                           //https://pub.dev/packages/flutter_custom_clippers
                                           Positioned(
                                             top: 55,

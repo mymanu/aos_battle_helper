@@ -125,7 +125,6 @@ class _WarScroll extends State<WarScroll> {
                                 ),
                               ),
                             ),
-                            //TODO Positioned für grünen Kasten
                             //https://pub.dev/packages/flutter_custom_clippers
                             Positioned(
                               top: 55,
@@ -302,7 +301,6 @@ class _WarScroll extends State<WarScroll> {
             ),
             SizedBox(height: 20),
 
-            //TODO Anzahl der Rows in einer Tabelle flexibel machen anhand einer Liste
             //https://medium.com/@punithsuppar7795/creating-an-interactive-table-in-flutter-5b203d1cf875
             //https://stackoverflow.com/questions/77487563/i-want-to-insert-the-row-at-the-top-on-data-table-when-i-click-on-addnew-but-it
 

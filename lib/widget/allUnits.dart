@@ -155,7 +155,6 @@ class _allUnits extends State<allUnits> {
                                   ),
                                 ],
                               ),
-                              //TODO Hier Content der Card einfügen einer Unit
                               Container(
                                 padding: EdgeInsets.only(top: 10),
                                 child:
@@ -196,7 +195,6 @@ class _allUnits extends State<allUnits> {
                                               ),
                                             ),
                                           ),
-                                          //TODO Positioned für grünen Kasten
                                           //https://pub.dev/packages/flutter_custom_clippers
                                           Positioned(
                                             top: 55,

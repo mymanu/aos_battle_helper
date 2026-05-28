@@ -206,7 +206,6 @@ class _Preparation extends State<Preparation> {
                 BuildContext context,
                 int index,
               ) {
-                //TODO für Manu: Bitte Preparations einfügen aus spearheadGeneralSpells.dart
                 return SingleChildScrollView(
                   child: Card(
                     child: spellsThisPhase[index].erledigt
