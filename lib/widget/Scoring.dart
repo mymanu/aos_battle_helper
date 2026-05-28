@@ -123,6 +123,7 @@ class _Scoring extends State<Scoring> {
       body: Center(
         child: Column(
           children: [
+            Text("Warhammer - Age of Sigmar"),
             Table(
               children: [
                 TableRow(

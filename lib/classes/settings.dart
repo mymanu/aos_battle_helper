@@ -6,6 +6,7 @@ class Settings {
   int commandPoints = 4;
   List<Ability> commandAbilitys = [];
   List<Ability> normalAbilitys = [];
+  List<Ability> spearheadPreparationSpells = [];
   String playerName = "Player 1";
   List<int> scoresPlayer1 = [0,0,0,0,0];
   List<int> scoresPlayer2 = [0,0,0,0,0];

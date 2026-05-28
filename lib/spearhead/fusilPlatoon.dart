@@ -5,6 +5,8 @@ import '../classes/unit.dart';
 import '../classes/weapon.dart';
 import 'spearheadGeneralSpells.dart';
 
+//TODO Seite fusil ausfüllen
+
 class FusilPlatoon {
   Settings pickFusilPlatoon(Settings settings) {
     //---------------------------------------------------------

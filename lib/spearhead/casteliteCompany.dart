@@ -5,6 +5,8 @@ import '../classes/unit.dart';
 import '../classes/weapon.dart';
 import 'spearheadGeneralSpells.dart';
 
+//TODO Seite castelite ausfüllen
+
 class CasteliteCompany {
   Settings pickCasteliteCompany(Settings settings) {
     //---------------------------------------------------------

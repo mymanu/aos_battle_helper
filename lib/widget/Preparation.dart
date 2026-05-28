@@ -33,17 +33,53 @@ class _Preparation extends State<Preparation> {
 
     Functions functions = Functions();
 
-    spellsThisPhase.addAll(functions.unitAbilitys(widget.settings.army.unitList, widget.phaseColorString, widget.settings.ownPhase));
+    spellsThisPhase.addAll(
+      functions.unitAbilitys(
+        widget.settings.army.unitList,
+        widget.phaseColorString,
+        widget.settings.ownPhase,
+      ),
+    );
 
-    spellsThisPhase.addAll(functions.spellLoreAbilitys(widget.settings.army.spellLore, widget.phaseColorString, widget.settings.ownPhase));
+    spellsThisPhase.addAll(
+      functions.spellLoreAbilitys(
+        widget.settings.army.spellLore,
+        widget.phaseColorString,
+        widget.settings.ownPhase,
+      ),
+    );
 
-    spellsThisPhase.addAll(functions.battleTraitAbilitys(widget.settings.army.battleTraitsList, widget.phaseColorString, widget.settings.ownPhase));
+    spellsThisPhase.addAll(
+      functions.battleTraitAbilitys(
+        widget.settings.army.battleTraitsList,
+        widget.phaseColorString,
+        widget.settings.ownPhase,
+      ),
+    );
 
-    spellsThisPhase.addAll(functions.battleFormationAbilitys(widget.settings.army.battleFormationsList, widget.phaseColorString, widget.settings.ownPhase));
+    spellsThisPhase.addAll(
+      functions.battleFormationAbilitys(
+        widget.settings.army.battleFormationsList,
+        widget.phaseColorString,
+        widget.settings.ownPhase,
+      ),
+    );
 
-    spellsThisPhase.addAll(functions.commandAbilitys(widget.settings.commandAbilitys, widget.phaseColorString, widget.settings.ownPhase));
+    spellsThisPhase.addAll(
+      functions.commandAbilitys(
+        widget.settings.commandAbilitys,
+        widget.phaseColorString,
+        widget.settings.ownPhase,
+      ),
+    );
 
-    spellsThisPhase.addAll(functions.normalAbilitys(widget.settings.normalAbilitys, widget.phaseColorString, widget.settings.ownPhase));
+    spellsThisPhase.addAll(
+      functions.normalAbilitys(
+        widget.settings.normalAbilitys,
+        widget.phaseColorString,
+        widget.settings.ownPhase,
+      ),
+    );
 
     //TODO ab Hier wird das UI gebaut, ab hier kannst du dich dann austoben
     return Scaffold(
@@ -63,7 +99,7 @@ class _Preparation extends State<Preparation> {
             },
             child: Text("WarScrolls"),
           ),
-          SizedBox(width: 10,),
+          SizedBox(width: 10),
           IconButton(
             icon: Icon(Icons.add, color: calculateTextColor(widget.phaseColor)),
             onPressed: () {
@@ -161,11 +197,12 @@ class _Preparation extends State<Preparation> {
               delegate: SliverChildBuilderDelegate((
                 BuildContext context,
                 int index,
-              ) {
+              ) { //TODO für Manu: Bitte Preparations einfügen aus spearheadGeneralSpells.dart
                 return Card(
-                  child: spellsThisPhase[index].erledigt ?
-                  //Ab hier Card wenn die Ability erledigt ist
-                  ElevatedButton(
+                  child: spellsThisPhase[index].erledigt
+                      ?
+                        //Ab hier Card wenn die Ability erledigt ist
+                        ElevatedButton(
                           onPressed: () {
                             setState(() {
                               spellsThisPhase[index].erledigt = false;
@@ -197,8 +234,8 @@ class _Preparation extends State<Preparation> {
                           ),
                         )
                       :
-                  //Ab hier Card wenn es eine Ability ist
-                  Column(
+                        //Ab hier Card wenn es eine Ability ist
+                        Column(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             Row(
@@ -217,15 +254,27 @@ class _Preparation extends State<Preparation> {
                                 ),
                               ],
                             ),
-                            spellsThisPhase[index].typeName.contains("Passive") ? Text(spellsThisPhase[index].typeName) : Text(spellsThisPhase[index].timing),
+                            spellsThisPhase[index].typeName.contains("Passive")
+                                ? Text(spellsThisPhase[index].typeName)
+                                : Text(spellsThisPhase[index].timing),
                             Text(spellsThisPhase[index].originUnit),
                             Text(""),
-                            spellsThisPhase[index].effect.contains("-1") ?
-                            Text(spellsThisPhase[index].declare) : spellsThisPhase[index].declare.contains("-1") ?
-                            Text(spellsThisPhase[index].effect) :
-                            Text(spellsThisPhase[index].declare + "\n\n" + spellsThisPhase[index].effect) ,
+                            spellsThisPhase[index].effect.contains("-1")
+                                ? Text(spellsThisPhase[index].declare)
+                                : spellsThisPhase[index].declare.contains("-1")
+                                ? Text(spellsThisPhase[index].effect)
+                                : Text(
+                                    spellsThisPhase[index].declare +
+                                        "\n\n" +
+                                        spellsThisPhase[index].effect,
+                                  ),
 
-                            spellsThisPhase[index].commandPoints.contains("-") ? Text("") : Text("Command Point cost: " + spellsThisPhase[index].commandPoints),
+                            spellsThisPhase[index].commandPoints.contains("-")
+                                ? Text("")
+                                : Text(
+                                    "Command Point cost: " +
+                                        spellsThisPhase[index].commandPoints,
+                                  ),
                             /*
                             Text(cardContentList[index].ability.timing),
                             Text(cardContentList[index].ability.originUnit),
@@ -279,7 +328,8 @@ class _Preparation extends State<Preparation> {
   void _navigateToStartofBattle(BuildContext context, Settings settings) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => StartofBattle(title: "Start of Battle Round", settings: settings),
+        builder: (context) =>
+            StartofBattle(title: "Start of Battle Round", settings: settings),
       ),
     );
   }

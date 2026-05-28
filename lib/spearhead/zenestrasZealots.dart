@@ -5,6 +5,7 @@ import '../classes/unit.dart';
 import '../classes/weapon.dart';
 import 'spearheadGeneralSpells.dart';
 
+//TODO Seite zenestra ausfüllen
 
 class Zenestraszealots {
   Settings pickZenestraszealots(Settings settings) {

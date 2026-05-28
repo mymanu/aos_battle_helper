@@ -5,6 +5,8 @@ import '../classes/unit.dart';
 import '../classes/weapon.dart';
 import 'spearheadGeneralSpells.dart';
 
+//TODO Seite sentinels ausfüllen
+
 class SentinelsOfEmbergard {
   Settings pickSentinelsOfEmbergard(Settings settings) {
     //---------------------------------------------------------
@@ -62,18 +64,16 @@ class SentinelsOfEmbergard {
     //---------------------------------------------------------
     // Battle Traits
 
-
-
-    Ability mightyDestroyers = Ability("Mighty Destroyers");
-    mightyDestroyers.timing = "Once Per Turn (Army), Any Hero Phase";
-    mightyDestroyers.typeName = "Ability (Activated)";
-    mightyDestroyers.color = "Yellow";
-    mightyDestroyers.declare = "Pick a friendly unit that was not set up this turn to be the target.";
-    mightyDestroyers.effect = "The target can move up to 3\". It can move into combat. "
+    Ability rangerDoctrines = Ability("Ranger Doctrines");
+    rangerDoctrines.timing = "Once Per Turn (Army), Reaction: You declared a Fight ability for your general or a friendly non-Hero unit wholly within 12\" of your general";
+    rangerDoctrines.typeName = "Ability (Activated)";
+    rangerDoctrines.color = "Yellow";
+    rangerDoctrines.declare = "Pick a friendly unit that was not set up this turn to be the target.";
+    rangerDoctrines.effect = "The target can move up to 3\". It can move into combat. "
         "\nIf it was in combat at the start of the move, it must end that move in combat.";
 
     BattleTraits battleTraits = BattleTraits();
-    battleTraits.abilitys.add(mightyDestroyers);
+    battleTraits.abilitys.add(rangerDoctrines);
 
     // Battle Traits
     //---------------------------------------------------------
