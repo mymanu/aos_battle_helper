@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:aos_battle_helper/classes/spellLore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:file_picker/file_picker.dart';
@@ -312,6 +313,13 @@ class _ArmyImport extends State<ArmyImport> {
       for (Selections select in selectionsList) {
         if (select.name.contains("Battle Trait")) {
           readBattleTrait(select);
+        }
+        if (select.name.contains("Arcane")) {
+          widget.settings.army.spellLore = readSpellLoreOfJSON(select);
+        }
+        if(select.type.contains("unit")){
+          //TODO Hier Tower zu finden
+          widget.settings.army.unitList.add(readUnitOfJSON(select));
         }
 
         List<Selections> selectionsTwoList = [];
@@ -638,6 +646,66 @@ class _ArmyImport extends State<ArmyImport> {
       }
     }
     return ability;
+  }
+
+  SpellLore readSpellLoreOfJSON(Selections select) {
+    SpellLore spelllore = SpellLore();
+    List<Selections> selectionsTwoList = [];
+
+    for (Map<String, dynamic> selectionMapTwoJSON
+    in select.selectionsDynamic) {
+      Selections selectTwo = Selections(
+        selectionMapTwoJSON["id"],
+        selectionMapTwoJSON["name"],
+      );
+
+      if (selectionMapTwoJSON.containsKey("categories")) {
+        for (Map<String, dynamic> entry in selectionMapTwoJSON["categories"]) {
+          selectTwo.categoriesDynamic.add(entry);
+        }
+      }
+
+      if (selectionMapTwoJSON.containsKey("profiles")) {
+        for (Map<String, dynamic> entry in selectionMapTwoJSON["profiles"]) {
+          selectTwo.profilesDynamic.add(entry);
+        }
+      }
+
+      if (selectionMapTwoJSON.containsKey("type")) {
+        selectTwo.type = selectionMapTwoJSON["type"];
+      }
+
+      if(!selectTwo.type.contains("unit")){
+        selectionsTwoList.add(selectTwo);
+      }
+
+    }
+    for (Selections selectTwo in selectionsTwoList) {
+      for (Map<String, dynamic> profileMapJSON
+      in selectTwo.profilesDynamic) {
+        Profiles profile = Profiles(
+          profileMapJSON["id"],
+          profileMapJSON["name"],
+        );
+
+        if (profileMapJSON.containsKey("characteristics")) {
+          profile.characteristics = profileMapJSON["characteristics"];
+        }
+        if (profileMapJSON.containsKey("attributes")) {
+          profile.attributes = profileMapJSON["attributes"];
+        }
+        if (profileMapJSON.containsKey("typeName")) {
+          profile.typeName = profileMapJSON["typeName"];
+        }
+
+        if (profile.typeName.contains("Ability")) {
+          //unit = readAbilityOfJSON(unit, profile);
+          Ability abi = readAbilityOfJSON(profile);
+          spelllore.abilitys.add(abi);
+        }
+      }
+    }
+    return spelllore;
   }
 
   Unit readWeaponJSON(Unit unit, Profiles profile, bool weaponNew) {

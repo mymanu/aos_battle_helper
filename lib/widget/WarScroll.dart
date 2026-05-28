@@ -431,8 +431,8 @@ class _WarScroll extends State<WarScroll> {
                                     passiveAbilities[index].typeName.contains("Passive") ? Text(passiveAbilities[index].typeName) : Text(passiveAbilities[index].timing),
                                     Text(passiveAbilities[index].originUnit),
                                     Text(""),
-                                    passiveAbilities[index].effect.contains("-") ?
-                                    Text(passiveAbilities[index].declare) : passiveAbilities[index].declare.contains("-") ?
+                                    passiveAbilities[index].effect.contains("-1") ?
+                                    Text(passiveAbilities[index].declare) : passiveAbilities[index].declare.contains("-1") ?
                                     Text(passiveAbilities[index].effect) :
                                     Text(passiveAbilities[index].declare + "\n\n" + passiveAbilities[index].effect) ,
 
