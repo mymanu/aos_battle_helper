@@ -81,6 +81,14 @@ class _Preparation extends State<Preparation> {
       ),
     );
 
+    spellsThisPhase.addAll(
+      functions.preparationAbilities(
+        widget.settings.preparationSpells,
+        widget.phaseColorString,
+        widget.settings.ownPhase,
+      ),
+    );
+
     //TODO ab Hier wird das UI gebaut, ab hier kannst du dich dann austoben
     return Scaffold(
       appBar: AppBar(
@@ -197,26 +205,28 @@ class _Preparation extends State<Preparation> {
               delegate: SliverChildBuilderDelegate((
                 BuildContext context,
                 int index,
-              ) { //TODO für Manu: Bitte Preparations einfügen aus spearheadGeneralSpells.dart
-                return Card(
-                  child: spellsThisPhase[index].erledigt
-                      ?
-                        //Ab hier Card wenn die Ability erledigt ist
-                        ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              spellsThisPhase[index].erledigt = false;
-                            });
-                          },
-                          child: Column(
-                            children: [
-                              Text(
-                                spellsThisPhase[index].name,
-                                //cardContentList[index].ability.name.contains("-1") ? cardContentList[index].unit.name : cardContentList[index].ability.name,
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Icon(Icons.done, size: 100),
-                              /*
+              ) {
+                //TODO für Manu: Bitte Preparations einfügen aus spearheadGeneralSpells.dart
+                return SingleChildScrollView(
+                  child: Card(
+                    child: spellsThisPhase[index].erledigt
+                        ?
+                          //Ab hier Card wenn die Ability erledigt ist
+                          ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                spellsThisPhase[index].erledigt = false;
+                              });
+                            },
+                            child: Column(
+                              children: [
+                                Text(
+                                  spellsThisPhase[index].name,
+                                  //cardContentList[index].ability.name.contains("-1") ? cardContentList[index].unit.name : cardContentList[index].ability.name,
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                Icon(Icons.done, size: 100),
+                                /*
                               Container(
                                 height: 100,
                                 width: 100,
@@ -230,86 +240,91 @@ class _Preparation extends State<Preparation> {
                                 ),
                               ),
                               */
-                            ],
-                          ),
-                        )
-                      :
-                        //Ab hier Card wenn es eine Ability ist
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  spellsThisPhase[index].name,
-                                  //cardContentList[index].ability.name,
-                                  style: TextStyle(
-                                    backgroundColor: widget.phaseColor,
-                                    fontWeight: FontWeight.bold,
-                                    color: calculateTextColor(
-                                      widget.phaseColor,
-                                    ),
-                                  ),
-                                ),
                               ],
                             ),
-                            spellsThisPhase[index].typeName.contains("Passive")
-                                ? Text(spellsThisPhase[index].typeName)
-                                : Text(spellsThisPhase[index].timing),
-                            Text(spellsThisPhase[index].originUnit),
-                            Text(""),
-                            spellsThisPhase[index].effect.contains("-1")
-                                ? Text(spellsThisPhase[index].declare)
-                                : spellsThisPhase[index].declare.contains("-1")
-                                ? Text(spellsThisPhase[index].effect)
-                                : Text(
-                                    spellsThisPhase[index].declare +
-                                        "\n\n" +
-                                        spellsThisPhase[index].effect,
+                          )
+                        :
+                          //Ab hier Card wenn es eine Ability ist
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    spellsThisPhase[index].name,
+                                    //cardContentList[index].ability.name,
+                                    style: TextStyle(
+                                      backgroundColor: widget.phaseColor,
+                                      fontWeight: FontWeight.bold,
+                                      color: calculateTextColor(
+                                        widget.phaseColor,
+                                      ),
+                                    ),
                                   ),
+                                ],
+                              ),
+                              spellsThisPhase[index].typeName.contains(
+                                    "Passive",
+                                  )
+                                  ? Text(spellsThisPhase[index].typeName)
+                                  : Text(spellsThisPhase[index].timing),
+                              Text(spellsThisPhase[index].originUnit),
+                              Text(""),
+                              spellsThisPhase[index].effect.contains("-1")
+                                  ? Text(spellsThisPhase[index].declare)
+                                  : spellsThisPhase[index].declare.contains(
+                                      "-1",
+                                    )
+                                  ? Text(spellsThisPhase[index].effect)
+                                  : Text(
+                                      spellsThisPhase[index].declare +
+                                          "\n\n" +
+                                          spellsThisPhase[index].effect,
+                                    ),
 
-                            spellsThisPhase[index].commandPoints.contains("-")
-                                ? Text("")
-                                : Text(
-                                    "Command Point cost: " +
-                                        spellsThisPhase[index].commandPoints,
-                                  ),
-                            /*
+                              spellsThisPhase[index].commandPoints.contains("-")
+                                  ? Text("")
+                                  : Text(
+                                      "Command Point cost: " +
+                                          spellsThisPhase[index].commandPoints,
+                                    ),
+                              /*
                             Text(cardContentList[index].ability.timing),
                             Text(cardContentList[index].ability.originUnit),
                             Text(cardContentList[index].ability.details),
                              */
-                            /*
+                              /*
                             ListTile(
                               leading: Icon(Icons.album),
                               title: Text(spells[index].title),
                               subtitle: Text(spells[index].details),
                             ),
                             */
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: <Widget>[
-                                TextButton(
-                                  child: Text("Fähigkeit erledigt"),
-                                  onPressed: () {
-                                    setState(() {
-                                      spellsThisPhase[index].erledigt = true;
-                                    });
-                                  },
-                                ),
-                                const SizedBox(width: 8),
-                                TextButton(
-                                  child: Text("Item $index"),
-                                  onPressed: () {
-                                    /* ... */
-                                  },
-                                ),
-                                const SizedBox(width: 8),
-                              ],
-                            ),
-                          ],
-                        ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: <Widget>[
+                                  TextButton(
+                                    child: Text("Fähigkeit erledigt"),
+                                    onPressed: () {
+                                      setState(() {
+                                        spellsThisPhase[index].erledigt = true;
+                                      });
+                                    },
+                                  ),
+                                  const SizedBox(width: 8),
+                                  TextButton(
+                                    child: Text("Item $index"),
+                                    onPressed: () {
+                                      /* ... */
+                                    },
+                                  ),
+                                  const SizedBox(width: 8),
+                                ],
+                              ),
+                            ],
+                          ),
+                  ),
                 );
               }, childCount: spellsThisPhase.length),
             ),

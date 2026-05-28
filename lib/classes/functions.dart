@@ -277,6 +277,49 @@ class Functions {
     return abilitys;
   }
 
+  List<Ability> preparationAbilities(List<Ability> preparationAbilities, String phaseColorString, bool ownPhase) {
+    List<Ability> abilities = [];
+    for (Ability ability in preparationAbilities) {
+      if (ability.color.contains(phaseColorString)) {
+        /*
+        //Für Hard Coded Spells Anfang
+        if ((ability.timing.contains("Your") ||
+            ability.timing.contains("Any") ||
+            ability.timing.contains("Passive")) &&
+            ownPhase) {
+          ability.originUnit = "Core-Ability";
+          abilities.add(ability);
+        }
+        if ((ability.timing.contains("Enemy") ||
+            ability.timing.contains("Any") ||
+            ability.timing.contains("Passive")) &&
+            !ownPhase) {
+          ability.originUnit = "Core-Ability";
+          abilities.add(ability);
+        }
+        //Für Hard Coded Spells Ende
+        */
+        //Für JSON Spells Anfang
+        if ((ability.timing.contains("Your") ||
+            ability.timing.contains("Any") ||
+            ability.typeName.contains("Passive")) &&
+            ownPhase) {
+          ability.originUnit = "Preparation-Ability";
+          abilities.add(ability);
+        }
+        if ((ability.timing.contains("Enemy") ||
+            ability.timing.contains("Any") ||
+            ability.typeName.contains("Passive")) &&
+            !ownPhase) {
+          ability.originUnit = "Preparation-Ability";
+          abilities.add(ability);
+        }
+        //Für JSON Spells Ende
+      }
+    }
+    return abilities;
+  }
+
 
 
   void _navigateToMenu(BuildContext context, Settings settings) {

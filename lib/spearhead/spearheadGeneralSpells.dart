@@ -97,6 +97,8 @@ class SpearheadGeneralSpells {
 
     settings.normalAbilitys = normalSpells;
 
+    settings = spearheadPreparationSpells(settings);
+
     return settings;
   }
 
@@ -104,6 +106,8 @@ class SpearheadGeneralSpells {
     List<Ability> spearheadPreparationSpells = [];
 
     Ability preBattleSequence = Ability("Pre-Battle Sequence");
+    preBattleSequence.typeName = "Ability (Passive)";
+    preBattleSequence.color = "Teal";
     preBattleSequence.effect =
         "• Roll off. Winner chooses who is attacker and who is defender."
         "\n• Attacker picks regiment ability and enhancement, then defender does so."
@@ -115,12 +119,16 @@ class SpearheadGeneralSpells {
     spearheadPreparationSpells.add(preBattleSequence);
 
     Ability deployment = Ability("Deployment");
+    deployment.typeName = "Ability (Passive)";
+    deployment.color = "Teal";
     deployment.effect =
         "Attacker sets up their army first, followed by the defender. "
         "\nEach unit must be set up wholly within friendly territory and more than 6\" from enemy territory.";
     spearheadPreparationSpells.add(deployment);
 
     Ability seizingInitiative = Ability("Seizing The Initiative");
+    seizingInitiative.typeName = "Ability (Passive)";
+    seizingInitiative.color = "Teal";
     seizingInitiative.effect =
         "If the player who went second in the previous battle round wins the priority roll "
         "and chooses to go first in the current battle round, they do not draw any battle tactic cards for that battle round "
@@ -128,6 +136,8 @@ class SpearheadGeneralSpells {
     spearheadPreparationSpells.add(seizingInitiative);
 
     Ability battleTacticCards = Ability("Battle Tactics Cards");
+    battleTacticCards.typeName = "Ability (Passive)";
+    battleTacticCards.color = "Teal";
     battleTacticCards.effect =
         "• Start of first battle round: draw 3 battle tactic cards."
         "\nStart of second or later battle round: discard any battle tactic cards in your hand if you wish. "
@@ -135,6 +145,8 @@ class SpearheadGeneralSpells {
     spearheadPreparationSpells.add(battleTacticCards);
 
     Ability victoryPoints = Ability("Victory Points");
+    victoryPoints.typeName = "Ability (Passive)";
+    victoryPoints.color = "Teal";
     victoryPoints.effect =
         "At the end of each of your turns:"
         "\n• Score 1 victory point if you control at least one objective."
@@ -146,6 +158,8 @@ class SpearheadGeneralSpells {
     Ability startBattleRoundSequence = Ability(
       "Start of Battle Round Sequence",
     );
+    startBattleRoundSequence.typeName = "Ability (Passive)";
+    startBattleRoundSequence.color = "Teal";
     startBattleRoundSequence.effect =
         "• First battle round: attacker chooses who takes the first turn. "
         "\nLater battle rounds: players make a priority roll (Core Rules, 12.0)."
@@ -156,6 +170,8 @@ class SpearheadGeneralSpells {
     spearheadPreparationSpells.add(startBattleRoundSequence);
 
     Ability terrain = Ability("Terrain");
+    terrain.typeName = "Ability (Passive)";
+    terrain.color = "Teal";
     terrain.effect =
         "Large Terrain Feature: Cover, Obscuring, Unstable."
         "\nSmall Terrain Feature: Cover, Unstable."
@@ -167,6 +183,8 @@ class SpearheadGeneralSpells {
     spearheadPreparationSpells.add(terrain);
 
     Ability universalWeaponAbilities = Ability("Universal Weapon Abilities");
+    universalWeaponAbilities.typeName = "Ability (Passive)";
+    universalWeaponAbilities.color = "Teal";
     universalWeaponAbilities.effect =
         "• Anti-X (+1 Rend): Add 1 to this weapon’s Rend characteristic if the target has the keyword after ‘Anti-’ or "
         "\nfulfils the condition after ‘Anti-’. Multiples of this ability are cumulative. For example, if a weapon has both"
@@ -183,7 +201,7 @@ class SpearheadGeneralSpells {
         "\n• Shoot in Combat: This weapon can be used to make shooting attacks even if the attacking unit is in combat.";
     spearheadPreparationSpells.add(universalWeaponAbilities);
 
-    settings.spearheadPreparationSpells = spearheadPreparationSpells;
+    settings.preparationSpells = spearheadPreparationSpells;
 
     return settings;
   }

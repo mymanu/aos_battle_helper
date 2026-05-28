@@ -33,28 +33,67 @@ class _ChargePhase extends State<ChargePhase> {
 
     Functions functions = Functions();
 
-    spellsThisPhase.addAll(functions.unitAbilitys(widget.settings.army.unitList, widget.phaseColorString, widget.settings.ownPhase));
+    spellsThisPhase.addAll(
+      functions.unitAbilitys(
+        widget.settings.army.unitList,
+        widget.phaseColorString,
+        widget.settings.ownPhase,
+      ),
+    );
 
-    spellsThisPhase.addAll(functions.spellLoreAbilitys(widget.settings.army.spellLore, widget.phaseColorString, widget.settings.ownPhase));
+    spellsThisPhase.addAll(
+      functions.spellLoreAbilitys(
+        widget.settings.army.spellLore,
+        widget.phaseColorString,
+        widget.settings.ownPhase,
+      ),
+    );
 
-    spellsThisPhase.addAll(functions.battleTraitAbilitys(widget.settings.army.battleTraitsList, widget.phaseColorString, widget.settings.ownPhase));
+    spellsThisPhase.addAll(
+      functions.battleTraitAbilitys(
+        widget.settings.army.battleTraitsList,
+        widget.phaseColorString,
+        widget.settings.ownPhase,
+      ),
+    );
 
-    spellsThisPhase.addAll(functions.battleFormationAbilitys(widget.settings.army.battleFormationsList, widget.phaseColorString, widget.settings.ownPhase));
+    spellsThisPhase.addAll(
+      functions.battleFormationAbilitys(
+        widget.settings.army.battleFormationsList,
+        widget.phaseColorString,
+        widget.settings.ownPhase,
+      ),
+    );
 
-    spellsThisPhase.addAll(functions.commandAbilitys(widget.settings.commandAbilitys, widget.phaseColorString, widget.settings.ownPhase));
+    spellsThisPhase.addAll(
+      functions.commandAbilitys(
+        widget.settings.commandAbilitys,
+        widget.phaseColorString,
+        widget.settings.ownPhase,
+      ),
+    );
 
-    spellsThisPhase.addAll(functions.normalAbilitys(widget.settings.normalAbilitys, widget.phaseColorString, widget.settings.ownPhase));
+    spellsThisPhase.addAll(
+      functions.normalAbilitys(
+        widget.settings.normalAbilitys,
+        widget.phaseColorString,
+        widget.settings.ownPhase,
+      ),
+    );
 
     //TODO ab Hier wird das UI der Helden-Phase gebaut, ab hier kann sich Jenny austoben.
     return Scaffold(
       appBar: AppBar(
-        title: Text(title, style: TextStyle(color: calculateTextColor(widget.phaseColor)),),
+        title: Text(
+          title,
+          style: TextStyle(color: calculateTextColor(widget.phaseColor)),
+        ),
         centerTitle: true,
         backgroundColor: widget.phaseColor,
         actions: <Widget>[
           Text(
-              "Underdog:",
-              style: TextStyle(color: calculateTextColor(widget.phaseColor))
+            "Underdog:",
+            style: TextStyle(color: calculateTextColor(widget.phaseColor)),
           ),
           Switch(
             // This bool value toggles the switch.
@@ -78,7 +117,7 @@ class _ChargePhase extends State<ChargePhase> {
             },
             child: Text("WarScrolls"),
           ),
-          SizedBox(width: 10,),
+          SizedBox(width: 10),
           IconButton(
             icon: Icon(Icons.add, color: calculateTextColor(widget.phaseColor)),
             onPressed: () {
@@ -93,7 +132,10 @@ class _ChargePhase extends State<ChargePhase> {
             style: TextStyle(color: calculateTextColor(widget.phaseColor)),
           ),
           IconButton(
-            icon: Icon(Icons.remove, color: calculateTextColor(widget.phaseColor)),
+            icon: Icon(
+              Icons.remove,
+              color: calculateTextColor(widget.phaseColor),
+            ),
             onPressed: () {
               setState(() {
                 widget.settings.commandPoints =
@@ -126,10 +168,11 @@ class _ChargePhase extends State<ChargePhase> {
           ),
           SizedBox(width: 50),
           Text(
-              widget.settings.ownPhase
-                  ? 'My ' + widget.title
-                  : 'Enemy ' + widget.title,
-              style: TextStyle(color: calculateTextColor(widget.phaseColor))),
+            widget.settings.ownPhase
+                ? 'My ' + widget.title
+                : 'Enemy ' + widget.title,
+            style: TextStyle(color: calculateTextColor(widget.phaseColor)),
+          ),
           Switch(
             // Dieser bool-Wert ändert den Switch.
             value: widget.settings.ownPhase,
@@ -160,27 +203,28 @@ class _ChargePhase extends State<ChargePhase> {
                 mainAxisSpacing: 10,
                 crossAxisCount: 3,
                 childAspectRatio: 2,
-
-
               ),
-              delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) {
-                    return Card(
-                      child: spellsThisPhase[index].erledigt
-                          ? ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            spellsThisPhase[index].erledigt = false;
-                          });
-                        },
-                        child: Column(
-                          children: [
-                            Text(
-                              spellsThisPhase[index].name,
-                              style: TextStyle(fontSize: 20),
-                            ),
-                            Icon(Icons.done, size: 100),
-                            /*
+              delegate: SliverChildBuilderDelegate((
+                BuildContext context,
+                int index,
+              ) {
+                return SingleChildScrollView(
+                  child: Card(
+                    child: spellsThisPhase[index].erledigt
+                        ? ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                spellsThisPhase[index].erledigt = false;
+                              });
+                            },
+                            child: Column(
+                              children: [
+                                Text(
+                                  spellsThisPhase[index].name,
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                Icon(Icons.done, size: 100),
+                                /*
                               Container(
                                 height: 100,
                                 width: 100,
@@ -194,76 +238,96 @@ class _ChargePhase extends State<ChargePhase> {
                                 ),
                               ),
                               */
-                          ],
-                        ),
-                      )
-                          : Column(
-                        mainAxisSize: MainAxisSize.min,
-                        //crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                spellsThisPhase[index].name,
-                                style: TextStyle(
-                                  backgroundColor: widget.phaseColor,
-                                  fontWeight: FontWeight.bold,
-                                  color: calculateTextColor(
-                                    widget.phaseColor,
+                              ],
+                            ),
+                          )
+                        : Column(
+                            mainAxisSize: MainAxisSize.min,
+                            //crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    spellsThisPhase[index].name,
+                                    style: TextStyle(
+                                      backgroundColor: widget.phaseColor,
+                                      fontWeight: FontWeight.bold,
+                                      color: calculateTextColor(
+                                        widget.phaseColor,
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              //TODO abändern zu Unit, von welcher es genutzt werden kann
-                              Text("Ursprung: " + spellsThisPhase[index].originUnit),
-                            ],
-                          ),
-                          spellsThisPhase[index].typeName.contains("Passive") ? Text(spellsThisPhase[index].typeName) : Text(spellsThisPhase[index].timing),
-                          Text(spellsThisPhase[index].originUnit),
-                          Text(""),
-                          spellsThisPhase[index].effect.contains("-1") ?
-                          Text(spellsThisPhase[index].declare) : spellsThisPhase[index].declare.contains("-1") ?
-                          Text(spellsThisPhase[index].effect) :
-                          Text(spellsThisPhase[index].declare + "\n\n" + spellsThisPhase[index].effect) ,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  //TODO abändern zu Unit, von welcher es genutzt werden kann
+                                  Text(
+                                    "Ursprung: " +
+                                        spellsThisPhase[index].originUnit,
+                                  ),
+                                ],
+                              ),
+                              spellsThisPhase[index].typeName.contains(
+                                    "Passive",
+                                  )
+                                  ? Text(spellsThisPhase[index].typeName)
+                                  : Text(spellsThisPhase[index].timing),
+                              Text(spellsThisPhase[index].originUnit),
+                              Text(""),
+                              spellsThisPhase[index].effect.contains("-1")
+                                  ? Text(spellsThisPhase[index].declare)
+                                  : spellsThisPhase[index].declare.contains(
+                                      "-1",
+                                    )
+                                  ? Text(spellsThisPhase[index].effect)
+                                  : Text(
+                                      spellsThisPhase[index].declare +
+                                          "\n\n" +
+                                          spellsThisPhase[index].effect,
+                                    ),
 
-                          spellsThisPhase[index].commandPoints.contains("-") ? Text("") : Text("Command Point cost: " + spellsThisPhase[index].commandPoints),
-                          /*
+                              spellsThisPhase[index].commandPoints.contains("-")
+                                  ? Text("")
+                                  : Text(
+                                      "Command Point cost: " +
+                                          spellsThisPhase[index].commandPoints,
+                                    ),
+                              /*
                             ListTile(
                               leading: Icon(Icons.album),
                               title: Text(spells[index].title),
                               subtitle: Text(spells[index].details),
                             ),
                             */
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: <Widget>[
-                              TextButton(
-                                child: Text("Fähigkeit erledigt"),
-                                onPressed: () {
-                                  setState(() {
-                                    spellsThisPhase[index].erledigt = true;
-                                  });
-                                },
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: <Widget>[
+                                  TextButton(
+                                    child: Text("Fähigkeit erledigt"),
+                                    onPressed: () {
+                                      setState(() {
+                                        spellsThisPhase[index].erledigt = true;
+                                      });
+                                    },
+                                  ),
+                                  const SizedBox(width: 8),
+                                  TextButton(
+                                    child: Text("Item $index"),
+                                    onPressed: () {
+                                      /* ... */
+                                    },
+                                  ),
+                                  const SizedBox(width: 8),
+                                ],
                               ),
-                              const SizedBox(width: 8),
-                              TextButton(
-                                child: Text("Item $index"),
-                                onPressed: () {
-                                  /* ... */
-                                },
-                              ),
-                              const SizedBox(width: 8),
                             ],
                           ),
-                        ],
-                      ),
-                    );
-                  }, childCount: spellsThisPhase.length),
+                  ),
+                );
+              }, childCount: spellsThisPhase.length),
             ),
           ),
         ],
@@ -280,7 +344,8 @@ class _ChargePhase extends State<ChargePhase> {
   void _navigateToCombat(BuildContext context, Settings settings) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => CombatPhase(title: "Combatphase", settings: settings),
+        builder: (context) =>
+            CombatPhase(title: "Combatphase", settings: settings),
       ),
     );
   }
@@ -288,7 +353,8 @@ class _ChargePhase extends State<ChargePhase> {
   void _navigateToMenu(BuildContext context, Settings settings) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => HomePage(title: "Age of Sigmar Battle Helper", settings: settings),
+        builder: (context) =>
+            HomePage(title: "Age of Sigmar Battle Helper", settings: settings),
       ),
     );
   }

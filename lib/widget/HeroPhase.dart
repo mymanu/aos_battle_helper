@@ -33,17 +33,53 @@ class _HeroPhase extends State<HeroPhase> {
 
     Functions functions = Functions();
 
-    spellsThisPhase.addAll(functions.unitAbilitys(widget.settings.army.unitList, widget.phaseColorString, widget.settings.ownPhase));
+    spellsThisPhase.addAll(
+      functions.unitAbilitys(
+        widget.settings.army.unitList,
+        widget.phaseColorString,
+        widget.settings.ownPhase,
+      ),
+    );
 
-    spellsThisPhase.addAll(functions.spellLoreAbilitys(widget.settings.army.spellLore, widget.phaseColorString, widget.settings.ownPhase));
+    spellsThisPhase.addAll(
+      functions.spellLoreAbilitys(
+        widget.settings.army.spellLore,
+        widget.phaseColorString,
+        widget.settings.ownPhase,
+      ),
+    );
 
-    spellsThisPhase.addAll(functions.battleTraitAbilitys(widget.settings.army.battleTraitsList, widget.phaseColorString, widget.settings.ownPhase));
+    spellsThisPhase.addAll(
+      functions.battleTraitAbilitys(
+        widget.settings.army.battleTraitsList,
+        widget.phaseColorString,
+        widget.settings.ownPhase,
+      ),
+    );
 
-    spellsThisPhase.addAll(functions.battleFormationAbilitys(widget.settings.army.battleFormationsList, widget.phaseColorString, widget.settings.ownPhase));
+    spellsThisPhase.addAll(
+      functions.battleFormationAbilitys(
+        widget.settings.army.battleFormationsList,
+        widget.phaseColorString,
+        widget.settings.ownPhase,
+      ),
+    );
 
-    spellsThisPhase.addAll(functions.commandAbilitys(widget.settings.commandAbilitys, widget.phaseColorString, widget.settings.ownPhase));
+    spellsThisPhase.addAll(
+      functions.commandAbilitys(
+        widget.settings.commandAbilitys,
+        widget.phaseColorString,
+        widget.settings.ownPhase,
+      ),
+    );
 
-    spellsThisPhase.addAll(functions.normalAbilitys(widget.settings.normalAbilitys, widget.phaseColorString, widget.settings.ownPhase));
+    spellsThisPhase.addAll(
+      functions.normalAbilitys(
+        widget.settings.normalAbilitys,
+        widget.phaseColorString,
+        widget.settings.ownPhase,
+      ),
+    );
 
     //TODO ab Hier wird das UI der Helden-Phase gebaut, ab hier kann sich Jenny austoben.
     return Scaffold(
@@ -56,8 +92,8 @@ class _HeroPhase extends State<HeroPhase> {
         backgroundColor: widget.phaseColor,
         actions: <Widget>[
           Text(
-              "Underdog:",
-              style: TextStyle(color: calculateTextColor(widget.phaseColor))
+            "Underdog:",
+            style: TextStyle(color: calculateTextColor(widget.phaseColor)),
           ),
           Switch(
             // This bool value toggles the switch.
@@ -81,7 +117,7 @@ class _HeroPhase extends State<HeroPhase> {
             },
             child: Text("WarScrolls"),
           ),
-          SizedBox(width: 10,),
+          SizedBox(width: 10),
           IconButton(
             icon: Icon(Icons.add, color: calculateTextColor(widget.phaseColor)),
             onPressed: () {
@@ -172,22 +208,23 @@ class _HeroPhase extends State<HeroPhase> {
                 BuildContext context,
                 int index,
               ) {
-                return Card(
-                  child: spellsThisPhase[index].erledigt
-                      ? ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              spellsThisPhase[index].erledigt = false;
-                            });
-                          },
-                          child: Column(
-                            children: [
-                              Text(
-                                spellsThisPhase[index].name,
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Icon(Icons.done, size: 100),
-                              /*
+                return SingleChildScrollView(
+                  child: Card(
+                    child: spellsThisPhase[index].erledigt
+                        ? ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                spellsThisPhase[index].erledigt = false;
+                              });
+                            },
+                            child: Column(
+                              children: [
+                                Text(
+                                  spellsThisPhase[index].name,
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                Icon(Icons.done, size: 100),
+                                /*
                               Container(
                                 height: 100,
                                 width: 100,
@@ -201,77 +238,94 @@ class _HeroPhase extends State<HeroPhase> {
                                 ),
                               ),
                               */
-                            ],
-                          ),
-                        )
-                      : Column(
-                          mainAxisSize: MainAxisSize.min,
-                          //crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  spellsThisPhase[index].name,
-                                  style: TextStyle(
-                                    backgroundColor: widget.phaseColor,
-                                    fontWeight: FontWeight.bold,
-                                    color: calculateTextColor(
-                                      widget.phaseColor,
+                              ],
+                            ),
+                          )
+                        : Column(
+                            mainAxisSize: MainAxisSize.min,
+                            //crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    spellsThisPhase[index].name,
+                                    style: TextStyle(
+                                      backgroundColor: widget.phaseColor,
+                                      fontWeight: FontWeight.bold,
+                                      color: calculateTextColor(
+                                        widget.phaseColor,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                //TODO abändern zu Unit, von welcher es genutzt werden kann
-                                Text(
-                                  "Ursprung: " +
-                                      spellsThisPhase[index].originUnit,
-                                ),
-                              ],
-                            ),
-                            spellsThisPhase[index].typeName.contains("Passive") ? Text(spellsThisPhase[index].typeName) : Text(spellsThisPhase[index].timing),
-                            Text(spellsThisPhase[index].originUnit),
-                            Text(""),
-                            spellsThisPhase[index].effect.contains("-1") ?
-                            Text(spellsThisPhase[index].declare) : spellsThisPhase[index].declare.contains("-1") ?
-                            Text(spellsThisPhase[index].effect) :
-                            Text(spellsThisPhase[index].declare + "\n\n" + spellsThisPhase[index].effect) ,
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  //TODO abändern zu Unit, von welcher es genutzt werden kann
+                                  Text(
+                                    "Ursprung: " +
+                                        spellsThisPhase[index].originUnit,
+                                  ),
+                                ],
+                              ),
+                              spellsThisPhase[index].typeName.contains(
+                                    "Passive",
+                                  )
+                                  ? Text(spellsThisPhase[index].typeName)
+                                  : Text(spellsThisPhase[index].timing),
+                              Text(spellsThisPhase[index].originUnit),
+                              Text(""),
+                              spellsThisPhase[index].effect.contains("-1")
+                                  ? Text(spellsThisPhase[index].declare)
+                                  : spellsThisPhase[index].declare.contains(
+                                      "-1",
+                                    )
+                                  ? Text(spellsThisPhase[index].effect)
+                                  : Text(
+                                      spellsThisPhase[index].declare +
+                                          "\n\n" +
+                                          spellsThisPhase[index].effect,
+                                    ),
 
-                            spellsThisPhase[index].commandPoints.contains("-") ? Text("") : Text("Command Point cost: " + spellsThisPhase[index].commandPoints),
-                            /*
+                              spellsThisPhase[index].commandPoints.contains("-")
+                                  ? Text("")
+                                  : Text(
+                                      "Command Point cost: " +
+                                          spellsThisPhase[index].commandPoints,
+                                    ),
+                              /*
                             ListTile(
                               leading: Icon(Icons.album),
                               title: Text(spells[index].title),
                               subtitle: Text(spells[index].details),
                             ),
                             */
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: <Widget>[
-                                TextButton(
-                                  child: Text("Fähigkeit erledigt"),
-                                  onPressed: () {
-                                    setState(() {
-                                      spellsThisPhase[index].erledigt = true;
-                                    });
-                                  },
-                                ),
-                                const SizedBox(width: 8),
-                                TextButton(
-                                  child: Text("Item $index"),
-                                  onPressed: () {
-                                    /* ... */
-                                  },
-                                ),
-                                const SizedBox(width: 8),
-                              ],
-                            ),
-                          ],
-                        ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: <Widget>[
+                                  TextButton(
+                                    child: Text("Fähigkeit erledigt"),
+                                    onPressed: () {
+                                      setState(() {
+                                        spellsThisPhase[index].erledigt = true;
+                                      });
+                                    },
+                                  ),
+                                  const SizedBox(width: 8),
+                                  TextButton(
+                                    child: Text("Item $index"),
+                                    onPressed: () {
+                                      /* ... */
+                                    },
+                                  ),
+                                  const SizedBox(width: 8),
+                                ],
+                              ),
+                            ],
+                          ),
+                  ),
                 );
               }, childCount: spellsThisPhase.length),
             ),
@@ -304,6 +358,7 @@ class _HeroPhase extends State<HeroPhase> {
       ),
     );
   }
+
   void _navigateToAllUnits(BuildContext context, Settings settings) {
     Navigator.of(context).push(
       MaterialPageRoute(

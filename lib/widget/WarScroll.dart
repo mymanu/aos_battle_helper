@@ -220,8 +220,9 @@ class _WarScroll extends State<WarScroll> {
                               child: Column(
                                 children: [
                                   Text(
-                                    widget.unit.banishment.contains("-") ?
-                                    widget.unit.control : widget.unit.banishment,
+                                    widget.unit.banishment.contains("-")
+                                        ? widget.unit.control
+                                        : widget.unit.banishment,
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,
@@ -229,8 +230,7 @@ class _WarScroll extends State<WarScroll> {
                                   ),
                                   SizedBox(width: 10),
                                   Text(
-                                    widget.unit.banishment
-                                        .contains("-")
+                                    widget.unit.banishment.contains("-")
                                         ? "Control"
                                         : "Banish",
                                     style: TextStyle(
@@ -285,8 +285,16 @@ class _WarScroll extends State<WarScroll> {
                             )
                           : Text(""),
                       //2. Row für Schlüsselworte
-                      Positioned(bottom: 0,left: 130, child: Text("Keywords:")),
-                      Positioned(bottom: 0, left: 320, child: Text(widget.unit.keywords)),
+                      Positioned(
+                        bottom: 0,
+                        left: 130,
+                        child: Text("Keywords:"),
+                      ),
+                      Positioned(
+                        bottom: 0,
+                        left: 320,
+                        child: Text(widget.unit.keywords),
+                      ),
                     ],
                   ),
                 ),
@@ -385,94 +393,126 @@ class _WarScroll extends State<WarScroll> {
                         BuildContext context,
                         int index,
                       ) {
-                        return Card(
-                          child: passiveAbilities[index].erledigt
-                              ?
-                                //Ab hier Card wenn die Ability erledigt ist
-                                ElevatedButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      passiveAbilities[index].erledigt = false;
-                                    });
-                                  },
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        passiveAbilities[index].name,
-                                        //cardContentList[index].ability.name.contains("-1") ? cardContentList[index].unit.name : cardContentList[index].ability.name,
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                      Icon(Icons.done, size: 100),
-                                    ],
-                                  ),
-                                )
-                              :
-                                //Ab hier Card wenn es eine Ability ist
-                                Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: <Widget>[
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                        return SingleChildScrollView(
+                          child: Card(
+                            child: passiveAbilities[index].erledigt
+                                ?
+                                  //Ab hier Card wenn die Ability erledigt ist
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        passiveAbilities[index].erledigt =
+                                            false;
+                                      });
+                                    },
+                                    child: Column(
                                       children: [
                                         Text(
                                           passiveAbilities[index].name,
-                                          //cardContentList[index].ability.name,
-                                          style: TextStyle(
-                                            backgroundColor: widget.phaseColor,
-                                            fontWeight: FontWeight.bold,
-                                            color: calculateTextColor(
-                                              widget.phaseColor,
-                                            ),
-                                          ),
+                                          //cardContentList[index].ability.name.contains("-1") ? cardContentList[index].unit.name : cardContentList[index].ability.name,
+                                          style: TextStyle(fontSize: 20),
                                         ),
+                                        Icon(Icons.done, size: 100),
                                       ],
                                     ),
-                                    passiveAbilities[index].typeName.contains("Passive") ? Text(passiveAbilities[index].typeName) : Text(passiveAbilities[index].timing),
-                                    Text(passiveAbilities[index].originUnit),
-                                    Text(""),
-                                    passiveAbilities[index].effect.contains("-1") ?
-                                    Text(passiveAbilities[index].declare) : passiveAbilities[index].declare.contains("-1") ?
-                                    Text(passiveAbilities[index].effect) :
-                                    Text(passiveAbilities[index].declare + "\n\n" + passiveAbilities[index].effect) ,
+                                  )
+                                :
+                                  //Ab hier Card wenn es eine Ability ist
+                                  Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            passiveAbilities[index].name,
+                                            //cardContentList[index].ability.name,
+                                            style: TextStyle(
+                                              backgroundColor:
+                                                  widget.phaseColor,
+                                              fontWeight: FontWeight.bold,
+                                              color: calculateTextColor(
+                                                widget.phaseColor,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      passiveAbilities[index].typeName.contains(
+                                            "Passive",
+                                          )
+                                          ? Text(
+                                              passiveAbilities[index].typeName,
+                                            )
+                                          : Text(
+                                              passiveAbilities[index].timing,
+                                            ),
+                                      Text(passiveAbilities[index].originUnit),
+                                      Text(""),
+                                      passiveAbilities[index].effect.contains(
+                                            "-1",
+                                          )
+                                          ? Text(
+                                              passiveAbilities[index].declare,
+                                            )
+                                          : passiveAbilities[index].declare
+                                                .contains("-1")
+                                          ? Text(passiveAbilities[index].effect)
+                                          : Text(
+                                              passiveAbilities[index].declare +
+                                                  "\n\n" +
+                                                  passiveAbilities[index]
+                                                      .effect,
+                                            ),
 
-                                    passiveAbilities[index].commandPoints.contains("-") ? Text("") : Text("Command Point cost: " + passiveAbilities[index].commandPoints),
-                                    /*
+                                      passiveAbilities[index].commandPoints
+                                              .contains("-")
+                                          ? Text("")
+                                          : Text(
+                                              "Command Point cost: " +
+                                                  passiveAbilities[index]
+                                                      .commandPoints,
+                                            ),
+                                      /*
                             Text(cardContentList[index].ability.timing),
                             Text(cardContentList[index].ability.originUnit),
                             Text(cardContentList[index].ability.details),
                              */
-                                    /*
+                                      /*
                             ListTile(
                               leading: Icon(Icons.album),
                               title: Text(spells[index].title),
                               subtitle: Text(spells[index].details),
                             ),
                             */
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: <Widget>[
-                                        TextButton(
-                                          child: Text("Fähigkeit erledigt"),
-                                          onPressed: () {
-                                            setState(() {
-                                              passiveAbilities[index].erledigt =
-                                                  true;
-                                            });
-                                          },
-                                        ),
-                                        const SizedBox(width: 8),
-                                        TextButton(
-                                          child: Text("Item $index"),
-                                          onPressed: () {
-                                            /* ... */
-                                          },
-                                        ),
-                                        const SizedBox(width: 8),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: <Widget>[
+                                          TextButton(
+                                            child: Text("Fähigkeit erledigt"),
+                                            onPressed: () {
+                                              setState(() {
+                                                passiveAbilities[index]
+                                                        .erledigt =
+                                                    true;
+                                              });
+                                            },
+                                          ),
+                                          const SizedBox(width: 8),
+                                          TextButton(
+                                            child: Text("Item $index"),
+                                            onPressed: () {
+                                              /* ... */
+                                            },
+                                          ),
+                                          const SizedBox(width: 8),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                          ),
                         );
                       }, childCount: passiveAbilities.length),
                     ),
