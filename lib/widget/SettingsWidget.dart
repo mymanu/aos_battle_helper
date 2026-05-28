@@ -1,3 +1,6 @@
+import 'package:aos_battle_helper/spearhead/fusilPlatoon.dart';
+import 'package:aos_battle_helper/spearhead/sentinelsOfEmbergard.dart';
+import 'package:aos_battle_helper/spearhead/zenestrasZealots.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -17,6 +20,10 @@ import '../spearhead/gnawfeastClawpack.dart';
 import '../spearhead/irojawzBigMob.dart';
 import '../spearhead/starscaleWarhost.dart';
 import '../spearhead/warpsparkClawpack.dart';
+import '../spearhead/fusilPlatoon.dart';
+import '../spearhead/sentinelsOfEmbergard.dart';
+import '../spearhead/zenestrasZealots.dart';
+import '../spearhead/casteliteCompany.dart';
 import '../widget/RegimentChooser.dart';
 import 'BattleTactics.dart';
 
@@ -101,8 +108,8 @@ class _SettingsWidget extends State<SettingsWidget> {
                   children: [
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.orange,
-                        backgroundColor: Colors.blueGrey.shade800,
+                        foregroundColor: calculateTextColor(Colors.red.shade500),
+                        backgroundColor: Colors.red.shade500,
                         shadowColor: Colors.black,
                         padding: const EdgeInsets.all(10.0),
                         minimumSize: Size(250, 100),
@@ -571,8 +578,8 @@ class _SettingsWidget extends State<SettingsWidget> {
                   children: [
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.orange,
-                        backgroundColor: Colors.blueGrey.shade800,
+                        foregroundColor: calculateTextColor(Colors.red.shade500),
+                        backgroundColor: Colors.red.shade500,
                         shadowColor: Colors.black,
                         padding: const EdgeInsets.all(10.0),
                         minimumSize: Size(250, 100),
@@ -692,32 +699,124 @@ class _SettingsWidget extends State<SettingsWidget> {
                         pickSkavenCrixxitKillPack();
                       },
                     ),
-
-                    SizedBox(height: 20),
-
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.orange,
-                        backgroundColor: Colors.blueGrey.shade800,
-                        shadowColor: Colors.black,
-                        padding: const EdgeInsets.all(10.0),
-                        minimumSize: Size(250, 100),
-                        maximumSize: Size(510, 510),
-                      ),
-                      child: Text(
-                        'Choose Regiment Ability\nand Enhancement',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      onPressed: () {
-                        pickRegimentAbilityAndEnhancement(
-                          context,
-                          widget.settings,
-                        );
-                      },
-                    ),
                   ],
                 ),
+
+                Spacer(),
+
+                Column(
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: calculateTextColor(Colors.red.shade500),
+                          backgroundColor: Colors.red.shade500,
+                          shadowColor: Colors.black,
+                          padding: const EdgeInsets.all(10.0),
+                          minimumSize: Size(250, 100),
+                          maximumSize: Size(510, 510),
+                        ),
+                        child: Text(
+                          'Choose Regiment Ability\nand Enhancement',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        onPressed: () {
+                          pickRegimentAbilityAndEnhancement(
+                            context,
+                            widget.settings,
+                          );
+                        },
+                      ),
+
+                      SizedBox(height: 20),
+
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.orange,
+                          backgroundColor: Colors.blueGrey.shade800,
+                          shadowColor: Colors.black,
+                          padding: const EdgeInsets.all(10.0),
+                          minimumSize: Size(250, 100),
+                          maximumSize: Size(510, 510),
+                        ),
+                        child: Text(
+                          'Cities of Sigmar \nSentinels Of Embergard',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        onPressed: () {
+                          pickSentinelsOfEmbergard();
+                        },
+                      ),
+
+                      SizedBox(height: 20),
+
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.orange,
+                          backgroundColor: Colors.blueGrey.shade800,
+                          shadowColor: Colors.black,
+                          padding: const EdgeInsets.all(10.0),
+                          minimumSize: Size(250, 100),
+                          maximumSize: Size(510, 510),
+                        ),
+                        child: Text(
+                          'Cities of Sigmar \nZenestra´s Zealots',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        onPressed: () {
+                          pickZenestrasZealots();
+                        },
+                      ),
+
+                      SizedBox(height: 20),
+
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.orange,
+                          backgroundColor: Colors.blueGrey.shade800,
+                          shadowColor: Colors.black,
+                          padding: const EdgeInsets.all(10.0),
+                          minimumSize: Size(250, 100),
+                          maximumSize: Size(510, 510),
+                        ),
+                        child: Text(
+                          'Cities of Sigmar \nFusil-Platoon',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        onPressed: () {
+                          pickFusilPlatoon();
+                        },
+                      ),
+
+                      SizedBox(height: 20),
+
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.orange,
+                          backgroundColor: Colors.blueGrey.shade800,
+                          shadowColor: Colors.black,
+                          padding: const EdgeInsets.all(10.0),
+                          minimumSize: Size(250, 100),
+                          maximumSize: Size(510, 510),
+                        ),
+                        child: Text(
+                          'Cities of Sigmar \nCastelite Company',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        onPressed: () {
+                          pickCasteliteCompany();
+                        },
+                      ),
+
+                      SizedBox(height: 20),
+                      ],
+
+                ),
+
                 Spacer(),
               ],
             ),
@@ -772,6 +871,22 @@ class _SettingsWidget extends State<SettingsWidget> {
 
   void pickSkavenCrixxitKillPack() {
     widget.settings = CrixxitKillPack().pickCrixxitKillPack(widget.settings);
+  }
+
+  void pickSentinelsOfEmbergard() {
+    widget.settings = SentinelsOfEmbergard().pickSentinelsOfEmbergard(widget.settings);
+  }
+
+  void pickZenestrasZealots() {
+    widget.settings = Zenestraszealots().pickZenestraszealots(widget.settings);
+  }
+
+  void pickFusilPlatoon() {
+    widget.settings = FusilPlatoon().pickFusilPlatoon(widget.settings);
+  }
+
+  void pickCasteliteCompany() {
+    widget.settings = CasteliteCompany().pickCasteliteCompany(widget.settings);
   }
 
   Future<void> pickRegimentAbilityAndEnhancement(

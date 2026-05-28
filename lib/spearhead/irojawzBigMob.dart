@@ -143,6 +143,7 @@ class IronjawzBigMob {
 
     BattleTraits battleTraits = BattleTraits();
     battleTraits.abilitys.add(mightyDestroyers);
+    battleTraits.abilitys.add(ereWeGo);
 
     // Battle Traits
     //---------------------------------------------------------
