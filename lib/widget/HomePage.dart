@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../classes/settings.dart';
 import '../classes/unit.dart';
 import 'HeroPhase.dart';
+import 'Preparation.dart';
 import 'SettingsWidget-Backup.dart';
 import 'StartofBattle.dart';
 import 'ArmyImport.dart';
@@ -22,8 +23,6 @@ class HomePage extends StatefulWidget {
 class _HomePage extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    //String envTitle = Env.environmentName ?? "";
-    //String title = widget.title + ' - ' + envTitle;
     String title = widget.title;
 
     List<Color> buttonColors = [
@@ -39,18 +38,9 @@ class _HomePage extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(title), //Text('Logged In'),
+        title: Text(title),
         centerTitle: true,
         actions: [
-          // TextButton(
-          //   child: Text('Logout',
-          //       style: TextStyle(fontSize: 24, color: Colors.white)),
-          //   onPressed: () {
-          //     // final provider =
-          //     //   Provider.of<GoogleSignInProvider>(context, listen: false);
-          //     // provider.logout();
-          //   },
-          // )
         ],
       ),
       body: Center(
@@ -60,7 +50,7 @@ class _HomePage extends State<HomePage> {
             children: <Widget>[
               //SizedBox(height: 25),
               const Text(
-                'Hauptmenü',
+                'Menu',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 50),
@@ -82,12 +72,12 @@ class _HomePage extends State<HomePage> {
                   maximumSize: Size(510, 510),
                 ),
                 child: Text(
-                  'Spiel starten',
+                  'Start Game',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20),
                 ),
                 onPressed: () {
-                  _navigateToStartofBattle(context, widget.settings);
+                  _navigateToPreparation(context, widget.settings);
                 },
               ),
 
@@ -103,7 +93,7 @@ class _HomePage extends State<HomePage> {
                   maximumSize: Size(510, 510),
                 ),
                 child: Text(
-                  'Armee importieren',
+                  'Army import',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20),
                 ),
@@ -123,7 +113,7 @@ class _HomePage extends State<HomePage> {
                   maximumSize: Size(510, 510),
                 ),
                 child: Text(
-                  'Einstellungen',
+                  'Settings',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20),
                 ),
@@ -144,7 +134,7 @@ class _HomePage extends State<HomePage> {
                   maximumSize: Size(510, 510),
                 ),
                 child: Text(
-                  'Heldenphase',
+                  'Hero Phase',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20),
                 ),
@@ -165,7 +155,7 @@ class _HomePage extends State<HomePage> {
                   maximumSize: Size(510, 510),
                 ),
                 child: Text(
-                  'Schriftrolle',
+                  'Warscroll',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20),
                 ),
@@ -176,244 +166,6 @@ class _HomePage extends State<HomePage> {
             ],
           ),
         ),
-
-        /*
-      Container(
-        alignment: Alignment.center,
-        color: Colors.blueGrey.shade900,
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: 20,),
-
-              Row(
-                  children: [
-                    Padding(padding: EdgeInsets.all(20.0)),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: buttonColors[0],
-                        shadowColor: Colors.black,
-                        minimumSize: Size(80, 60),
-                        maximumSize: Size(150, 60),
-                      ),
-                      child: Text(
-                        'Spiel starten',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: calculateTextColor(buttonColors[0])),
-                        // Storage
-                      ),
-                      onPressed: () {
-                        _navigateToStartofBattle(context);
-                      },
-                    ),
-
-                    SizedBox(width: 85),
-
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: buttonColors[1],
-                        shadowColor: Colors.black,
-                        padding: const EdgeInsets.all(10.0),
-                        minimumSize: Size(110, 110),
-                        maximumSize: Size(110, 110),
-                      ),
-                      child: Text(
-                        '',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: calculateTextColor(buttonColors[1])),
-                      ),
-                      onPressed: () {
-                        //_navigateToShoppingList(context);
-                      },
-                    ),
-                  ]
-              ),
-              /*
-              SizedBox(height: 60),
-
-              Row(
-                  children: [
-                    Padding(padding: EdgeInsets.all(20.0)),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: buttonColors[2],
-                        shadowColor: Colors.black,
-                        padding: const EdgeInsets.all(10.0),
-                        minimumSize: Size(110, 110),
-                        maximumSize: Size(110, 110),
-                      ),
-                      child: Text(
-                        'Frisch eingekauft',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: widget.settings.calculateTextColor(buttonColors[2])),
-                      ),
-                      onPressed: () {
-                        _navigateToBoughtItems(context);
-                      },
-                    ),
-
-                    SizedBox(width: 85),
-
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: buttonColors[3],
-                        shadowColor: Colors.black,
-                        padding: const EdgeInsets.all(10.0),
-                        minimumSize: Size(110, 110),
-                        maximumSize: Size(110, 110),
-                      ),
-                      child: Text(
-                        'MHD-Liste',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: widget.settings.calculateTextColor(buttonColors[3])),
-                      ),
-                      onPressed: () {
-                        _navigateToMHD_list(context);
-                      },
-                    ),
-                  ]
-              ),
-
-              SizedBox(height: 30),
-
-              Row (
-                  children: [
-                    SizedBox(width: 125),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: buttonColors[4],
-                        shadowColor: Colors.black,
-                        //padding: const EdgeInsets.all(10.0),
-                        minimumSize: Size(80, 60),
-                        maximumSize: Size(150, 60),
-                      ),
-                      child: Text(
-                        'Produkt anlegen',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: widget.settings.calculateTextColor(buttonColors[4])),
-                      ),
-                      onPressed: () {
-                        _navigateToEditProductPage(context);
-                      },
-                    ),
-                  ]
-              ),
-
-
-              SizedBox(height: 30),
-
-              Row(
-                  children: [
-                    Padding(padding: EdgeInsets.all(20.0)),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: buttonColors[5],
-                        shadowColor: Colors.black,
-                        padding: const EdgeInsets.all(10.0),
-                        minimumSize: Size(110, 110),
-                        maximumSize: Size(110, 110),
-                      ),
-                      child: Text(
-                        'Database Upload',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: widget.settings.calculateTextColor(buttonColors[5])),
-                      ),
-                      onPressed: () {
-                        _navigateToDBUpload(context);
-                      },
-                    ),
-
-                    SizedBox(width: 85),
-
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: buttonColors[6],
-                        shadowColor: Colors.black,
-                        padding: const EdgeInsets.all(10.0),
-                        minimumSize: Size(110, 110),
-                        maximumSize: Size(110, 110),
-                      ),
-                      child: Text(
-                        'Shopping List Example',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: widget.settings.calculateTextColor(buttonColors[6])),
-                      ),
-                      onPressed: () {
-                        _navigateToShoppinListWidget(context);
-                      },
-                    ),
-                  ]
-              ),
-
-              Row(
-                children: [
-                  Spacer(),
-                  Padding(padding: EdgeInsets.all(20.0),
-                    child:
-                    Column(
-                      //crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text("Environment name: ${Env.environmentName}", style: TextStyle(color: Colors.white)),
-                        Text("API Base URL: ${Env.apiBaseUrl}", style: TextStyle(color: Colors.white)),
-                        Text("Debug: ${Env.debug ? 'YES' : 'NO'}", style: TextStyle(color: Colors.white)),
-                        Text("ENV Pfad: ${Env.databaseURL}", style: TextStyle(color: Colors.white, fontSize: 10)),
-                        Text("DB Pfad: " + widget.settings.dbPath, style: TextStyle(color: Colors.white, fontSize: 10)),
-                      ],
-                    ),
-                  ),
-                  Spacer(),
-                ],
-              ),
-
-              Row(
-                children: [
-                  Padding(padding: EdgeInsets.all(20.0)),
-
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: buttonColors[7],
-                      shadowColor: Colors.black,
-                      padding: const EdgeInsets.all(10.0),
-                      minimumSize: Size(110, 110),
-                      maximumSize: Size(110, 110),
-                    ),
-                    child: Text(
-                      'DB Wechsel',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: widget.settings.calculateTextColor(buttonColors[7])),
-                    ),
-                    onPressed: () {
-                      if (widget.settings.dbPath.contains("Frankreich")) {
-                        widget.settings.dbPath = "Haushalt_MJ/Produkte/Produkte-Sammlung";
-                      } else if (widget.settings.dbPath.contains("Haushalt_MJ")){
-                        widget.settings.dbPath = "Eltern_Manu";
-                      } else {
-                        widget.settings.dbPath = "Frankreich";
-                      }
-                      setState(() {
-
-                      });
-                      print(widget.settings.dbPath);
-                      // String test = Env.databaseURL ?? "";
-                      // if(path.contains(test)) {
-                      //   path = Env.databaseURL2 ?? "";
-                      // } else {
-                      //   path = Env.databaseURL ?? "";
-                      // }
-                      //print(path);
-                    },
-                  ),
-
-                ],
-              ),
-               */
-
-              SizedBox(height: 50,),
-            ],
-          ),
-        ),
-       */
       ),
     );
   }
@@ -424,10 +176,10 @@ class _HomePage extends State<HomePage> {
         : Colors.white;
   }
 
-  void _navigateToStartofBattle(BuildContext context, Settings settings) {
+  void _navigateToPreparation(BuildContext context, Settings settings) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => StartofBattle(title: "Start of Battle Round", settings: settings),
+        builder: (context) => Preparation(title: "Preparation", settings: settings),
       ),
     );
   }
@@ -435,7 +187,7 @@ class _HomePage extends State<HomePage> {
   void _navigateToArmyImport(BuildContext context, Settings settings) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => ArmyImport(title: "Armee importieren", settings: settings),
+        builder: (context) => ArmyImport(title: "Army import", settings: settings),
       ),
     );
   }
@@ -451,7 +203,7 @@ class _HomePage extends State<HomePage> {
   void _navigateToHero(BuildContext context, Settings settings) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => HeroPhase(title: "Heldenphase", settings: settings),
+        builder: (context) => HeroPhase(title: "Hero Phase", settings: settings),
       ),
     );
   }
@@ -460,7 +212,7 @@ class _HomePage extends State<HomePage> {
     Unit unit = Unit("ExampleUnit");
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => WarScroll(title: "Schriftrolle", settings: settings, unit: unit),
+        builder: (context) => WarScroll(title: "Warscroll", settings: settings, unit: unit),
       ),
     );
   }
