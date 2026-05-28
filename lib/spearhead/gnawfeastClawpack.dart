@@ -216,7 +216,7 @@ class GnawfeastClawpack{
     Ability ambush = Ability("Gnawhole Ambush");
     ambush.typeName = "Ability (Activated)";
     ambush.timing = "Your Movement Phase";
-    ambush.color = "Grey";
+    ambush.color = "Gray";
     ambush.declare = "Pick a friendly unit that is in the tunnels below to use this ability.";
     ambush.effect =
         "Set up that unit wholly within 6\" of a corner of the battlefield and more than 9\" from all enemy units.";

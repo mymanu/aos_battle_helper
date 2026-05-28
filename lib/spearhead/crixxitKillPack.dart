@@ -180,7 +180,7 @@ class CrixxitKillPack {
     Ability shade = Ability("Way of the Skittering Shade");
     shade.typeName = "Ability (Activated)";
     shade.timing = "Once Per Battle, Your Movement Phase";
-    shade.color = "Grey";
+    shade.color = "Gray";
     shade.declare =
     "Pick a friendly unit that is wholly within 6\" of a battlefield edge to be the target.";
     shade.effect =

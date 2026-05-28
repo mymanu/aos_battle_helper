@@ -186,7 +186,7 @@ class StarscaleWarhost {
     ancientStrategist.typeName = "Ability (Activated)";
     ancientStrategist.keywords = "Enhancement";
     ancientStrategist.timing = "Once Per Battle, Any Movement Phase";
-    ancientStrategist.color = "Grey";
+    ancientStrategist.color = "Gray";
     ancientStrategist.declare =
         "Pick a friendly unit wholly within 12\" of your general. You cannot pick your general.";
     ancientStrategist.effect =
