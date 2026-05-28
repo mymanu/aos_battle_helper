@@ -313,7 +313,7 @@ class _ArmyImport extends State<ArmyImport> {
         if (select.name.contains("Battle Trait")) {
           readBattleTrait(select);
         }
-        if (select.name.contains("Arcane")) {
+        if (select.name.contains("Arcane") || select.name.contains("Spell")) {
           widget.settings.army.spellLore = readSpellLoreOfJSON(select);
         }
         if (select.type.contains("unit")) {
@@ -729,6 +729,8 @@ class _ArmyImport extends State<ArmyImport> {
           selectionMapTwoJSON["id"],
           selectionMapTwoJSON["name"],
         );
+
+        //TODO Hier nochmal Selections durchsurchen für normales AoS (Debug ausführen mit Gordrak und Schweine)
 
         if (selectionMapTwoJSON.containsKey("categories")) {
           for (Map<String,
