@@ -5,130 +5,245 @@ import '../classes/unit.dart';
 import '../classes/weapon.dart';
 import 'spearheadGeneralSpells.dart';
 
-//TODO Seite fusil ausfüllen
-
 class FusilPlatoon {
   Settings pickFusilPlatoon(Settings settings) {
     //---------------------------------------------------------
-    // General JORVAN KRREEL
+    // General FUSIL-MAJOR
 
-    Weapon rangerblades = Weapon("rangerblades","Ranger Blades");
-    rangerblades.attack = "6";
-    rangerblades.hit = "3+";
-    rangerblades.wound = "4+";
-    rangerblades.rend = "1";
-    rangerblades.damage = "2";
+    Weapon longFusil = Weapon("longFusil", "Long-Fusil");
+    longFusil.range = "24\"";
+    longFusil.attack = "3";
+    longFusil.hit = "3+";
+    longFusil.wound = "3+";
+    longFusil.rend = "1";
+    longFusil.damage = "2";
 
-    Ability veteran = Ability("Veteran Skirmishers");
-    veteran.typeName = "Ability (Activated)";
-    veteran.timing = "Your Hero Phase";
-    veteran.color = "Yellow";
-    veteran.declare =
-    "Pick a friendly unit wholly within 12\" of this unit to be the target";
-    veteran.effect =
-    "Roll a dice. On a 3+, for the rest of the turn, "
-        "add 2\" to the target’s Move characteristic but it cannot use Run abilities.";
+    Weapon mace = Weapon("mace", "Ranger Blades");
+    mace.attack = "4";
+    mace.hit = "4+";
+    mace.wound = "2+";
+    mace.rend = "2";
+    mace.damage = "2";
 
-    Ability prowling = Ability("Prowling Ash Panther");
-    prowling.typeName = "Ability (Activated)";
-    prowling.timing = "End of Any Turn";
-    prowling.color = "Purple";
-    prowling.effect =
-    "If this unit has the Thexa token, give that token to an enemy unit within 6\" of this unit. "
-        "If an enemy unit has the Thexa token, inflict D3 mortal damage on that enemy unit. Then, give this unit the Thexa token.";
+    Ability targets = Ability("Mark Targets");
+    targets.typeName = "Ability (Activated)";
+    targets.timing = "Your Shooting Phase";
+    targets.color = "Blue";
+    targets.declare =
+        "Pick an enemy unit that was targeted by this unit’s shooting attacks this turn to be the target.";
+    targets.effect =
+        "Add 1 to hit rolls for shooting attacks made by friendly units that target that unit for the rest of the turn.";
 
     List<Ability> generalSpells = [
       SpearheadGeneralSpells().getGuardedHero(),
-      veteran,
-      prowling,
+      targets,
     ];
 
     Unit general = Unit.withSpells("Jorvan Kreel", generalSpells);
     general.id = "General";
-    general.weapons.add(rangerblades);
-    general.move = "6\"";
-    general.health = "5";
-    general.save = "4+";
+    general.weapons.add(longFusil);
+    general.weapons.add(mace);
+    general.move = "5\"";
+    general.health = "8";
+    general.save = "3+";
     general.control = "2";
-    general.keywords = "Hero, Infantry";
+    general.keywords = "Hero, Infantry, Castelite";
 
-    // General JORVAN KRREEL
+    // General FUSIL-MAJOR
     //---------------------------------------------------------
+    // ALCHEMITE WARFORGER
 
+    Weapon tongstaff = Weapon("tongstaff", "Warpstone Staff");
+    tongstaff.attack = "3";
+    tongstaff.hit = "4+";
+    tongstaff.wound = "4+";
+    tongstaff.rend = "1";
+    tongstaff.damage = "D3";
+
+    Ability blazing = Ability("Blazing Weapons");
+    blazing.typeName = "Ability (Activated)";
+    blazing.timing = "Your Hero Phase";
+    blazing.color = "Yellow";
+    blazing.declare = "Pick a friendly unit wholly within 12\" of this unit to be the target, then make a casting roll of 2D6.";
+    blazing.effect = "On a 6+, the target’s melee weapons have Crit (Mortal) until the start of your next turn.";
+
+    List<Ability> warforgerSpells = [SpearheadGeneralSpells().getGuardedHero(), blazing];
+
+    Unit warforger = Unit.withSpells("Alchemite Warforger", warforgerSpells);
+    warforger.weapons.add(tongstaff);
+    warforger.move = "5\"";
+    warforger.health = "5";
+    warforger.save = "5+";
+    warforger.control = "2";
+    warforger.keywords = "Hero, Wizard, Infantry";
+
+    // ALCHEMITE WARFORGER
+    //---------------------------------------------------------
+    // FREEGUILD FUSILIERS
+
+    Weapon fusilCannon = Weapon("fusilCannon", "Fusil-Cannon");
+    fusilCannon.range = "18\"";
+    fusilCannon.attack = "2";
+    fusilCannon.hit = "4+";
+    fusilCannon.wound = "4+";
+    fusilCannon.rend = "1";
+    fusilCannon.damage = "1";
+
+    Weapon bayonet = Weapon("bayonet", "Fusil-Cannon");
+    bayonet.attack = "1";
+    bayonet.hit = "4+";
+    bayonet.wound = "4+";
+    bayonet.rend = "-";
+    bayonet.damage = "1";
+
+    Ability squire = Ability("Blazing Weapons");
+    squire.typeName = "Ability (Passive)";
+    squire.color = "Blue";
+    squire.effect = "While this unit has a Blackpowder Squire token, this unit’s ranged weapons have Shoot in Combat.";
+
+    Ability stop = Ability("Can´t Stop!");
+    stop.typeName = "Ability (Passive)";
+    stop.timing = "Once Per Turn (Army), Your Shooting Phase";
+    stop.color = "Blue";
+    stop.declare = "Pick another friendly Freeguild Fusiliers unit to be the target.";
+    stop.effect = "Remove this unit’s Blackpowder Squire token from the battlefield, then give it to the target. ";
+
+    List<Ability> fusiliersSpells = [SpearheadGeneralSpells().getGuardedHero(), squire, stop];
+
+    Unit fusiliers = Unit.withSpells("Freeguild Fusiliers", fusiliersSpells);
+    fusiliers.weapons.add(fusilCannon);
+    fusiliers.weapons.add(bayonet);
+    fusiliers.move = "5\"";
+    fusiliers.health = "1";
+    fusiliers.save = "4+";
+    fusiliers.control = "1";
+    fusiliers.keywords = "Infantry, Castelite, Reinforcements";
+
+    // FREEGUILD FUSILIERS
+    //---------------------------------------------------------
+    // WILDERCORPS HUNTERS
+
+    Weapon crossbow = Weapon("crossbow", "Hunting Crossbow");
+    crossbow.range = "15\"";
+    crossbow.attack = "2";
+    crossbow.hit = "4+";
+    crossbow.wound = "4+";
+    crossbow.rend = "1";
+    crossbow.damage = "1";
+
+    Weapon huntingWeapon = Weapon("huntingWeapon", "Hunting Weapons");
+    huntingWeapon.attack = "2";
+    huntingWeapon.hit = "4+";
+    huntingWeapon.wound = "4+";
+    huntingWeapon.rend = "-";
+    huntingWeapon.damage = "1";
+
+    Weapon bite = Weapon("bite", "Trailhound’s Ferocious Bite");
+    bite.attack = "2";
+    bite.hit = "4+";
+    bite.wound = "3+";
+    bite.rend = "-";
+    bite.damage = "1";
+
+    Ability tracker = Ability("Expert Trackers");
+    tracker.typeName = "Ability (Active)";
+    tracker.color = "Black";
+    tracker.effect = "This unit can use the ‘Normal Move’ ability as if it were your movement phase.";
+
+    List<Ability> hunterSpells = [SpearheadGeneralSpells().getGuardedHero(), tracker];
+
+    Unit hunter = Unit.withSpells("Freeguild Fusiliers", hunterSpells);
+    hunter.weapons.add(crossbow);
+    hunter.weapons.add(huntingWeapon);
+    hunter.weapons.add(bite);
+    hunter.move = "5\"";
+    hunter.health = "1";
+    hunter.save = "5+";
+    hunter.control = "1";
+    hunter.keywords = "Infantry";
+
+    // WILDERCORPS HUNTERS
     //---------------------------------------------------------
     // Unit-List Build
 
-    //List<Unit> units = [general, ardboyz, bruteRagerz, brutes];
+    List<Unit> units = [general, warforger, fusiliers, hunter];
 
     // Unit-List Build
     //---------------------------------------------------------
     // Battle Traits
 
-
-
-    Ability mightyDestroyers = Ability("Mighty Destroyers");
-    mightyDestroyers.timing = "Once Per Turn (Army), Any Hero Phase";
-    mightyDestroyers.typeName = "Ability (Activated)";
-    mightyDestroyers.color = "Yellow";
-    mightyDestroyers.declare = "Pick a friendly unit that was not set up this turn to be the target.";
-    mightyDestroyers.effect = "The target can move up to 3\". It can move into combat. "
-        "\nIf it was in combat at the start of the move, it must end that move in combat.";
+    Ability fortify = Ability("Fortify Position");
+    fortify.typeName = "Ability (Passive)";
+    fortify.color = "Green";
+    fortify.effect =
+        "Subtract 1 from the Rend characteristic of weapons used for attacks that target friendly Castelite units "
+        "if they did not use a Move ability in the same turn.";
 
     BattleTraits battleTraits = BattleTraits();
-    battleTraits.abilitys.add(mightyDestroyers);
+    battleTraits.abilitys.add(fortify);
 
     // Battle Traits
     //---------------------------------------------------------
     // Regiment Abilities
 
-    Ability naturalDisaster = Ability("Natural Disaster");
-    naturalDisaster.typeName = "Ability (Passive)";
-    naturalDisaster.color = "Orange";
-    naturalDisaster.effect = "If you make an unmodified charge roll of 8+ for a friendly unit, "
-        "\nadd 1 to the Attacks characteristic of that unit’s melee weapons for the rest of the turn.";
+    Ability provision = Ability("Well Provisioned");
+    provision.typeName = "Ability (Active)";
+    provision.timing = "Once Per Turn (Army), Your Shooting Phase";
+    provision.color = "Green";
+    provision.declare = "Pick a friendly non-Hero unit to be the target.";
+    provision.effect =
+        "Roll a dice. On a 3+, add 1 to wound rolls for that unit’s shooting attacks for the rest of the phase.";
 
-    Ability properRuckus = Ability("A Proper Ruckus");
-    properRuckus.timing =
-    "Once Per Battle, Reaction: You declared the ´Mighty Destroyers´ ability";
-    properRuckus.typeName = "Ability (Activated)";
-    properRuckus.color = "Yellow";
-    properRuckus.effect =
-    "All friendly units on the battlefield that were not set up this turn are the targets of that ability instead.";
+    Ability resepected = Ability("Respected Leader");
+    resepected.typeName = "Ability (Active)";
+    resepected.timing = "Once Per Battle, Deployment Phase";
+    resepected.color = "Black";
+    resepected.effect =
+        "Friendly Wildercorps Hunters units gain the Reinforcements keyword.";
 
-    List<Ability> regimentAbilies = [naturalDisaster, properRuckus];
+    List<Ability> regimentAbilies = [provision, resepected];
 
     // Regiment Abilities
     //---------------------------------------------------------
     // Enhancements
 
-    Ability amberstone = Ability("Amberstone Whetstone");
-    amberstone.keywords = "Enhancement";
-    amberstone.typeName = "Ability (Passive)";
-    amberstone.color = "Red";
-    amberstone.effect =
-    "The Rend characteristic of your general’s melee weapons is 2";
+    Ability tactic = Ability("Adept Tactician");
+    tactic.keywords = "Enhancement";
+    tactic.typeName = "Ability (Active)";
+    tactic.timing = "Once Per Battle, Your Movement Phase";
+    tactic.color = "Gray";
+    tactic.declare =
+        "Pick 2 friendly Freeguild Fusiliers units that have been destroyed and have not already been replaced.";
+    tactic.effect =
+        "Set up a single replacement Freeguild Fusiliers unit with 10 models more than 6\" from all enemy units.";
 
-    Ability skulls = Ability("Trophy Skulls");
-    skulls.keywords = "Enhancement";
-    skulls.typeName = "Ability (Passive)";
-    skulls.color = "Purple";
-    skulls.effect = "Your general’s Control characteristic is 5.";
+    Ability shield = Ability("Shield Bash");
+    shield.keywords = "Enhancement";
+    shield.typeName = "Ability (Active)";
+    shield.timing = "Once Per Turn, Your Movement Phase";
+    shield.color = "Gray";
+    shield.declare =
+        "Pick an enemy Infantry, War Machine or Cavalry unit in combat with your general to be the target.";
+    shield.effect =
+        "Roll a dice. On a 3+, the target must immediately use the ‘Retreat’ ability as if it were the enemy movement phase.";
 
-    Ability armourGork = Ability("Armour of Gork");
-    armourGork.keywords = "Enhancement";
-    armourGork.typeName = "Ability (Passive)";
-    armourGork.color = "Green";
-    armourGork.effect = "Your general has Ward (6+).";
+    Ability brace = Ability("Brace!");
+    brace.keywords = "Enhancement";
+    brace.typeName = "Ability (Passive)";
+    brace.color = "Green";
+    brace.effect = "Your general has Ward (5+).";
 
-    Ability megaBossy = Ability("Mega Bossy");
-    megaBossy.keywords = "Enhancement";
-    megaBossy.typeName = "Ability (Passive)";
-    megaBossy.color = "Orange";
-    megaBossy.effect =
-    "If this unit charged this turn, for the rest of the turn, "
-        "add 1 to charge rolls for friendly units while they are wholly within 12\" of this unit.";
+    Ability volley = Ability("Point-Blank Volley");
+    volley.keywords = "Enhancement";
+    volley.typeName = "Ability (Active)";
+    volley.timing = "Once Per Turn, Enemy Combat Phase";
+    volley.color = "Red";
+    volley.declare =
+        "Pick an enemy unit in combat with your general to be the target.";
+    volley.effect =
+        "Roll a D3. On a 2+, inflict an amount of mortal damage on the target equal to the roll.";
 
-    List<Ability> enhancements = [amberstone, skulls, armourGork, megaBossy];
+    List<Ability> enhancements = [tactic, shield, brace, volley];
 
     // Enhancements
     //---------------------------------------------------------

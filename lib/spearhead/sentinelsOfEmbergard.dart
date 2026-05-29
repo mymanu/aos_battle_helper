@@ -150,7 +150,7 @@ class SentinelsOfEmbergard {
     //---------------------------------------------------------
     // Unit-List Build
 
-    //List<Unit> units = [general, ardboyz, bruteRagerz, brutes];
+    List<Unit> units = [general, forepriest, gallants, grenadiers];
 
     // Unit-List Build
     //---------------------------------------------------------
