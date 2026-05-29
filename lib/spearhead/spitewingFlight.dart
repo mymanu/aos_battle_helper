@@ -5,8 +5,8 @@ import '../classes/unit.dart';
 import '../classes/weapon.dart';
 import 'spearheadGeneralSpells.dart';
 
-class Spitewingflight {
-  Settings pickSpitewingflight(Settings settings) {
+class SpitewingFlight {
+  Settings pickSpitewingFlight(Settings settings) {
     //---------------------------------------------------------
     // General ARCH-REVENANT
 

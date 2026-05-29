@@ -53,8 +53,9 @@ class _Regimentchooser extends State<RegimentChooser> {
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      widget.settings.regimentAbilities[0].typeName.contains("Passive") ?
                       Text("Trigger: " +
-                          widget.settings.regimentAbilities[0].timing,),
+                          widget.settings.regimentAbilities[0].typeName) : Text("Trigger: " + widget.settings.regimentAbilities[0].timing,),
                       Text(""),
                       widget.settings.regimentAbilities[0].effect.contains("-1")
                           ? Text(widget.settings.regimentAbilities[0].declare)
@@ -78,8 +79,9 @@ class _Regimentchooser extends State<RegimentChooser> {
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      widget.settings.regimentAbilities[1].typeName.contains("Passive") ?
                       Text("Trigger: " +
-                          widget.settings.regimentAbilities[1].timing,),
+                          widget.settings.regimentAbilities[1].typeName) : Text("Trigger: " + widget.settings.regimentAbilities[1].timing,),
                       Text(""),
                       widget.settings.regimentAbilities[1].effect.contains("-1")
                           ? Text(widget.settings.regimentAbilities[1].declare)
@@ -127,8 +129,9 @@ class _Regimentchooser extends State<RegimentChooser> {
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      widget.settings.enhancements[0].typeName.contains("Passive") ?
                       Text("Trigger: " +
-                          widget.settings.enhancements[0].timing,),
+                          widget.settings.enhancements[0].typeName) : Text("Trigger: " + widget.settings.enhancements[0].timing,),
                       Text(""),
                       widget.settings.enhancements[0].effect.contains("-1")
                           ? Text(widget.settings.enhancements[0].declare)
@@ -152,8 +155,9 @@ class _Regimentchooser extends State<RegimentChooser> {
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      widget.settings.enhancements[1].typeName.contains("Passive") ?
                       Text("Trigger: " +
-                          widget.settings.enhancements[1].timing,),
+                          widget.settings.enhancements[1].typeName) : Text("Trigger: " + widget.settings.enhancements[1].timing,),
                       Text(""),
                       widget.settings.enhancements[1].effect.contains("-1")
                           ? Text(widget.settings.enhancements[1].declare)
@@ -177,8 +181,9 @@ class _Regimentchooser extends State<RegimentChooser> {
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      widget.settings.enhancements[2].typeName.contains("Passive") ?
                       Text("Trigger: " +
-                          widget.settings.enhancements[2].timing,),
+                          widget.settings.enhancements[2].typeName) : Text("Trigger: " + widget.settings.enhancements[2].timing,),
                       Text(""),
                       widget.settings.enhancements[2].effect.contains("-1")
                           ? Text(widget.settings.enhancements[2].declare)
@@ -202,8 +207,9 @@ class _Regimentchooser extends State<RegimentChooser> {
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      widget.settings.enhancements[3].typeName.contains("Passive") ?
                       Text("Trigger: " +
-                          widget.settings.enhancements[3].timing,),
+                          widget.settings.enhancements[3].typeName) : Text("Trigger: " + widget.settings.enhancements[3].timing,),
                       Text(""),
                       widget.settings.enhancements[3].effect.contains("-1")
                           ? Text(widget.settings.enhancements[3].declare)

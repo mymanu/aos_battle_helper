@@ -14,10 +14,12 @@ import '../classes/settings.dart';
 import '../classes/spellLore.dart';
 import '../classes/unit.dart';
 import '../classes/weapon.dart';
+import '../spearhead/bitterbarkCopse.dart';
 import '../spearhead/crixxitKillPack.dart';
 import '../spearhead/spearheadGeneralSpells.dart';
 import '../spearhead/gnawfeastClawpack.dart';
 import '../spearhead/irojawzBigMob.dart';
+import '../spearhead/spitewingFlight.dart';
 import '../spearhead/starscaleWarhost.dart';
 import '../spearhead/warpsparkClawpack.dart';
 import '../spearhead/fusilPlatoon.dart';
@@ -813,10 +815,48 @@ class _SettingsWidget extends State<SettingsWidget> {
                       ),
 
                       SizedBox(height: 20),
-                      ],
 
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.orange,
+                          backgroundColor: Colors.blueGrey.shade800,
+                          shadowColor: Colors.black,
+                          padding: const EdgeInsets.all(10.0),
+                          minimumSize: Size(250, 100),
+                          maximumSize: Size(510, 510),
+                        ),
+                        child: Text(
+                          'Sylvaneth\nBitterbark Copse',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        onPressed: () {
+                          pickBitterbarkCopse();
+                        },
+                      ),
+
+                      SizedBox(height: 20),
+
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.orange,
+                          backgroundColor: Colors.blueGrey.shade800,
+                          shadowColor: Colors.black,
+                          padding: const EdgeInsets.all(10.0),
+                          minimumSize: Size(250, 100),
+                          maximumSize: Size(510, 510),
+                        ),
+                        child: Text(
+                          'Sylvaneth\nSpitewing Flight',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        onPressed: () {
+                          pickSpitewingFlight();
+                        },
+                      ),
+                    ],
                 ),
-
                 Spacer(),
               ],
             ),
@@ -887,6 +927,14 @@ class _SettingsWidget extends State<SettingsWidget> {
 
   void pickCasteliteCompany() {
     widget.settings = CasteliteCompany().pickCasteliteCompany(widget.settings);
+  }
+
+  void pickBitterbarkCopse() {
+    widget.settings = BitterbarkCopse().pickBitterbarkCopse(widget.settings);
+  }
+
+  void pickSpitewingFlight() {
+    widget.settings = SpitewingFlight().pickSpitewingFlight(widget.settings);
   }
 
   Future<void> pickRegimentAbilityAndEnhancement(

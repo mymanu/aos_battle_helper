@@ -53,7 +53,7 @@ class CrixxitKillPack {
     cuts.damage = "1";
     cuts.ability = "Crit (Mortal)";
 
-    Ability hunt = Ability("");
+    Ability hunt = Ability("Go-Go, Hunt Them Down");
     hunt.typeName = "Ability (Activated)";
     hunt.timing = "Your Hero Phase";
     hunt.color = "Yellow";
@@ -220,7 +220,7 @@ class CrixxitKillPack {
     Ability anotherShadow = Ability("Just Another Shadow");
     anotherShadow.typeName = "Ability (Passive)";
     anotherShadow.keywords = "Enhancement";
-    anotherShadow.timing = "Passive";
+    //anotherShadow.timing = "Passive";
     anotherShadow.color = "Green";
     anotherShadow.effect =
         "While your general is wholly within the combat range of a friendly unit that has 3 or more models,"
@@ -229,7 +229,6 @@ class CrixxitKillPack {
     Ability screech = Ability("Death Screech");
     screech.typeName = "Ability (Passive)";
     screech.keywords = "Enhancement";
-    screech.timing = "Passive";
     screech.color = "Red";
     screech.declare = "Pick an enemy unit within 6\" of your general to be the target.";
     screech.effect =
