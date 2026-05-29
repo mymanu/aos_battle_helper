@@ -5,8 +5,6 @@ import '../classes/unit.dart';
 import '../classes/weapon.dart';
 import 'spearheadGeneralSpells.dart';
 
-//TODO Seite Sylvaneth Bitterbark-Copse ausfüllen
-
 class BitterbarkCopse {
   Settings pickBitterbarkCopse(Settings settings) {
     //---------------------------------------------------------
@@ -119,16 +117,16 @@ class BitterbarkCopse {
     everqueen.effect =
         "While this unit is contesting an objective, friendly units contesting that objective have Ward (6+).";
 
-    List<Ability> fusiliersSpells = [everqueen];
+    List<Ability> hunterSpells = [everqueen];
 
-    Unit fusiliers = Unit.withSpells("Freeguild Fusiliers", fusiliersSpells);
-    fusiliers.weapons.add(greatbow);
-    fusiliers.weapons.add(claws);
-    fusiliers.move = "5\"";
-    fusiliers.health = "5";
-    fusiliers.save = "4+";
-    fusiliers.control = "2";
-    fusiliers.keywords = "Infantry";
+    Unit hunters = Unit.withSpells("Kurnoth Hunters", hunterSpells);
+    hunters.weapons.add(greatbow);
+    hunters.weapons.add(claws);
+    hunters.move = "5\"";
+    hunters.health = "5";
+    hunters.save = "4+";
+    hunters.control = "2";
+    hunters.keywords = "Infantry";
 
     // KURNOTH HUNTERS
     //---------------------------------------------------------
@@ -150,21 +148,21 @@ class BitterbarkCopse {
         "\nMemories of War: Add 1 to hit rolls for attacks made by this unit. "
         "\nMemories of Peace: Add 1 to save rolls for this unit.";
 
-    List<Ability> hunterSpells = [memories];
+    List<Ability> revenantSpells = [memories];
 
-    Unit hunter = Unit.withSpells("Tree-Revenants", hunterSpells);
-    hunter.weapons.add(blade);
-    hunter.move = "5\"";
-    hunter.health = "1";
-    hunter.save = "5+";
-    hunter.control = "1";
-    hunter.keywords = "Infantry";
+    Unit revenants = Unit.withSpells("Tree-Revenants", revenantSpells);
+    revenants.weapons.add(blade);
+    revenants.move = "6\"";
+    revenants.health = "3";
+    revenants.save = "5+";
+    revenants.control = "1";
+    revenants.keywords = "Infantry, Reinforcements";
 
     // TREE-REVENANTS
     //---------------------------------------------------------
     // Unit-List Build
 
-    List<Unit> units = [general];
+    List<Unit> units = [general, treelord, hunters, revenants];
 
     // Unit-List Build
     //---------------------------------------------------------
