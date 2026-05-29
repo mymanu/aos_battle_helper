@@ -58,7 +58,7 @@ class Zenestraszealots {
     //---------------------------------------------------------
     // Unit-List Build
 
-    //List<Unit> units = [general, ardboyz, bruteRagerz, brutes];
+    List<Unit> units = [general];
 
     // Unit-List Build
     //---------------------------------------------------------
