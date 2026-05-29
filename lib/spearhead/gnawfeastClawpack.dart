@@ -281,7 +281,7 @@ class GnawfeastClawpack{
     stitched.keywords = "Enhancement";
     stitched.timing = "Passive";
     stitched.color = "Green";
-    stitched.details = "Effect: Your general has Ward (5+)";
+    stitched.effect = "Your general has Ward (5+)";
 
     List<Ability> enhancements = [horde, connections, charm, stitched];
 

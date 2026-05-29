@@ -244,8 +244,8 @@ class WarpsparkClawpack {
     skilledManipulator.keywords = "Enhancement";
     skilledManipulator.timing = "Passive";
     skilledManipulator.color = "Red";
-    skilledManipulator.details =
-        "Effect: Your general has WARD (4+) while they are within 1\" of any friendly CLanrats units.";
+    skilledManipulator.effect =
+        "Your general has WARD (4+) while they are within 1\" of any friendly CLanrats units.";
 
     Ability skitterleap = Ability("Skitterleap");
     skitterleap.typeName = "Ability (Activated)";

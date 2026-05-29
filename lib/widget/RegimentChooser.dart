@@ -53,12 +53,20 @@ class _Regimentchooser extends State<RegimentChooser> {
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Trigger: " +
-                            widget.settings.regimentAbilities[0].timing,
-                      ),
+                      Text("Trigger: " +
+                          widget.settings.regimentAbilities[0].timing,),
                       Text(""),
-                      Text(widget.settings.regimentAbilities[0].details),
+                      widget.settings.regimentAbilities[0].effect.contains("-1")
+                          ? Text(widget.settings.regimentAbilities[0].declare)
+                          : widget.settings.regimentAbilities[0].declare.contains(
+                        "-1",
+                      )
+                          ? Text(widget.settings.regimentAbilities[0].effect)
+                          : Text(
+                        widget.settings.regimentAbilities[0].declare +
+                            "\n\n" +
+                            widget.settings.regimentAbilities[0].effect,
+                      ),
                     ],
                   ),
                 ),
@@ -70,12 +78,20 @@ class _Regimentchooser extends State<RegimentChooser> {
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Trigger: " +
-                            widget.settings.regimentAbilities[1].timing,
-                      ),
+                      Text("Trigger: " +
+                          widget.settings.regimentAbilities[1].timing,),
                       Text(""),
-                      Text(widget.settings.regimentAbilities[1].details),
+                      widget.settings.regimentAbilities[1].effect.contains("-1")
+                          ? Text(widget.settings.regimentAbilities[1].declare)
+                          : widget.settings.regimentAbilities[1].declare.contains(
+                        "-1",
+                      )
+                          ? Text(widget.settings.regimentAbilities[1].effect)
+                          : Text(
+                        widget.settings.regimentAbilities[1].declare +
+                            "\n\n" +
+                            widget.settings.regimentAbilities[1].effect,
+                      ),
                     ],
                   ),
                 ),
@@ -111,12 +127,20 @@ class _Regimentchooser extends State<RegimentChooser> {
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Trigger: " +
-                            widget.settings.enhancements[0].timing,
-                      ),
+                      Text("Trigger: " +
+                          widget.settings.enhancements[0].timing,),
                       Text(""),
-                      Text(widget.settings.enhancements[0].details),
+                      widget.settings.enhancements[0].effect.contains("-1")
+                          ? Text(widget.settings.enhancements[0].declare)
+                          : widget.settings.enhancements[0].declare.contains(
+                        "-1",
+                      )
+                          ? Text(widget.settings.enhancements[0].effect)
+                          : Text(
+                        widget.settings.enhancements[0].declare +
+                            "\n\n" +
+                            widget.settings.enhancements[0].effect,
+                      ),
                     ],
                   ),
                 ),
@@ -128,12 +152,20 @@ class _Regimentchooser extends State<RegimentChooser> {
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Trigger: " +
-                            widget.settings.enhancements[1].timing,
-                      ),
+                      Text("Trigger: " +
+                          widget.settings.enhancements[1].timing,),
                       Text(""),
-                      Text(widget.settings.enhancements[1].details),
+                      widget.settings.enhancements[1].effect.contains("-1")
+                          ? Text(widget.settings.enhancements[1].declare)
+                          : widget.settings.enhancements[1].declare.contains(
+                        "-1",
+                      )
+                          ? Text(widget.settings.enhancements[1].effect)
+                          : Text(
+                        widget.settings.enhancements[1].declare +
+                            "\n\n" +
+                            widget.settings.enhancements[1].effect,
+                      ),
                     ],
                   ),
                 ),
@@ -145,12 +177,20 @@ class _Regimentchooser extends State<RegimentChooser> {
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Trigger: " +
-                            widget.settings.enhancements[2].timing,
-                      ),
+                      Text("Trigger: " +
+                          widget.settings.enhancements[2].timing,),
                       Text(""),
-                      Text(widget.settings.enhancements[2].details),
+                      widget.settings.enhancements[2].effect.contains("-1")
+                          ? Text(widget.settings.enhancements[2].declare)
+                          : widget.settings.enhancements[2].declare.contains(
+                        "-1",
+                      )
+                          ? Text(widget.settings.enhancements[2].effect)
+                          : Text(
+                        widget.settings.enhancements[2].declare +
+                            "\n\n" +
+                            widget.settings.enhancements[2].effect,
+                      ),
                     ],
                   ),
                 ),
@@ -162,12 +202,20 @@ class _Regimentchooser extends State<RegimentChooser> {
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Trigger: " +
-                            widget.settings.enhancements[3].timing,
-                      ),
+                      Text("Trigger: " +
+                          widget.settings.enhancements[3].timing,),
                       Text(""),
-                      Text(widget.settings.enhancements[3].details),
+                      widget.settings.enhancements[3].effect.contains("-1")
+                          ? Text(widget.settings.enhancements[3].declare)
+                          : widget.settings.enhancements[3].declare.contains(
+                        "-1",
+                      )
+                          ? Text(widget.settings.enhancements[3].effect)
+                          : Text(
+                        widget.settings.enhancements[3].declare +
+                            "\n\n" +
+                            widget.settings.enhancements[3].effect,
+                      ),
                     ],
                   ),
                 ),

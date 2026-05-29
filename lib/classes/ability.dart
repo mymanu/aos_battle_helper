@@ -30,7 +30,7 @@ class Ability {
   String castingValue = "-";
 
   bool erledigt = false;
-  String originUnit = "Nobody";
+  String originUnit = "-";
   String commandPoints = "-";
 
   String imagePath = "";

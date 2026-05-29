@@ -172,6 +172,7 @@ class IronjawzBigMob {
     Ability amberstone = Ability("Amberstone Whetstone");
     amberstone.keywords = "Enhancement";
     amberstone.typeName = "Ability (Passive)";
+    amberstone.timing = "Passive";
     amberstone.color = "Red";
     amberstone.effect =
     "The Rend characteristic of your general’s melee weapons is 2";
@@ -179,18 +180,21 @@ class IronjawzBigMob {
     Ability skulls = Ability("Trophy Skulls");
     skulls.keywords = "Enhancement";
     skulls.typeName = "Ability (Passive)";
+    skulls.timing = "Passive";
     skulls.color = "Purple";
     skulls.effect = "Your general’s Control characteristic is 5.";
 
     Ability armourGork = Ability("Armour of Gork");
     armourGork.keywords = "Enhancement";
     armourGork.typeName = "Ability (Passive)";
+    armourGork.timing = "Passive";
     armourGork.color = "Green";
     armourGork.effect = "Your general has Ward (6+).";
 
     Ability megaBossy = Ability("Mega Bossy");
     megaBossy.keywords = "Enhancement";
     megaBossy.typeName = "Ability (Passive)";
+    megaBossy.timing = "Passive";
     megaBossy.color = "Orange";
     megaBossy.effect =
     "If this unit charged this turn, for the rest of the turn, "
