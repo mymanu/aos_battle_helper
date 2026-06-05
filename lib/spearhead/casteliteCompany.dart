@@ -144,7 +144,7 @@ class CasteliteCompany {
     //---------------------------------------------------------
     //
 
-    //settings.army.unitList = units;
+    settings.army.unitList = units;
 
     settings.army.battleTraitsList.clear();
     settings.army.battleTraitsList.add(battleTraits);

@@ -1,3 +1,4 @@
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -271,14 +272,21 @@ class _WarScroll extends State<WarScroll> {
                               IconButton(
                                 icon: Image.file(
                                   //Nur bei Windows --debug exe benötigt
-                                  //File("data/flutter_assets/assets/AoS_Reinforcement_Symbol.png"),
+                                  File("data/flutter_assets/assets/AoS_Reinforcement_Symbol.png"),
 
                                   //Nur in Android Studio
-                                  File('./assets/AoS_Reinforcement_Symbol.png'),
+                                  //File('./assets/AoS_Reinforcement_Symbol.png'),
+
                                   //scale: 0.5,
                                   height: 100,
                                   width: 100,
                                 ),
+                                /*
+                                //Für Android Apps
+                                Image(
+                                  image: AssetImage('assets/AoS_Reinforcement_Symbol.png'),
+                                  height: 100,
+                                  width: 100,),*/
                                 onPressed: () {},
                               ),
                             )
