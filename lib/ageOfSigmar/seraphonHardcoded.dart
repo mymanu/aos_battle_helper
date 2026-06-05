@@ -250,7 +250,119 @@ class SeraphonHardcoded {
     //---------------------------------------------------------
     // Manifestation
 
-    //TODO muss Jenny definieren welche Manifestation sie spielen will !!!
+    //Manifestation The Burning Head
+    Weapon breath = Weapon("breath", "Burning Breath");
+    breath.range = "10\"";
+    breath.attack = "D6";
+    breath.hit = "4+";
+    breath.wound = "3+";
+    breath.rend = "2";
+    breath.damage = "1";
+    breath.ability = "Shoot In Combat, Anti-WAR MACHINE (+1 Rend)";
+
+    Weapon flaming = Weapon("flaming", "Flaming Maw");
+    flaming.attack = "D26";
+    flaming.hit = "4+";
+    flaming.wound = "3+";
+    flaming.rend = "2";
+    flaming.damage = "1";
+    flaming.ability = "Anti-WAR MACHINE (+1 Rend)";
+
+    Ability burningUp = Ability("Burning Up");
+    burningUp.typeName = "Ability (Passive)";
+    burningUp.color = "Blue";
+    burningUp.effect =
+        "Each time this Manifestation uses a Shoot ability, after that ability has been resolved, "
+        "allocate 1 damage point to this Manifestation (ward rolls cannot be made for that damage point).";
+
+    Ability fly = Ability("Wandering Destruction");
+    fly.timing = "Once Per Turn, Your Movement Phase";
+    fly.typeName = "Ability (Passive)";
+    fly.color = "Gray";
+    fly.effect =
+        "As this unit moves, it ignores other models, terrain features and the combat ranges of enemy units. "
+        "It cannot end its move in combat unless specified in the ability that allowed it to move. "
+        "Ignore any vertical distance moved for this unit.";
+
+    List<Ability> headSpells = [
+      burningUp,
+      fly,
+      aosGeneralSpells().getWardSave(),
+    ];
+
+    Unit burningHead = Unit.withSpells("The Burning Head", headSpells);
+    burningHead.weapons.add(breath);
+    burningHead.weapons.add(flaming);
+    burningHead.move = "8\"";
+    burningHead.health = "6";
+    burningHead.save = "6+";
+    burningHead.banishment = "6+";
+    burningHead.keywords = "WARD (6+), MANIFESTATION, ENDLESS SPELL, FLY";
+
+    //Manifestation LifeSwarm
+    Weapon bites = Weapon("breath", "Burning Breath");
+    bites.attack = "2D6";
+    bites.hit = "4+";
+    bites.wound = "4+";
+    bites.rend = "-";
+    bites.damage = "1";
+    bites.ability = "Anti-Infantry (+1 Rend)";
+
+    Ability vigour = Ability("Restored Vigour");
+    vigour.typeName = "Ability (Active)";
+    vigour.timing = "End of Any Turn";
+    vigour.color = "Black";
+    vigour.effect = "Heal (3) this Manifestation.";
+
+    Ability healing = Ability("Bounteous Healing");
+    healing.typeName = "Ability (Active)";
+    healing.timing = "Your Movement Phase";
+    healing.color = "Gray";
+    healing.declare =
+        "Pick a friendly unit within 3\" of this Manifestation to be the target.";
+    healing.effect = "Heal (3) the target.";
+
+    List<Ability> swarmSpells = [
+      healing,
+      fly,
+      aosGeneralSpells().getWardSave(),
+    ];
+
+    Unit lifeSwarm = Unit.withSpells("Emerald Lifeswarm", swarmSpells);
+    lifeSwarm.weapons.add(bites);
+    lifeSwarm.move = "8\"";
+    lifeSwarm.health = "5";
+    lifeSwarm.save = "6+";
+    lifeSwarm.banishment = "7+";
+    lifeSwarm.keywords = "WARD (6+), MANIFESTATION, ENDLESS SPELL, FLY";
+
+    //Manifestation Jaws
+    Weapon jaws = Weapon("jaws", "Gnashing Jaws");
+    jaws.attack = "10";
+    jaws.hit = "4+";
+    jaws.wound = "2+";
+    jaws.rend = "1";
+    jaws.damage = "1";
+    jaws.ability = "Charge (+1 Damage)";
+
+    Ability hunger = Ability("Ravening Hunger");
+    vigour.typeName = "Ability (Active)";
+    vigour.timing = "Any Charge Phase";
+    vigour.color = "Black";
+    vigour.declare =
+        "If this Manifestation charged this turn, pick an enemy unit within 1\" of it to be the target.";
+    vigour.effect =
+        "Roll 10 dice. For each 5+, inflict 1 mortal damage on the target.";
+
+    List<Ability> jawsSpells = [hunger, aosGeneralSpells().getWardSave()];
+
+    Unit gnashingJaws = Unit.withSpells("Ravenak´s Gnashing Jaws", jawsSpells);
+    gnashingJaws.weapons.add(jaws);
+    gnashingJaws.move = "3D6";
+    gnashingJaws.health = "10";
+    gnashingJaws.save = "6+";
+    gnashingJaws.banishment = "7+";
+    gnashingJaws.keywords = "WARD (6+), MANIFESTATION, ENDLESS SPELL";
 
     // Manifestation
     //---------------------------------------------------------
@@ -262,6 +374,9 @@ class SeraphonHardcoded {
       skinkStarpriest,
       kroxigor,
       stegadon,
+      burningHead,
+      lifeSwarm,
+      gnashingJaws,
       realmshaperEngine,
     ];
 
@@ -332,34 +447,49 @@ class SeraphonHardcoded {
 
     // Battle Traits
     //---------------------------------------------------------
-    // Spell Lore
-    //TODO hier Summon Spells für Jennys Manifestation einbauen
-    /*
-    Ability summonFoot = Ability("Summon Foot of Gork");
-    summonFoot.timing = "Your Hero Phase";
-    summonFoot.color = "Yellow";
-    summonFoot.castingValue = "7";
-    summonFoot.keywords = "Spell, Summon";
-    summonFoot.details =
-    "Declare: If there is not a friendly Foot of Gork on the battlefield, pick a friendly Ironjawz Wizard to cast this spell, then make a casting roll of 2D6.\nEffect: Set up a Foot of Gork wholly within 12\" of the caster, visible to them and more than 9\" from all enemy units. A Foot of Gork has 2 parts that must be set up within 9\" of each other.";
+    // Spell Lore (Zauber + Manifestationen)
 
-    Ability summonGork = Ability("Summon Gork-Roara");
-    summonGork.timing = "Your Hero Phase";
-    summonGork.color = "Yellow";
-    summonGork.castingValue = "5";
-    summonGork.keywords = "Spell, Summon";
-    summonGork.details =
-    "Declare: If there is not a friendly Gork-Roara on the battlefield, pick a friendly Ironjawz Wizard to cast this spell, then make a casting roll of 2D6.\nEffect: Set up a Gork-Roara wholly within 12\" of the caster, visible to them and more than 9\" from all enemy units.";
+    //Summon Spells für Jennys Manifestation
+    Ability summonHead = Ability("Summon Burning Head");
+    summonHead.timing = "Your Hero Phase";
+    summonHead.color = "Yellow";
+    summonHead.castingValue = "5";
+    summonHead.keywords = "Spell, Summon";
+    summonHead.declare =
+        "If there is not a friendly The Burning Head endless Spell on the battlefield, "
+        "pick a friendly Wizard to cast this Spell, then make a casting roll of 2D6.";
+    summonHead.effect =
+        "Set up a The Burning Head endless Spell wholly within 12\" of the caster, "
+        "visible to them and more than 9\" from all enemy units."
+        "\nCasting Value: 5";
 
-    Ability summonMorkspit = Ability("Summon Morkspit Marsh");
-    summonMorkspit.timing = "Your Hero Phase";
-    summonMorkspit.color = "Yellow";
-    summonMorkspit.castingValue = "5";
-    summonMorkspit.keywords = "Spell, Summon";
-    summonMorkspit.details =
-    "Declare: If there is not a friendly Morkspit Marsh on the battlefield, pick a friendly Ironjawz Wizard to cast this spell, then make a casting roll of 2D6.\nEffect: Set up a Morkspit Marsh wholly within 18\" of the caster and visible to them.";
-    */
+    Ability summonLifeSwarm = Ability("Summon Emerald Lifeswarm");
+    summonLifeSwarm.timing = "Your Hero Phase";
+    summonLifeSwarm.color = "Yellow";
+    summonLifeSwarm.castingValue = "6";
+    summonLifeSwarm.keywords = "Spell, Summon";
+    summonLifeSwarm.declare =
+        "If there is not a friendly Emerald Lifeswarm endless Spell on the battlefield, "
+        "pick a friendly Wizard to cast this Spell, then make a casting roll of 2D6.";
+    summonLifeSwarm.effect =
+        "Set up a Emerald Lifeswarm endless Spell wholly within 12\" of the caster, "
+        "visible to them and more than 9\" from all enemy units."
+            "\nCasting Value: 6";
 
+    Ability summonJaws = Ability("Summon Ravenak’s Gnashing Jaws");
+    summonJaws.timing = "Your Hero Phase";
+    summonJaws.color = "Yellow";
+    summonJaws.castingValue = "7";
+    summonJaws.keywords = "Spell, Summon";
+    summonJaws.declare =
+        "If there is not a friendly Ravenak’s Gnashing Jaws endless Spell on the battlefield, "
+        "pick a friendly Wizard to cast this Spell, then make a casting roll of 2D6.";
+    summonJaws.effect =
+        "Set up a Ravenak’s Gnashing Jaws endless Spell wholly within 12\" of the caster, "
+        "visible to them and more than 9\" from all enemy units."
+            "\nCasting Value: 7";
+
+    //Spell Lore Jenny
     Ability cometsCall = Ability("Comet's Call");
     cometsCall.typeName = "Ability (Activated)";
     cometsCall.timing = "Your Hero Phase";
@@ -394,21 +524,32 @@ class SeraphonHardcoded {
         "Until the start of your next turn, the target can use a Run ability and still use Shoot and/or Charge abilities later in the turn.";
 
     SpellLore spellLore = SpellLore();
-    /*
-    spellLore.abilitys.add(summonFoot);
-    spellLore.abilitys.add(summonGork);
-    spellLore.abilitys.add(summonMorkspit);
-     */
+
+    //Jennys Manifestationen hinschreiben
+    spellLore.abilitys.add(summonHead);
+    spellLore.abilitys.add(summonLifeSwarm);
+    spellLore.abilitys.add(summonJaws);
+
     spellLore.abilitys.add(cometsCall);
     spellLore.abilitys.add(mysticalUnforging);
     spellLore.abilitys.add(speedOfHuanchi);
 
-    // Spell Lore
+    // Spell Lore (Zauber + Manifestationen)
     //---------------------------------------------------------
     // Battle Formation
 
-    //TODO muss Jenny definieren welchen Battle Formation sie spielen will !!!
+    Ability starhost = Ability("Eternal Starhost");
+    starhost.typeName = "Ability (Activated)";
+    starhost.timing = "Once Per Turn (Army), Your Movement Phase";
+    starhost.color = "Gray";
+    starhost.declare =
+        "Pick a friendly Seraphon unit wholly within 12\" of a friendly Seraphon Wizard to use this ability";
+    starhost.effect =
+        "Roll a dice. On a 3+, remove that unit from the battlefield "
+        "and set it up again on the battlefield more than 9\" from all enemy units.";
+
     BattleFormation battleFormation = BattleFormation();
+    battleFormation.abilitys.add(starhost);
 
     // Battle Formation
     //---------------------------------------------------------
