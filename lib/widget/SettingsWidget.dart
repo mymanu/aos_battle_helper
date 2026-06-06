@@ -125,6 +125,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                       onPressed: () {
                         addCommandSpells();
                         addNormalSpells();
+                        addAoSPreparationSpells();
                       },
                     ),
 
@@ -890,6 +891,10 @@ class _SettingsWidget extends State<SettingsWidget> {
 
   void addNormalSpells() {
     widget.settings = aosGeneralSpells().addNormalSpells(widget.settings);
+  }
+
+  void addAoSPreparationSpells() {
+    widget.settings = aosGeneralSpells().aosPreparationSpells(widget.settings);
   }
 
   void addSpearheadSpells() {
