@@ -203,6 +203,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                               ),
                             ),
 
+                            //Ggf für Handy Nutzer auskommentieren für Surface 30 benötigt
                             SizedBox(height: 30),
 
                             Transform.scale(
