@@ -258,7 +258,23 @@ class _ShootingPhase extends State<ShootingPhase> {
                               ],
                             ),
                           )
-                        : Column(
+                        : Stack(
+                      children: [
+                        Positioned(
+                          top: 0,
+                          right: 0,
+                          child:
+                          spellsThisPhase[index].commandPoints
+                              .contains("-")
+                              ? Text("")
+                              : Text(
+                            "Command Point cost: " +
+                                spellsThisPhase[index]
+                                    .commandPoints,
+                          ),
+                        ),
+
+                        Column(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
@@ -306,12 +322,6 @@ class _ShootingPhase extends State<ShootingPhase> {
                                           spellsThisPhase[index].effect,
                                     ),
 
-                              spellsThisPhase[index].commandPoints.contains("-")
-                                  ? Text("")
-                                  : Text(
-                                      "Command Point cost: " +
-                                          spellsThisPhase[index].commandPoints,
-                                    ),
                               /*
                             ListTile(
                               leading: Icon(Icons.album),
@@ -342,6 +352,8 @@ class _ShootingPhase extends State<ShootingPhase> {
                               ),
                             ],
                           ),
+                    ],
+                  ),
                   ),
                 );
               }, childCount: spellsThisPhase.length),

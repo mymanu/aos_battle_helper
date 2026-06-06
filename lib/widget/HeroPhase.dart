@@ -241,86 +241,112 @@ class _HeroPhase extends State<HeroPhase> {
                               ],
                             ),
                           )
-                        : Column(
-                            mainAxisSize: MainAxisSize.min,
-                            //crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    spellsThisPhase[index].name,
-                                    style: TextStyle(
-                                      backgroundColor: widget.phaseColor,
-                                      fontWeight: FontWeight.bold,
-                                      color: calculateTextColor(
-                                        widget.phaseColor,
+                        : Stack(
+                            children: [
+                              Positioned(
+                                top: 0,
+                                right: 0,
+                                child:
+                                    spellsThisPhase[index].castingValue
+                                        .contains("-")
+                                    ? Text("")
+                                    : Text(
+                                        "Casting Value: " +
+                                            spellsThisPhase[index].castingValue,
                                       ),
-                                    ),
-                                  ),
-                                ],
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  //TODO abändern zu Unit, von welcher es genutzt werden kann
-                                  Text(
-                                    "Ursprung: " +
-                                        spellsThisPhase[index].originUnit,
-                                  ),
-                                ],
-                              ),
-                              spellsThisPhase[index].typeName.contains(
-                                    "Passive",
-                                  )
-                                  ? Text(spellsThisPhase[index].typeName)
-                                  : Text(spellsThisPhase[index].timing),
-                              Text(spellsThisPhase[index].originUnit),
-                              Text(""),
-                              spellsThisPhase[index].effect.contains("-1")
-                                  ? Text(spellsThisPhase[index].declare)
-                                  : spellsThisPhase[index].declare.contains(
-                                      "-1",
-                                    )
-                                  ? Text(spellsThisPhase[index].effect)
-                                  : Text(
-                                      spellsThisPhase[index].declare +
-                                          "\n\n" +
-                                          spellsThisPhase[index].effect,
-                                    ),
 
-                              spellsThisPhase[index].commandPoints.contains("-")
-                                  ? Text("")
-                                  : Text(
-                                      "Command Point cost: " +
-                                          spellsThisPhase[index].commandPoints,
-                                    ),
-                              /*
+                              Positioned(
+                                top: 0,
+                                right: 0,
+                                child:
+                                    spellsThisPhase[index].commandPoints
+                                        .contains("-")
+                                    ? Text("")
+                                    : Text(
+                                        "Command Point cost: " +
+                                            spellsThisPhase[index]
+                                                .commandPoints,
+                                      ),
+                              ),
+
+                              Column(
+                                mainAxisSize: MainAxisSize.min,
+                                //crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        spellsThisPhase[index].name,
+                                        style: TextStyle(
+                                          backgroundColor: widget.phaseColor,
+                                          fontWeight: FontWeight.bold,
+                                          color: calculateTextColor(
+                                            widget.phaseColor,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      //TODO abändern zu Unit, von welcher es genutzt werden kann
+                                      Text(
+                                        "Ursprung: " +
+                                            spellsThisPhase[index].originUnit,
+                                      ),
+                                    ],
+                                  ),
+                                  spellsThisPhase[index].typeName.contains(
+                                        "Passive",
+                                      )
+                                      ? Text(spellsThisPhase[index].typeName)
+                                      : Text(spellsThisPhase[index].timing),
+                                  Text(spellsThisPhase[index].originUnit),
+                                  Text(""),
+                                  spellsThisPhase[index].effect.contains("-1")
+                                      ? Text(spellsThisPhase[index].declare)
+                                      : spellsThisPhase[index].declare.contains(
+                                          "-1",
+                                        )
+                                      ? Text(spellsThisPhase[index].effect)
+                                      : Text(
+                                          spellsThisPhase[index].declare +
+                                              "\n\n" +
+                                              spellsThisPhase[index].effect,
+                                        ),
+
+                                  /*
                             ListTile(
                               leading: Icon(Icons.album),
                               title: Text(spells[index].title),
                               subtitle: Text(spells[index].details),
                             ),
                             */
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: <Widget>[
-                                  TextButton(
-                                    child: Text("Fähigkeit erledigt"),
-                                    onPressed: () {
-                                      setState(() {
-                                        spellsThisPhase[index].erledigt = true;
-                                      });
-                                    },
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: <Widget>[
+                                      TextButton(
+                                        child: Text("Fähigkeit erledigt"),
+                                        onPressed: () {
+                                          setState(() {
+                                            spellsThisPhase[index].erledigt =
+                                                true;
+                                          });
+                                        },
+                                      ),
+                                      const SizedBox(width: 8),
+                                      TextButton(
+                                        child: Text("Item $index"),
+                                        onPressed: () {
+                                          /* ... */
+                                        },
+                                      ),
+                                      const SizedBox(width: 8),
+                                    ],
                                   ),
-                                  const SizedBox(width: 8),
-                                  TextButton(
-                                    child: Text("Item $index"),
-                                    onPressed: () {
-                                      /* ... */
-                                    },
-                                  ),
-                                  const SizedBox(width: 8),
                                 ],
                               ),
                             ],
