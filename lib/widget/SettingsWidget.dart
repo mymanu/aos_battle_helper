@@ -202,6 +202,9 @@ class _SettingsWidget extends State<SettingsWidget> {
                                 },
                               ),
                             ),
+
+                            SizedBox(height: 15),
+
                             Transform.scale(
                               scale: 2,
                               child: CupertinoCheckbox(
@@ -219,6 +222,8 @@ class _SettingsWidget extends State<SettingsWidget> {
                                 },
                               ),
                             ),
+
+                            SizedBox(height: 15),
 
                             Transform.scale(
                               scale: 2,
@@ -238,6 +243,8 @@ class _SettingsWidget extends State<SettingsWidget> {
                               ),
                             ),
 
+                            SizedBox(height: 15),
+
                             Transform.scale(
                               scale: 2,
                               child: CupertinoCheckbox(
@@ -256,6 +263,8 @@ class _SettingsWidget extends State<SettingsWidget> {
                               ),
                             ),
 
+                            SizedBox(height: 15),
+
                             Transform.scale(
                               scale: 2,
                               child: CupertinoCheckbox(
@@ -273,6 +282,8 @@ class _SettingsWidget extends State<SettingsWidget> {
                                 },
                               ),
                             ),
+
+                            SizedBox(height: 15),
 
                             Transform.scale(
                               scale: 2,
