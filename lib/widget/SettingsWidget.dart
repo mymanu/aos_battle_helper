@@ -203,7 +203,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                               ),
                             ),
 
-                            SizedBox(height: 15),
+                            SizedBox(height: 30),
 
                             Transform.scale(
                               scale: 2,
@@ -223,7 +223,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                               ),
                             ),
 
-                            SizedBox(height: 15),
+                            SizedBox(height: 30),
 
                             Transform.scale(
                               scale: 2,
@@ -243,7 +243,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                               ),
                             ),
 
-                            SizedBox(height: 15),
+                            SizedBox(height: 30),
 
                             Transform.scale(
                               scale: 2,
@@ -263,7 +263,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                               ),
                             ),
 
-                            SizedBox(height: 15),
+                            SizedBox(height: 30),
 
                             Transform.scale(
                               scale: 2,
@@ -283,7 +283,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                               ),
                             ),
 
-                            SizedBox(height: 15),
+                            SizedBox(height: 30),
 
                             Transform.scale(
                               scale: 2,
