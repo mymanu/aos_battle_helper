@@ -85,6 +85,15 @@ class _ShootingPhase extends State<ShootingPhase> {
       ),
     );
 
+    for(Ability abi in spellsThisPhase) {
+      if(!abi.commandPoints.contains("-")) {
+        int commandCostInt = int.parse(abi.commandPoints);
+        if (commandCostInt > widget.settings.commandPoints) {
+          abi.erledigt = true;
+        }
+      }
+    }
+
     //Ab hier Units mit Ranged Waffen in die unitsThisPhase Liste hinzufügen
     for (Unit unit in widget.settings.army.unitList) {
       bool isRangedUnit = false;
@@ -336,7 +345,12 @@ class _ShootingPhase extends State<ShootingPhase> {
                                     child: Text("Fähigkeit erledigt"),
                                     onPressed: () {
                                       setState(() {
-                                        spellsThisPhase[index].erledigt = true;
+                                        if(!spellsThisPhase[index].commandPoints.contains("-")) {
+                                          int commandCostInt = int.parse(spellsThisPhase[index].commandPoints);
+                                          widget.settings.commandPoints = widget.settings.commandPoints - commandCostInt;
+                                        }
+                                        spellsThisPhase[index].erledigt =
+                                        true;
                                       });
                                     },
                                   ),

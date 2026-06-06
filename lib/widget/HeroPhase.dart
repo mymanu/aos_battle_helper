@@ -81,6 +81,15 @@ class _HeroPhase extends State<HeroPhase> {
       ),
     );
 
+    for(Ability abi in spellsThisPhase) {
+      if(!abi.commandPoints.contains("-")) {
+        int commandCostInt = int.parse(abi.commandPoints);
+        if (commandCostInt > widget.settings.commandPoints) {
+          abi.erledigt = true;
+        }
+      }
+    }
+
     //TODO ab Hier wird das UI der Helden-Phase gebaut, ab hier kann sich Jenny austoben.
     return Scaffold(
       appBar: AppBar(
@@ -332,6 +341,10 @@ class _HeroPhase extends State<HeroPhase> {
                                         child: Text("Fähigkeit erledigt"),
                                         onPressed: () {
                                           setState(() {
+                                            if(!spellsThisPhase[index].commandPoints.contains("-")) {
+                                              int commandCostInt = int.parse(spellsThisPhase[index].commandPoints);
+                                              widget.settings.commandPoints = widget.settings.commandPoints - commandCostInt;
+                                            }
                                             spellsThisPhase[index].erledigt =
                                                 true;
                                           });

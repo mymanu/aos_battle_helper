@@ -84,6 +84,15 @@ class _ChargePhase extends State<ChargePhase> {
       ),
     );
 
+    for(Ability abi in spellsThisPhase) {
+      if(!abi.commandPoints.contains("-")) {
+        int commandCostInt = int.parse(abi.commandPoints);
+        if (commandCostInt > widget.settings.commandPoints) {
+          abi.erledigt = true;
+        }
+      }
+    }
+
     //Ab hier Units in unitsThisPhase
     for (Unit unit in widget.settings.army.unitList) {
       if (unit.weapons.isNotEmpty) {
@@ -329,8 +338,12 @@ class _ChargePhase extends State<ChargePhase> {
                                         child: Text("Fähigkeit erledigt"),
                                         onPressed: () {
                                           setState(() {
+                                            if(!spellsThisPhase[index].commandPoints.contains("-")) {
+                                              int commandCostInt = int.parse(spellsThisPhase[index].commandPoints);
+                                              widget.settings.commandPoints = widget.settings.commandPoints - commandCostInt;
+                                            }
                                             spellsThisPhase[index].erledigt =
-                                                true;
+                                            true;
                                           });
                                         },
                                       ),
