@@ -16,36 +16,19 @@ class Functions {
     for (Unit unit in unitList) {
       for (Ability ability in unit.abilitys) {
         if (ability.color.contains(phaseColorString)) {
-          /*
-          //Für Hard Coded Spells Anfang
-          if ((ability.timing.contains("Your") ||
-              ability.timing.contains("Any") ||
-              ability.timing.contains("Passive")) &&
-              ownPhase) {
-            ability.originUnit = unit.name;
-            abilitys.add(ability);
-          }
-          if ((ability.timing.contains("Enemy") ||
-              ability.timing.contains("Any") ||
-              ability.timing.contains("Passive")) &&
-              !ownPhase) {
-            ability.originUnit = unit.name;
-            abilitys.add(ability);
-          }
-          //Für Hard Coded Spells Ende
-          */
-          
           //Für JSON Spells Anfang
           if ((ability.timing.contains("Your") ||
               ability.timing.contains("Any") ||
-              ability.typeName.contains("Passive")) &&
+              ability.typeName.contains("Passive") ||
+              ability.timing.contains("Reaction")) &&
               ownPhase) {
             ability.originUnit = unit.name;
             abilitys.add(ability);
           }
           if ((ability.timing.contains("Enemy") ||
               ability.timing.contains("Any") ||
-              ability.typeName.contains("Passive")) &&
+              ability.typeName.contains("Passive") ||
+              ability.timing.contains("Reaction")) &&
               !ownPhase) {
             ability.originUnit = unit.name;
             abilitys.add(ability);
@@ -61,35 +44,19 @@ class Functions {
     List<Ability> abilitys = [];
     for (Ability ability in spellLore.abilitys) {
       if (ability.color.contains(phaseColorString)) {
-        /*
-        //Für Hard Coded Spells Anfang
-        if ((ability.timing.contains("Your") ||
-            ability.timing.contains("Any") ||
-            ability.timing.contains("Passive")) &&
-            ownPhase) {
-          ability.originUnit = "Spell-Lore";
-          abilitys.add(ability);
-        }
-        if ((ability.timing.contains("Enemy") ||
-            ability.timing.contains("Any") ||
-            ability.timing.contains("Passive")) &&
-            !ownPhase) {
-          ability.originUnit = "Spell-Lore";
-          abilitys.add(ability);
-        }
-        //Für Hard Coded Spells Ende
-         */
         //Für JSON Spells Anfang
         if ((ability.timing.contains("Your") ||
             ability.timing.contains("Any") ||
-            ability.typeName.contains("Passive")) &&
+            ability.typeName.contains("Passive") ||
+            ability.timing.contains("Reaction")) &&
             ownPhase) {
           ability.originUnit = "Spell-Lore";
           abilitys.add(ability);
         }
         if ((ability.timing.contains("Enemy") ||
             ability.timing.contains("Any") ||
-            ability.typeName.contains("Passive")) &&
+            ability.typeName.contains("Passive") ||
+            ability.timing.contains("Reaction")) &&
             !ownPhase) {
           ability.originUnit = "Spell-Lore";
           abilitys.add(ability);
@@ -105,35 +72,19 @@ class Functions {
     for (BattleTraits battleTrait in battleTraitsList) {
       for (Ability ability in battleTrait.abilitys) {
         if (ability.color.contains(phaseColorString)) {
-          /*
-          //Für Hard Coded Spells Anfang
-          if ((ability.timing.contains("Your") ||
-              ability.timing.contains("Any") ||
-              ability.timing.contains("Passive")) &&
-              ownPhase) {
-            ability.originUnit = "Battle-Trait";
-            abilitys.add(ability);
-          }
-          if ((ability.timing.contains("Enemy") ||
-              ability.timing.contains("Any") ||
-              ability.timing.contains("Passive")) &&
-              !ownPhase) {
-            ability.originUnit = "Battle-Trait";
-            abilitys.add(ability);
-          }
-          //Für Hard Coded Spells Ende
-          */
           //Für JSON Spells Anfang
           if ((ability.timing.contains("Your") ||
               ability.timing.contains("Any") ||
-              ability.typeName.contains("Passive")) &&
+              ability.typeName.contains("Passive") ||
+              ability.timing.contains("Reaction")) &&
               ownPhase) {
             ability.originUnit = "Battle-Trait";
             abilitys.add(ability);
           }
           if ((ability.timing.contains("Enemy") ||
               ability.timing.contains("Any") ||
-              ability.typeName.contains("Passive")) &&
+              ability.typeName.contains("Passive") ||
+              ability.timing.contains("Reaction")) &&
               !ownPhase) {
             ability.originUnit = "Battle-Trait";
             abilitys.add(ability);
@@ -150,35 +101,19 @@ class Functions {
     for (BattleFormation battleFormation in battleFormationsList) {
       for (Ability ability in battleFormation.abilitys) {
         if (ability.color.contains(phaseColorString)) {
-          /*
-          //Für Hard Coded Spells Anfang
-          if ((ability.timing.contains("Your") ||
-              ability.timing.contains("Any") ||
-              ability.timing.contains("Passive")) &&
-              ownPhase) {
-            ability.originUnit = "Battle-Formation";
-            abilitys.add(ability);
-          }
-          if ((ability.timing.contains("Enemy") ||
-              ability.timing.contains("Any") ||
-              ability.timing.contains("Passive")) &&
-              !ownPhase) {
-            ability.originUnit = "Battle-Formation";
-            abilitys.add(ability);
-          }
-          //Für Hard Coded Spells Ende
-          */
           //Für JSON Spells Anfang
           if ((ability.timing.contains("Your") ||
               ability.timing.contains("Any") ||
-              ability.typeName.contains("Passive")) &&
+              ability.typeName.contains("Passive") ||
+              ability.timing.contains("Reaction")) &&
               ownPhase) {
             ability.originUnit = "Battle-Formation";
             abilitys.add(ability);
           }
           if ((ability.timing.contains("Enemy") ||
               ability.timing.contains("Any") ||
-              ability.typeName.contains("Passive")) &&
+              ability.typeName.contains("Passive") ||
+              ability.timing.contains("Reaction")) &&
               !ownPhase) {
             ability.originUnit = "Battle-Formation";
             abilitys.add(ability);
@@ -194,35 +129,19 @@ class Functions {
     List<Ability> abilitys = [];
     for (Ability ability in commandAbilitys) {
       if (ability.color.contains(phaseColorString)) {
-        /*
-        //Für Hard Coded Spells Anfang
-        if ((ability.timing.contains("Your") ||
-            ability.timing.contains("Any") ||
-            ability.timing.contains("Passive")) &&
-            ownPhase) {
-          ability.originUnit = "Command-Ability";
-          abilitys.add(ability);
-        }
-        if ((ability.timing.contains("Enemy") ||
-            ability.timing.contains("Any") ||
-            ability.timing.contains("Passive")) &&
-            !ownPhase) {
-          ability.originUnit = "Command-Ability";
-          abilitys.add(ability);
-        }
-        //Für Hard Coded Spells Ende
-        */
         //Für JSON Spells Anfang
         if ((ability.timing.contains("Your") ||
             ability.timing.contains("Any") ||
-            ability.typeName.contains("Passive")) &&
+            ability.typeName.contains("Passive") ||
+            ability.timing.contains("Reaction")) &&
             ownPhase) {
           ability.originUnit = "Command-Ability";
           abilitys.add(ability);
         }
         if ((ability.timing.contains("Enemy") ||
             ability.timing.contains("Any") ||
-            ability.typeName.contains("Passive")) &&
+            ability.typeName.contains("Passive") ||
+            ability.timing.contains("Reaction")) &&
             !ownPhase) {
           ability.originUnit = "Command-Ability";
           abilitys.add(ability);
@@ -237,35 +156,19 @@ class Functions {
     List<Ability> abilitys = [];
     for (Ability ability in normalAbilitys) {
       if (ability.color.contains(phaseColorString)) {
-        /*
-        //Für Hard Coded Spells Anfang
-        if ((ability.timing.contains("Your") ||
-            ability.timing.contains("Any") ||
-            ability.timing.contains("Passive")) &&
-            ownPhase) {
-          ability.originUnit = "Core-Ability";
-          abilitys.add(ability);
-        }
-        if ((ability.timing.contains("Enemy") ||
-            ability.timing.contains("Any") ||
-            ability.timing.contains("Passive")) &&
-            !ownPhase) {
-          ability.originUnit = "Core-Ability";
-          abilitys.add(ability);
-        }
-        //Für Hard Coded Spells Ende
-        */
         //Für JSON Spells Anfang
         if ((ability.timing.contains("Your") ||
             ability.timing.contains("Any") ||
-            ability.typeName.contains("Passive")) &&
+            ability.typeName.contains("Passive") ||
+            ability.timing.contains("Reaction")) &&
             ownPhase) {
           ability.originUnit = "Core-Ability";
           abilitys.add(ability);
         }
         if ((ability.timing.contains("Enemy") ||
             ability.timing.contains("Any") ||
-            ability.typeName.contains("Passive")) &&
+            ability.typeName.contains("Passive") ||
+            ability.timing.contains("Reaction")) &&
             !ownPhase) {
           ability.originUnit = "Core-Ability";
           abilitys.add(ability);
@@ -280,35 +183,19 @@ class Functions {
     List<Ability> abilities = [];
     for (Ability ability in preparationAbilities) {
       if (ability.color.contains(phaseColorString)) {
-        /*
-        //Für Hard Coded Spells Anfang
-        if ((ability.timing.contains("Your") ||
-            ability.timing.contains("Any") ||
-            ability.timing.contains("Passive")) &&
-            ownPhase) {
-          ability.originUnit = "Core-Ability";
-          abilities.add(ability);
-        }
-        if ((ability.timing.contains("Enemy") ||
-            ability.timing.contains("Any") ||
-            ability.timing.contains("Passive")) &&
-            !ownPhase) {
-          ability.originUnit = "Core-Ability";
-          abilities.add(ability);
-        }
-        //Für Hard Coded Spells Ende
-        */
         //Für JSON Spells Anfang
         if ((ability.timing.contains("Your") ||
             ability.timing.contains("Any") ||
-            ability.typeName.contains("Passive")) &&
+            ability.typeName.contains("Passive") ||
+            ability.timing.contains("Reaction")) &&
             ownPhase) {
           ability.originUnit = "Preparation-Ability";
           abilities.add(ability);
         }
         if ((ability.timing.contains("Enemy") ||
             ability.timing.contains("Any") ||
-            ability.typeName.contains("Passive")) &&
+            ability.typeName.contains("Passive") ||
+            ability.timing.contains("Reaction")) &&
             !ownPhase) {
           ability.originUnit = "Preparation-Ability";
           abilities.add(ability);

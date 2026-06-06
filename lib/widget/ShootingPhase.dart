@@ -44,11 +44,25 @@ class _ShootingPhase extends State<ShootingPhase> {
         widget.settings.ownPhase,
       ),
     );
+    spellsThisPhase.addAll(
+      functions.unitAbilitys(
+        widget.settings.army.unitList,
+        "Green",
+        widget.settings.ownPhase,
+      ),
+    );
 
     spellsThisPhase.addAll(
       functions.spellLoreAbilitys(
         widget.settings.army.spellLore,
         widget.phaseColorString,
+        widget.settings.ownPhase,
+      ),
+    );
+    spellsThisPhase.addAll(
+      functions.spellLoreAbilitys(
+        widget.settings.army.spellLore,
+        "Green",
         widget.settings.ownPhase,
       ),
     );
@@ -60,11 +74,25 @@ class _ShootingPhase extends State<ShootingPhase> {
         widget.settings.ownPhase,
       ),
     );
+    spellsThisPhase.addAll(
+      functions.battleTraitAbilitys(
+        widget.settings.army.battleTraitsList,
+        "Green",
+        widget.settings.ownPhase,
+      ),
+    );
 
     spellsThisPhase.addAll(
       functions.battleFormationAbilitys(
         widget.settings.army.battleFormationsList,
         widget.phaseColorString,
+        widget.settings.ownPhase,
+      ),
+    );
+    spellsThisPhase.addAll(
+      functions.battleFormationAbilitys(
+        widget.settings.army.battleFormationsList,
+        "Green",
         widget.settings.ownPhase,
       ),
     );
@@ -76,11 +104,25 @@ class _ShootingPhase extends State<ShootingPhase> {
         widget.settings.ownPhase,
       ),
     );
+    spellsThisPhase.addAll(
+      functions.commandAbilitys(
+        widget.settings.commandAbilitys,
+        "Green",
+        widget.settings.ownPhase,
+      ),
+    );
 
     spellsThisPhase.addAll(
       functions.normalAbilitys(
         widget.settings.normalAbilitys,
         widget.phaseColorString,
+        widget.settings.ownPhase,
+      ),
+    );
+    spellsThisPhase.addAll(
+      functions.normalAbilitys(
+        widget.settings.normalAbilitys,
+        "Green",
         widget.settings.ownPhase,
       ),
     );
