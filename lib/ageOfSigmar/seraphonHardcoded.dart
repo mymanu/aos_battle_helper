@@ -258,7 +258,7 @@ class SeraphonHardcoded {
     breath.wound = "3+";
     breath.rend = "2";
     breath.damage = "1";
-    breath.ability = "Shoot In Combat, Anti-WAR MACHINE (+1 Rend)";
+    breath.ability = "Shoot In Combat, Anti-Warmachine (+1 Rend)";
 
     Weapon flaming = Weapon("flaming", "Flaming Maw");
     flaming.attack = "D26";
@@ -266,16 +266,16 @@ class SeraphonHardcoded {
     flaming.wound = "3+";
     flaming.rend = "2";
     flaming.damage = "1";
-    flaming.ability = "Anti-WAR MACHINE (+1 Rend)";
+    flaming.ability = "Anti-Warmachine (+1 Rend)";
 
     Ability burningUp = Ability("Burning Up");
     burningUp.typeName = "Ability (Passive)";
     burningUp.color = "Blue";
     burningUp.effect =
         "Each time this Manifestation uses a Shoot ability, after that ability has been resolved, "
-        "allocate 1 damage point to this Manifestation (ward rolls cannot be made for that damage point).";
+        "allocate 1 damage point to this Manifestation. (Ward rolls cannot be made for that damage point).";
 
-    Ability fly = Ability("Wandering Destruction");
+    Ability fly = Ability("Fly");
     fly.timing = "Once Per Turn, Your Movement Phase";
     fly.typeName = "Ability (Passive)";
     fly.color = "Gray";
@@ -299,8 +299,8 @@ class SeraphonHardcoded {
     burningHead.banishment = "6+";
     burningHead.keywords = "WARD (6+), MANIFESTATION, ENDLESS SPELL, FLY";
 
-    //Manifestation LifeSwarm
-    Weapon bites = Weapon("breath", "Burning Breath");
+    //Manifestation Emerald LifeSwarm
+    Weapon bites = Weapon("bites", "Swarming Bites");
     bites.attack = "2D6";
     bites.hit = "4+";
     bites.wound = "4+";
@@ -309,13 +309,13 @@ class SeraphonHardcoded {
     bites.ability = "Anti-Infantry (+1 Rend)";
 
     Ability vigour = Ability("Restored Vigour");
-    vigour.typeName = "Ability (Active)";
+    vigour.typeName = "Ability (Activated)";
     vigour.timing = "End of Any Turn";
-    vigour.color = "Black";
+    vigour.color = "Purple";
     vigour.effect = "Heal (3) this Manifestation.";
 
     Ability healing = Ability("Bounteous Healing");
-    healing.typeName = "Ability (Active)";
+    healing.typeName = "Ability (Activated)";
     healing.timing = "Your Movement Phase";
     healing.color = "Gray";
     healing.declare =
@@ -323,9 +323,10 @@ class SeraphonHardcoded {
     healing.effect = "Heal (3) the target.";
 
     List<Ability> swarmSpells = [
-      healing,
-      fly,
       aosGeneralSpells().getWardSave(),
+      fly,
+      vigour,
+      healing,
     ];
 
     Unit lifeSwarm = Unit.withSpells("Emerald Lifeswarm", swarmSpells);
@@ -336,7 +337,7 @@ class SeraphonHardcoded {
     lifeSwarm.banishment = "7+";
     lifeSwarm.keywords = "WARD (6+), MANIFESTATION, ENDLESS SPELL, FLY";
 
-    //Manifestation Jaws
+    //Manifestation Ravenak´s Gnashing Jaws
     Weapon jaws = Weapon("jaws", "Gnashing Jaws");
     jaws.attack = "10";
     jaws.hit = "4+";
@@ -346,17 +347,17 @@ class SeraphonHardcoded {
     jaws.ability = "Charge (+1 Damage)";
 
     Ability hunger = Ability("Ravening Hunger");
-    vigour.typeName = "Ability (Active)";
+    vigour.typeName = "Ability (Activated)";
     vigour.timing = "Any Charge Phase";
-    vigour.color = "Black";
+    vigour.color = "Orange";
     vigour.declare =
         "If this Manifestation charged this turn, pick an enemy unit within 1\" of it to be the target.";
     vigour.effect =
         "Roll 10 dice. For each 5+, inflict 1 mortal damage on the target.";
 
-    List<Ability> jawsSpells = [hunger, aosGeneralSpells().getWardSave()];
+    List<Ability> jawSpells = [aosGeneralSpells().getWardSave(), hunger];
 
-    Unit gnashingJaws = Unit.withSpells("Ravenak´s Gnashing Jaws", jawsSpells);
+    Unit gnashingJaws = Unit.withSpells("Ravenak´s Gnashing Jaws", jawSpells);
     gnashingJaws.weapons.add(jaws);
     gnashingJaws.move = "3D6";
     gnashingJaws.health = "10";
@@ -385,9 +386,11 @@ class SeraphonHardcoded {
     // Battle Traits
 
     Ability theGreatPlan = Ability("The Great Plan");
-    theGreatPlan.timing = "Once Per Battle, Deployment Phase";
+    theGreatPlan.typeName = "Ability (Activated)";
+    theGreatPlan.timing =
+        "Once Per Battle, Deployment Phase"; // TODO müsste hier Start of Battle Round stehen?
     theGreatPlan.color = "Black";
-    theGreatPlan.declare = "Pick an Asterism ability.";
+    theGreatPlan.declare = "Pick ONE Asterism ability.";
     theGreatPlan.effect =
         "That Asterism ability can be used for the rest of the battle, but the others cannot, "
         "unless allowed by the ‘Further the Great Plan’ ability.";
@@ -395,7 +398,7 @@ class SeraphonHardcoded {
     Ability furtherTheGreatPlan = Ability("Further the Great Plan");
     furtherTheGreatPlan.typeName = "Ability (Activated)";
     furtherTheGreatPlan.timing =
-        "Once Per Battle, Start of the Third Battle Round";
+        "Once Per Battle, Start of the Third Battle Round"; //TODO wieso wird es nicht angezeigt?
     furtherTheGreatPlan.color = "Black";
     furtherTheGreatPlan.declare =
         "You can use this ability if you meet the condition below that corresponds to the Asterism you picked in the deployment phase."
@@ -404,9 +407,9 @@ class SeraphonHardcoded {
         "\nSotek the Deliverer: The enemy general is in combat or has been destroyed."
         "\nTepok the Seer: There are any friendly Slann units on the battlefield and no friendly Slann units are in combat or have been destroyed.";
     furtherTheGreatPlan.effect =
-        "Pick a different Asterism ability. It can be used in addition to the one you picked in the deployment phase.";
+        "Pick ANOTHER Asterism ability. It can be used in addition to the one you picked in the deployment phase.";
 
-    Ability itzlTheTamer = Ability("Itzl the Tamer");
+    Ability itzlTheTamer = Ability("Itzl the Tamer (The Great Plan 1/4)");
     itzlTheTamer.typeName = "Ability (Passive)";
     itzlTheTamer.timing = "Passive";
     itzlTheTamer.color = "Red";
@@ -414,23 +417,30 @@ class SeraphonHardcoded {
         "Companion weapons used by friendly Seraphon units have Crit (2 Hits).";
     itzlTheTamer.keywords = "Asterism";
 
-    Ability quetzlThePreserver = Ability("Quetzl the Preserver");
+    Ability quetzlThePreserver = Ability(
+      //Wir dachten zuerst Farbe Red
+      "Quetzl the Preserver (The Great Plan 2/4)",
+    );
     quetzlThePreserver.typeName = "Ability (Passive)";
     quetzlThePreserver.timing = "Passive";
-    quetzlThePreserver.color = "Red";
+    quetzlThePreserver.color = "Green";
     quetzlThePreserver.effect =
-        "Subtract 1 from the Rend characteristic of melee weapons for attacks that target friendly Seraphon units that are wholly within friendly territory.";
+        "Subtract 1 from the Rend characteristic of melee weapons for attacks that "
+        "target friendly Seraphon units that are wholly within friendly territory.";
     quetzlThePreserver.keywords = "Asterism";
 
-    Ability sotekTheDeliverer = Ability("Sotek the Deliverer");
+    Ability sotekTheDeliverer = Ability(
+      //App sagt Farbe Orange und Edi bestätigte es am 05.06.2026 bei Markus
+      "Sotek the Deliverer (The Great Plan 3/4)",
+    );
     sotekTheDeliverer.typeName = "Ability (Passive)";
     sotekTheDeliverer.timing = "Passive";
-    sotekTheDeliverer.color = "Gray";
+    sotekTheDeliverer.color = "Orange";
     sotekTheDeliverer.effect =
         "Add 2 to the Move characteristic of friendly Seraphon units.";
     sotekTheDeliverer.keywords = "Asterism";
 
-    Ability tepokTheSeer = Ability("Tepok the Seer");
+    Ability tepokTheSeer = Ability("Tepok the Seer (The Great Plan 4/4)");
     tepokTheSeer.typeName = "Ability (Passive)";
     tepokTheSeer.timing = "Passive";
     tepokTheSeer.color = "Yellow";
@@ -447,9 +457,9 @@ class SeraphonHardcoded {
 
     // Battle Traits
     //---------------------------------------------------------
-    // Spell Lore (Zauber + Manifestationen)
+    // Arcane Tome = Spell Lore (Zauber Spells + Summon Spells) //TODO Casting Values anzeigen für summon manifestations
 
-    //Summon Spells für Jennys Manifestation
+    //Summon Spells für Jennys Manifestation //TODO Brauchen summon spells typename Ability (Activated)?
     Ability summonHead = Ability("Summon Burning Head");
     summonHead.timing = "Your Hero Phase";
     summonHead.color = "Yellow";
@@ -474,7 +484,7 @@ class SeraphonHardcoded {
     summonLifeSwarm.effect =
         "Set up a Emerald Lifeswarm endless Spell wholly within 12\" of the caster, "
         "visible to them and more than 9\" from all enemy units."
-            "\nCasting Value: 6";
+        "\nCasting Value: 6";
 
     Ability summonJaws = Ability("Summon Ravenak’s Gnashing Jaws");
     summonJaws.timing = "Your Hero Phase";
@@ -487,7 +497,7 @@ class SeraphonHardcoded {
     summonJaws.effect =
         "Set up a Ravenak’s Gnashing Jaws endless Spell wholly within 12\" of the caster, "
         "visible to them and more than 9\" from all enemy units."
-            "\nCasting Value: 7";
+        "\nCasting Value: 7";
 
     //Spell Lore Jenny
     Ability cometsCall = Ability("Comet's Call");
@@ -497,7 +507,8 @@ class SeraphonHardcoded {
     cometsCall.castingValue = "7";
     cometsCall.keywords = "Spell";
     cometsCall.declare =
-        "Pick a friendly Seraphon Wizard to cast this spell, pick a visible enemy unit within 18\" of them to be the target, then make a casting roll of 2D6.";
+        "Pick a friendly Seraphon Wizard to cast this spell, pick a visible enemy unit within 18\" of them to be the target, "
+        "then make a casting roll of 2D6.";
     cometsCall.effect =
         "Roll a dice for each model in the target unit. For each 5+, inflict 1 mortal damage on the target.";
 
@@ -508,7 +519,8 @@ class SeraphonHardcoded {
     mysticalUnforging.castingValue = "6";
     mysticalUnforging.keywords = "Spell, Unlimited";
     mysticalUnforging.declare =
-        "Pick a friendly Seraphon Wizard to cast this spell, pick a visible enemy unit within 12\" of them to be the target, then make a casting roll of 2D6.";
+        "Pick a friendly Seraphon Wizard to cast this spell, pick a visible enemy unit within 12\" of them to be the target, "
+        "then make a casting roll of 2D6.";
     mysticalUnforging.effect =
         "Subtract 1 from the Rend characteristic of the target’s weapons until the start of your next turn.";
 
@@ -519,13 +531,12 @@ class SeraphonHardcoded {
     speedOfHuanchi.castingValue = "6";
     speedOfHuanchi.keywords = "Spell";
     speedOfHuanchi.declare =
-        "Pick a friendly Seraphon Wizard to cast this spell, pick a visible friendly Seraphon unit wholly within 12\" of them to be the target, then make a casting roll of 2D6.";
+        "Pick a friendly Seraphon Wizard to cast this spell, pick a visible friendly Seraphon unit wholly within 12\" of them to be the target, "
+        "then make a casting roll of 2D6.";
     speedOfHuanchi.effect =
         "Until the start of your next turn, the target can use a Run ability and still use Shoot and/or Charge abilities later in the turn.";
 
     SpellLore spellLore = SpellLore();
-
-    //Jennys Manifestationen hinschreiben
     spellLore.abilitys.add(summonHead);
     spellLore.abilitys.add(summonLifeSwarm);
     spellLore.abilitys.add(summonJaws);
@@ -534,22 +545,22 @@ class SeraphonHardcoded {
     spellLore.abilitys.add(mysticalUnforging);
     spellLore.abilitys.add(speedOfHuanchi);
 
-    // Spell Lore (Zauber + Manifestationen)
+    // Arcane Tome = Spell Lore (Zauber Spells + Summon Spells)
     //---------------------------------------------------------
     // Battle Formation
 
-    Ability starhost = Ability("Eternal Starhost");
-    starhost.typeName = "Ability (Activated)";
-    starhost.timing = "Once Per Turn (Army), Your Movement Phase";
-    starhost.color = "Gray";
-    starhost.declare =
+    Ability translocation = Ability("Celestial Translocation");
+    translocation.typeName = "Ability (Activated)";
+    translocation.timing = "Once Per Turn (Army), Your Movement Phase";
+    translocation.color = "Gray";
+    translocation.declare =
         "Pick a friendly Seraphon unit wholly within 12\" of a friendly Seraphon Wizard to use this ability";
-    starhost.effect =
+    translocation.effect =
         "Roll a dice. On a 3+, remove that unit from the battlefield "
         "and set it up again on the battlefield more than 9\" from all enemy units.";
 
     BattleFormation battleFormation = BattleFormation();
-    battleFormation.abilitys.add(starhost);
+    battleFormation.abilitys.add(translocation);
 
     // Battle Formation
     //---------------------------------------------------------
