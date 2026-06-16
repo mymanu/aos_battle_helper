@@ -49,11 +49,18 @@ class _WarScroll extends State<WarScroll> {
       }
     }
 
-    List<Ability> passiveAbilities = [];
+    /*
+    List<Ability> unitAbilities = [];
     for (Ability abi in widget.unit.abilitys) {
       if (abi.typeName.contains("Passive")) {
-        passiveAbilities.add(abi);
+        unitAbilities.add(abi);
       }
+    }
+     */
+
+    List<Ability> unitAbilities = [];
+    for (Ability abi in widget.unit.abilitys) {
+      unitAbilities.add(abi);
     }
 
     //TODO ab Hier wird das UI der WarScrolls gebaut, ab hier kann sich Jenny austoben.
@@ -401,20 +408,20 @@ class _WarScroll extends State<WarScroll> {
                       ) {
                         return SingleChildScrollView(
                           child: Card(
-                            child: passiveAbilities[index].erledigt
+                            child: unitAbilities[index].erledigt
                                 ?
                                   //Ab hier Card wenn die Ability erledigt ist
                                   ElevatedButton(
                                     onPressed: () {
                                       setState(() {
-                                        passiveAbilities[index].erledigt =
+                                        unitAbilities[index].erledigt =
                                             false;
                                       });
                                     },
                                     child: Column(
                                       children: [
                                         Text(
-                                          passiveAbilities[index].name,
+                                          unitAbilities[index].name,
                                           //cardContentList[index].ability.name.contains("-1") ? cardContentList[index].unit.name : cardContentList[index].ability.name,
                                           style: TextStyle(fontSize: 20),
                                         ),
@@ -432,7 +439,7 @@ class _WarScroll extends State<WarScroll> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            passiveAbilities[index].name,
+                                            unitAbilities[index].name,
                                             //cardContentList[index].ability.name,
                                             style: TextStyle(
                                               backgroundColor:
@@ -445,39 +452,39 @@ class _WarScroll extends State<WarScroll> {
                                           ),
                                         ],
                                       ),
-                                      passiveAbilities[index].typeName.contains(
+                                      unitAbilities[index].typeName.contains(
                                             "Passive",
                                           )
                                           ? Text(
-                                              passiveAbilities[index].typeName,
+                                              unitAbilities[index].typeName,
                                             )
                                           : Text(
-                                              passiveAbilities[index].timing,
+                                              unitAbilities[index].timing,
                                             ),
-                                      Text(passiveAbilities[index].originUnit),
+                                      Text(unitAbilities[index].originUnit),
                                       Text(""),
-                                      passiveAbilities[index].effect.contains(
+                                      unitAbilities[index].effect.contains(
                                             "-1",
                                           )
                                           ? Text(
-                                              passiveAbilities[index].declare,
+                                              unitAbilities[index].declare,
                                             )
-                                          : passiveAbilities[index].declare
+                                          : unitAbilities[index].declare
                                                 .contains("-1")
-                                          ? Text(passiveAbilities[index].effect)
+                                          ? Text(unitAbilities[index].effect)
                                           : Text(
-                                              passiveAbilities[index].declare +
+                                              unitAbilities[index].declare +
                                                   "\n\n" +
-                                                  passiveAbilities[index]
+                                                  unitAbilities[index]
                                                       .effect,
                                             ),
 
-                                      passiveAbilities[index].commandPoints
+                                      unitAbilities[index].commandPoints
                                               .contains("-")
                                           ? Text("")
                                           : Text(
                                               "Command Point cost: " +
-                                                  passiveAbilities[index]
+                                                  unitAbilities[index]
                                                       .commandPoints,
                                             ),
                                       /*
@@ -500,7 +507,7 @@ class _WarScroll extends State<WarScroll> {
                                             child: Text("Fähigkeit erledigt"),
                                             onPressed: () {
                                               setState(() {
-                                                passiveAbilities[index]
+                                                unitAbilities[index]
                                                         .erledigt =
                                                     true;
                                               });
@@ -520,7 +527,7 @@ class _WarScroll extends State<WarScroll> {
                                   ),
                           ),
                         );
-                      }, childCount: passiveAbilities.length),
+                      }, childCount: unitAbilities.length),
                     ),
                   ),
                 ],

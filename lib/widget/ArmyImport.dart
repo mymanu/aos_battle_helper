@@ -311,7 +311,7 @@ class _ArmyImport extends State<ArmyImport> {
 
       for (Selections select in selectionsList) {
         if (select.name.contains("Battle Trait")) {
-          readBattleTrait(select);
+          widget.settings.army.battleTraitsList = readBattleTrait(select);
         }
         if (select.name.contains("Arcane") || select.name.contains("Spell")) {
           widget.settings.army.spellLore = readSpellLoreOfJSON(select);
@@ -703,6 +703,9 @@ class _ArmyImport extends State<ArmyImport> {
         if (charMapJSON["name"].contains("Effect")) {
           ability.effect = charMapJSON["\$text"].toString();
         }
+        if (charMapJSON["name"].contains("Casting Value")) {
+          ability.castingValue = charMapJSON["\$text"].toString();
+        }
         if (charMapJSON["name"].contains("Keywords")) {
           ability.keywords = charMapJSON["\$text"].toString();
         }
@@ -820,7 +823,8 @@ class _ArmyImport extends State<ArmyImport> {
       return unit;
     }
 
-    void readBattleTrait(Selections select) {
+    List<BattleTraits> readBattleTrait(Selections select) {
+      List<BattleTraits> battleTraitList = [];
       BattleTraits battleTrait = BattleTraits();
 
       //roster -> forces -> selections -> profiles
@@ -850,7 +854,8 @@ class _ArmyImport extends State<ArmyImport> {
           );
         }
       }
-      widget.settings.army.battleTraitsList.add(battleTrait);
+      battleTraitList.add(battleTrait);
+      return battleTraitList;
     }
 
     BattleFormation readBattleFormationOfJSON(Selections select) {
