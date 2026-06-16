@@ -121,48 +121,6 @@ class _HomePage extends State<HomePage> {
                   _navigateToSettings(context, widget.settings);
                 },
               ),
-
-              SizedBox(height: 50),
-
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.orange,
-                  backgroundColor: Colors.blueGrey.shade800,
-                  shadowColor: Colors.black,
-                  padding: const EdgeInsets.all(10.0),
-                  minimumSize: Size(250, 100),
-                  maximumSize: Size(510, 510),
-                ),
-                child: Text(
-                  'Hero Phase',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20),
-                ),
-                onPressed: () {
-                  _navigateToHero(context, widget.settings);
-                },
-              ),
-
-              SizedBox(height: 50),
-
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.orange,
-                  backgroundColor: Colors.blueGrey.shade800,
-                  shadowColor: Colors.black,
-                  padding: const EdgeInsets.all(10.0),
-                  minimumSize: Size(250, 100),
-                  maximumSize: Size(510, 510),
-                ),
-                child: Text(
-                  'Warscroll',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20),
-                ),
-                onPressed: () {
-                  _navigateToWarScroll(context, widget.settings);
-                },
-              ),
             ],
           ),
         ),

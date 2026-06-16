@@ -80,10 +80,13 @@ class _ArmyImport extends State<ArmyImport> {
         centerTitle: true,
         actions: <Widget>[],
       ),
-      body: Container(
+      body: Center(
         child: Column(
           children: [
-            Text("Hallo-Text"),
+            Text("Bitte auf New Recruit.eu eine Armee erstellen\nBei FORCE: bitte Path to Glory: Ravaged Coast auswählen.\n\n"
+                "Diese Liste dann über den Import JSON Button importieren.\n\n"
+                "Danach bitte prüfen, ob alles richtig angezeigt wird in den jeweiligen Phasen.\n"
+                "Manuel kann nicht alles perfekt testen."),
             /*_items.isNotEmpty ? Expanded(
               child: ListView.builder(
                 itemCount: _items.length,
@@ -102,20 +105,21 @@ class _ArmyImport extends State<ArmyImport> {
               ),
             )
             Text("Habe was gefunden")
-                : */
+                :
             ElevatedButton(
               onPressed: () {
                 readArmyOfJSON(File("./assets/import.json"));
               },
               child: Center(child: Text("Load Json")),
-            ),
+            ),*/
+            SizedBox(height: 20,),
             isLoading
                 ? CircularProgressIndicator()
                 : TextButton(
               onPressed: () {
                 pickFile();
               },
-              child: Text("Pick File"),
+              child: Text("Import JSON"),
             ),
             if (pickedFile != null)
               SizedBox(
@@ -124,9 +128,9 @@ class _ArmyImport extends State<ArmyImport> {
                 child: Text("Armee erfolgreich importiert"),
               ),
 
+            SizedBox(height: 50,),
             Text(
-              "Unit-Anzahl in der Armee: " +
-                  widget.settings.army.unitList.length.toString(),
+              "Hinweis: Bitte nicht vergessen über Settings die AoS Standard Fähigkeiten wie Move hinzuzufügen."
             ),
           ],
         ),
