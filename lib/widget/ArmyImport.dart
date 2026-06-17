@@ -19,6 +19,7 @@ import '../classes/forcesTwo.dart';
 import '../classes/settings.dart';
 import '../classes/weapon.dart';
 import '../classes/battleTraits.dart';
+import 'HomePage.dart';
 
 class ArmyImport extends StatefulWidget {
   ArmyImport({super.key, required this.title, required this.settings});
@@ -131,6 +132,30 @@ class _ArmyImport extends State<ArmyImport> {
             SizedBox(height: 50,),
             Text(
               "Hinweis: Bitte nicht vergessen über Settings die AoS Standard Fähigkeiten wie Move hinzuzufügen."
+            ),
+
+            SizedBox(height: 20),
+
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.orange,
+                backgroundColor: Colors.blueGrey.shade800,
+                shadowColor: Colors.black,
+                padding: const EdgeInsets.all(10.0),
+                minimumSize: Size(250, 100),
+                maximumSize: Size(510, 510),
+              ),
+              child: Text(
+                'Clear Settings',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20),
+              ),
+              onPressed: () {
+                setState(() {
+                  widget.settings = Settings();
+                });
+                _navigateToMenu(context, widget.settings);
+              },
             ),
           ],
         ),
@@ -922,4 +947,13 @@ class _ArmyImport extends State<ArmyImport> {
       }
       return battleFormation;
     }
+
+  void _navigateToMenu(BuildContext context, Settings settings) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) =>
+            HomePage(title: "Age of Sigmar Battle Helper", settings: settings),
+      ),
+    );
+  }
   }

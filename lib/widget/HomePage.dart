@@ -5,7 +5,7 @@ import '../classes/settings.dart';
 import '../classes/unit.dart';
 import 'HeroPhase.dart';
 import 'Preparation.dart';
-import 'SettingsWidget-Backup.dart';
+import 'SettingsWidgetPath.dart';
 import 'StartofBattle.dart';
 import 'ArmyImport.dart';
 import 'SettingsWidget.dart';
@@ -103,6 +103,7 @@ class _HomePage extends State<HomePage> {
               ),
 
               SizedBox(height: 50),
+
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.orange,
@@ -119,6 +120,27 @@ class _HomePage extends State<HomePage> {
                 ),
                 onPressed: () {
                   _navigateToSettings(context, widget.settings);
+                },
+              ),
+
+              SizedBox(height: 50),
+
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.orange,
+                  backgroundColor: Colors.blueGrey.shade800,
+                  shadowColor: Colors.black,
+                  padding: const EdgeInsets.all(10.0),
+                  minimumSize: Size(250, 100),
+                  maximumSize: Size(510, 510),
+                ),
+                child: Text(
+                  'Path Settings',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 20),
+                ),
+                onPressed: () {
+                  _navigateToPathSettings(context, widget.settings);
                 },
               ),
             ],
@@ -158,10 +180,10 @@ class _HomePage extends State<HomePage> {
     );
   }
 
-  void _navigateToHero(BuildContext context, Settings settings) {
+  void _navigateToPathSettings(BuildContext context, Settings settings) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => HeroPhase(title: "Hero Phase", settings: settings),
+        builder: (context) => SettingsWidgetPath(title: "Path Settings", settings: settings),
       ),
     );
   }

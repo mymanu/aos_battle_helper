@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import '../ageOfSigmar/aosGeneralSpells.dart';
 import '../ageOfSigmar/ironjawzHardcoded.dart';
 import '../ageOfSigmar/seraphonHardcoded.dart';
+import '../classes/BattlePlan.dart';
 import '../classes/ability.dart';
 import '../classes/battleFormation.dart';
 import '../classes/battleTraits.dart';
@@ -30,25 +31,27 @@ import '../widget/RegimentChooser.dart';
 import 'BattleTactics.dart';
 import 'HomePage.dart';
 
-class SettingsWidget extends StatefulWidget {
-  SettingsWidget({super.key, required this.title, required this.settings});
+class SettingsWidgetPath extends StatefulWidget {
+  SettingsWidgetPath({super.key, required this.title, required this.settings});
 
   Settings settings;
   String title;
   bool firstRun = true;
 
-  bool? masterThePaths = false;
-  bool? restlessEnergy = false;
-  bool? interceptAndRecover = false;
-  bool? wrathfulCycles = false;
-  bool? scoutingForce = false;
-  bool? attunedToGhyran = false;
+  bool? ironjawTactics = false;
+  bool? seraphonTactics = false;
+  bool? skavenTactics = false;
+  bool? sylvanethTactics = false;
+  bool? stormcastTactics = false;
+  bool? citiesTactics = false;
+  bool? nighthauntTactics = false;
+  bool? nurgleTactics = false;
 
   @override
-  _SettingsWidget createState() => _SettingsWidget();
+  _SettingsWidgetPath createState() => _SettingsWidgetPath();
 }
 
-class _SettingsWidget extends State<SettingsWidget> {
+class _SettingsWidgetPath extends State<SettingsWidgetPath> {
   @override
   Widget build(BuildContext context) {
     //String envTitle = Env.environmentName ?? "";
@@ -111,7 +114,9 @@ class _SettingsWidget extends State<SettingsWidget> {
                   children: [
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        foregroundColor: calculateTextColor(Colors.red.shade500),
+                        foregroundColor: calculateTextColor(
+                          Colors.red.shade500,
+                        ),
                         backgroundColor: Colors.red.shade500,
                         shadowColor: Colors.black,
                         padding: const EdgeInsets.all(10.0),
@@ -119,7 +124,8 @@ class _SettingsWidget extends State<SettingsWidget> {
                         maximumSize: Size(510, 510),
                       ),
                       child: Text(
-                        'add AoS Spells',
+                        'add Preparation, Command\n'
+                        'and Core Spells',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 20),
                       ),
@@ -131,6 +137,599 @@ class _SettingsWidget extends State<SettingsWidget> {
                     ),
 
                     SizedBox(height: 20),
+
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.orange,
+                        backgroundColor: Colors.blueGrey.shade800,
+                        shadowColor: Colors.black,
+                        padding: const EdgeInsets.all(10.0),
+                        minimumSize: Size(250, 100),
+                        maximumSize: Size(510, 510),
+                      ),
+                      child: Text(
+                        'Add Path BattlePlan 1',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        addBattlePlanSpells();
+                      },
+                    ),
+
+                    SizedBox(height: 20),
+
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.orange,
+                        backgroundColor: Colors.blueGrey.shade800,
+                        shadowColor: Colors.black,
+                        padding: const EdgeInsets.all(10.0),
+                        minimumSize: Size(250, 100),
+                        maximumSize: Size(510, 510),
+                      ),
+                      child: Text(
+                        'Clear Settings',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          widget.settings = Settings();
+                        });
+                        _navigateToMenu(context, widget.settings);
+                      },
+                    ),
+                  ],
+                ),
+
+                /*
+                Spacer(),
+
+                Column(
+                  //crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text("Please choose TWO Battle Tactics"),
+
+                    SizedBox(height: 10),
+
+                    Row(
+                      children: [
+                        Column(
+                          children: [
+                            Transform.scale(
+                              scale: 2,
+                              child: CupertinoCheckbox(
+                                checkColor: CupertinoColors.white,
+                                activeColor: Colors.teal,
+                                // Set tristate to true to make the checkbox display a null value
+                                // in addition to the default true and false values.
+                                tristate: false,
+                                value: widget.ironjawTactics,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    widget.ironjawTactics = value;
+                                    //directoriesFill();
+                                  });
+                                },
+                              ),
+                            ),
+
+                            //Ggf für Handy Nutzer auskommentieren für Surface 30 benötigt
+                            SizedBox(height: 30),
+
+                            Transform.scale(
+                              scale: 2,
+                              child: CupertinoCheckbox(
+                                checkColor: CupertinoColors.white,
+                                activeColor: Colors.teal,
+                                // Set tristate to true to make the checkbox display a null value
+                                // in addition to the default true and false values.
+                                tristate: false,
+                                value: widget.seraphonTactics,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    widget.seraphonTactics = value;
+                                    //directoriesFill();
+                                  });
+                                },
+                              ),
+                            ),
+
+                            SizedBox(height: 30),
+
+                            Transform.scale(
+                              scale: 2,
+                              child: CupertinoCheckbox(
+                                checkColor: CupertinoColors.white,
+                                activeColor: Colors.teal,
+                                // Set tristate to true to make the checkbox display a null value
+                                // in addition to the default true and false values.
+                                tristate: false,
+                                value: widget.skavenTactics,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    widget.skavenTactics = value;
+                                    //directoriesFill();
+                                  });
+                                },
+                              ),
+                            ),
+
+                            SizedBox(height: 30),
+
+                            Transform.scale(
+                              scale: 2,
+                              child: CupertinoCheckbox(
+                                checkColor: CupertinoColors.white,
+                                activeColor: Colors.teal,
+                                // Set tristate to true to make the checkbox display a null value
+                                // in addition to the default true and false values.
+                                tristate: false,
+                                value: widget.citiesTactics,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    widget.citiesTactics = value;
+                                    //directoriesFill();
+                                  });
+                                },
+                              ),
+                            ),
+
+                            SizedBox(height: 30),
+
+                            Transform.scale(
+                              scale: 2,
+                              child: CupertinoCheckbox(
+                                checkColor: CupertinoColors.white,
+                                activeColor: Colors.teal,
+                                // Set tristate to true to make the checkbox display a null value
+                                // in addition to the default true and false values.
+                                tristate: false,
+                                value: widget.sylvanethTactics,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    widget.sylvanethTactics = value;
+                                    //directoriesFill();
+                                  });
+                                },
+                              ),
+                            ),
+
+                            SizedBox(height: 30),
+
+                            Transform.scale(
+                              scale: 2,
+                              child: CupertinoCheckbox(
+                                checkColor: CupertinoColors.white,
+                                activeColor: Colors.teal,
+                                // Set tristate to true to make the checkbox display a null value
+                                // in addition to the default true and false values.
+                                tristate: false,
+                                value: widget.stormcastTactics,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    widget.stormcastTactics = value;
+                                    //directoriesFill();
+                                  });
+                                },
+                              ),
+                            ),
+
+                            SizedBox(height: 30),
+
+                            Transform.scale(
+                              scale: 2,
+                              child: CupertinoCheckbox(
+                                checkColor: CupertinoColors.white,
+                                activeColor: Colors.teal,
+                                // Set tristate to true to make the checkbox display a null value
+                                // in addition to the default true and false values.
+                                tristate: false,
+                                value: widget.nighthauntTactics,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    widget.nighthauntTactics = value;
+                                    //directoriesFill();
+                                  });
+                                },
+                              ),
+                            ),
+
+                            SizedBox(height: 30),
+
+                            Transform.scale(
+                              scale: 2,
+                              child: CupertinoCheckbox(
+                                checkColor: CupertinoColors.white,
+                                activeColor: Colors.teal,
+                                // Set tristate to true to make the checkbox display a null value
+                                // in addition to the default true and false values.
+                                tristate: false,
+                                value: widget.nurgleTactics,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    widget.nurgleTactics = value;
+                                    //directoriesFill();
+                                  });
+                                },
+                              ),
+                            ),
+
+                          ],
+                        ),
+
+                        SizedBox(width: 10),
+
+
+                        Column(
+                          children: [
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.orange,
+                                backgroundColor: Colors.blueGrey.shade800,
+                                shadowColor: Colors.black,
+                              ),
+                              child: Text("Ironjawz"),
+                              onPressed: () {
+                                showDialog<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text("Master the Paths"),
+                                      content: Text(
+                                        BattleTactics().masterThePaths[0] +
+                                            "\n\n" +
+                                            BattleTactics().masterThePaths[1] +
+                                            "\n\n" +
+                                            BattleTactics().masterThePaths[2],
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+
+                            SizedBox(height: 12),
+
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.orange,
+                                backgroundColor: Colors.blueGrey.shade800,
+                                shadowColor: Colors.black,
+                              ),
+                              child: Text("Seraphon"),
+                              onPressed: () {
+                                showDialog<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text("Restless Energy"),
+                                      content: Text(
+                                        BattleTactics().restlessEnergy[0] +
+                                            "\n\n" +
+                                            BattleTactics().restlessEnergy[1] +
+                                            "\n\n" +
+                                            BattleTactics().restlessEnergy[2],
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+
+                            SizedBox(height: 12),
+
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.orange,
+                                backgroundColor: Colors.blueGrey.shade800,
+                                shadowColor: Colors.black,
+                              ),
+                              child: Text("Skaven"),
+                              onPressed: () {
+                                showDialog<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text(
+                                        "Intercept and Recover",
+                                      ),
+                                      content: Text(
+                                        BattleTactics().interceptAndRecover[0] +
+                                            "\n\n" +
+                                            BattleTactics()
+                                                .interceptAndRecover[1] +
+                                            "\n\n" +
+                                            BattleTactics()
+                                                .interceptAndRecover[2],
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+
+                            SizedBox(height: 12),
+
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.orange,
+                                backgroundColor: Colors.blueGrey.shade800,
+                                shadowColor: Colors.black,
+                              ),
+                              child: Text("Cities of Sigmar"),
+                              onPressed: () {
+                                showDialog<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text("Wrathful Cycles"),
+                                      content: Text(
+                                        BattleTactics().wrathfulCycles[0] +
+                                            "\n\n" +
+                                            BattleTactics().wrathfulCycles[1] +
+                                            "\n\n" +
+                                            BattleTactics().wrathfulCycles[2],
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+
+                            SizedBox(height: 12),
+
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.orange,
+                                backgroundColor: Colors.blueGrey.shade800,
+                                shadowColor: Colors.black,
+                              ),
+                              child: Text("Sylvaneth"),
+                              onPressed: () {
+                                showDialog<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text("Scouting Force"),
+                                      content: Text(
+                                        BattleTactics().scoutingForce[0] +
+                                            "\n\n" +
+                                            BattleTactics().scoutingForce[1] +
+                                            "\n\n" +
+                                            BattleTactics().scoutingForce[2],
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+
+                            SizedBox(height: 12),
+
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.orange,
+                                backgroundColor: Colors.blueGrey.shade800,
+                                shadowColor: Colors.black,
+                              ),
+                              child: Text("Stormcast Eternals"),
+                              onPressed: () {
+                                showDialog<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text("Attuned to Ghyran"),
+                                      content: Text(
+                                        BattleTactics().attunedToGhyran[0] +
+                                            "\n\n" +
+                                            BattleTactics().attunedToGhyran[1] +
+                                            "\n\n" +
+                                            BattleTactics().attunedToGhyran[2],
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+
+                            SizedBox(height: 12),
+
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.orange,
+                                backgroundColor: Colors.blueGrey.shade800,
+                                shadowColor: Colors.black,
+                              ),
+                              child: Text("Nighthaunt"),
+                              onPressed: () {
+                                showDialog<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text("Attuned to Ghyran"),
+                                      content: Text(
+                                        BattleTactics().attunedToGhyran[0] +
+                                            "\n\n" +
+                                            BattleTactics().attunedToGhyran[1] +
+                                            "\n\n" +
+                                            BattleTactics().attunedToGhyran[2],
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+
+                            SizedBox(height: 12),
+
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.orange,
+                                backgroundColor: Colors.blueGrey.shade800,
+                                shadowColor: Colors.black,
+                              ),
+                              child: Text("Maggotkin of Nurgle"),
+                              onPressed: () {
+                                showDialog<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text("Attuned to Ghyran"),
+                                      content: Text(
+                                        BattleTactics().attunedToGhyran[0] +
+                                            "\n\n" +
+                                            BattleTactics().attunedToGhyran[1] +
+                                            "\n\n" +
+                                            BattleTactics().attunedToGhyran[2],
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.orange,
+                            backgroundColor: Colors.blueGrey.shade800,
+                            shadowColor: Colors.black,
+                            padding: const EdgeInsets.all(10.0),
+                            minimumSize: Size(250, 100),
+                            maximumSize: Size(510, 510),
+                          ),
+                          child: Text(
+                            'Your Battle Tactics chosen',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          onPressed: () {
+                            widget.settings.chosenBattleTactics.clear();
+                            if (widget.ironjawTactics!) {
+                              widget.settings.chosenBattleTactics.add(
+                                "ironjawTactics",
+                              );
+                            }
+                            if (widget.seraphonTactics!) {
+                              widget.settings.chosenBattleTactics.add(
+                                "seraphonTactics",
+                              );
+                            }
+                            if (widget.skavenTactics!) {
+                              widget.settings.chosenBattleTactics.add(
+                                "skavenTactics",
+                              );
+                            }
+                            if (widget.sylvanethTactics!) {
+                              widget.settings.chosenBattleTactics.add(
+                                "sylvanethTactics",
+                              );
+                            }
+                            if (widget.stormcastTactics!) {
+                              widget.settings.chosenBattleTactics.add(
+                                "stormcastTactics",
+                              );
+                            }
+                            if (widget.citiesTactics!) {
+                              widget.settings.chosenBattleTactics.add(
+                                "citiesTactics",
+                              );
+                            }
+                            if (widget.citiesTactics!) {
+                              widget.settings.chosenBattleTactics.add(
+                                "nighthauntTactics",
+                              );
+                            }
+                            if (widget.citiesTactics!) {
+                              widget.settings.chosenBattleTactics.add(
+                                "nurgleTactics",
+                              );
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+*/
+                Spacer(),
+
+                Column(
+                  children: [
+                    Text("Hard Coded Armies:"),
+
+                    SizedBox(height: 10),
 
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -184,716 +783,36 @@ class _SettingsWidget extends State<SettingsWidget> {
                         maximumSize: Size(510, 510),
                       ),
                       child: Text(
-                        'Clear Settings',
+                        'Platzhalter',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 20),
                       ),
                       onPressed: () {
-                        setState(() {
-                          widget.settings = Settings();
-                        });
-                        _navigateToMenu(context, widget.settings);
+                        //pickIronjawzBigmob();
+                      },
+                    ),
+
+                    SizedBox(height: 20),
+
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.orange,
+                        backgroundColor: Colors.blueGrey.shade800,
+                        shadowColor: Colors.black,
+                        padding: const EdgeInsets.all(10.0),
+                        minimumSize: Size(250, 100),
+                        maximumSize: Size(510, 510),
+                      ),
+                      child: Text(
+                        'Platzhalter',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        //pickWarpsparkClawpack();
                       },
                     ),
                   ],
-                ),
-
-                Spacer(),
-
-                Column(
-                  //crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text("Please choose TWO Battle Tactics"),
-
-                    SizedBox(height: 10),
-
-                    Row(
-                      children: [
-                        Column(
-                          children: [
-                            Transform.scale(
-                              scale: 2,
-                              child: CupertinoCheckbox(
-                                checkColor: CupertinoColors.white,
-                                activeColor: Colors.teal,
-                                // Set tristate to true to make the checkbox display a null value
-                                // in addition to the default true and false values.
-                                tristate: false,
-                                value: widget.masterThePaths,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    widget.masterThePaths = value;
-                                    //directoriesFill();
-                                  });
-                                },
-                              ),
-                            ),
-
-                            //Ggf für Handy Nutzer auskommentieren für Surface 30 benötigt
-                            SizedBox(height: 30),
-
-                            Transform.scale(
-                              scale: 2,
-                              child: CupertinoCheckbox(
-                                checkColor: CupertinoColors.white,
-                                activeColor: Colors.teal,
-                                // Set tristate to true to make the checkbox display a null value
-                                // in addition to the default true and false values.
-                                tristate: false,
-                                value: widget.restlessEnergy,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    widget.restlessEnergy = value;
-                                    //directoriesFill();
-                                  });
-                                },
-                              ),
-                            ),
-
-                            SizedBox(height: 30),
-
-                            Transform.scale(
-                              scale: 2,
-                              child: CupertinoCheckbox(
-                                checkColor: CupertinoColors.white,
-                                activeColor: Colors.teal,
-                                // Set tristate to true to make the checkbox display a null value
-                                // in addition to the default true and false values.
-                                tristate: false,
-                                value: widget.interceptAndRecover,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    widget.interceptAndRecover = value;
-                                    //directoriesFill();
-                                  });
-                                },
-                              ),
-                            ),
-
-                            SizedBox(height: 30),
-
-                            Transform.scale(
-                              scale: 2,
-                              child: CupertinoCheckbox(
-                                checkColor: CupertinoColors.white,
-                                activeColor: Colors.teal,
-                                // Set tristate to true to make the checkbox display a null value
-                                // in addition to the default true and false values.
-                                tristate: false,
-                                value: widget.wrathfulCycles,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    widget.wrathfulCycles = value;
-                                    //directoriesFill();
-                                  });
-                                },
-                              ),
-                            ),
-
-                            SizedBox(height: 30),
-
-                            Transform.scale(
-                              scale: 2,
-                              child: CupertinoCheckbox(
-                                checkColor: CupertinoColors.white,
-                                activeColor: Colors.teal,
-                                // Set tristate to true to make the checkbox display a null value
-                                // in addition to the default true and false values.
-                                tristate: false,
-                                value: widget.scoutingForce,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    widget.scoutingForce = value;
-                                    //directoriesFill();
-                                  });
-                                },
-                              ),
-                            ),
-
-                            SizedBox(height: 30),
-
-                            Transform.scale(
-                              scale: 2,
-                              child: CupertinoCheckbox(
-                                checkColor: CupertinoColors.white,
-                                activeColor: Colors.teal,
-                                // Set tristate to true to make the checkbox display a null value
-                                // in addition to the default true and false values.
-                                tristate: false,
-                                value: widget.attunedToGhyran,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    widget.attunedToGhyran = value;
-                                    //directoriesFill();
-                                  });
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(width: 10),
-
-                        Column(
-                          children: [
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                foregroundColor: Colors.orange,
-                                backgroundColor: Colors.blueGrey.shade800,
-                                shadowColor: Colors.black,
-                              ),
-                              child: Text("Master the Paths"),
-                              onPressed: () {
-                                showDialog<void>(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: const Text("Master the Paths"),
-                                      content: Text(
-                                        BattleTactics().masterThePaths[0] +
-                                            "\n\n" +
-                                            BattleTactics().masterThePaths[1] +
-                                            "\n\n" +
-                                            BattleTactics().masterThePaths[2],
-                                      ),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: const Text('OK'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-
-                            SizedBox(height: 12),
-
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                foregroundColor: Colors.orange,
-                                backgroundColor: Colors.blueGrey.shade800,
-                                shadowColor: Colors.black,
-                              ),
-                              child: Text("Restless Energy"),
-                              onPressed: () {
-                                showDialog<void>(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: const Text("Restless Energy"),
-                                      content: Text(
-                                        BattleTactics().restlessEnergy[0] +
-                                            "\n\n" +
-                                            BattleTactics().restlessEnergy[1] +
-                                            "\n\n" +
-                                            BattleTactics().restlessEnergy[2],
-                                      ),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: const Text('OK'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-
-                            SizedBox(height: 12),
-
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                foregroundColor: Colors.orange,
-                                backgroundColor: Colors.blueGrey.shade800,
-                                shadowColor: Colors.black,
-                              ),
-                              child: Text("Intercept and Recover"),
-                              onPressed: () {
-                                showDialog<void>(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: const Text(
-                                        "Intercept and Recover",
-                                      ),
-                                      content: Text(
-                                        BattleTactics().interceptAndRecover[0] +
-                                            "\n\n" +
-                                            BattleTactics()
-                                                .interceptAndRecover[1] +
-                                            "\n\n" +
-                                            BattleTactics()
-                                                .interceptAndRecover[2],
-                                      ),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: const Text('OK'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-
-                            SizedBox(height: 12),
-
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                foregroundColor: Colors.orange,
-                                backgroundColor: Colors.blueGrey.shade800,
-                                shadowColor: Colors.black,
-                              ),
-                              child: Text("Wrathful Cycles"),
-                              onPressed: () {
-                                showDialog<void>(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: const Text("Wrathful Cycles"),
-                                      content: Text(
-                                        BattleTactics().wrathfulCycles[0] +
-                                            "\n\n" +
-                                            BattleTactics().wrathfulCycles[1] +
-                                            "\n\n" +
-                                            BattleTactics().wrathfulCycles[2],
-                                      ),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: const Text('OK'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-
-                            SizedBox(height: 12),
-
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                foregroundColor: Colors.orange,
-                                backgroundColor: Colors.blueGrey.shade800,
-                                shadowColor: Colors.black,
-                              ),
-                              child: Text("Scouting Force"),
-                              onPressed: () {
-                                showDialog<void>(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: const Text("Scouting Force"),
-                                      content: Text(
-                                        BattleTactics().scoutingForce[0] +
-                                            "\n\n" +
-                                            BattleTactics().scoutingForce[1] +
-                                            "\n\n" +
-                                            BattleTactics().scoutingForce[2],
-                                      ),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: const Text('OK'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-
-                            SizedBox(height: 12),
-
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                foregroundColor: Colors.orange,
-                                backgroundColor: Colors.blueGrey.shade800,
-                                shadowColor: Colors.black,
-                              ),
-                              child: Text("Attuned to Ghyran"),
-                              onPressed: () {
-                                showDialog<void>(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: const Text("Attuned to Ghyran"),
-                                      content: Text(
-                                        BattleTactics().attunedToGhyran[0] +
-                                            "\n\n" +
-                                            BattleTactics().attunedToGhyran[1] +
-                                            "\n\n" +
-                                            BattleTactics().attunedToGhyran[2],
-                                      ),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: const Text('OK'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 20),
-                    Row(
-                      children: [
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.orange,
-                            backgroundColor: Colors.blueGrey.shade800,
-                            shadowColor: Colors.black,
-                            padding: const EdgeInsets.all(10.0),
-                            minimumSize: Size(250, 100),
-                            maximumSize: Size(510, 510),
-                          ),
-                          child: Text(
-                            '2 Battle Tactics chosen',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          onPressed: () {
-                            widget.settings.chosenBattleTactics.clear();
-                            if (widget.masterThePaths!) {
-                              widget.settings.chosenBattleTactics.add(
-                                "masterThePaths",
-                              );
-                            }
-                            if (widget.restlessEnergy!) {
-                              widget.settings.chosenBattleTactics.add(
-                                "restlessEnergy",
-                              );
-                            }
-                            if (widget.interceptAndRecover!) {
-                              widget.settings.chosenBattleTactics.add(
-                                "interceptAndRecover",
-                              );
-                            }
-                            if (widget.wrathfulCycles!) {
-                              widget.settings.chosenBattleTactics.add(
-                                "wrathfulCycles",
-                              );
-                            }
-                            if (widget.scoutingForce!) {
-                              widget.settings.chosenBattleTactics.add(
-                                "scoutingForce",
-                              );
-                            }
-                            if (widget.attunedToGhyran!) {
-                              widget.settings.chosenBattleTactics.add(
-                                "attunedToGhyran",
-                              );
-                            }
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-
-                Spacer(),
-
-                Column(
-                  children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: calculateTextColor(Colors.red.shade500),
-                        backgroundColor: Colors.red.shade500,
-                        shadowColor: Colors.black,
-                        padding: const EdgeInsets.all(10.0),
-                        minimumSize: Size(250, 100),
-                        maximumSize: Size(510, 510),
-                      ),
-                      child: Text(
-                        'add Spearhed Spells',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      onPressed: () {
-                        addSpearheadSpells();
-                      },
-                    ),
-
-                    SizedBox(height: 20),
-
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.orange,
-                        backgroundColor: Colors.blueGrey.shade800,
-                        shadowColor: Colors.black,
-                        padding: const EdgeInsets.all(10.0),
-                        minimumSize: Size(250, 100),
-                        maximumSize: Size(510, 510),
-                      ),
-                      child: Text(
-                        'Seraphon \nStarscale Warhost',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      onPressed: () {
-                        pickStarscaleWarhost();
-                      },
-                    ),
-
-                    SizedBox(height: 20),
-
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.orange,
-                        backgroundColor: Colors.blueGrey.shade800,
-                        shadowColor: Colors.black,
-                        padding: const EdgeInsets.all(10.0),
-                        minimumSize: Size(250, 100),
-                        maximumSize: Size(510, 510),
-                      ),
-                      child: Text(
-                        'Orruk Warclans \nIronjawz Bigmob',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      onPressed: () {
-                        pickIronjawzBigmob();
-                      },
-                    ),
-
-                    SizedBox(height: 20),
-
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.orange,
-                        backgroundColor: Colors.blueGrey.shade800,
-                        shadowColor: Colors.black,
-                        padding: const EdgeInsets.all(10.0),
-                        minimumSize: Size(250, 100),
-                        maximumSize: Size(510, 510),
-                      ),
-                      child: Text(
-                        'Skaven \nWarpspark Clawpack',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      onPressed: () {
-                        pickWarpsparkClawpack();
-                      },
-                    ),
-
-                    SizedBox(height: 20),
-
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.orange,
-                        backgroundColor: Colors.blueGrey.shade800,
-                        shadowColor: Colors.black,
-                        padding: const EdgeInsets.all(10.0),
-                        minimumSize: Size(250, 100),
-                        maximumSize: Size(510, 510),
-                      ),
-                      child: Text(
-                        'Skaven \nGnawfeast Clawpack',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      onPressed: () {
-                        pickSkavenGnawfeastClawpack();
-                      },
-                    ),
-
-                    SizedBox(height: 20),
-
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.orange,
-                        backgroundColor: Colors.blueGrey.shade800,
-                        shadowColor: Colors.black,
-                        padding: const EdgeInsets.all(10.0),
-                        minimumSize: Size(250, 100),
-                        maximumSize: Size(510, 510),
-                      ),
-                      child: Text(
-                        'Skaven \nCrixxit´s Kill-Pack',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      onPressed: () {
-                        pickSkavenCrixxitKillPack();
-                      },
-                    ),
-                  ],
-                ),
-
-                Spacer(),
-
-                Column(
-                    children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: calculateTextColor(Colors.red.shade500),
-                          backgroundColor: Colors.red.shade500,
-                          shadowColor: Colors.black,
-                          padding: const EdgeInsets.all(10.0),
-                          minimumSize: Size(250, 100),
-                          maximumSize: Size(510, 510),
-                        ),
-                        child: Text(
-                          'Choose Regiment Ability\nand Enhancement',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        onPressed: () {
-                          pickRegimentAbilityAndEnhancement(
-                            context,
-                            widget.settings,
-                          );
-                        },
-                      ),
-
-                      SizedBox(height: 20),
-
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.orange,
-                          backgroundColor: Colors.blueGrey.shade800,
-                          shadowColor: Colors.black,
-                          padding: const EdgeInsets.all(10.0),
-                          minimumSize: Size(250, 100),
-                          maximumSize: Size(510, 510),
-                        ),
-                        child: Text(
-                          'Cities of Sigmar \nSentinels Of Embergard',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        onPressed: () {
-                          pickSentinelsOfEmbergard();
-                        },
-                      ),
-
-                      SizedBox(height: 20),
-
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.orange,
-                          backgroundColor: Colors.blueGrey.shade800,
-                          shadowColor: Colors.black,
-                          padding: const EdgeInsets.all(10.0),
-                          minimumSize: Size(250, 100),
-                          maximumSize: Size(510, 510),
-                        ),
-                        child: Text(
-                          'Cities of Sigmar \nZenestra´s Zealots',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        onPressed: () {
-                          pickZenestrasZealots();
-                        },
-                      ),
-
-                      SizedBox(height: 20),
-
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.orange,
-                          backgroundColor: Colors.blueGrey.shade800,
-                          shadowColor: Colors.black,
-                          padding: const EdgeInsets.all(10.0),
-                          minimumSize: Size(250, 100),
-                          maximumSize: Size(510, 510),
-                        ),
-                        child: Text(
-                          'Cities of Sigmar \nFusil-Platoon',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        onPressed: () {
-                          pickFusilPlatoon();
-                        },
-                      ),
-
-                      SizedBox(height: 20),
-
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.orange,
-                          backgroundColor: Colors.blueGrey.shade800,
-                          shadowColor: Colors.black,
-                          padding: const EdgeInsets.all(10.0),
-                          minimumSize: Size(250, 100),
-                          maximumSize: Size(510, 510),
-                        ),
-                        child: Text(
-                          'Cities of Sigmar \nCastelite Company',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        onPressed: () {
-                          pickCasteliteCompany();
-                        },
-                      ),
-
-                      SizedBox(height: 20),
-
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.orange,
-                          backgroundColor: Colors.blueGrey.shade800,
-                          shadowColor: Colors.black,
-                          padding: const EdgeInsets.all(10.0),
-                          minimumSize: Size(250, 100),
-                          maximumSize: Size(510, 510),
-                        ),
-                        child: Text(
-                          'Sylvaneth\nBitterbark Copse',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        onPressed: () {
-                          pickBitterbarkCopse();
-                        },
-                      ),
-
-                      SizedBox(height: 20),
-
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.orange,
-                          backgroundColor: Colors.blueGrey.shade800,
-                          shadowColor: Colors.black,
-                          padding: const EdgeInsets.all(10.0),
-                          minimumSize: Size(250, 100),
-                          maximumSize: Size(510, 510),
-                        ),
-                        child: Text(
-                          'Sylvaneth\nSpitewing Flight',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        onPressed: () {
-                          pickSpitewingFlight();
-                        },
-                      ),
-                    ],
                 ),
                 Spacer(),
               ],
@@ -911,7 +830,7 @@ class _SettingsWidget extends State<SettingsWidget> {
   }
 
   void addCommandSpells() {
-   widget.settings = aosGeneralSpells().addCommandSpells(widget.settings);
+    widget.settings = aosGeneralSpells().addCommandSpells(widget.settings);
   }
 
   void addNormalSpells() {
@@ -922,12 +841,10 @@ class _SettingsWidget extends State<SettingsWidget> {
     widget.settings = aosGeneralSpells().aosPreparationSpells(widget.settings);
   }
 
-  void addSpearheadSpells() {
-    widget.settings = SpearheadGeneralSpells().addSpearheadSpells(widget.settings);
-  }
-
   void pickIronjawzHardcoded() {
-    widget.settings = IronjawzHardcoded().pickIronjawzHardcoded(widget.settings);
+    widget.settings = IronjawzHardcoded().pickIronjawzHardcoded(
+      widget.settings,
+    );
   }
 
   //TODO Seraphon Path to Glory Liste hinzufügen über Button Hinzufügen
@@ -935,91 +852,10 @@ class _SettingsWidget extends State<SettingsWidget> {
     widget.settings = SeraphonHardcoded().pickSeraphonHardcoded(widget.settings);
   }
 
-  void pickWarpsparkClawpack() {
-    widget.settings = WarpsparkClawpack().pickWarpsparkClawpack(widget.settings);
+  void addBattlePlanSpells() {
+    widget.settings = BattlePlan().rissInAethelgard(widget.settings);
   }
 
-  void pickStarscaleWarhost() {
-    widget.settings = StarscaleWarhost().pickStarscaleWarhost(widget.settings);
-  }
-
-  void pickIronjawzBigmob() {
-    widget.settings = IronjawzBigMob().pickIronjawzBigMob(widget.settings);
-  }
-
-  void pickSkavenGnawfeastClawpack() {
-    widget.settings = GnawfeastClawpack().pickGnawfeastClawpack(widget.settings);
-  }
-
-  void pickSkavenCrixxitKillPack() {
-    widget.settings = CrixxitKillPack().pickCrixxitKillPack(widget.settings);
-  }
-
-  void pickSentinelsOfEmbergard() {
-    widget.settings = SentinelsOfEmbergard().pickSentinelsOfEmbergard(widget.settings);
-  }
-
-  void pickZenestrasZealots() {
-    widget.settings = Zenestraszealots().pickZenestraszealots(widget.settings);
-  }
-
-  void pickFusilPlatoon() {
-    widget.settings = FusilPlatoon().pickFusilPlatoon(widget.settings);
-  }
-
-  void pickCasteliteCompany() {
-    widget.settings = CasteliteCompany().pickCasteliteCompany(widget.settings);
-  }
-
-  void pickBitterbarkCopse() {
-    widget.settings = BitterbarkCopse().pickBitterbarkCopse(widget.settings);
-  }
-
-  void pickSpitewingFlight() {
-    widget.settings = SpitewingFlight().pickSpitewingFlight(widget.settings);
-  }
-
-  Future<void> pickRegimentAbilityAndEnhancement(
-    BuildContext context,
-    Settings settings,
-  ) {
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          insetPadding: EdgeInsets.zero,
-          title: Text("Choose Regiment Ability and Enhancement"),
-          content: Container(
-            height: 1000,
-            width: 1000,
-            child: RegimentChooser(settings: settings),
-          ),
-          actions: <Widget>[
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle: Theme.of(context).textTheme.labelLarge,
-              ),
-              child: const Text('Save'),
-              onPressed: () {
-                Navigator.of(context).pop();
-                setState(() {});
-                for (Unit unit in widget.settings.army.unitList) {
-                  if (unit.id.contains("General")) {
-                    if (!widget.firstRun) {
-                      unit.abilitys.removeLast();
-                    }
-                    unit.abilitys.add(widget.settings.chosenEnhancement);
-                    widget.firstRun = false;
-                  }
-                }
-                setState(() {});
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
   void _navigateToMenu(BuildContext context, Settings settings) {
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -1028,4 +864,5 @@ class _SettingsWidget extends State<SettingsWidget> {
       ),
     );
   }
+
 }

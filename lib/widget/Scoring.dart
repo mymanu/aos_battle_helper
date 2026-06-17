@@ -56,6 +56,10 @@ class _Scoring extends State<Scoring> {
         case "attunedToGhyran":
           battleTacticStringList.addAll(BattleTactics().attunedToGhyran);
           break;
+          //Ab Hier Path Tactics
+        case "ironjawTactics":
+          battleTacticStringList.addAll(BattleTactics().attunedToGhyran);
+          break;
       }
     }
 
