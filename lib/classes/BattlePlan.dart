@@ -5,7 +5,6 @@ import 'ability.dart';
 class BattlePlan {
 
   Settings rissInAethelgard(Settings settings) {
-    //for (int x = 0; x < 5; x++) {
     Ability abi = Ability("name");
     abi.name = "Das Kausale Paradoxon";
     abi.typeName = "Ability (Activated)";
@@ -14,20 +13,7 @@ class BattlePlan {
     abi.declare =
     "In einer Phase kann ein Spieler einen Paradox Punkt ausgeben um einen einzelnen Würfel des Gegners neuwerfen zu lassen. "
         "Pro Phase kann nur ein Punkt ausgegeben werden.";
-    /*
-      switch (x) {
-        case 0:
-          abi.color = "Black";
-          break;
-        case 1:
-          abi.color = "Yellow";
-          break;
-        case 2:
-          abi.color = "Grey";
-          break;
-      }*/
     settings.normalAbilitys.add(abi);
-    //}
 
     Ability throwDice = Ability("Throw the Dice");
     throwDice.typeName = "Ability (Activated)";
