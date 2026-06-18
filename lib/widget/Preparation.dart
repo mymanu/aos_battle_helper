@@ -96,6 +96,32 @@ class _Preparation extends State<Preparation> {
         centerTitle: true,
         backgroundColor: widget.phaseColor,
         actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add, color: calculateTextColor(widget.phaseColor)),
+            onPressed: () {
+              setState(() {
+                widget.settings.paradoxPoints =
+                    widget.settings.paradoxPoints + 1;
+              });
+            },
+          ),
+          Text(
+            "PP: " + widget.settings.paradoxPoints.toString(),
+            style: TextStyle(color: calculateTextColor(widget.phaseColor)),
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.remove,
+              color: calculateTextColor(widget.phaseColor),
+            ),
+            onPressed: () {
+              setState(() {
+                widget.settings.paradoxPoints =
+                    widget.settings.paradoxPoints - 1;
+              });
+            },
+          ),
+          SizedBox(width: 10),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.teal,

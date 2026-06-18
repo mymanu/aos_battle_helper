@@ -4,6 +4,7 @@ import 'army.dart';
 class Settings {
   Army army = Army("Beispiel-Armee-Name");
   int commandPoints = 4;
+  int paradoxPoints = 2;
   List<Ability> commandAbilitys = [];
   List<Ability> normalAbilitys = [];
   List<Ability> preparationSpells = [];

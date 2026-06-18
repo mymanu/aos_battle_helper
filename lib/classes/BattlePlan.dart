@@ -11,7 +11,7 @@ class BattlePlan {
     abi.timing = "Once per Phase, Any Phase";
     abi.color = "Black,Yellow,Gray,Blue,Orange,Red,Purple";
     abi.declare =
-    "In einer Phase kann ein Spieler einen Paradox Punkt ausgeben um einen einzelnen Würfel des Gegners neuwerfen zu lassen. "
+    "In einer Phase kann ein Spieler einen Paradox Punkt (PP) ausgeben um einen einzelnen Würfel des Gegners neuwerfen zu lassen. "
         "Pro Phase kann nur ein Punkt ausgegeben werden.";
     settings.normalAbilitys.add(abi);
 
@@ -20,7 +20,7 @@ class BattlePlan {
     throwDice.timing = "Once per Battle Round, Your Phase";
     throwDice.color = "Black";
     throwDice.declare = "Zu Beginn der Runde wirft der führende Spieler einen W3. Wenn es keinen führenden Spieler gibt, wirft einer der Spieler einen W3. "
-        "Beide Spieler erhalten entsprechend des Wurfes Paradox Punkte. Der Underdog erhält einen zusätzlichen Paradox Punkt.";
+        "Beide Spieler erhalten entsprechend des Wurfes Paradox Punkte (PP). Der Underdog erhält einen zusätzlichen Paradox Punkt (PP).";
 
     settings.normalAbilitys.add(throwDice);
 
