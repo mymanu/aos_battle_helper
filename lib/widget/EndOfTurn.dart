@@ -8,6 +8,7 @@ import '../classes/settings.dart';
 import '../classes/unit.dart';
 import 'HomePage.dart';
 import 'Scoring.dart';
+import 'ScoringPath.dart';
 import 'StartofBattle.dart';
 import 'allUnits.dart';
 
@@ -198,7 +199,8 @@ class _EndOfTurn extends State<EndOfTurn> {
               shadowColor: Colors.black,
             ),
             onPressed: () {
-              _navigateToScoring(context, widget.settings);
+              //_navigateToScoring(context, widget.settings);
+              _navigateToScoringPath(context, widget.settings);
             },
             child: Text("To Scoring"),
           ),
@@ -398,6 +400,14 @@ class _EndOfTurn extends State<EndOfTurn> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => Scoring(title: "Scoring", settings: settings),
+      ),
+    );
+  }
+
+  void _navigateToScoringPath(BuildContext context, Settings settings) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => ScoringPath(title: "Scoring", settings: settings),
       ),
     );
   }

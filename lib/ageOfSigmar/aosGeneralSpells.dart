@@ -289,6 +289,23 @@ class aosGeneralSpells {
         "\n• Roll off. The winner decides which territory belongs to which player. The opponent decides which player begins deployment.";
     aosPreparationSpells.add(preBattleSequence);
 
+    Ability startBattleRoundSequence = Ability(
+      "Start of Battle Round Sequence",
+    );
+    startBattleRoundSequence.typeName = "Ability (Passive)";
+    startBattleRoundSequence.color = "Teal";
+    startBattleRoundSequence.effect =
+        "1. Determine the Active Player:"
+        "\n• First battle round: The player who finished setting up the army first, chooses who takes the first turn."
+        "\n• Later battle rounds: Players make a priority roll and the winner decides who starts (Core Rules, 12.0)."
+        "\n• If the roll-off is a tie, the player who took the first turn in the previous battle round decides who is first next (= active player)."
+        "\n2. Determine the Underdog: "
+        "\nThe player with fewest victory points is the underdog for this battle round (Core Rules, 12.0)."
+        "\nThere is no underdog, if the players are tie (equal victory points)."
+        "\n3. Start of Battle Round Abilities:"
+        "\n The active player can use any  Start of Battle Round  abilities  first, then their opponent can do the same.";
+    aosPreparationSpells.add(startBattleRoundSequence);
+
     Ability deployment = Ability("Deployment");
     deployment.typeName = "Ability (Passive)";
     deployment.color = "Teal";
@@ -335,23 +352,6 @@ class aosGeneralSpells {
         "\n(A regiment is a collection of units. It is one of the main building blocks of an army (see ‘Army Composition’ in the Advanced Rules)."
         "\nSome factions have special Deploy abilities, such as the ‘The Celestial Realm’ ability of the Stormcast Eternals).";
     aosPreparationSpells.add(deployRegiment);
-
-    Ability startBattleRoundSequence = Ability(
-      "Start of Battle Round Sequence",
-    );
-    startBattleRoundSequence.typeName = "Ability (Passive)";
-    startBattleRoundSequence.color = "Teal";
-    startBattleRoundSequence.effect =
-        "1. Determine the Active Player:"
-        "\n• First battle round: The player who finished setting up the army first, chooses who takes the first turn."
-        "\n• Later battle rounds: Players make a priority roll and the winner decides who starts (Core Rules, 12.0)."
-        "\n• If the roll-off is a tie, the player who took the first turn in the previous battle round decides who is first next (= active player)."
-        "\n2. Determine the Underdog: "
-        "\nThe player with fewest victory points is the underdog for this battle round (Core Rules, 12.0)."
-        "\nThere is no underdog, if the players are tie (equal victory points)."
-        "\n3. Start of Battle Round Abilities:"
-        "\n The active player can use any  Start of Battle Round  abilities  first, then their opponent can do the same.";
-    aosPreparationSpells.add(startBattleRoundSequence);
 
     Ability phases = Ability("Turn Phases");
     phases.typeName = "Ability (Passive)";

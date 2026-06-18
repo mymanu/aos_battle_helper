@@ -37,6 +37,14 @@ class _StartofBattle extends State<StartofBattle> {
     Functions functions = Functions();
 
     spellsThisPhase.addAll(
+      functions.normalAbilitys(
+        widget.settings.normalAbilitys,
+        widget.phaseColorString,
+        widget.settings.ownPhase,
+      ),
+    );
+
+    spellsThisPhase.addAll(
       functions.unitAbilitys(
         widget.settings.army.unitList,
         widget.phaseColorString,
@@ -76,13 +84,6 @@ class _StartofBattle extends State<StartofBattle> {
       ),
     );
 
-    spellsThisPhase.addAll(
-      functions.normalAbilitys(
-        widget.settings.normalAbilitys,
-        widget.phaseColorString,
-        widget.settings.ownPhase,
-      ),
-    );
 
     //TODO ab Hier wird das UI gebaut, ab hier kannst du dich dann austoben
     return Scaffold(
