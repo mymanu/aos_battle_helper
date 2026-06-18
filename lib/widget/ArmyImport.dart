@@ -469,7 +469,7 @@ class _ArmyImport extends State<ArmyImport> {
       in mySelection.selectionsDynamic) {
         Selections selectTwo = Selections(
           selectionMapTwoJSON["id"],
-          selectionMapTwoJSON["name"],
+          selectionMapTwoJSON["name"].toString(),
         );
 
         if (selectionMapTwoJSON.containsKey("selections")) {
