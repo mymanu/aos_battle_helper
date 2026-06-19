@@ -33,7 +33,7 @@ class SeraphonHardcoded {
     List<Ability> slannSoloSpells = [SpearheadGeneralSpells().getGuardedHero()];
 
     Unit slannSolo = Unit.withSpells(
-      "Slann Solo - schneller als ein Skink",
+      "Skink Floyd - erst gezockt dann abgerockt",
       slannSoloSpells,
     );
     slannSolo.weapons.add(greatWeapon);

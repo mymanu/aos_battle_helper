@@ -430,6 +430,34 @@ class _WarScroll extends State<WarScroll> {
                                     ),
                                   )
                                 :
+                            Stack(
+                              children: [
+                              Positioned(
+                              top: 0,
+                              right: 0,
+                              child:
+                              unitAbilities[index].castingValue
+                                  .contains("-")
+                                  ? Text("")
+                                  : Text(
+                                "Casting Value: " +
+                                    unitAbilities[index].castingValue,
+                              ),
+                            ),
+
+                            Positioned(
+                              top: 0,
+                              right: 0,
+                              child:
+                              unitAbilities[index].commandPoints
+                                  .contains("-")
+                                  ? Text("")
+                                  : Text(
+                                "Command Point cost: " +
+                                    unitAbilities[index]
+                                        .commandPoints,
+                              ),
+                            ),
                                   //Ab hier Card wenn es eine Ability ist
                                   Column(
                                     mainAxisSize: MainAxisSize.min,
@@ -478,27 +506,6 @@ class _WarScroll extends State<WarScroll> {
                                                   unitAbilities[index]
                                                       .effect,
                                             ),
-
-                                      unitAbilities[index].commandPoints
-                                              .contains("-")
-                                          ? Text("")
-                                          : Text(
-                                              "Command Point cost: " +
-                                                  unitAbilities[index]
-                                                      .commandPoints,
-                                            ),
-                                      /*
-                            Text(cardContentList[index].ability.timing),
-                            Text(cardContentList[index].ability.originUnit),
-                            Text(cardContentList[index].ability.details),
-                             */
-                                      /*
-                            ListTile(
-                              leading: Icon(Icons.album),
-                              title: Text(spells[index].title),
-                              subtitle: Text(spells[index].details),
-                            ),
-                            */
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
@@ -525,6 +532,8 @@ class _WarScroll extends State<WarScroll> {
                                       ),
                                     ],
                                   ),
+                            ],
+                            ),
                           ),
                         );
                       }, childCount: unitAbilities.length),

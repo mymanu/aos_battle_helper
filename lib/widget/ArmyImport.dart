@@ -695,6 +695,9 @@ class _ArmyImport extends State<ArmyImport> {
         if (charMapJSON["name"].contains("Used By")) {
           ability.usedBy = charMapJSON["\$text"].toString();
         }
+        if (charMapJSON["name"].contains("Casting Value")) {
+          ability.castingValue = charMapJSON["\$text"].toString();
+        }
       }
       ////Attributes für Abilitys
       for (Map<String, dynamic> attributesMapJSON in profile.attributes) {
