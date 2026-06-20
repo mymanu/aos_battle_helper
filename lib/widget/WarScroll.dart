@@ -453,7 +453,7 @@ class _WarScroll extends State<WarScroll> {
                                   .contains("-")
                                   ? Text("")
                                   : Text(
-                                "Command Point cost: " +
+                                "CP cost: " +
                                     unitAbilities[index]
                                         .commandPoints,
                               ),

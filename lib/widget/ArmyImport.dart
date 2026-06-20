@@ -21,6 +21,8 @@ import '../classes/weapon.dart';
 import '../classes/battleTraits.dart';
 import 'HomePage.dart';
 
+import 'package:flutter_parsed_text/flutter_parsed_text.dart';
+
 class ArmyImport extends StatefulWidget {
   ArmyImport({super.key, required this.title, required this.settings});
 
@@ -84,10 +86,26 @@ class _ArmyImport extends State<ArmyImport> {
       body: Center(
         child: Column(
           children: [
-            Text("Bitte auf New Recruit.eu eine Armee erstellen\nBei FORCE: bitte Path to Glory: Ravaged Coast auswählen.\n\n"
+            Text("Bitte auf NewRecruit.eu eine Armee erstellen\nBei FORCE: bitte Path to Glory: Ravaged Coast auswählen.\n\n"
                 "Diese Liste dann über den Import JSON Button importieren.\n\n"
                 "Danach bitte prüfen, ob alles richtig angezeigt wird in den jeweiligen Phasen.\n"
                 "Manuel kann nicht alles perfekt testen."),
+            ParsedText(
+              text: "Pick a friendly non-**^^Hero Skaven Infantry^^** unit",
+              //text: "Test #Hallo Test",
+              parse: <MatchText>[
+                MatchText(
+                  pattern: r"\B\*\*\^\^+([\w]+\b)",
+                  //pattern: r"\B#+([\w]+)\b",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.pink,
+                    //fontSize: 24,
+                  ),
+                ),
+              ],
+            ),
+
             /*_items.isNotEmpty ? Expanded(
               child: ListView.builder(
                 itemCount: _items.length,
@@ -697,6 +715,9 @@ class _ArmyImport extends State<ArmyImport> {
         }
         if (charMapJSON["name"].contains("Casting Value")) {
           ability.castingValue = charMapJSON["\$text"].toString();
+        }
+        if (charMapJSON["name"].contains("Cost")) {
+          ability.commandPoints = charMapJSON["\$text"].toString();
         }
       }
       ////Attributes für Abilitys
