@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:aos_battle_helper/classes/battleFormation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_parsed_text/flutter_parsed_text.dart';
 
 import '../classes/ability.dart';
 import '../classes/battleTraits.dart';
@@ -304,13 +305,13 @@ class _MovementPhase extends State<MovementPhase> {
 
                               Column(
                                 mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
                                         spellsThisPhase[index].name,
+                                        //cardContentList[index].ability.name,
                                         style: TextStyle(
                                           backgroundColor: widget.phaseColor,
                                           fontWeight: FontWeight.bold,
@@ -321,34 +322,97 @@ class _MovementPhase extends State<MovementPhase> {
                                       ),
                                     ],
                                   ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      //TODO abändern zu Unit, von welcher es genutzt werden kann
-                                      Text(
-                                        "Ursprung: " +
-                                            spellsThisPhase[index].originUnit,
-                                      ),
-                                    ],
-                                  ),
                                   spellsThisPhase[index].typeName.contains(
-                                        "Passive",
-                                      )
+                                    "Passive",
+                                  )
                                       ? Text(spellsThisPhase[index].typeName)
                                       : Text(spellsThisPhase[index].timing),
                                   Text(spellsThisPhase[index].originUnit),
                                   Text(""),
-                                  spellsThisPhase[index].effect.contains("-1")
-                                      ? Text(spellsThisPhase[index].declare)
-                                      : spellsThisPhase[index].declare.contains(
-                                          "-1",
-                                        )
-                                      ? Text(spellsThisPhase[index].effect)
-                                      : Text(
-                                          spellsThisPhase[index].declare +
-                                              "\n\n" +
-                                              spellsThisPhase[index].effect,
+                                  (spellsThisPhase[index].effect.contains(
+                                      "null") || spellsThisPhase[index].effect.contains("-1"))
+                                  //https://pub.dev/packages/flutter_parsed_text
+                                      ? ParsedText(
+                                    text: spellsThisPhase[index].declare,
+                                    parse: <MatchText>[
+                                      MatchText(
+                                        pattern:
+                                        r"\*\*\^?\^?(\w*\s?\w*\s?\w*)\^?\^?\*\*",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blue,
+                                          //fontSize: 24,
                                         ),
+                                        renderText:
+                                            ({
+                                          required String str,
+                                          required String pattern,
+                                        }) {
+                                          RegExp customRegExp = RegExp(
+                                            pattern,
+                                          );
+                                          Match match = customRegExp
+                                              .firstMatch(str)!;
+                                          return {'display': match[2]!};
+                                        },
+                                      ),
+                                    ],
+                                  )
+                                      : (spellsThisPhase[index].declare.contains(
+                                      "null") || spellsThisPhase[index].declare.contains("-1"))
+                                      ? ParsedText(
+                                    text: spellsThisPhase[index].effect,
+                                    parse: <MatchText>[
+                                      MatchText(
+                                        pattern:
+                                        r"\*\*\^?\^?(\w*\s?\w*\s?\w*)\^?\^?\*\*",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blue,
+                                          //fontSize: 24,
+                                        ),
+                                        renderText:
+                                            ({
+                                          required String str,
+                                          required String pattern,
+                                        }) {
+                                          RegExp customRegExp = RegExp(
+                                            pattern,
+                                          );
+                                          Match match = customRegExp
+                                              .firstMatch(str)!;
+                                          return {'display': match[2]!};
+                                        },
+                                      ),
+                                    ],
+                                  )
+                                      : ParsedText(
+                                    text: spellsThisPhase[index].declare + "\n\n" +
+                                        spellsThisPhase[index].effect,
+                                    parse: <MatchText>[
+                                      MatchText(
+                                        pattern:
+                                        r"\*\*\^?\^?(\w*\s?\w*\s?\w*)\^?\^?\*\*",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blue,
+                                          //fontSize: 24,
+                                        ),
+                                        renderText:
+                                            ({
+                                          required String str,
+                                          required String pattern,
+                                        }) {
+                                          RegExp customRegExp = RegExp(
+                                            pattern,
+                                          );
+                                          Match match = customRegExp
+                                              .firstMatch(str)!;
+                                          return {'display': match[2]!};
+                                        },
+                                      ),
+                                    ],
+                                  ),
 
                                   /*
                             ListTile(

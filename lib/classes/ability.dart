@@ -17,8 +17,8 @@ class Ability {
 
   //Characteristics
   String timing = "-";
-  String declare = "-1";
-  String effect = "-1";
+  String declare = "null";
+  String effect = "null";
   String keywords = "-";
   String usedBy = "-";
 

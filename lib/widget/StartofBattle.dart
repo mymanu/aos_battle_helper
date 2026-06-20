@@ -2,6 +2,7 @@ import 'package:aos_battle_helper/classes/battleTraits.dart';
 import 'package:aos_battle_helper/classes/unit.dart';
 import 'package:aos_battle_helper/classes/ability.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_parsed_text/flutter_parsed_text.dart';
 
 import '../classes/battleFormation.dart';
 import '../classes/functions.dart';
@@ -280,46 +281,119 @@ class _StartofBattle extends State<StartofBattle> {
                             ),
                           )
                         :
-                          //Ab hier Card wenn es eine Ability ist
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    spellsThisPhase[index].name,
-                                    //cardContentList[index].ability.name,
-                                    style: TextStyle(
-                                      backgroundColor: widget.phaseColor,
-                                      fontWeight: FontWeight.bold,
-                                      color: calculateTextColor(
-                                        widget.phaseColor,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                    //Ab hier Card wenn es eine Ability ist
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              spellsThisPhase[index].name,
+                              //cardContentList[index].ability.name,
+                              style: TextStyle(
+                                backgroundColor: widget.phaseColor,
+                                fontWeight: FontWeight.bold,
+                                color: calculateTextColor(
+                                  widget.phaseColor,
+                                ),
                               ),
-                              spellsThisPhase[index].typeName.contains(
-                                    "Passive",
-                                  )
-                                  ? Text(spellsThisPhase[index].typeName)
-                                  : Text(spellsThisPhase[index].timing),
-                              Text(spellsThisPhase[index].originUnit),
-                              Text(""),
-                              spellsThisPhase[index].effect.contains("-1")
-                                  ? Text(spellsThisPhase[index].declare)
-                                  : spellsThisPhase[index].declare.contains(
-                                      "-1",
-                                    )
-                                  ? Text(spellsThisPhase[index].effect)
-                                  : Text(
-                                      spellsThisPhase[index].declare +
-                                          "\n\n" +
-                                          spellsThisPhase[index].effect,
-                                    ),
+                            ),
+                          ],
+                        ),
+                        spellsThisPhase[index].typeName.contains(
+                          "Passive",
+                        )
+                            ? Text(spellsThisPhase[index].typeName)
+                            : Text(spellsThisPhase[index].timing),
+                        Text(spellsThisPhase[index].originUnit),
+                        Text(""),
+                        (spellsThisPhase[index].effect.contains(
+                            "null") || spellsThisPhase[index].effect.contains("-1"))
+                        //https://pub.dev/packages/flutter_parsed_text
+                            ? ParsedText(
+                          text: spellsThisPhase[index].declare,
+                          parse: <MatchText>[
+                            MatchText(
+                              pattern:
+                              r"\*\*\^?\^?(\w*\s?\w*\s?\w*)\^?\^?\*\*",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue,
+                                //fontSize: 24,
+                              ),
+                              renderText:
+                                  ({
+                                required String str,
+                                required String pattern,
+                              }) {
+                                RegExp customRegExp = RegExp(
+                                  pattern,
+                                );
+                                Match match = customRegExp
+                                    .firstMatch(str)!;
+                                return {'display': match[2]!};
+                              },
+                            ),
+                          ],
+                        )
+                            : (spellsThisPhase[index].declare.contains(
+                            "null") || spellsThisPhase[index].declare.contains("-1"))
+                            ? ParsedText(
+                          text: spellsThisPhase[index].effect,
+                          parse: <MatchText>[
+                            MatchText(
+                              pattern:
+                              r"\*\*\^?\^?(\w*\s?\w*\s?\w*)\^?\^?\*\*",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue,
+                                //fontSize: 24,
+                              ),
+                              renderText:
+                                  ({
+                                required String str,
+                                required String pattern,
+                              }) {
+                                RegExp customRegExp = RegExp(
+                                  pattern,
+                                );
+                                Match match = customRegExp
+                                    .firstMatch(str)!;
+                                return {'display': match[2]!};
+                              },
+                            ),
+                          ],
+                        )
+                            : ParsedText(
+                          text: spellsThisPhase[index].declare + "\n\n" +
+                              spellsThisPhase[index].effect,
+                          parse: <MatchText>[
+                            MatchText(
+                              pattern:
+                              r"\*\*\^?\^?(\w*\s?\w*\s?\w*)\^?\^?\*\*",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue,
+                                //fontSize: 24,
+                              ),
+                              renderText:
+                                  ({
+                                required String str,
+                                required String pattern,
+                              }) {
+                                RegExp customRegExp = RegExp(
+                                  pattern,
+                                );
+                                Match match = customRegExp
+                                    .firstMatch(str)!;
+                                return {'display': match[2]!};
+                              },
+                            ),
+                          ],
+                        ),
 
-                              spellsThisPhase[index].commandPoints.contains("-")
+                        spellsThisPhase[index].commandPoints.contains("-")
                                   ? Text("")
                                   : Text(
                                       "Command Point cost: " +
