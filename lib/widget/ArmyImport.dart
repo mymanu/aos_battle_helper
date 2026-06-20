@@ -76,9 +76,6 @@ class _ArmyImport extends State<ArmyImport> {
     String title = widget.title;
     //String title = widget.title + "Phase";
 
-    String str =
-        "**ward roll** **^^Pick^^** a friendly non-**^^Hero Skaven Infantry^^** unit";
-
     return Scaffold(
       appBar: AppBar(
         title: Text(title), //Text('Logged In'),
@@ -93,25 +90,6 @@ class _ArmyImport extends State<ArmyImport> {
               "Diese Liste dann über den Import JSON Button importieren.\n\n"
               "Danach bitte prüfen, ob alles richtig angezeigt wird in den jeweiligen Phasen.\n"
               "Manuel kann nicht alles perfekt testen.",
-            ),
-            //https://pub.dev/packages/flutter_parsed_text
-            ParsedText(
-              text: str,
-              parse: <MatchText>[
-                MatchText(
-                  pattern: r"\*\*\^?\^?(\w*\s?\w*\s?\w*)\^?\^?\*\*",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue,
-                    //fontSize: 24,
-                  ),
-                  renderText: ({required String str, required String pattern}) {
-                    RegExp customRegExp = RegExp(pattern);
-                    Match match = customRegExp.firstMatch(str)!;
-                    return {'display': match[2]!};
-                  },
-                ),
-              ],
             ),
 
             /*_items.isNotEmpty ? Expanded(
