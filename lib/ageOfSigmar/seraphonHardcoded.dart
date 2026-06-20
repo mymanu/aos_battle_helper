@@ -10,7 +10,7 @@ import 'aosGeneralSpells.dart';
 
 class SeraphonHardcoded {
   Settings pickSeraphonHardcoded(Settings settings) {
-    // Slann Solo (Special Boss)
+    // Special Hero
 
     Weapon greatWeapon = Weapon("greatWeapon", "Great Weapon of Renown");
     greatWeapon.attack = "5";
@@ -30,7 +30,32 @@ class SeraphonHardcoded {
     hooves.damage = "1";
     hooves.ability = "Companion";
 
-    List<Ability> slannSoloSpells = [SpearheadGeneralSpells().getGuardedHero()];
+    Ability leadByExample = Ability("Lead By Example (Path of the Ruler)");
+    leadByExample.typeName = "Ability (Activated)";
+    leadByExample.timing = "Any Charge Phase";
+    leadByExample.color = "Orange";
+    leadByExample.declare =
+        "If this unit charged this phase, pick another friendly unit wholly within 12\" of it to be the target.";
+    leadByExample.effect =
+        "You can re-roll charge rolls for the target for the rest of the phase.";
+
+    Ability stars = Ability("Being of the Stars (Heroic Trait)");
+    stars.typeName = "Ability (Activated)";
+    stars.timing = "Any Phase";
+    stars.color = "Red";
+    stars.effect =
+        "Ignore modifiers to save rolls for this unit (positive and negative).";
+    
+    Ability rectrice = Ability("Incandescent Rectrices");
+    rectrice.typeName = "Ability (Activated)";
+    rectrice.timing = "Any Hero Phase";
+    rectrice.color = "Yellow";
+    rectrice.effect = "**Heal** (D3) this unit.	";
+
+    List<Ability> slannSoloSpells = [
+      SpearheadGeneralSpells().getGuardedHero(),
+      leadByExample, stars,rectrice,
+    ];
 
     Unit slannSolo = Unit.withSpells(
       "Skink Floyd - erst gezockt dann abgerockt",
@@ -44,7 +69,7 @@ class SeraphonHardcoded {
     slannSolo.control = "5";
     slannSolo.keywords = "General, Hero, Order, Seraphon, Cavalry";
 
-    // Slann Solo (Special Boss)
+    // Special Hero
     //---------------------------------------------------------
     // Saurus Warriors
 
@@ -284,6 +309,7 @@ class SeraphonHardcoded {
         "It cannot end its move in combat unless specified in the ability that allowed it to move. "
         "Ignore any vertical distance moved for this unit.";
 
+    //TODO Wieso wird Fly 2x mit Ursprung Emerald Lifeswarm angezeigt?
     List<Ability> headSpells = [
       burningUp,
       fly,
@@ -347,19 +373,19 @@ class SeraphonHardcoded {
     jaws.ability = "Charge (+1 Damage)";
 
     Ability hunger = Ability("Ravening Hunger");
-    vigour.typeName = "Ability (Activated)";
-    vigour.timing = "Any Charge Phase";
-    vigour.color = "Orange";
-    vigour.declare =
+    hunger.typeName = "Ability (Activated)";
+    hunger.timing = "Any Charge Phase";
+    hunger.color = "Orange";
+    hunger.declare =
         "If this Manifestation charged this turn, pick an enemy unit within 1\" of it to be the target.";
-    vigour.effect =
+    hunger.effect =
         "Roll 10 dice. For each 5+, inflict 1 mortal damage on the target.";
 
     List<Ability> jawSpells = [aosGeneralSpells().getWardSave(), hunger];
 
     Unit gnashingJaws = Unit.withSpells("Ravenak´s Gnashing Jaws", jawSpells);
     gnashingJaws.weapons.add(jaws);
-    gnashingJaws.move = "3D6";
+    gnashingJaws.move = "3D6\"";
     gnashingJaws.health = "10";
     gnashingJaws.save = "6+";
     gnashingJaws.banishment = "7+";
@@ -385,27 +411,30 @@ class SeraphonHardcoded {
     //---------------------------------------------------------
     // Battle Traits
 
+    //TODO Wieso wird es 2x angezeigt?
     Ability theGreatPlan = Ability("The Great Plan");
     theGreatPlan.typeName = "Ability (Activated)";
-    theGreatPlan.timing =
-        "Once Per Battle, Deployment Phase"; // TODO müsste hier Start of Battle Round stehen?
-    theGreatPlan.color = "Black";
+    theGreatPlan.timing = "Once Per Battle, Deployment Phase, Your Phase";
+    theGreatPlan.color = "Teal";
     theGreatPlan.declare = "Pick ONE Asterism ability.";
     theGreatPlan.effect =
         "That Asterism ability can be used for the rest of the battle, but the others cannot, "
         "unless allowed by the ‘Further the Great Plan’ ability.";
+    List<Ability> abis = [];
+    abis.add(theGreatPlan);
+    settings.normalAbilitys.insertAll(0, abis);
 
     Ability furtherTheGreatPlan = Ability("Further the Great Plan");
-    furtherTheGreatPlan.typeName = "Ability (Activated)";
-    furtherTheGreatPlan.timing =
-        "Once Per Battle, Start of the Third Battle Round"; //TODO wieso wird es nicht angezeigt?
+    furtherTheGreatPlan.typeName = "Ability (Passive)";
+    furtherTheGreatPlan.timing = "Once Per Battle, Start of Third Battle Round";
     furtherTheGreatPlan.color = "Black";
     furtherTheGreatPlan.declare =
-        "You can use this ability if you meet the condition below that corresponds to the Asterism you picked in the deployment phase."
-        "\nItzl the Tamer: 3 or more enemy units have been destroyed."
-        "\nQuetzl the Preserver: There are no enemy units wholly within friendly territory."
-        "\nSotek the Deliverer: The enemy general is in combat or has been destroyed."
-        "\nTepok the Seer: There are any friendly Slann units on the battlefield and no friendly Slann units are in combat or have been destroyed.";
+        "Start of Third Battle Round:"
+        "\n\nYou can use this ability if you meet the condition below that corresponds to the Asterism you picked in the deployment phase."
+        "\n• Itzl the Tamer: 3 or more enemy units have been destroyed."
+        "\n• Quetzl the Preserver: There are no enemy units wholly within friendly territory."
+        "\n• Sotek the Deliverer: The enemy general is in combat or has been destroyed."
+        "\n• Tepok the Seer: There are any friendly Slann units on the battlefield and no friendly Slann units are in combat or have been destroyed.";
     furtherTheGreatPlan.effect =
         "Pick ANOTHER Asterism ability. It can be used in addition to the one you picked in the deployment phase.";
 
@@ -457,9 +486,9 @@ class SeraphonHardcoded {
 
     // Battle Traits
     //---------------------------------------------------------
-    // Arcane Tome = Spell Lore (Zauber Spells + Summon Spells) //TODO Casting Values anzeigen für summon manifestations
+    // Arcane Tome = Spell Lore (Zauber Spells + Summon Spells)
 
-    //Summon Spells für Jennys Manifestation //TODO Brauchen summon spells typename Ability (Activated)?
+    //Summon Spells für Jennys Manifestation
     Ability summonHead = Ability("Summon Burning Head");
     summonHead.timing = "Your Hero Phase";
     summonHead.color = "Yellow";
