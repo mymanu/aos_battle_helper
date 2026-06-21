@@ -7,7 +7,6 @@ import 'HeroPhase.dart';
 import 'Preparation.dart';
 import 'SettingsWidgetPath.dart';
 import 'StartofBattle.dart';
-import 'ArmyImport.dart';
 import 'SettingsWidget.dart';
 
 class HomePage extends StatefulWidget {
@@ -93,28 +92,7 @@ class _HomePage extends State<HomePage> {
                   maximumSize: Size(510, 510),
                 ),
                 child: Text(
-                  'Army import',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20),
-                ),
-                onPressed: () {
-                  _navigateToArmyImport(context, widget.settings);
-                },
-              ),
-
-              SizedBox(height: 50),
-
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.orange,
-                  backgroundColor: Colors.blueGrey.shade800,
-                  shadowColor: Colors.black,
-                  padding: const EdgeInsets.all(10.0),
-                  minimumSize: Size(250, 100),
-                  maximumSize: Size(510, 510),
-                ),
-                child: Text(
-                  'Settings',
+                  'Settings AoS/Spearhead',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20),
                 ),
@@ -135,7 +113,7 @@ class _HomePage extends State<HomePage> {
                   maximumSize: Size(510, 510),
                 ),
                 child: Text(
-                  'Path Settings',
+                  'Settings Path to Glory',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20),
                 ),
@@ -160,14 +138,6 @@ class _HomePage extends State<HomePage> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => Preparation(title: "Preparation", settings: settings),
-      ),
-    );
-  }
-
-  void _navigateToArmyImport(BuildContext context, Settings settings) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => ArmyImport(title: "Army import", settings: settings),
       ),
     );
   }

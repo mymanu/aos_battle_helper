@@ -14,7 +14,6 @@ import '../classes/BattlePlan.dart';
 import '../classes/functions.dart';
 import '../classes/settings.dart';
 
-import 'ArmyImport.dart';
 import 'HomePage.dart';
 
 class SettingsWidgetPath extends StatefulWidget {
