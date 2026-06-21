@@ -607,4 +607,68 @@ class SeraphonHardcoded {
 
     return settings;
   }
+
+  Settings addSkinkFloydHardcoded(Settings settings) {
+    // Special Hero
+
+    Weapon greatWeapon = Weapon("greatWeapon", "Great Weapon of Renown");
+    greatWeapon.attack = "5";
+    greatWeapon.hit = "3+";
+    greatWeapon.wound = "2+";
+    greatWeapon.rend = "2";
+    greatWeapon.damage = "3";
+    greatWeapon.ability = "Crit (Mortal)";
+
+    Weapon hooves = Weapon(
+      "hooves",
+      "Ghyranite Steed`s Teeth, Hooves or Claws",
+    );
+    hooves.attack = "2";
+    hooves.hit = "5+";
+    hooves.wound = "3+";
+    hooves.damage = "1";
+    hooves.ability = "Companion";
+
+    Ability leadByExample = Ability("Lead By Example (Path of the Ruler)");
+    leadByExample.typeName = "Ability (Activated)";
+    leadByExample.timing = "Any Charge Phase";
+    leadByExample.color = "Orange";
+    leadByExample.declare =
+    "If this unit charged this phase, pick another friendly unit wholly within 12\" of it to be the target.";
+    leadByExample.effect =
+    "You can re-roll charge rolls for the target for the rest of the phase.";
+
+    Ability stars = Ability("Being of the Stars (Heroic Trait)");
+    stars.typeName = "Ability (Activated)";
+    stars.timing = "Any Phase";
+    stars.color = "Red";
+    stars.effect =
+    "Ignore modifiers to save rolls for this unit (positive and negative).";
+
+    Ability rectrice = Ability("Incandescent Rectrices");
+    rectrice.typeName = "Ability (Activated)";
+    rectrice.timing = "Any Hero Phase";
+    rectrice.color = "Yellow";
+    rectrice.effect = "**Heal** (D3) this unit.	";
+
+    List<Ability> slannSoloSpells = [
+      SpearheadGeneralSpells().getGuardedHero(),
+      leadByExample, stars, rectrice,
+    ];
+
+    Unit skinkFloyd = Unit.withSpells(
+      "Skink Floyd - erst gezockt dann abgerockt",
+      slannSoloSpells,
+    );
+    skinkFloyd.weapons.add(greatWeapon);
+    skinkFloyd.weapons.add(hooves);
+    skinkFloyd.move = "12\"";
+    skinkFloyd.health = "11";
+    skinkFloyd.save = "3+";
+    skinkFloyd.control = "5";
+    skinkFloyd.keywords = "General, Hero, Order, Seraphon, Cavalry";
+
+    settings.army.unitList.insert(0, skinkFloyd);
+    return settings;
+  }
 }

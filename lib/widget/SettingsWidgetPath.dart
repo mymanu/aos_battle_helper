@@ -800,6 +800,7 @@ class _SettingsWidgetPath extends State<SettingsWidgetPath> {
                       ),
                       onPressed: () {
                         pickIronjawzHardcoded();
+                        ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("WAAAAGH! Ironjawz Hardcoded successfully added"));
                       },
                     ),
 
@@ -821,6 +822,7 @@ class _SettingsWidgetPath extends State<SettingsWidgetPath> {
                       ),
                       onPressed: () {
                         pickSeraphonHardcoded();
+                        ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("ROOAARR! Seraphon Hardcoded successfully added"));
                       },
                     ),
 
@@ -836,12 +838,13 @@ class _SettingsWidgetPath extends State<SettingsWidgetPath> {
                         maximumSize: Size(510, 510),
                       ),
                       child: Text(
-                        'Platzhalter',
+                        'Skink Floyd hinzufügen',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 20),
                       ),
                       onPressed: () {
-                        //pickIronjawzBigmob();
+                        addSkinkFloydHardcoded();
+                        ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Skink Floyd successfully added"));
                       },
                     ),
 
@@ -863,6 +866,7 @@ class _SettingsWidgetPath extends State<SettingsWidgetPath> {
                       ),
                       onPressed: () {
                         //pickWarpsparkClawpack();
+                        ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Platzhalter successfully added"));
                       },
                     ),
                   ],
@@ -904,6 +908,10 @@ class _SettingsWidgetPath extends State<SettingsWidgetPath> {
   //TODO Seraphon Path to Glory Liste hinzufügen über Button Hinzufügen
   void pickSeraphonHardcoded() {
     widget.settings = SeraphonHardcoded().pickSeraphonHardcoded(widget.settings);
+  }
+
+  void addSkinkFloydHardcoded() {
+    widget.settings = SeraphonHardcoded().addSkinkFloydHardcoded(widget.settings);
   }
 
   void addBattlePlanSpells() {
