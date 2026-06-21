@@ -31,150 +31,9 @@ class ArmyImport extends StatefulWidget {
 
   @override
   _ArmyImport createState() => _ArmyImport();
-}
-
-class _ArmyImport extends State<ArmyImport> {
-  FilePickerResult? result;
-  String? _fileName;
-  PlatformFile? pickedFile;
-  bool isLoading = false;
-  File? fileToDisplay;
-
-  void pickFile() async {
-    try {
-      setState(() {
-        isLoading = true;
-      });
-
-      result = await FilePicker.pickFiles(
-        type: FileType.any,
-        allowMultiple: false,
-      );
-
-      if (result != null) {
-        _fileName = result!.files.first.name;
-        pickedFile = result!.files.first;
-        fileToDisplay = File(pickedFile!.path.toString());
-
-        print("File name: $_fileName");
-      }
-
-      //TODO hier wir die Funktion zum JSON decoden gestartet
-      readArmyOfJSON(fileToDisplay);
-      setState(() {
-        isLoading = false;
-      });
-    } catch (exception) {
-      print(exception);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    //String envTitle = Env.environmentName ?? "";
-    //String title = widget.title + ' - ' + envTitle;
-    String title = widget.title;
-    //String title = widget.title + "Phase";
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title), //Text('Logged In'),
-        centerTitle: true,
-        actions: <Widget>[],
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            Text(
-              "Bitte auf NewRecruit.eu eine Armee erstellen\nBei FORCE: bitte Path to Glory: Ravaged Coast auswählen.\n\n"
-              "Diese Liste dann über den Import JSON Button importieren.\n\n"
-              "Danach bitte prüfen, ob alles richtig angezeigt wird in den jeweiligen Phasen.\n"
-              "Manuel kann nicht alles perfekt testen.",
-            ),
-
-            /*_items.isNotEmpty ? Expanded(
-              child: ListView.builder(
-                itemCount: _items.length,
-                  itemBuilder: (context, index) {
-                  return Card(
-                    key: ValueKey(_items[index]["id"]),
-                    margin: const EdgeInsets.all(10),
-                    color: Colors.orangeAccent.shade100,
-                      child: ListTile(
-                        leading: Text(_items[index]["id"], style: TextStyle(color: calculateTextColor(Colors.orangeAccent.shade100))),
-                        title: Text(_items[index]["name"], style: TextStyle(color: calculateTextColor(Colors.orangeAccent.shade100))),
-                        subtitle: Text(_items[index]["description"], style: TextStyle(color: calculateTextColor(Colors.orangeAccent.shade100))),
-                      )
-                  );
-                  },
-              ),
-            )
-            Text("Habe was gefunden")
-                :
-            ElevatedButton(
-              onPressed: () {
-                readArmyOfJSON(File("./assets/import.json"));
-              },
-              child: Center(child: Text("Load Json")),
-            ),*/
-            SizedBox(height: 20),
-            isLoading
-                ? CircularProgressIndicator()
-                : TextButton(
-                    onPressed: () {
-                      pickFile();
-                    },
-                    child: Text("Import JSON"),
-                  ),
-            if (pickedFile != null)
-              SizedBox(
-                height: 300,
-                width: 400, //child: Image.file(fileToDisplay!),
-                child: Text("Armee erfolgreich importiert"),
-              ),
-
-            SizedBox(height: 50),
-            Text(
-              "Hinweis: Bitte nicht vergessen über Settings die AoS Standard Fähigkeiten wie Move hinzuzufügen.",
-            ),
-
-            SizedBox(height: 20),
-
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.orange,
-                backgroundColor: Colors.blueGrey.shade800,
-                shadowColor: Colors.black,
-                padding: const EdgeInsets.all(10.0),
-                minimumSize: Size(250, 100),
-                maximumSize: Size(510, 510),
-              ),
-              child: Text(
-                'Clear Settings',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20),
-              ),
-              onPressed: () {
-                setState(() {
-                  widget.settings = Settings();
-                });
-                _navigateToMenu(context, widget.settings);
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Color calculateTextColor(Color background) {
-    return ThemeData.estimateBrightnessForColor(background) == Brightness.light
-        ? Colors.black
-        : Colors.white;
-  }
 
   Future<void> readArmyOfJSON(File? jsonFile) async {
-    widget.settings.army.unitList.clear();
+    settings.army.unitList.clear();
 
     final String response = await jsonFile!.readAsString();
     final data = await json.decode(response);
@@ -230,7 +89,7 @@ class _ArmyImport extends State<ArmyImport> {
     List<Selections> selections = [];
     for (ForcesTwo forcesTwo in forcesTwoList) {
       for (Map<String, dynamic> selectionMapJSON
-          in forcesTwo.selectionsDynamic) {
+      in forcesTwo.selectionsDynamic) {
         Selections currentSelections = Selections(
           selectionMapJSON["id"],
           selectionMapJSON["name"],
@@ -259,12 +118,12 @@ class _ArmyImport extends State<ArmyImport> {
 
     for (Selections mySelection in selections) {
       if (mySelection.type.contains("unit")) {
-        widget.settings.army.unitList.add(readUnitOfJSON(mySelection));
+        settings.army.unitList.add(readUnitOfJSON(mySelection));
       }
     }
 
     //Unit Ausgabe mit Prints
-    for (Unit unit in widget.settings.army.unitList) {
+    for (Unit unit in settings.army.unitList) {
       print("-------------------------------------------------------------");
       print("");
       print("Unit aus dem großen neuen Decode Block:");
@@ -303,7 +162,8 @@ class _ArmyImport extends State<ArmyImport> {
     }
 
     print(
-      "Anzahl der Units in der Unit-List: ${widget.settings.army.unitList.length}",
+      "Anzahl der Units in der Unit-List: ${settings.army.unitList
+          .length}",
     );
 
     List<Selections> selectionsList = [];
@@ -343,16 +203,16 @@ class _ArmyImport extends State<ArmyImport> {
 
       for (Selections select in selectionsList) {
         if (select.name.contains("Battle Trait")) {
-          widget.settings.army.battleTraitsList = readBattleTrait(select);
+          settings.army.battleTraitsList = readBattleTrait(select);
         }
         if (select.name.contains("Arcane") || select.name.contains("Spell")) {
-          widget.settings.army.spellLore = readSpellLoreOfJSON(select);
+          settings.army.spellLore = readSpellLoreOfJSON(select);
         }
         if (select.type.contains("unit")) {
-          widget.settings.army.unitList.add(readUnitOfJSON(select));
+          settings.army.unitList.add(readUnitOfJSON(select));
         }
         if (select.name.contains("Formation")) {
-          widget.settings.army.battleFormationsList.add(
+          settings.army.battleFormationsList.add(
             readBattleFormationOfJSON(select),
           );
         }
@@ -360,7 +220,7 @@ class _ArmyImport extends State<ArmyImport> {
         List<Selections> selectionsTwoList = [];
         //roster -> forces -> selections -> selectionsTwo
         for (Map<String, dynamic> selectionMapTwoJSON
-            in select.selectionsDynamic) {
+        in select.selectionsDynamic) {
           Selections selectTwo = Selections(
             selectionMapTwoJSON["id"],
             selectionMapTwoJSON["name"],
@@ -368,14 +228,14 @@ class _ArmyImport extends State<ArmyImport> {
 
           if (selectionMapTwoJSON.containsKey("categories")) {
             for (Map<String, dynamic> entry
-                in selectionMapTwoJSON["categories"]) {
+            in selectionMapTwoJSON["categories"]) {
               selectTwo.categoriesDynamic.add(entry);
             }
           }
 
           if (selectionMapTwoJSON.containsKey("profiles")) {
             for (Map<String, dynamic> entry
-                in selectionMapTwoJSON["profiles"]) {
+            in selectionMapTwoJSON["profiles"]) {
               selectTwo.profilesDynamic.add(entry);
             }
           }
@@ -388,7 +248,7 @@ class _ArmyImport extends State<ArmyImport> {
         }
         for (Selections selectTwo in selectionsTwoList) {
           if (selectTwo.type.contains("unit")) {
-            widget.settings.army.unitList.add(readUnitOfJSON(selectTwo));
+            settings.army.unitList.add(readUnitOfJSON(selectTwo));
           }
         }
       }
@@ -402,7 +262,7 @@ class _ArmyImport extends State<ArmyImport> {
     //Keywords befüllen, beim ersten wird der "-" ersetzt, weitere ergänzt
     bool firstKeyword = true;
     for (Map<String, dynamic> categoriesMapJSON
-        in mySelection.categoriesDynamic) {
+    in mySelection.categoriesDynamic) {
       if (categoriesMapJSON.containsKey("name")) {
         if (firstKeyword) {
           unit.keywords = categoriesMapJSON["name"];
@@ -470,7 +330,7 @@ class _ArmyImport extends State<ArmyImport> {
       //Ab hier den Selections Pfad paralell zu Profiles bauen
       //roster -> forces -> forcesTwo -> selections -> selections
       for (Map<String, dynamic> selectionMapTwoJSON
-          in mySelection.selectionsDynamic) {
+      in mySelection.selectionsDynamic) {
         Selections selectTwo = Selections(
           selectionMapTwoJSON["id"],
           selectionMapTwoJSON["name"].toString(),
@@ -478,7 +338,7 @@ class _ArmyImport extends State<ArmyImport> {
 
         if (selectionMapTwoJSON.containsKey("selections")) {
           for (Map<String, dynamic> entry
-              in selectionMapTwoJSON["selections"]) {
+          in selectionMapTwoJSON["selections"]) {
             selectTwo.selectionsDynamic.add(entry);
           }
         }
@@ -491,7 +351,7 @@ class _ArmyImport extends State<ArmyImport> {
 
         if (selectionMapTwoJSON.containsKey("categories")) {
           for (Map<String, dynamic> entry
-              in selectionMapTwoJSON["categories"]) {
+          in selectionMapTwoJSON["categories"]) {
             selectTwo.categoriesDynamic.add(entry);
           }
         }
@@ -591,7 +451,7 @@ class _ArmyImport extends State<ArmyImport> {
         List<Selections> selectThreeList = [];
         //roster -> forces -> forcesTwo -> selections -> selectTwo -> selectThree
         for (Map<String, dynamic> selectionThreeMapJSON
-            in selectTwo.selectionsDynamic) {
+        in selectTwo.selectionsDynamic) {
           Selections selectThree = Selections(
             selectionThreeMapJSON["id"],
             selectionThreeMapJSON["name"],
@@ -599,13 +459,13 @@ class _ArmyImport extends State<ArmyImport> {
 
           if (selectionThreeMapJSON.containsKey("profiles")) {
             for (Map<String, dynamic> entry
-                in selectionThreeMapJSON["profiles"]) {
+            in selectionThreeMapJSON["profiles"]) {
               selectThree.profilesDynamic.add(entry);
             }
           }
           if (selectionThreeMapJSON.containsKey("selections")) {
             for (Map<String, dynamic> entry
-                in selectionThreeMapJSON["selections"]) {
+            in selectionThreeMapJSON["selections"]) {
               selectThree.selectionsDynamic.add(entry);
             }
           }
@@ -625,7 +485,7 @@ class _ArmyImport extends State<ArmyImport> {
           }
 
           for (Map<String, dynamic> selectionFourMapJSON
-              in selectThree.selectionsDynamic) {
+          in selectThree.selectionsDynamic) {
             Selections selectFour = Selections(
               selectionFourMapJSON["id"],
               selectionFourMapJSON["name"],
@@ -633,7 +493,7 @@ class _ArmyImport extends State<ArmyImport> {
 
             if (selectionFourMapJSON.containsKey("profiles")) {
               for (Map<String, dynamic> entry
-                  in selectionFourMapJSON["profiles"]) {
+              in selectionFourMapJSON["profiles"]) {
                 selectFour.profilesDynamic.add(entry);
               }
             }
@@ -643,7 +503,7 @@ class _ArmyImport extends State<ArmyImport> {
           for (Selections selectFour in selectFourList) {
             bool weaponNew = true;
             for (Map<String, dynamic> profileMapJSON
-                in selectFour.profilesDynamic) {
+            in selectFour.profilesDynamic) {
               Profiles profile = Profiles(
                 profileMapJSON["id"],
                 profileMapJSON["name"],
@@ -667,7 +527,7 @@ class _ArmyImport extends State<ArmyImport> {
 
           bool weaponNew = true;
           for (Map<String, dynamic> profileMapJSON
-              in selectThree.profilesDynamic) {
+          in selectThree.profilesDynamic) {
             Profiles profile = Profiles(
               profileMapJSON["id"],
               profileMapJSON["name"],
@@ -699,10 +559,10 @@ class _ArmyImport extends State<ArmyImport> {
   }
 
   Unit readUnitAbilityOfJSON(
-    Unit unit,
-    Profiles profile,
-    bool abilityAlreadyAdded,
-  ) {
+      Unit unit,
+      Profiles profile,
+      bool abilityAlreadyAdded,
+      ) {
     //Unit readAbilityOfJSON(Unit unit, Profiles profile) {
     Ability ability = Ability(profile.name);
     ability.id = profile.id;
@@ -974,6 +834,148 @@ class _ArmyImport extends State<ArmyImport> {
       }
     }
     return battleFormation;
+  }
+
+}
+
+class _ArmyImport extends State<ArmyImport> {
+  FilePickerResult? result;
+  String? _fileName;
+  PlatformFile? pickedFile;
+  bool isLoading = false;
+  File? fileToDisplay;
+
+  void pickFile() async {
+    try {
+      setState(() {
+        isLoading = true;
+      });
+
+      result = await FilePicker.pickFiles(
+        type: FileType.any,
+        allowMultiple: false,
+      );
+
+      if (result != null) {
+        _fileName = result!.files.first.name;
+        pickedFile = result!.files.first;
+        fileToDisplay = File(pickedFile!.path.toString());
+
+        print("File name: $_fileName");
+      }
+
+      //TODO hier wir die Funktion zum JSON decoden gestartet
+      widget.readArmyOfJSON(fileToDisplay);
+      setState(() {
+        isLoading = false;
+      });
+    } catch (exception) {
+      print(exception);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    //String envTitle = Env.environmentName ?? "";
+    //String title = widget.title + ' - ' + envTitle;
+    String title = widget.title;
+    //String title = widget.title + "Phase";
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title), //Text('Logged In'),
+        centerTitle: true,
+        actions: <Widget>[],
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            Text(
+              "Bitte auf NewRecruit.eu eine Armee erstellen\nBei FORCE: bitte Path to Glory: Ravaged Coast auswählen.\n\n"
+              "Diese Liste dann über den Import JSON Button importieren.\n\n"
+              "Danach bitte prüfen, ob alles richtig angezeigt wird in den jeweiligen Phasen.\n"
+              "Manuel kann nicht alles perfekt testen.",
+            ),
+
+            /*_items.isNotEmpty ? Expanded(
+              child: ListView.builder(
+                itemCount: _items.length,
+                  itemBuilder: (context, index) {
+                  return Card(
+                    key: ValueKey(_items[index]["id"]),
+                    margin: const EdgeInsets.all(10),
+                    color: Colors.orangeAccent.shade100,
+                      child: ListTile(
+                        leading: Text(_items[index]["id"], style: TextStyle(color: calculateTextColor(Colors.orangeAccent.shade100))),
+                        title: Text(_items[index]["name"], style: TextStyle(color: calculateTextColor(Colors.orangeAccent.shade100))),
+                        subtitle: Text(_items[index]["description"], style: TextStyle(color: calculateTextColor(Colors.orangeAccent.shade100))),
+                      )
+                  );
+                  },
+              ),
+            )
+            Text("Habe was gefunden")
+                :
+            ElevatedButton(
+              onPressed: () {
+                readArmyOfJSON(File("./assets/import.json"));
+              },
+              child: Center(child: Text("Load Json")),
+            ),*/
+            SizedBox(height: 20),
+            isLoading
+                ? CircularProgressIndicator()
+                : TextButton(
+                    onPressed: () {
+                      pickFile();
+                    },
+                    child: Text("Import JSON"),
+                  ),
+            if (pickedFile != null)
+              SizedBox(
+                height: 300,
+                width: 400, //child: Image.file(fileToDisplay!),
+                child: Text("Armee erfolgreich importiert"),
+              ),
+
+            SizedBox(height: 50),
+            Text(
+              "Hinweis: Bitte nicht vergessen über Settings die AoS Standard Fähigkeiten wie Move hinzuzufügen.",
+            ),
+
+            SizedBox(height: 20),
+
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.orange,
+                backgroundColor: Colors.blueGrey.shade800,
+                shadowColor: Colors.black,
+                padding: const EdgeInsets.all(10.0),
+                minimumSize: Size(250, 100),
+                maximumSize: Size(510, 510),
+              ),
+              child: Text(
+                'Clear Settings',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20),
+              ),
+              onPressed: () {
+                setState(() {
+                  widget.settings = Settings();
+                });
+                _navigateToMenu(context, widget.settings);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Color calculateTextColor(Color background) {
+    return ThemeData.estimateBrightnessForColor(background) == Brightness.light
+        ? Colors.black
+        : Colors.white;
   }
 
   void _navigateToMenu(BuildContext context, Settings settings) {

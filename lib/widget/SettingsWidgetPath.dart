@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:aos_battle_helper/spearhead/fusilPlatoon.dart';
 import 'package:aos_battle_helper/spearhead/sentinelsOfEmbergard.dart';
 import 'package:aos_battle_helper/spearhead/zenestrasZealots.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -8,27 +11,9 @@ import '../ageOfSigmar/aosGeneralSpells.dart';
 import '../ageOfSigmar/ironjawzHardcoded.dart';
 import '../ageOfSigmar/seraphonHardcoded.dart';
 import '../classes/BattlePlan.dart';
-import '../classes/ability.dart';
-import '../classes/battleFormation.dart';
-import '../classes/battleTraits.dart';
 import '../classes/settings.dart';
-import '../classes/spellLore.dart';
-import '../classes/unit.dart';
-import '../classes/weapon.dart';
-import '../spearhead/bitterbarkCopse.dart';
-import '../spearhead/crixxitKillPack.dart';
-import '../spearhead/spearheadGeneralSpells.dart';
-import '../spearhead/gnawfeastClawpack.dart';
-import '../spearhead/irojawzBigMob.dart';
-import '../spearhead/spitewingFlight.dart';
-import '../spearhead/starscaleWarhost.dart';
-import '../spearhead/warpsparkClawpack.dart';
-import '../spearhead/fusilPlatoon.dart';
-import '../spearhead/sentinelsOfEmbergard.dart';
-import '../spearhead/zenestrasZealots.dart';
-import '../spearhead/casteliteCompany.dart';
-import '../widget/RegimentChooser.dart';
-import 'BattleTactics.dart';
+
+import 'ArmyImport.dart';
 import 'HomePage.dart';
 
 class SettingsWidgetPath extends StatefulWidget {
@@ -52,6 +37,43 @@ class SettingsWidgetPath extends StatefulWidget {
 }
 
 class _SettingsWidgetPath extends State<SettingsWidgetPath> {
+
+  FilePickerResult? result;
+  String? _fileName;
+  PlatformFile? pickedFile;
+  bool isLoading = false;
+  File? fileToDisplay;
+
+  void pickFile() async {
+    try {
+      setState(() {
+        isLoading = true;
+      });
+
+      result = await FilePicker.pickFiles(
+        type: FileType.any,
+        allowMultiple: false,
+      );
+
+      if (result != null) {
+        _fileName = result!.files.first.name;
+        pickedFile = result!.files.first;
+        fileToDisplay = File(pickedFile!.path.toString());
+
+        print("File name: $_fileName");
+      }
+
+      //TODO hier wir die Funktion zum JSON decoden gestartet
+      ArmyImport(title: "ArmyImport", settings: widget.settings,).readArmyOfJSON(fileToDisplay);
+      setState(() {
+        isLoading = false;
+      });
+    } catch (exception) {
+      print(exception);
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     //String envTitle = Env.environmentName ?? "";
@@ -67,7 +89,9 @@ class _SettingsWidgetPath extends State<SettingsWidgetPath> {
         centerTitle: true,
         actions: <Widget>[],
       ),
-      body: Center(
+      body: SingleChildScrollView(
+        child:
+      Center(
         child: Column(
           //crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -101,6 +125,31 @@ class _SettingsWidgetPath extends State<SettingsWidgetPath> {
                   );
                 },
               ),
+            ),
+
+            SizedBox(height: 20),
+
+            Text(
+              "Bitte auf NewRecruit.eu eine Armee erstellen\nBei FORCE: bitte Path to Glory: Ravaged Coast auswählen.\n\n"
+                  "Diese Liste dann über den Import JSON Button importieren.\n\n"
+                  "Danach bitte prüfen, ob alles richtig angezeigt wird in den jeweiligen Phasen.\n"
+                  "Manuel kann nicht alles perfekt testen.",
+            ),
+            SizedBox(height: 20),
+            isLoading
+                ? CircularProgressIndicator()
+                : TextButton(
+              onPressed: () {
+                pickFile();
+              },
+              child: Text("Import JSON"),
+            ),
+            if (pickedFile != null)
+              Text("Armee erfolgreich importiert"),
+
+            SizedBox(height: 50),
+            Text(
+              "Hinweis: Bitte nicht vergessen die AoS Standard Fähigkeiten wie Move, BattlePlan Fähigkeit und ggf Taktiken hinzuzufügen.",
             ),
 
             SizedBox(height: 20),
@@ -819,6 +868,7 @@ class _SettingsWidgetPath extends State<SettingsWidgetPath> {
             ),
           ],
         ),
+      ),
       ),
     );
   }
