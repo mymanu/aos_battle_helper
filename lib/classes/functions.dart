@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:aos_battle_helper/classes/settings.dart';
 import 'package:aos_battle_helper/classes/unit.dart';
 import 'package:flutter_parsed_text/flutter_parsed_text.dart';
+import '../widget/AbilityPopUp.dart';
 import '../widget/HomePage.dart';
 import '../widget/WarScroll.dart';
 import 'ability.dart';
@@ -261,6 +262,48 @@ class Functions {
     );
   }
 
+  Future<void> showAbilityPopUp(BuildContext context, Settings settings, Ability currentAbility) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          insetPadding: EdgeInsets.zero,
+          title: Text(currentAbility.name),
+          content: Container(
+            height: 1500,
+            width: 1500,
+            child: AbilityPopUp(
+              title: currentAbility.name,
+              settings: settings,
+              ability: currentAbility,
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Back'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: Theme.of(context).textTheme.labelLarge,
+              ),
+              child: const Text('Menu'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                _navigateToMenu(context, settings);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   //https://pub.dev/packages/flutter_parsed_text
   Widget parseText(String text) {
     return ParsedText(
@@ -268,7 +311,7 @@ class Functions {
       parse: <MatchText>[
         MatchText(
           pattern:
-              r"\*\*\*?\^?\^?([^*^]+)\^?\^?\*?\*\*",
+              r"\*\*\*?\^?\^?([^*^]+)\^?\^?\*\*\*?",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.blue,

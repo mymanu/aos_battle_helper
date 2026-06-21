@@ -524,9 +524,10 @@ class _WarScroll extends State<WarScroll> {
                                           ),
                                           const SizedBox(width: 8),
                                           TextButton(
-                                            child: Text("Item $index"),
+                                            //child: Text("Item $index"),
+                                            child: Text("Show Ability PopUp"),
                                             onPressed: () {
-                                              /* ... */
+                                              functions.showAbilityPopUp(context, widget.settings, unitAbilities[index]);
                                             },
                                           ),
                                           const SizedBox(width: 8),

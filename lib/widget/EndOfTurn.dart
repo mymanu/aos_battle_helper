@@ -387,9 +387,10 @@ class _EndOfTurn extends State<EndOfTurn> {
                                       ),
                                       const SizedBox(width: 8),
                                       TextButton(
-                                        child: Text("Item $index"),
+                                        //child: Text("Item $index"),
+                                        child: Text("Show Ability PopUp"),
                                         onPressed: () {
-                                          /* ... */
+                                          functions.showAbilityPopUp(context, widget.settings, spellsThisPhase[index]);
                                         },
                                       ),
                                       const SizedBox(width: 8),
