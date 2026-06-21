@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:aos_battle_helper/spearhead/fusilPlatoon.dart';
 import 'package:aos_battle_helper/spearhead/sentinelsOfEmbergard.dart';
 import 'package:aos_battle_helper/spearhead/zenestrasZealots.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -10,6 +13,7 @@ import '../ageOfSigmar/seraphonHardcoded.dart';
 import '../classes/ability.dart';
 import '../classes/battleFormation.dart';
 import '../classes/battleTraits.dart';
+import '../classes/functions.dart';
 import '../classes/settings.dart';
 import '../classes/spellLore.dart';
 import '../classes/unit.dart';
@@ -49,6 +53,44 @@ class SettingsWidget extends StatefulWidget {
 }
 
 class _SettingsWidget extends State<SettingsWidget> {
+
+  Functions functions = Functions();
+
+  FilePickerResult? result;
+  String? _fileName;
+  PlatformFile? pickedFile;
+  bool isLoading = false;
+  File? fileToDisplay;
+
+  void pickFile() async {
+    try {
+      setState(() {
+        isLoading = true;
+      });
+
+      result = await FilePicker.pickFiles(
+        type: FileType.any,
+        allowMultiple: false,
+      );
+
+      if (result != null) {
+        _fileName = result!.files.first.name;
+        pickedFile = result!.files.first;
+        fileToDisplay = File(pickedFile!.path.toString());
+
+        print("File name: $_fileName");
+      }
+
+      //TODO hier wir die Funktion zum JSON decoden gestartet
+      widget.settings = await functions.readArmyOfJSON(fileToDisplay, widget.settings);
+      setState(() {
+        isLoading = false;
+      });
+    } catch (exception) {
+      print(exception);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     //String envTitle = Env.environmentName ?? "";
@@ -64,7 +106,8 @@ class _SettingsWidget extends State<SettingsWidget> {
         centerTitle: true,
         actions: <Widget>[],
       ),
-      body: Center(
+      body: SingleChildScrollView(
+    child: Center(
         child: Column(
           //crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -101,6 +144,23 @@ class _SettingsWidget extends State<SettingsWidget> {
             ),
 
             SizedBox(height: 20),
+            isLoading
+                ? CircularProgressIndicator()
+                : TextButton(
+              onPressed: () {
+                pickFile();
+              },
+              child: Text("Import JSON"),
+            ),
+            if (pickedFile != null)
+              Text("Armee erfolgreich importiert"),
+
+            SizedBox(height: 50),
+            Text(
+              "Hinweis: Bitte nicht vergessen die AoS Standard Fähigkeiten wie Move, BattlePlan Fähigkeit und ggf Taktiken hinzuzufügen.",
+            ),
+
+            SizedBox(height: 20),
 
             Row(
               children: [
@@ -127,6 +187,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                         addCommandSpells();
                         addNormalSpells();
                         addAoSPreparationSpells();
+                        ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Preparation, Core and Command Spells successfully added"));
                       },
                     ),
 
@@ -148,6 +209,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                       ),
                       onPressed: () {
                         pickIronjawzHardcoded();
+                        ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("WAAAAGH! Ironjawz Hardcoded successfully added"));
                       },
                     ),
 
@@ -169,6 +231,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                       ),
                       onPressed: () {
                         pickSeraphonHardcoded();
+                        ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("ROOAARR! Seraphon Hardcoded successfully added"));
                       },
                     ),
 
@@ -605,6 +668,8 @@ class _SettingsWidget extends State<SettingsWidget> {
                                 "attunedToGhyran",
                               );
                             }
+
+                            ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Tactics successfully chosen"));
                           },
                         ),
                       ],
@@ -632,6 +697,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                       ),
                       onPressed: () {
                         addSpearheadSpells();
+                        ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Spearhead Core Abilities successfully added"));
                       },
                     ),
 
@@ -653,6 +719,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                       ),
                       onPressed: () {
                         pickStarscaleWarhost();
+                        ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Spearhead Seraphon Starscale Warhost successfully chosen"));
                       },
                     ),
 
@@ -674,6 +741,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                       ),
                       onPressed: () {
                         pickIronjawzBigmob();
+                        ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Spearhead Orruk Warclans Ironjawz Bigmob successfully chosen"));
                       },
                     ),
 
@@ -695,6 +763,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                       ),
                       onPressed: () {
                         pickWarpsparkClawpack();
+                        ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Spearhead Skaven Warpspark Clawpack successfully chosen"));
                       },
                     ),
 
@@ -716,6 +785,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                       ),
                       onPressed: () {
                         pickSkavenGnawfeastClawpack();
+                        ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Spearhead Skaven Gnawfeast Clawpack successfully chosen"));
                       },
                     ),
 
@@ -737,6 +807,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                       ),
                       onPressed: () {
                         pickSkavenCrixxitKillPack();
+                        ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Spearhead Skaven Crixxit´s Kill-Pack successfully chosen"));
                       },
                     ),
                   ],
@@ -786,6 +857,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                         ),
                         onPressed: () {
                           pickSentinelsOfEmbergard();
+                          ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Spearhead Cities of Sigmar Sentinels Of Embergard successfully chosen"));
                         },
                       ),
 
@@ -807,6 +879,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                         ),
                         onPressed: () {
                           pickZenestrasZealots();
+                          ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Spearhead Cities of Sigmar Zenestra´s Zealots successfully chosen"));
                         },
                       ),
 
@@ -828,6 +901,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                         ),
                         onPressed: () {
                           pickFusilPlatoon();
+                          ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Spearhead Cities of Sigmar Fusil-Platoon successfully chosen"));
                         },
                       ),
 
@@ -849,6 +923,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                         ),
                         onPressed: () {
                           pickCasteliteCompany();
+                          ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Spearhead Cities of Sigmar Castelite Company successfully chosen"));
                         },
                       ),
 
@@ -870,6 +945,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                         ),
                         onPressed: () {
                           pickBitterbarkCopse();
+                          ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Spearhead Sylvaneth Bitterbark Copse successfully chosen"));
                         },
                       ),
 
@@ -891,6 +967,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                         ),
                         onPressed: () {
                           pickSpitewingFlight();
+                          ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Spearhead Sylvaneth Spitewing Flight successfully chosen"));
                         },
                       ),
                     ],
@@ -900,6 +977,7 @@ class _SettingsWidget extends State<SettingsWidget> {
             ),
           ],
         ),
+      ),
       ),
     );
   }

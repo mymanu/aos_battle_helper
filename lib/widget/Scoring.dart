@@ -633,7 +633,7 @@ class _Scoring extends State<Scoring> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) =>
-            StartofBattle(title: "Start of Battle", settings: settings),
+            StartofBattle(title: "Start of Battle Round", settings: settings),
       ),
     );
   }

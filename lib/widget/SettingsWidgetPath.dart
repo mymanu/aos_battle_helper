@@ -11,6 +11,7 @@ import '../ageOfSigmar/aosGeneralSpells.dart';
 import '../ageOfSigmar/ironjawzHardcoded.dart';
 import '../ageOfSigmar/seraphonHardcoded.dart';
 import '../classes/BattlePlan.dart';
+import '../classes/functions.dart';
 import '../classes/settings.dart';
 
 import 'ArmyImport.dart';
@@ -38,6 +39,8 @@ class SettingsWidgetPath extends StatefulWidget {
 
 class _SettingsWidgetPath extends State<SettingsWidgetPath> {
 
+  Functions functions = Functions();
+
   FilePickerResult? result;
   String? _fileName;
   PlatformFile? pickedFile;
@@ -64,7 +67,7 @@ class _SettingsWidgetPath extends State<SettingsWidgetPath> {
       }
 
       //TODO hier wir die Funktion zum JSON decoden gestartet
-      ArmyImport(title: "ArmyImport", settings: widget.settings,).readArmyOfJSON(fileToDisplay);
+      widget.settings = await functions.readArmyOfJSON(fileToDisplay, widget.settings);
       setState(() {
         isLoading = false;
       });
@@ -182,6 +185,7 @@ class _SettingsWidgetPath extends State<SettingsWidgetPath> {
                         addCommandSpells();
                         addNormalSpells();
                         addAoSPreparationSpells();
+                        ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Preparation, Core and Command Spells successfully added"));
                       },
                     ),
 
@@ -203,6 +207,7 @@ class _SettingsWidgetPath extends State<SettingsWidgetPath> {
                       ),
                       onPressed: () {
                         addBattlePlanSpells();
+                        ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Battle-Plan Abilities successfully added"));
                       },
                     ),
 
