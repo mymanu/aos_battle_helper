@@ -5,6 +5,22 @@ import 'ability.dart';
 class BattlePlan {
 
   Settings rissInAethelgard(Settings settings) {
+    Ability throwDice = Ability("01 Throw the Dice");
+    throwDice.typeName = "Ability (Activated)";
+    throwDice.timing = "Once per Battle Round, Your Phase";
+    throwDice.color = "Black";
+    throwDice.declare = "Zu Beginn der Runde wirft der führende Spieler einen W3. Wenn es keinen führenden Spieler gibt, wirft einer der Spieler einen W3. "
+        "Beide Spieler erhalten entsprechend des Wurfes Paradox Punkte (PP). Der Underdog erhält einen zusätzlichen Paradox Punkt (PP).";
+    settings.normalAbilitys.insert(0, throwDice);
+
+    Ability reminderChooseTactic = Ability("02 Tactic Reminder (PtG Runde 1)");
+    reminderChooseTactic.typeName = "Ability (Passive)";
+    reminderChooseTactic.timing = "Any Phase";
+    reminderChooseTactic.color = "Black";
+    reminderChooseTactic.effect =
+    "Please choose one tactic to play for this Battle Round.";
+    settings.normalAbilitys.insert(1, reminderChooseTactic);
+
     Ability abi = Ability("name");
     abi.name = "Das Kausale Paradoxon";
     abi.typeName = "Ability (Activated)";
@@ -15,15 +31,7 @@ class BattlePlan {
         "Pro Phase kann nur ein Punkt ausgegeben werden.";
     settings.normalAbilitys.add(abi);
 
-    Ability throwDice = Ability("Throw the Dice");
-    throwDice.typeName = "Ability (Activated)";
-    throwDice.timing = "Once per Battle Round, Your Phase";
-    throwDice.color = "Black";
-    throwDice.declare = "Zu Beginn der Runde wirft der führende Spieler einen W3. Wenn es keinen führenden Spieler gibt, wirft einer der Spieler einen W3. "
-        "Beide Spieler erhalten entsprechend des Wurfes Paradox Punkte (PP). Der Underdog erhält einen zusätzlichen Paradox Punkt (PP).";
-    settings.normalAbilitys.add(throwDice);
-
-    Ability aufstellungPtG1 = Ability("Path to Glory Runde 1: Aufstellung");
+    Ability aufstellungPtG1 = Ability("02 Aufstellung (PtG Runde 1)");
     aufstellungPtG1.typeName = "Ability (Passive)";
     aufstellungPtG1.color = "Teal";
     aufstellungPtG1.effect =
@@ -34,21 +42,8 @@ class BattlePlan {
         "\n• Splitter Beta: 12 Zoll links vom Zentrum auf der Mittellinie."
         "\n• Splitter Gamma: 12 Zoll rechts vom Zentrum auf der Mittellinie. "
         "\n• Das Spiel dauert maximal 5 Schlachtrunden.";
-    settings.normalAbilitys.add(aufstellungPtG1);
-
-    List<Ability> abis = [];
-
-    Ability reminderChooseTactic = Ability("Path to Glory Runde 1: Tactic Reminder");
-    reminderChooseTactic.typeName = "Ability (Passive)";
-    reminderChooseTactic.timing = "Any Phase";
-    reminderChooseTactic.color = "Black";
-    reminderChooseTactic.effect =
-    "Please choose one tactic to play for this Battle Round.";
-
-    abis.add(reminderChooseTactic);
-    settings.normalAbilitys.insertAll(0, abis);
-    //settings.normalAbilitys.add(reminderChooseTactic);
-
+    //settings.normalAbilitys.add(aufstellungPtG1);
+    settings.preparationSpells.insert(1, aufstellungPtG1);
 
     return settings;
   }

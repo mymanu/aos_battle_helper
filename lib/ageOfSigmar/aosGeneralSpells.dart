@@ -280,7 +280,7 @@ class aosGeneralSpells {
   Settings aosPreparationSpells(Settings settings) {
     List<Ability> aosPreparationSpells = [];
 
-    Ability preBattleSequence = Ability("Pre-Battle Sequence");
+    Ability preBattleSequence = Ability("01 Pre-Battle Sequence");
     preBattleSequence.typeName = "Ability (Passive)";
     preBattleSequence.color = "Teal";
     preBattleSequence.effect =
@@ -289,24 +289,7 @@ class aosGeneralSpells {
         "\n• Roll off. The winner decides which territory belongs to which player. The opponent decides which player begins deployment.";
     aosPreparationSpells.add(preBattleSequence);
 
-    Ability startBattleRoundSequence = Ability(
-      "Start of Battle Round Sequence",
-    );
-    startBattleRoundSequence.typeName = "Ability (Passive)";
-    startBattleRoundSequence.color = "Teal";
-    startBattleRoundSequence.effect =
-        "1. Determine the Active Player:"
-        "\n• First battle round: The player who finished setting up the army first, chooses who takes the first turn."
-        "\n• Later battle rounds: Players make a priority roll and the winner decides who starts (Core Rules, 12.0)."
-        "\n• If the roll-off is a tie, the player who took the first turn in the previous battle round decides who is first next (= active player)."
-        "\n2. Determine the Underdog: "
-        "\nThe player with fewest victory points is the underdog for this battle round (Core Rules, 12.0)."
-        "\nThere is no underdog, if the players are tie (equal victory points)."
-        "\n3. Start of Battle Round Abilities:"
-        "\n The active player can use any  Start of Battle Round  abilities  first, then their opponent can do the same.";
-    aosPreparationSpells.add(startBattleRoundSequence);
-
-    Ability deployment = Ability("Deployment");
+    Ability deployment = Ability("03 Deployment");
     deployment.typeName = "Ability (Passive)";
     deployment.color = "Teal";
     deployment.effect =
@@ -320,27 +303,17 @@ class aosGeneralSpells {
         "in the order of their choosing,  abilities, in the order of their choosing, then their opponent can do the same.";
     aosPreparationSpells.add(deployment);
 
-    Ability deployUnit = Ability("Deploy Unit");
-    deployUnit.typeName = "Ability (Passive)";
-    deployUnit.color = "Teal";
-    deployUnit.declare =
-        "Pick a unit from your army roster that has not been deployed to be the target.";
-    deployUnit.effect =
-        "Set up the target unit wholly within friendly territory and more than 9\" from enemy territory. "
-        "\nAfter you have done so, it has been deployed.";
-    aosPreparationSpells.add(deployUnit);
-
-    Ability deployFactionTerrain = Ability("Deploy Faction Terrain");
+    Ability deployFactionTerrain = Ability("03a Deploy Faction Terrain");
     deployFactionTerrain.typeName = "Ability (Passive)";
     deployFactionTerrain.color = "Teal";
     deployFactionTerrain.declare =
-        "Pick a friendly faction terrain feature that has not been deployed to be the target.";
+    "Pick a friendly faction terrain feature that has not been deployed to be the target.";
     deployFactionTerrain.effect =
-        "Set up the target faction terrain feature wholly within friendly territory, more than 3\" from "
+    "Set up the target faction terrain feature wholly within friendly territory, more than 3\" from "
         "all objectives and other terrain features. After you have done so, it has been deployed.";
     aosPreparationSpells.add(deployFactionTerrain);
 
-    Ability deployRegiment = Ability("Deploy Regiment");
+    Ability deployRegiment = Ability("03b Deploy Regiment");
     deployRegiment.typeName = "Ability (Passive)";
     deployRegiment.color = "Teal";
     deployRegiment.declare =
@@ -353,14 +326,41 @@ class aosGeneralSpells {
         "\nSome factions have special Deploy abilities, such as the ‘The Celestial Realm’ ability of the Stormcast Eternals).";
     aosPreparationSpells.add(deployRegiment);
 
+    Ability deployUnit = Ability("03c Deploy Unit");
+    deployUnit.typeName = "Ability (Passive)";
+    deployUnit.color = "Teal";
+    deployUnit.declare =
+    "Pick a unit from your army roster that has not been deployed to be the target.";
+    deployUnit.effect =
+    "Set up the target unit wholly within friendly territory and more than 9\" from enemy territory. "
+        "\nAfter you have done so, it has been deployed.";
+    aosPreparationSpells.add(deployUnit);
+
+    Ability startBattleRoundSequence = Ability(
+      "04 Start of Battle Round Sequence",
+    );
+    startBattleRoundSequence.typeName = "Ability (Passive)";
+    startBattleRoundSequence.color = "Teal";
+    startBattleRoundSequence.effect =
+    "1. Determine the Active Player:"
+        "\n• First battle round: The player who finished setting up the army first, chooses who takes the first turn."
+        "\n• Later battle rounds: Players make a priority roll and the winner decides who starts (Core Rules, 12.0)."
+        "\n• If the roll-off is a tie, the player who took the first turn in the previous battle round decides who is first next (= active player)."
+        "\n2. Determine the Underdog: "
+        "\nThe player with fewest victory points is the underdog for this battle round (Core Rules, 12.0)."
+        "\nThere is no underdog, if the players are tie (equal victory points)."
+        "\n3. Start of Battle Round Abilities:"
+        "\n The active player can use any  Start of Battle Round  abilities  first, then their opponent can do the same.";
+    aosPreparationSpells.add(startBattleRoundSequence);
+
     Ability phases = Ability("Turn Phases");
     phases.typeName = "Ability (Passive)";
     phases.color = "Teal";
     phases.effect =
         "Each player’s turn is broken down into 7 phases: "
-        "\nStart of Turn, Hero Phase, Movement Phase, Shooting Phase, Charge Phase, Combat Phase, End of Turn."
-        "\nIn each phase, the active player can use any abilities with the ‘Your (…) Phase’ or ‘Any (…) Phase’ timing."
-        "\nOnce the active player has  nished using abilities, their opponent can then use any abilities with "
+        "\n• Start of Turn, Hero Phase, Movement Phase, Shooting Phase, Charge Phase, Combat Phase, End of Turn."
+        "\n• In each phase, the active player can use any abilities with the ‘Your (…) Phase’ or ‘Any (…) Phase’ timing."
+        "\n• Once the active player has  nished using abilities, their opponent can then use any abilities with "
         "an ‘Enemy (…) Phase’ or ‘Any (…) Phase’ timing";
     aosPreparationSpells.add(phases);
 
@@ -370,7 +370,7 @@ class aosGeneralSpells {
     terrain.effect =
         "Large Terrain Feature: Cover, Obscuring, Unstable."
         "\nSmall Terrain Feature: Cover, Unstable."
-        "\n• Cover: Subtract 1 from hit rolls for attacks that target a unit that is behind or wholly on this terrain feature, "
+        "\n\n• Cover: Subtract 1 from hit rolls for attacks that target a unit that is behind or wholly on this terrain feature, "
         "unless that unit charged or has the Fly keyword."
         "\n• Obscuring: A unit cannot be targeted by shooting attacks if it is behind or wholly on this terrain feature, unless it has the Fly keyword."
         "\n• Unstable: Models can move across but cannot be set up on or"
