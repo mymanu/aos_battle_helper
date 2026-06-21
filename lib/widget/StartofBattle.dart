@@ -282,6 +282,35 @@ class _StartofBattle extends State<StartofBattle> {
                           )
                         :
                     //Ab hier Card wenn es eine Ability ist
+                    Stack(
+                      children: [
+                      Positioned(
+                      top: 0,
+                      right: 0,
+                      child:
+                      spellsThisPhase[index].castingValue
+                          .contains("-")
+                          ? Text("")
+                          : Text(
+                        "Casting Value: " +
+                            spellsThisPhase[index].castingValue,
+                      ),
+                    ),
+
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      child:
+                      spellsThisPhase[index].commandPoints
+                          .contains("-")
+                          ? Text("")
+                          : Text(
+                        "Command Point cost: " +
+                            spellsThisPhase[index]
+                                .commandPoints,
+                      ),
+                    ),
+
                     Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
@@ -393,12 +422,38 @@ class _StartofBattle extends State<StartofBattle> {
                           ],
                         ),
 
-                        spellsThisPhase[index].commandPoints.contains("-")
-                                  ? Text("")
-                                  : Text(
-                                      "Command Point cost: " +
-                                          spellsThisPhase[index].commandPoints,
-                                    ),
+                        (spellsThisPhase[index].keywords.contains(
+                            "null") || spellsThisPhase[index].keywords.contains("-1"))
+                            ? Text("")
+                            : ParsedText(
+                          text:
+                          "Keywords: ${spellsThisPhase[index].keywords}",
+                          parse: <MatchText>[
+                            MatchText(
+                              pattern:
+                              r"\*\*\^?\^?(\w*\s?\w*\s?\w*)\^?\^?\*\*",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue,
+                                //fontSize: 24,
+                              ),
+                              renderText:
+                                  ({
+                                required String str,
+                                required String pattern,
+                              }) {
+                                RegExp customRegExp =
+                                RegExp(pattern);
+                                Match match = customRegExp
+                                    .firstMatch(str)!;
+                                return {
+                                  'display': match[2]!,
+                                };
+                              },
+                            ),
+                          ],
+                        ),
+
                               /*
                             Text(cardContentList[index].ability.timing),
                             Text(cardContentList[index].ability.originUnit),
@@ -434,6 +489,8 @@ class _StartofBattle extends State<StartofBattle> {
                               ),
                             ],
                           ),
+                    ],
+                    ),
                   ),
                 );
               }, childCount: spellsThisPhase.length),

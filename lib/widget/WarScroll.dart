@@ -570,6 +570,17 @@ class _WarScroll extends State<WarScroll> {
                                         ),
                                       ],
                                     ),
+
+                                    Text(""),
+
+                                    (unitAbilities[index].keywords.contains(
+                                      "null",
+                                    ) ||
+                                        unitAbilities[index].keywords
+                                            .contains("-1"))
+                                        ? Text("")
+                                        : parseText("Keywords: ${unitAbilities[index].keywords}"),
+
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
@@ -625,6 +636,36 @@ class _WarScroll extends State<WarScroll> {
         builder: (context) =>
             HomePage(title: "Age of Sigmar Battle Helper", settings: settings),
       ),
+    );
+  }
+
+  Widget parseText(String text) {
+    return ParsedText(
+      text: text,
+      parse: <MatchText>[
+        MatchText(
+          pattern:
+          r"\*\*\^?\^?(\w*\s?\w*\s?\w*)\^?\^?\*\*",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.blue,
+            //fontSize: 24,
+          ),
+          renderText:
+              ({
+            required String str,
+            required String pattern,
+          }) {
+            RegExp customRegExp =
+            RegExp(pattern);
+            Match match = customRegExp
+                .firstMatch(str)!;
+            return {
+              'display': match[2]!,
+            };
+          },
+        ),
+      ],
     );
   }
 }

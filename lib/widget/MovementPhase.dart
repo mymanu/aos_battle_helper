@@ -414,6 +414,43 @@ class _MovementPhase extends State<MovementPhase> {
                                     ],
                                   ),
 
+                                  Text(""),
+
+                                  (spellsThisPhase[index].keywords.contains(
+                                    "null",
+                                  ) ||
+                                      spellsThisPhase[index].keywords
+                                          .contains("-1"))
+                                      ? Text("")
+                                      : ParsedText(
+                                    text:
+                                    "Keywords: ${spellsThisPhase[index].keywords}",
+                                    parse: <MatchText>[
+                                      MatchText(
+                                        pattern:
+                                        r"\*\*\^?\^?(\w*\s?\w*\s?\w*)\^?\^?\*\*",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blue,
+                                          //fontSize: 24,
+                                        ),
+                                        renderText:
+                                            ({
+                                          required String str,
+                                          required String pattern,
+                                        }) {
+                                          RegExp customRegExp =
+                                          RegExp(pattern);
+                                          Match match = customRegExp
+                                              .firstMatch(str)!;
+                                          return {
+                                            'display': match[2]!,
+                                          };
+                                        },
+                                      ),
+                                    ],
+                                  ),
+
                                   /*
                             ListTile(
                               leading: Icon(Icons.album),

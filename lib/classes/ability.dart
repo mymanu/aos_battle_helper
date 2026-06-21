@@ -19,7 +19,7 @@ class Ability {
   String timing = "-";
   String declare = "null";
   String effect = "null";
-  String keywords = "-";
+  String keywords = "-1";
   String usedBy = "-";
 
   //Attributes
