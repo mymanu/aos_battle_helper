@@ -348,7 +348,7 @@ class _WarScroll extends State<WarScroll> {
                     DataCell(Text(shootingWeaponList[index].wound)),
                     DataCell(Text(shootingWeaponList[index].rend)),
                     DataCell(Text(shootingWeaponList[index].damage)),
-                    DataCell(Text(shootingWeaponList[index].ability)),
+                    DataCell(functions.parseText(shootingWeaponList[index].ability)),
                   ],
                 );
               }),
@@ -378,7 +378,7 @@ class _WarScroll extends State<WarScroll> {
                     DataCell(Text(meleeWeaponList[index].wound)),
                     DataCell(Text(meleeWeaponList[index].rend)),
                     DataCell(Text(meleeWeaponList[index].damage)),
-                    DataCell(Text(meleeWeaponList[index].ability)),
+                    DataCell(functions.parseText(meleeWeaponList[index].ability)),
                   ],
                 );
               }),
