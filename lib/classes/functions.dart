@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:aos_battle_helper/classes/settings.dart';
 import 'package:aos_battle_helper/classes/unit.dart';
+import 'package:flutter_parsed_text/flutter_parsed_text.dart';
 import '../widget/HomePage.dart';
 import '../widget/WarScroll.dart';
 import 'ability.dart';
@@ -259,4 +260,36 @@ class Functions {
       },
     );
   }
+
+  //https://pub.dev/packages/flutter_parsed_text
+  Widget parseText(String text) {
+    return ParsedText(
+      text: text,
+      parse: <MatchText>[
+        MatchText(
+          pattern:
+          r"\*\*\^?\^?(\w*\s?\w*\s?\w*)\^?\^?\*\*",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.blue,
+            //fontSize: 24,
+          ),
+          renderText:
+              ({
+            required String str,
+            required String pattern,
+          }) {
+            RegExp customRegExp =
+            RegExp(pattern);
+            Match match = customRegExp
+                .firstMatch(str)!;
+            return {
+              'display': match[2]!,
+            };
+          },
+        ),
+      ],
+    );
+  }
+
 }

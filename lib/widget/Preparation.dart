@@ -269,6 +269,34 @@ class _Preparation extends State<Preparation> {
                     )
                         :
                     //Ab hier Card wenn es eine Ability ist
+                    Stack(
+                      children: [
+                        Positioned(
+                          top: 0,
+                          right: 0,
+                          child:
+                          spellsThisPhase[index].castingValue
+                              .contains("-")
+                              ? Text("")
+                              : Text(
+                            "Casting Value: " +
+                                spellsThisPhase[index].castingValue,
+                          ),
+                        ),
+
+                        Positioned(
+                          top: 0,
+                          right: 0,
+                          child:
+                          spellsThisPhase[index].commandPoints
+                              .contains("-")
+                              ? Text("")
+                              : Text(
+                            "Command Point cost: " +
+                                spellsThisPhase[index]
+                                    .commandPoints,
+                          ),
+                        ),
                     Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
@@ -296,95 +324,35 @@ class _Preparation extends State<Preparation> {
                         Text(spellsThisPhase[index].originUnit),
                         Text(""),
                         (spellsThisPhase[index].effect.contains(
-                            "null") || spellsThisPhase[index].effect.contains("-1"))
-                        //https://pub.dev/packages/flutter_parsed_text
-                            ? ParsedText(
-                          text: spellsThisPhase[index].declare,
-                          parse: <MatchText>[
-                            MatchText(
-                              pattern:
-                              r"\*\*\^?\^?(\w*\s?\w*\s?\w*)\^?\^?\*\*",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blue,
-                                //fontSize: 24,
-                              ),
-                              renderText:
-                                  ({
-                                required String str,
-                                required String pattern,
-                              }) {
-                                RegExp customRegExp = RegExp(
-                                  pattern,
-                                );
-                                Match match = customRegExp
-                                    .firstMatch(str)!;
-                                return {'display': match[2]!};
-                              },
-                            ),
-                          ],
+                          "null",
+                        ) ||
+                            spellsThisPhase[index].effect
+                                .contains("-1"))
+                            ? functions.parseText(
+                          spellsThisPhase[index].declare,
                         )
-                            : (spellsThisPhase[index].declare.contains(
-                            "null") || spellsThisPhase[index].declare.contains("-1"))
-                            ? ParsedText(
-                          text: spellsThisPhase[index].effect,
-                          parse: <MatchText>[
-                            MatchText(
-                              pattern:
-                              r"\*\*\^?\^?(\w*\s?\w*\s?\w*)\^?\^?\*\*",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blue,
-                                //fontSize: 24,
-                              ),
-                              renderText:
-                                  ({
-                                required String str,
-                                required String pattern,
-                              }) {
-                                RegExp customRegExp = RegExp(
-                                  pattern,
-                                );
-                                Match match = customRegExp
-                                    .firstMatch(str)!;
-                                return {'display': match[2]!};
-                              },
-                            ),
-                          ],
+                            : (spellsThisPhase[index].declare
+                            .contains("null") ||
+                            spellsThisPhase[index].declare
+                                .contains("-1"))
+                            ? functions.parseText(
+                          spellsThisPhase[index].effect,
                         )
-                            : ParsedText(
-                          text: spellsThisPhase[index].declare + "\n\n" +
+                            : functions.parseText(
+                          spellsThisPhase[index].declare +
+                              "\n\n" +
                               spellsThisPhase[index].effect,
-                          parse: <MatchText>[
-                            MatchText(
-                              pattern:
-                              r"\*\*\^?\^?(\w*\s?\w*\s?\w*)\^?\^?\*\*",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blue,
-                                //fontSize: 24,
-                              ),
-                              renderText:
-                                  ({
-                                required String str,
-                                required String pattern,
-                              }) {
-                                RegExp customRegExp = RegExp(
-                                  pattern,
-                                );
-                                Match match = customRegExp
-                                    .firstMatch(str)!;
-                                return {'display': match[2]!};
-                              },
-                            ),
-                          ],
                         ),
+                        Text(""),
 
-                        spellsThisPhase[index].commandPoints.contains("-")
+                        (spellsThisPhase[index].keywords.contains(
+                          "null",
+                        ) ||
+                            spellsThisPhase[index].keywords
+                                .contains("-1"))
                             ? Text("")
-                            : Text(
-                          "Command Point cost: " +
-                              spellsThisPhase[index].commandPoints,
+                            : functions.parseText(
+                          "Keywords: ${spellsThisPhase[index].keywords}",
                         ),
                         /*
                             Text(cardContentList[index].ability.timing),
@@ -421,6 +389,8 @@ class _Preparation extends State<Preparation> {
                         ),
                       ],
                     ),
+                    ],
+                  ),
                   ),
                 );
               }, childCount: spellsThisPhase.length),

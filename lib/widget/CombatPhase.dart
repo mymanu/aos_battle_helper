@@ -371,90 +371,25 @@ class _CombatPhase extends State<CombatPhase> {
                                   Text(spellsThisPhase[index].originUnit),
                                   Text(""),
                                   (spellsThisPhase[index].effect.contains(
-                                      "null") || spellsThisPhase[index].effect.contains("-1"))
-                                  //https://pub.dev/packages/flutter_parsed_text
-                                      ? ParsedText(
-                                    text: spellsThisPhase[index].declare,
-                                    parse: <MatchText>[
-                                      MatchText(
-                                        pattern:
-                                        r"\*\*\^?\^?(\w*\s?\w*\s?\w*)\^?\^?\*\*",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.blue,
-                                          //fontSize: 24,
-                                        ),
-                                        renderText:
-                                            ({
-                                          required String str,
-                                          required String pattern,
-                                        }) {
-                                          RegExp customRegExp = RegExp(
-                                            pattern,
-                                          );
-                                          Match match = customRegExp
-                                              .firstMatch(str)!;
-                                          return {'display': match[2]!};
-                                        },
-                                      ),
-                                    ],
+                                    "null",
+                                  ) ||
+                                      spellsThisPhase[index].effect
+                                          .contains("-1"))
+                                      ? functions.parseText(
+                                    spellsThisPhase[index].declare,
                                   )
-                                      : (spellsThisPhase[index].declare.contains(
-                                      "null") || spellsThisPhase[index].declare.contains("-1"))
-                                      ? ParsedText(
-                                    text: spellsThisPhase[index].effect,
-                                    parse: <MatchText>[
-                                      MatchText(
-                                        pattern:
-                                        r"\*\*\^?\^?(\w*\s?\w*\s?\w*)\^?\^?\*\*",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.blue,
-                                          //fontSize: 24,
-                                        ),
-                                        renderText:
-                                            ({
-                                          required String str,
-                                          required String pattern,
-                                        }) {
-                                          RegExp customRegExp = RegExp(
-                                            pattern,
-                                          );
-                                          Match match = customRegExp
-                                              .firstMatch(str)!;
-                                          return {'display': match[2]!};
-                                        },
-                                      ),
-                                    ],
+                                      : (spellsThisPhase[index].declare
+                                      .contains("null") ||
+                                      spellsThisPhase[index].declare
+                                          .contains("-1"))
+                                      ? functions.parseText(
+                                    spellsThisPhase[index].effect,
                                   )
-                                      : ParsedText(
-                                    text: spellsThisPhase[index].declare + "\n\n" +
+                                      : functions.parseText(
+                                    spellsThisPhase[index].declare +
+                                        "\n\n" +
                                         spellsThisPhase[index].effect,
-                                    parse: <MatchText>[
-                                      MatchText(
-                                        pattern:
-                                        r"\*\*\^?\^?(\w*\s?\w*\s?\w*)\^?\^?\*\*",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.blue,
-                                          //fontSize: 24,
-                                        ),
-                                        renderText:
-                                            ({
-                                          required String str,
-                                          required String pattern,
-                                        }) {
-                                          RegExp customRegExp = RegExp(
-                                            pattern,
-                                          );
-                                          Match match = customRegExp
-                                              .firstMatch(str)!;
-                                          return {'display': match[2]!};
-                                        },
-                                      ),
-                                    ],
                                   ),
-
                                   Text(""),
 
                                   (spellsThisPhase[index].keywords.contains(
@@ -463,33 +398,8 @@ class _CombatPhase extends State<CombatPhase> {
                                       spellsThisPhase[index].keywords
                                           .contains("-1"))
                                       ? Text("")
-                                      : ParsedText(
-                                    text:
+                                      : functions.parseText(
                                     "Keywords: ${spellsThisPhase[index].keywords}",
-                                    parse: <MatchText>[
-                                      MatchText(
-                                        pattern:
-                                        r"\*\*\^?\^?(\w*\s?\w*\s?\w*)\^?\^?\*\*",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.blue,
-                                          //fontSize: 24,
-                                        ),
-                                        renderText:
-                                            ({
-                                          required String str,
-                                          required String pattern,
-                                        }) {
-                                          RegExp customRegExp =
-                                          RegExp(pattern);
-                                          Match match = customRegExp
-                                              .firstMatch(str)!;
-                                          return {
-                                            'display': match[2]!,
-                                          };
-                                        },
-                                      ),
-                                    ],
                                   ),
 
                                   /*

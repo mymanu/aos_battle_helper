@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_parsed_text/flutter_parsed_text.dart';
 
 import '../classes/ability.dart';
+import '../classes/functions.dart';
 import '../classes/settings.dart';
 import '../classes/unit.dart';
 import '../classes/weapon.dart';
@@ -63,6 +64,8 @@ class _WarScroll extends State<WarScroll> {
     for (Ability abi in widget.unit.abilitys) {
       unitAbilities.add(abi);
     }
+
+    Functions functions = Functions();
 
     //TODO ab Hier wird das UI der WarScrolls gebaut, ab hier kann sich Jenny austoben.
     return Scaffold(
@@ -488,88 +491,12 @@ class _WarScroll extends State<WarScroll> {
                                     Text(""),
                                     (unitAbilities[index].effect.contains(
                                         "null") || unitAbilities[index].effect.contains("-1"))
-                                    //https://pub.dev/packages/flutter_parsed_text
-                                        ? ParsedText(
-                                      text: unitAbilities[index].declare,
-                                      parse: <MatchText>[
-                                        MatchText(
-                                          pattern:
-                                          r"\*\*\^?\^?(\w*\s?\w*\s?\w*)\^?\^?\*\*",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.blue,
-                                            //fontSize: 24,
-                                          ),
-                                          renderText:
-                                              ({
-                                            required String str,
-                                            required String pattern,
-                                          }) {
-                                            RegExp customRegExp = RegExp(
-                                              pattern,
-                                            );
-                                            Match match = customRegExp
-                                                .firstMatch(str)!;
-                                            return {'display': match[2]!};
-                                          },
-                                        ),
-                                      ],
-                                    )
+                                        ? functions.parseText(unitAbilities[index].declare)
                                         : (unitAbilities[index].declare.contains(
                                         "null") || unitAbilities[index].declare.contains("-1"))
-                                        ? ParsedText(
-                                      text: unitAbilities[index].effect,
-                                      parse: <MatchText>[
-                                        MatchText(
-                                          pattern:
-                                          r"\*\*\^?\^?(\w*\s?\w*\s?\w*)\^?\^?\*\*",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.blue,
-                                            //fontSize: 24,
-                                          ),
-                                          renderText:
-                                              ({
-                                            required String str,
-                                            required String pattern,
-                                          }) {
-                                            RegExp customRegExp = RegExp(
-                                              pattern,
-                                            );
-                                            Match match = customRegExp
-                                                .firstMatch(str)!;
-                                            return {'display': match[2]!};
-                                          },
-                                        ),
-                                      ],
-                                    )
-                                        : ParsedText(
-                                      text: unitAbilities[index].declare + "\n\n" +
-                                          unitAbilities[index].effect,
-                                      parse: <MatchText>[
-                                        MatchText(
-                                          pattern:
-                                          r"\*\*\^?\^?(\w*\s?\w*\s?\w*)\^?\^?\*\*",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.blue,
-                                            //fontSize: 24,
-                                          ),
-                                          renderText:
-                                              ({
-                                            required String str,
-                                            required String pattern,
-                                          }) {
-                                            RegExp customRegExp = RegExp(
-                                              pattern,
-                                            );
-                                            Match match = customRegExp
-                                                .firstMatch(str)!;
-                                            return {'display': match[2]!};
-                                          },
-                                        ),
-                                      ],
-                                    ),
+                                        ? functions.parseText("Effekt: ${unitAbilities[index].effect}")
+                                        : functions.parseText(unitAbilities[index].declare + "\n\n" +
+                                          unitAbilities[index].effect),
 
                                     Text(""),
 
@@ -579,7 +506,7 @@ class _WarScroll extends State<WarScroll> {
                                         unitAbilities[index].keywords
                                             .contains("-1"))
                                         ? Text("")
-                                        : parseText("Keywords: ${unitAbilities[index].keywords}"),
+                                        : functions.parseText("Keywords: ${unitAbilities[index].keywords}"),
 
                                       Row(
                                         mainAxisAlignment:
@@ -636,36 +563,6 @@ class _WarScroll extends State<WarScroll> {
         builder: (context) =>
             HomePage(title: "Age of Sigmar Battle Helper", settings: settings),
       ),
-    );
-  }
-
-  Widget parseText(String text) {
-    return ParsedText(
-      text: text,
-      parse: <MatchText>[
-        MatchText(
-          pattern:
-          r"\*\*\^?\^?(\w*\s?\w*\s?\w*)\^?\^?\*\*",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.blue,
-            //fontSize: 24,
-          ),
-          renderText:
-              ({
-            required String str,
-            required String pattern,
-          }) {
-            RegExp customRegExp =
-            RegExp(pattern);
-            Match match = customRegExp
-                .firstMatch(str)!;
-            return {
-              'display': match[2]!,
-            };
-          },
-        ),
-      ],
     );
   }
 }
