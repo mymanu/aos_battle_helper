@@ -268,7 +268,7 @@ class Functions {
       parse: <MatchText>[
         MatchText(
           pattern:
-          r"\*\*\^?\^?(\w*\s?\w*\s?\w*)\^?\^?\*\*",
+              r"\*\*\*?\^?\^?([^*^]+)\^?\^?\*?\*\*",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.blue,
