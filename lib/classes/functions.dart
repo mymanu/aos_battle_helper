@@ -54,6 +54,20 @@ class Functions {
     return abilitys;
   }
 
+
+  List<Ability> unitAbilityDeployment(List<Unit>unitList) {
+    List<Ability> abilitys = [];
+    for (Unit unit in unitList) {
+      for (Ability ability in unit.abilitys) {
+          if (ability.timing.contains("Deployment")) {
+            ability.originUnit = unit.name;
+            abilitys.add(ability);
+          }
+      }
+    }
+    return abilitys;
+  }
+
   List<Ability> spellLoreAbilitys(SpellLore spellLore, String phaseColorString, bool ownPhase) {
     List<Ability> abilitys = [];
     for (Ability ability in spellLore.abilitys) {
@@ -110,6 +124,32 @@ class Functions {
     return abilitys;
   }
 
+  List<Ability> battleTraitDeployment(List<BattleTraits> battleTraitsList) {
+    List<Ability> abilitys = [];
+    for (BattleTraits battleTrait in battleTraitsList) {
+      for (Ability ability in battleTrait.abilitys) {
+        if (ability.timing.contains("Deployment")){
+          ability.originUnit = "Battle-Trait";
+          abilitys.add(ability);
+        }
+      }
+    }
+    return abilitys;
+  }
+
+  List<Ability> battleTraitStartOfBattle(List<BattleTraits> battleTraitsList) {
+    List<Ability> abilitys = [];
+    for (BattleTraits battleTrait in battleTraitsList) {
+      for (Ability ability in battleTrait.abilitys) {
+        if (ability.timing.contains("Battle Round")){
+          ability.originUnit = "Battle-Trait";
+          abilitys.add(ability);
+        }
+      }
+    }
+    return abilitys;
+  }
+
   List<Ability> battleFormationAbilitys(List<BattleFormation> battleFormationsList, String phaseColorString, bool ownPhase) {
     List<Ability> abilitys = [];
     for (BattleFormation battleFormation in battleFormationsList) {
@@ -134,6 +174,20 @@ class Functions {
           }
           //Für JSON Spells Ende
         }
+      }
+    }
+    return abilitys;
+  }
+
+  List<Ability> battleFormationDeployment(List<BattleFormation> battleFormationsList) {
+    List<Ability> abilitys = [];
+    for (BattleFormation battleFormation in battleFormationsList) {
+      for (Ability ability in battleFormation.abilitys) {
+          //Für JSON Spells Anfang
+          if (ability.timing.contains("Deployment")) {
+            ability.originUnit = "Battle-Formation";
+            abilitys.add(ability);
+          }
       }
     }
     return abilitys;

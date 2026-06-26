@@ -42,6 +42,8 @@ class _Preparation extends State<Preparation> {
       ),
     );
 
+    spellsThisPhase.addAll(functions.unitAbilityDeployment(widget.settings.army.unitList));
+
     spellsThisPhase.addAll(
       functions.spellLoreAbilitys(
         widget.settings.army.spellLore,
@@ -58,6 +60,8 @@ class _Preparation extends State<Preparation> {
       ),
     );
 
+    spellsThisPhase.addAll(functions.battleTraitDeployment(widget.settings.army.battleTraitsList));
+
     spellsThisPhase.addAll(
       functions.battleFormationAbilitys(
         widget.settings.army.battleFormationsList,
@@ -65,6 +69,8 @@ class _Preparation extends State<Preparation> {
         widget.settings.ownPhase,
       ),
     );
+
+    spellsThisPhase.addAll(functions.battleFormationDeployment(widget.settings.army.battleFormationsList));
 
     spellsThisPhase.addAll(
       functions.commandAbilitys(
@@ -297,63 +303,63 @@ class _Preparation extends State<Preparation> {
                                     .commandPoints,
                           ),
                         ),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              spellsThisPhase[index].name,
-                              //cardContentList[index].ability.name,
-                              style: TextStyle(
-                                backgroundColor: widget.phaseColor,
-                                fontWeight: FontWeight.bold,
-                                color: calculateTextColor(
-                                  widget.phaseColor,
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  spellsThisPhase[index].name,
+                                  //cardContentList[index].ability.name,
+                                  style: TextStyle(
+                                    backgroundColor: widget.phaseColor,
+                                    fontWeight: FontWeight.bold,
+                                    color: calculateTextColor(
+                                      widget.phaseColor,
+                                    ),
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
-                          ],
-                        ),
-                        spellsThisPhase[index].typeName.contains(
-                          "Passive",
-                        )
-                            ? Text(spellsThisPhase[index].typeName)
-                            : Text(spellsThisPhase[index].timing),
-                        Text(spellsThisPhase[index].originUnit),
-                        Text(""),
-                        (spellsThisPhase[index].effect.contains(
-                          "null",
-                        ) ||
-                            spellsThisPhase[index].effect
-                                .contains("-1"))
-                            ? functions.parseText(
-                          spellsThisPhase[index].declare,
-                        )
-                            : (spellsThisPhase[index].declare
-                            .contains("null") ||
-                            spellsThisPhase[index].declare
-                                .contains("-1"))
-                            ? functions.parseText(
-                          spellsThisPhase[index].effect,
-                        )
-                            : functions.parseText(
-                          spellsThisPhase[index].declare +
-                              "\n\n" +
+                            spellsThisPhase[index].typeName.contains(
+                              "Passive",
+                            )
+                                ? functions.parseText(spellsThisPhase[index].typeName)
+                                : functions.parseText(spellsThisPhase[index].timing),
+                            functions.parseText(spellsThisPhase[index].originUnit),
+                            Text(""),
+                            (spellsThisPhase[index].effect.contains(
+                              "null",
+                            ) ||
+                                spellsThisPhase[index].effect
+                                    .contains("-1"))
+                                ? functions.parseText(
+                              spellsThisPhase[index].declare,
+                            )
+                                : (spellsThisPhase[index].declare
+                                .contains("null") ||
+                                spellsThisPhase[index].declare
+                                    .contains("-1"))
+                                ? functions.parseText(
                               spellsThisPhase[index].effect,
-                        ),
-                        Text(""),
+                            )
+                                : functions.parseText(
+                              spellsThisPhase[index].declare +
+                                  "\n\n" +
+                                  spellsThisPhase[index].effect,
+                            ),
+                            Text(""),
 
-                        (spellsThisPhase[index].keywords.contains(
-                          "null",
-                        ) ||
-                            spellsThisPhase[index].keywords
-                                .contains("-1"))
-                            ? Text("")
-                            : functions.parseText(
-                          "Keywords: ${spellsThisPhase[index].keywords}",
-                        ),
+                            (spellsThisPhase[index].keywords.contains(
+                              "null",
+                            ) ||
+                                spellsThisPhase[index].keywords
+                                    .contains("-1"))
+                                ? Text("")
+                                : functions.parseText(
+                              "Keywords: ${spellsThisPhase[index].keywords}",
+                            ),
                         /*
                             Text(cardContentList[index].ability.timing),
                             Text(cardContentList[index].ability.originUnit),

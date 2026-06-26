@@ -69,6 +69,8 @@ class _StartofBattle extends State<StartofBattle> {
       ),
     );
 
+    spellsThisPhase.addAll(functions.battleTraitStartOfBattle(widget.settings.army.battleTraitsList));
+
     spellsThisPhase.addAll(
       functions.battleFormationAbilitys(
         widget.settings.army.battleFormationsList,
@@ -333,9 +335,9 @@ class _StartofBattle extends State<StartofBattle> {
                             spellsThisPhase[index].typeName.contains(
                               "Passive",
                             )
-                                ? Text(spellsThisPhase[index].typeName)
-                                : Text(spellsThisPhase[index].timing),
-                            Text(spellsThisPhase[index].originUnit),
+                                ? functions.parseText(spellsThisPhase[index].typeName)
+                                : functions.parseText(spellsThisPhase[index].timing),
+                            functions.parseText(spellsThisPhase[index].originUnit),
                             Text(""),
                             (spellsThisPhase[index].effect.contains(
                               "null",

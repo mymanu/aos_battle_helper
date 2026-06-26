@@ -366,9 +366,9 @@ class _CombatPhase extends State<CombatPhase> {
                                   spellsThisPhase[index].typeName.contains(
                                     "Passive",
                                   )
-                                      ? Text(spellsThisPhase[index].typeName)
-                                      : Text(spellsThisPhase[index].timing),
-                                  Text(spellsThisPhase[index].originUnit),
+                                      ? functions.parseText(spellsThisPhase[index].typeName)
+                                      : functions.parseText(spellsThisPhase[index].timing),
+                                  functions.parseText(spellsThisPhase[index].originUnit),
                                   Text(""),
                                   (spellsThisPhase[index].effect.contains(
                                     "null",

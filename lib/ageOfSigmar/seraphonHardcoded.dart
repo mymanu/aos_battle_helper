@@ -427,7 +427,7 @@ class SeraphonHardcoded {
     Ability furtherTheGreatPlan = Ability("Further the Great Plan");
     furtherTheGreatPlan.typeName = "Ability (Passive)";
     furtherTheGreatPlan.timing = "Once Per Battle, Start of Third Battle Round";
-    furtherTheGreatPlan.color = "Black";
+    furtherTheGreatPlan.color = "Black Teal";
     furtherTheGreatPlan.declare =
         "Start of Third Battle Round:"
         "\n\nYou can use this ability if you meet the condition below that corresponds to the Asterism you picked in the deployment phase."
@@ -441,7 +441,7 @@ class SeraphonHardcoded {
     Ability itzlTheTamer = Ability("Itzl the Tamer (The Great Plan 1/4)");
     itzlTheTamer.typeName = "Ability (Passive)";
     itzlTheTamer.timing = "Passive";
-    itzlTheTamer.color = "Red";
+    itzlTheTamer.color = "Red Teal";
     itzlTheTamer.effect =
         "Companion weapons used by friendly Seraphon units have Crit (2 Hits).";
     itzlTheTamer.keywords = "Asterism";
@@ -452,7 +452,7 @@ class SeraphonHardcoded {
     );
     quetzlThePreserver.typeName = "Ability (Passive)";
     quetzlThePreserver.timing = "Passive";
-    quetzlThePreserver.color = "Green";
+    quetzlThePreserver.color = "Green Teal";
     quetzlThePreserver.effect =
         "Subtract 1 from the Rend characteristic of melee weapons for attacks that "
         "target friendly Seraphon units that are wholly within friendly territory.";
@@ -464,7 +464,7 @@ class SeraphonHardcoded {
     );
     sotekTheDeliverer.typeName = "Ability (Passive)";
     sotekTheDeliverer.timing = "Passive";
-    sotekTheDeliverer.color = "Orange";
+    sotekTheDeliverer.color = "Orange Teal";
     sotekTheDeliverer.effect =
         "Add 2 to the Move characteristic of friendly Seraphon units.";
     sotekTheDeliverer.keywords = "Asterism";
@@ -472,7 +472,7 @@ class SeraphonHardcoded {
     Ability tepokTheSeer = Ability("Tepok the Seer (The Great Plan 4/4)");
     tepokTheSeer.typeName = "Ability (Passive)";
     tepokTheSeer.timing = "Passive";
-    tepokTheSeer.color = "Yellow";
+    tepokTheSeer.color = "Yellow Teal";
     tepokTheSeer.effect = "Add 1 to casting rolls for friendly Seraphon units.";
     tepokTheSeer.keywords = "Asterism";
 

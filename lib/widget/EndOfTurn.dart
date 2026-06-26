@@ -316,43 +316,43 @@ class _EndOfTurn extends State<EndOfTurn> {
                                     ],
                                   ),
                                   spellsThisPhase[index].typeName.contains(
-                                        "Passive",
-                                      )
-                                      ? Text(spellsThisPhase[index].typeName)
-                                      : Text(spellsThisPhase[index].timing),
-                                  Text(spellsThisPhase[index].originUnit),
+                                    "Passive",
+                                  )
+                                      ? functions.parseText(spellsThisPhase[index].typeName)
+                                      : functions.parseText(spellsThisPhase[index].timing),
+                                  functions.parseText(spellsThisPhase[index].originUnit),
                                   Text(""),
                                   (spellsThisPhase[index].effect.contains(
-                                            "null",
-                                          ) ||
-                                          spellsThisPhase[index].effect
-                                              .contains("-1"))
+                                    "null",
+                                  ) ||
+                                      spellsThisPhase[index].effect
+                                          .contains("-1"))
                                       ? functions.parseText(
-                                          spellsThisPhase[index].declare,
-                                        )
+                                    spellsThisPhase[index].declare,
+                                  )
                                       : (spellsThisPhase[index].declare
-                                                .contains("null") ||
-                                            spellsThisPhase[index].declare
-                                                .contains("-1"))
+                                      .contains("null") ||
+                                      spellsThisPhase[index].declare
+                                          .contains("-1"))
                                       ? functions.parseText(
-                                          spellsThisPhase[index].effect,
-                                        )
+                                    spellsThisPhase[index].effect,
+                                  )
                                       : functions.parseText(
-                                          spellsThisPhase[index].declare +
-                                              "\n\n" +
-                                              spellsThisPhase[index].effect,
-                                        ),
+                                    spellsThisPhase[index].declare +
+                                        "\n\n" +
+                                        spellsThisPhase[index].effect,
+                                  ),
                                   Text(""),
 
                                   (spellsThisPhase[index].keywords.contains(
-                                            "null",
-                                          ) ||
-                                          spellsThisPhase[index].keywords
-                                              .contains("-1"))
+                                    "null",
+                                  ) ||
+                                      spellsThisPhase[index].keywords
+                                          .contains("-1"))
                                       ? Text("")
                                       : functions.parseText(
-                                          "Keywords: ${spellsThisPhase[index].keywords}",
-                                        ),
+                                    "Keywords: ${spellsThisPhase[index].keywords}",
+                                  ),
                                   /*
                             ListTile(
                               leading: Icon(Icons.album),

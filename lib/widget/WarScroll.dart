@@ -485,9 +485,9 @@ class _WarScroll extends State<WarScroll> {
                                     unitAbilities[index].typeName.contains(
                                       "Passive",
                                     )
-                                        ? Text(unitAbilities[index].typeName)
-                                        : Text(unitAbilities[index].timing),
-                                    Text(unitAbilities[index].originUnit),
+                                        ? functions.parseText(unitAbilities[index].typeName)
+                                        : functions.parseText(unitAbilities[index].timing),
+                                    functions.parseText(unitAbilities[index].originUnit),
                                     Text(""),
                                     (unitAbilities[index].effect.contains(
                                         "null") || unitAbilities[index].effect.contains("-1"))
