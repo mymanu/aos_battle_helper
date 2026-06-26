@@ -671,4 +671,55 @@ class SeraphonHardcoded {
     settings.army.unitList.insert(0, skinkFloyd);
     return settings;
   }
+
+  Settings addAsterismDeploy(Settings settings) {
+
+    Ability itzlTheTamer = Ability("Itzl the Tamer (The Great Plan 1/4)");
+    itzlTheTamer.typeName = "Ability (Passive)";
+    itzlTheTamer.timing = "Passive";
+    itzlTheTamer.color = "Teal";
+    itzlTheTamer.effect =
+    "Companion weapons used by friendly Seraphon units have Crit (2 Hits).";
+    itzlTheTamer.keywords = "Asterism";
+
+    Ability quetzlThePreserver = Ability(
+      //Wir dachten zuerst Farbe Red
+      "Quetzl the Preserver (The Great Plan 2/4)",
+    );
+    quetzlThePreserver.typeName = "Ability (Passive)";
+    quetzlThePreserver.timing = "Passive";
+    quetzlThePreserver.color = "Teal";
+    quetzlThePreserver.effect =
+    "Subtract 1 from the Rend characteristic of melee weapons for attacks that "
+        "target friendly Seraphon units that are wholly within friendly territory.";
+    quetzlThePreserver.keywords = "Asterism";
+
+    Ability sotekTheDeliverer = Ability(
+      //App sagt Farbe Orange und Edi bestätigte es am 05.06.2026 bei Markus
+      "Sotek the Deliverer (The Great Plan 3/4)",
+    );
+    sotekTheDeliverer.typeName = "Ability (Passive)";
+    sotekTheDeliverer.timing = "Passive";
+    sotekTheDeliverer.color = "Teal";
+    sotekTheDeliverer.effect =
+    "Add 2 to the Move characteristic of friendly Seraphon units.";
+    sotekTheDeliverer.keywords = "Asterism";
+
+    Ability tepokTheSeer = Ability("Tepok the Seer (The Great Plan 4/4)");
+    tepokTheSeer.typeName = "Ability (Passive)";
+    tepokTheSeer.timing = "Passive";
+    tepokTheSeer.color = "Teal";
+    tepokTheSeer.effect = "Add 1 to casting rolls for friendly Seraphon units.";
+    tepokTheSeer.keywords = "Asterism";
+
+    BattleTraits battleTraits = BattleTraits();
+    battleTraits.abilitys.add(itzlTheTamer);
+    battleTraits.abilitys.add(quetzlThePreserver);
+    battleTraits.abilitys.add(sotekTheDeliverer);
+    battleTraits.abilitys.add(tepokTheSeer);
+
+    settings.army.battleTraitsList.add(battleTraits);
+
+    return settings;
+  }
 }

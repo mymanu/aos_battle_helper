@@ -860,13 +860,13 @@ class _SettingsWidgetPath extends State<SettingsWidgetPath> {
                         maximumSize: Size(510, 510),
                       ),
                       child: Text(
-                        'Platzhalter',
+                        'Asterism in Deployment',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 20),
                       ),
                       onPressed: () {
-                        //pickWarpsparkClawpack();
-                        ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Platzhalter successfully added"));
+                        addAsterismDeploy();
+                        ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Asterism for Deploy Screen successfully added"));
                       },
                     ),
                   ],
@@ -912,6 +912,10 @@ class _SettingsWidgetPath extends State<SettingsWidgetPath> {
 
   void addSkinkFloydHardcoded() {
     widget.settings = SeraphonHardcoded().addSkinkFloydHardcoded(widget.settings);
+  }
+
+  void addAsterismDeploy() {
+    widget.settings = SeraphonHardcoded().addAsterismDeploy(widget.settings);
   }
 
   void addBattlePlanSpells() {
