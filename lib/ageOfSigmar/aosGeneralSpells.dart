@@ -115,7 +115,7 @@ class aosGeneralSpells {
     counterCharge.typeName = "Ability (Activated)";
     counterCharge.color = "Orange";
     counterCharge.declare = "Used By: The unit using that Charge ability.";
-    counterCharge.effect = "You can re-roll the charge roll.";
+    counterCharge.effect = "You can make a charge roll with 2D6 and must end that move 1/2\" next to an enemy model.";
     counterCharge.commandPoints = "2";
     commandSpells.add(counterCharge);
 
@@ -186,10 +186,10 @@ class aosGeneralSpells {
     banishManifestation.typeName = "Ability (Activated)";
     banishManifestation.color = "Yellow";
     banishManifestation.declare =
-        "Pick a friendly Wizard or Priest to use this ability, pick a manifestation within 30\" of them"
+        "Pick a friendly Wizard or Priest to use this ability, pick a manifestation within 30\" of them "
         "to be the target, then make a banishment roll of 2D6.";
     banishManifestation.effect =
-        "If the banishment roll equals or exceeds the banishment value listed on the manifestation’s"
+        "If the banishment roll equals or exceeds the banishment value listed on the manifestation’s "
         "warscroll, it is banished and removed from play. You cannot pick the same manifestation as the target of this ability more than once per turn.";
     normalSpells.add(banishManifestation);
 
@@ -200,9 +200,8 @@ class aosGeneralSpells {
     unbind.declare =
         "Used By: A friendly Wizard within 30\" of the enemy Wizard casting the spell.";
     unbind.typeName =
-        "Make an unbinding roll of 2D6. If the roll exceeds the casting roll for the spell, then the spell is"
+        "Make an unbinding roll of 2D6. If the roll exceeds the casting roll for the spell, then the spell is "
         "unbound and its effect is not resolved. This reaction cannot be used more than once per casting roll.";
-    ;
     normalSpells.add(unbind);
 
     Ability normalMove = Ability("Normal Move");
@@ -212,7 +211,7 @@ class aosGeneralSpells {
     normalMove.declare =
         "Pick a friendly unit that is not in combat to use this ability.";
     normalMove.effect =
-        "That unit can move a distance up to its Move characteristic. That unit cannot move into combat"
+        "That unit can move a distance up to its Move characteristic. That unit cannot move into combat "
         "during any part of that move.";
     normalSpells.add(normalMove);
 
@@ -222,8 +221,8 @@ class aosGeneralSpells {
     run.color = "Gray";
     run.declare =
         "Pick a friendly unit that is not in combat to use this ability.";
-    run.color =
-        "Make a run roll of D6. That unit can move a distance up to its Move characteristic added to the"
+    run.effect =
+        "Make a run roll of D6. That unit can move a distance up to its Move characteristic added to the "
         "run roll. That unit cannot move into combat during any part of that move.";
     normalSpells.add(run);
 
@@ -234,8 +233,8 @@ class aosGeneralSpells {
     retreat.declare =
         "Pick a friendly unit that is in combat to use this ability.";
     retreat.effect =
-        "Inflict D3 mortal damage on that unit. That unit can move a distance up to its Move"
-        "characteristic. That unit can move through the combat ranges of any enemy units but cannot end"
+        "Inflict D3 mortal damage on that unit. That unit can move a distance up to its Move "
+        "characteristic. That unit can move through the combat ranges of any enemy units but cannot end "
         "that move within an enemy unit’s combat range.";
     normalSpells.add(retreat);
 
@@ -254,11 +253,11 @@ class aosGeneralSpells {
     charge.typeName = "Ability (Activated)";
     charge.color = "Orange";
     charge.declare =
-        "Pick a friendly unit that is not in combat and has not used a Run or Retreat ability this turn"
+        "Pick a friendly unit that is not in combat and has not used a Run or Retreat ability this turn "
         "to use this ability. Then, make a charge roll of 2D6.";
     charge.effect =
-        "That unit can move a distance up to the value of the charge roll. That unit can move through the"
-        "combat ranges of any enemy units and must end that move within ½\" of a visible enemy unit. If it does so,"
+        "That unit can move a distance up to the value of the charge roll. That unit can move through the "
+        "combat ranges of any enemy units and must end that move within ½\" of a visible enemy unit. If it does so, "
         "the unit using this ability has charged.";
     normalSpells.add(charge);
 
@@ -267,8 +266,8 @@ class aosGeneralSpells {
     fight.typeName = "Ability (Activated)";
     fight.color = "Red";
     fight.declare =
-        "Pick a friendly unit that is in combat or that charged this turn to use this ability. That unit can"
-        "make a pile‑in move (see 15.4). Then, if that unit is in combat, you must pick one or more enemy units as"
+        "Pick a friendly unit that is in combat or that charged this turn to use this ability. That unit can "
+        "make a pile‑in move (see 15.4). Then, if that unit is in combat, you must pick one or more enemy units as "
         "the target(s) of that unit’s attacks (see 16.0).";
     fight.effect = "Resolve combat attacks against the target unit(s).";
     normalSpells.add(fight);
@@ -298,8 +297,8 @@ class aosGeneralSpells {
         "\n• The beginner sets up one regiment, then the opponent set one regiment, and so on."
         "\n• Once one player has no more Deploy abilities to use, "
         "their opponent must continue to use Deploy abilities until they also have no more to use."
-        "\n• After both players have finished deploying their units,"
-        "the player who begins deployment can use any  Deployment Phase  abilities, that are not Deploy or Deploy Terrain abilities,"
+        "\n• After both players have finished deploying their units, "
+        "the player who begins deployment can use any  Deployment Phase  abilities, that are not Deploy or Deploy Terrain abilities, "
         "in the order of their choosing,  abilities, in the order of their choosing, then their opponent can do the same.";
     aosPreparationSpells.add(deployment);
 
@@ -373,7 +372,7 @@ class aosGeneralSpells {
         "\n\n• Cover: Subtract 1 from hit rolls for attacks that target a unit that is behind or wholly on this terrain feature, "
         "unless that unit charged or has the Fly keyword."
         "\n• Obscuring: A unit cannot be targeted by shooting attacks if it is behind or wholly on this terrain feature, unless it has the Fly keyword."
-        "\n• Unstable: Models can move across but cannot be set up on or"
+        "\n• Unstable: Models can move across but cannot be set up on or "
         "end any type of move on any part of this terrain feature that is more than 1\" tall.";
     aosPreparationSpells.add(terrain);
 
