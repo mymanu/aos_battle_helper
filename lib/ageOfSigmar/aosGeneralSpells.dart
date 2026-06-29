@@ -125,8 +125,9 @@ class aosGeneralSpells {
     allOutAttack.color = "Green";
     allOutAttack.declare = "Used By: The unit using that Attack ability.";
     allOutAttack.effect =
-        "Add 1 to hit rolls for attacks made as part of that Attack ability."
-        "This also affects weapons that have the Companion weapon ability.";
+        "Add 1 to hit rolls for attacks made as part of that Attack ability. "
+        "This also affects weapons that have the Companion weapon ability."
+            "\n For the rest of the turn this suffers -1 to save rolls.";
     allOutAttack.commandPoints = "1";
     commandSpells.add(allOutAttack);
 
@@ -136,7 +137,7 @@ class aosGeneralSpells {
     allOutDefence.color = "Green";
     allOutDefence.declare = "Used By: A unit targeted by that Attack ability.";
     allOutDefence.effect =
-        "Effect: Add 1 to save rolls for that unit in this phase.";
+        "Effect: Add 1 to save rolls for that unit for that attack.";
     allOutDefence.commandPoints = "1";
     commandSpells.add(allOutDefence);
 
