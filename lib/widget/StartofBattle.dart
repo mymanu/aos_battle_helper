@@ -197,11 +197,6 @@ class _StartofBattle extends State<StartofBattle> {
             child: Text("Weiter zur Hero Phase"),
           ),
           SizedBox(width: 50),
-          Text(
-            widget.settings.ownPhase
-                ? 'My ' + widget.title
-                : 'Enemy ' + widget.title,
-          ),
           Switch(
             // This bool value toggles the switch.
             value: widget.settings.ownPhase,
@@ -212,6 +207,11 @@ class _StartofBattle extends State<StartofBattle> {
                 widget.settings.ownPhase = value;
               });
             },
+          ),
+          Text(
+            widget.settings.ownPhase
+                ? 'My ' + widget.title
+                : 'Enemy ' + widget.title,
           ),
           /*IconButton(
             icon: const Icon(Icons.shopping_cart),

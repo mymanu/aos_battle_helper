@@ -203,12 +203,6 @@ class _HeroPhase extends State<HeroPhase> {
             child: Text("Weiter zur Movement Phase"),
           ),
           SizedBox(width: 50),
-          Text(
-            widget.settings.ownPhase
-                ? 'My ' + widget.title
-                : 'Enemy ' + widget.title,
-            style: TextStyle(color: calculateTextColor(widget.phaseColor)),
-          ),
           Switch(
             // Dieser bool-Wert ändert den Switch.
             value: widget.settings.ownPhase,
@@ -219,6 +213,12 @@ class _HeroPhase extends State<HeroPhase> {
                 widget.settings.ownPhase = value;
               });
             },
+          ),
+          Text(
+            widget.settings.ownPhase
+                ? 'My ' + widget.title
+                : 'Enemy ' + widget.title,
+            style: TextStyle(color: calculateTextColor(widget.phaseColor)),
           ),
         ],
       ),

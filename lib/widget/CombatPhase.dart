@@ -255,12 +255,6 @@ class _CombatPhase extends State<CombatPhase> {
             child: Text("Weiter zum End of Turn"),
           ),
           SizedBox(width: 50),
-          Text(
-            widget.settings.ownPhase
-                ? 'My ' + widget.title
-                : 'Enemy ' + widget.title,
-            style: TextStyle(color: calculateTextColor(widget.phaseColor)),
-          ),
           Switch(
             // Dieser bool-Wert ändert den Switch.
             value: widget.settings.ownPhase,
@@ -271,6 +265,12 @@ class _CombatPhase extends State<CombatPhase> {
                 widget.settings.ownPhase = value;
               });
             },
+          ),
+          Text(
+            widget.settings.ownPhase
+                ? 'My ' + widget.title
+                : 'Enemy ' + widget.title,
+            style: TextStyle(color: calculateTextColor(widget.phaseColor)),
           ),
         ],
       ),

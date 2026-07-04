@@ -213,12 +213,6 @@ class _MovementPhase extends State<MovementPhase> {
             child: Text("Weiter zur Shooting Phase"),
           ),
           SizedBox(width: 50),
-          Text(
-            widget.settings.ownPhase
-                ? 'My ' + widget.title
-                : 'Enemy ' + widget.title,
-            style: TextStyle(color: calculateTextColor(widget.phaseColor)),
-          ),
           Switch(
             // Dieser bool-Wert ändert den Switch.
             value: widget.settings.ownPhase,
@@ -229,6 +223,12 @@ class _MovementPhase extends State<MovementPhase> {
                 widget.settings.ownPhase = value;
               });
             },
+          ),
+          Text(
+            widget.settings.ownPhase
+                ? 'My ' + widget.title
+                : 'Enemy ' + widget.title,
+            style: TextStyle(color: calculateTextColor(widget.phaseColor)),
           ),
         ],
       ),

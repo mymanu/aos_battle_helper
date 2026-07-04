@@ -190,11 +190,6 @@ class _Preparation extends State<Preparation> {
             child: Text("To Start of Battle Round"),
           ),
           SizedBox(width: 50),
-          Text(
-            widget.settings.ownPhase
-                ? 'My ' + widget.title
-                : 'Enemy ' + widget.title,
-          ),
           Switch(
             // This bool value toggles the switch.
             value: widget.settings.ownPhase,
@@ -205,6 +200,11 @@ class _Preparation extends State<Preparation> {
                 widget.settings.ownPhase = value;
               });
             },
+          ),
+          Text(
+            widget.settings.ownPhase
+                ? 'My ' + widget.title
+                : 'Enemy ' + widget.title,
           ),
           /*IconButton(
             icon: const Icon(Icons.shopping_cart),

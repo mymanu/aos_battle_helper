@@ -206,12 +206,6 @@ class _EndOfTurn extends State<EndOfTurn> {
             child: Text("To Scoring"),
           ),
           SizedBox(width: 50),
-          Text(
-            widget.settings.ownPhase
-                ? 'My ' + widget.title
-                : 'Enemy ' + widget.title,
-            style: TextStyle(color: calculateTextColor(widget.phaseColor)),
-          ),
           Switch(
             // Dieser bool-Wert ändert den Switch.
             value: widget.settings.ownPhase,
@@ -222,6 +216,12 @@ class _EndOfTurn extends State<EndOfTurn> {
                 widget.settings.ownPhase = value;
               });
             },
+          ),
+          Text(
+            widget.settings.ownPhase
+                ? 'My ' + widget.title
+                : 'Enemy ' + widget.title,
+            style: TextStyle(color: calculateTextColor(widget.phaseColor)),
           ),
         ],
       ),
