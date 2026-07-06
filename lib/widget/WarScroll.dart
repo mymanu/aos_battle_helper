@@ -311,7 +311,7 @@ class _WarScroll extends State<WarScroll> {
                       Positioned(
                         bottom: 0,
                         left: 320,
-                        child: Text(widget.unit.keywords),
+                        child: functions.parseText(context, widget.unit.keywords),
                       ),
                     ],
                   ),

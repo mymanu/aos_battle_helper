@@ -374,8 +374,12 @@ class Functions {
   //https://pub.dev/packages/flutter_parsed_text
   Widget parseText(BuildContext context, String text) {
     Ability ward = aosGeneralSpells().getWardSave();
+    Ability musician = aosGeneralSpells().getMusician();
+    Ability champion = aosGeneralSpells().getChampion();
+    Ability standardBearer = aosGeneralSpells().getStandardBearer();
+    Ability fly = aosGeneralSpells().getFly();
 
-    Map<String, Ability> testMap = {"ward roll": ward};
+    Map<String, Ability> testMap = {"ward roll": ward, "WARD": ward, "CHAMPION": champion, "MUSICIAN": musician, "STANDARDBEARER": standardBearer, "FLY": fly};
 
     return ParsedText(
       text: text,
@@ -403,6 +407,140 @@ class Functions {
           },
           onTap: (display) {
             display = display.replaceAll("*", "").replaceAll("^", "");
+            showAbilityPopUp(context, settings, testMap[display]!);
+          },
+        ),
+        MatchText(
+          pattern:
+          r"(WARD)",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.red,
+            //fontSize: 24,
+          ),
+          renderText:
+              ({
+            required String str,
+            required String pattern,
+          }) {
+            RegExp customRegExp =
+            RegExp(pattern);
+            Match match = customRegExp
+                .firstMatch(str)!;
+            return {
+              'display': match[1]!,
+            };
+          },
+          onTap: (display) {
+            display = display.replaceAll("*", "").replaceAll("^", "").replaceAll(" ", "");
+            showAbilityPopUp(context, settings, testMap[display]!);
+          },
+        ),
+
+        MatchText(
+          pattern:
+          r"(MUSICIAN)",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.red,
+            //fontSize: 24,
+          ),
+          renderText:
+              ({
+            required String str,
+            required String pattern,
+          }) {
+            RegExp customRegExp =
+            RegExp(pattern);
+            Match match = customRegExp
+                .firstMatch(str)!;
+            return {
+              'display': match[1]!,
+            };
+          },
+          onTap: (display) {
+            display = display.replaceAll("*", "").replaceAll("^", "").replaceAll(" ", "");
+            showAbilityPopUp(context, settings, testMap[display]!);
+          },
+        ),
+
+        MatchText(
+          pattern:
+          r"(CHAMPION)",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.red,
+            //fontSize: 24,
+          ),
+          renderText:
+              ({
+            required String str,
+            required String pattern,
+          }) {
+            RegExp customRegExp =
+            RegExp(pattern);
+            Match match = customRegExp
+                .firstMatch(str)!;
+            return {
+              'display': match[1]!,
+            };
+          },
+          onTap: (display) {
+            display = display.replaceAll("*", "").replaceAll("^", "").replaceAll(" ", "");
+            showAbilityPopUp(context, settings, testMap[display]!);
+          },
+        ),
+
+        MatchText(
+          pattern:
+          r"(STANDARD BEARER)",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.red,
+            //fontSize: 24,
+          ),
+          renderText:
+              ({
+            required String str,
+            required String pattern,
+          }) {
+            RegExp customRegExp =
+            RegExp(pattern);
+            Match match = customRegExp
+                .firstMatch(str)!;
+            return {
+              'display': match[1]!,
+            };
+          },
+          onTap: (display) {
+            display = display.replaceAll("*", "").replaceAll("^", "").replaceAll(" ", "");
+            showAbilityPopUp(context, settings, testMap[display]!);
+          },
+        ),
+
+        MatchText(
+          pattern:
+          r"(FLY)",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.red,
+            //fontSize: 24,
+          ),
+          renderText:
+              ({
+            required String str,
+            required String pattern,
+          }) {
+            RegExp customRegExp =
+            RegExp(pattern);
+            Match match = customRegExp
+                .firstMatch(str)!;
+            return {
+              'display': match[1]!,
+            };
+          },
+          onTap: (display) {
+            display = display.replaceAll("*", "").replaceAll("^", "").replaceAll(" ", "");
             showAbilityPopUp(context, settings, testMap[display]!);
           },
         ),

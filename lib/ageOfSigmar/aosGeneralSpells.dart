@@ -25,8 +25,8 @@ class aosGeneralSpells {
     ward.typeName = "Ability (Passive)";
     ward.color = "Black";
     ward.effect =
-        "6+\nIn step 1 of the damage sequence (see 18.0), make a ward roll of D6 for each damage point in this unit’s damage pool. "
-        "If the roll equals or exceeds this unit’s ward value, remove that damage point from the damage pool.";
+        "In step 1 of the damage sequence (see 18.0), make a ward roll of D6 for each damage point "
+            "in this unit’s damage pool. If the roll equals or exceeds this unit’s ward value, remove that damage point from the damage pool.";
     return ward;
   }
 
@@ -35,8 +35,18 @@ class aosGeneralSpells {
     musician.typeName = "Ability (Passive)";
     musician.color = "Yellow";
     musician.effect =
-        "While this unit contains any musicians, if it uses the ‘Rally’ command, you can make one additional rally roll of D6.";
+        "While this unit contains any musicians, if it uses the *Rally* command, you can make one additional rally roll of D6.";
     return musician;
+  }
+
+  Ability getFly() {
+    Ability fly = Ability("Fly");
+    fly.typeName = "Ability (Passive)";
+    fly.color = "Gray";
+    fly.effect =
+    "As this unit moves, it ignores other models, terrain features and the combat ranges of enemy units. "
+        "It cannot end its move in combat unless specified in the ability that allowed it to move. Ignore any vertical distance moved for this unit.";
+    return fly;
   }
 
   Settings addCommandSpells(Settings settings) {
