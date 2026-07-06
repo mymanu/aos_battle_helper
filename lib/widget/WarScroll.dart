@@ -348,7 +348,7 @@ class _WarScroll extends State<WarScroll> {
                     DataCell(Text(shootingWeaponList[index].wound)),
                     DataCell(Text(shootingWeaponList[index].rend)),
                     DataCell(Text(shootingWeaponList[index].damage)),
-                    DataCell(functions.parseText(shootingWeaponList[index].ability)),
+                    DataCell(functions.parseText(context, shootingWeaponList[index].ability)),
                   ],
                 );
               }),
@@ -378,7 +378,7 @@ class _WarScroll extends State<WarScroll> {
                     DataCell(Text(meleeWeaponList[index].wound)),
                     DataCell(Text(meleeWeaponList[index].rend)),
                     DataCell(Text(meleeWeaponList[index].damage)),
-                    DataCell(functions.parseText(meleeWeaponList[index].ability)),
+                    DataCell(functions.parseText(context, meleeWeaponList[index].ability)),
                   ],
                 );
               }),
@@ -485,17 +485,17 @@ class _WarScroll extends State<WarScroll> {
                                     unitAbilities[index].typeName.contains(
                                       "Passive",
                                     )
-                                        ? functions.parseText(unitAbilities[index].typeName)
-                                        : functions.parseText(unitAbilities[index].timing),
-                                    functions.parseText(unitAbilities[index].originUnit),
+                                        ? functions.parseText(context, unitAbilities[index].typeName)
+                                        : functions.parseText(context, unitAbilities[index].timing),
+                                    functions.parseText(context, unitAbilities[index].originUnit),
                                     Text(""),
                                     (unitAbilities[index].effect.contains(
                                         "null") || unitAbilities[index].effect.contains("-1"))
-                                        ? functions.parseText(unitAbilities[index].declare)
+                                        ? functions.parseText(context, unitAbilities[index].declare)
                                         : (unitAbilities[index].declare.contains(
                                         "null") || unitAbilities[index].declare.contains("-1"))
-                                        ? functions.parseText("Effekt: ${unitAbilities[index].effect}")
-                                        : functions.parseText(unitAbilities[index].declare + "\n\n" +
+                                        ? functions.parseText(context, "Effekt: ${unitAbilities[index].effect}")
+                                        : functions.parseText(context, unitAbilities[index].declare + "\n\n" +
                                           unitAbilities[index].effect),
 
                                     Text(""),
@@ -506,7 +506,7 @@ class _WarScroll extends State<WarScroll> {
                                         unitAbilities[index].keywords
                                             .contains("-1"))
                                         ? Text("")
-                                        : functions.parseText("Keywords: ${unitAbilities[index].keywords}"),
+                                        : functions.parseText(context, "Keywords: ${unitAbilities[index].keywords}"),
 
                                       Row(
                                         mainAxisAlignment:

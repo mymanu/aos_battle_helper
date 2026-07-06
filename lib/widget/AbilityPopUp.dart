@@ -142,13 +142,13 @@ class _AbilityPopUp extends State<AbilityPopUp> {
                           Text(""),
                           (widget.ability.effect.contains("null") ||
                                   widget.ability.effect.contains("-1"))
-                              ? functions.parseText(widget.ability.declare)
+                              ? functions.parseText(context, widget.ability.declare)
                               : (widget.ability.declare.contains("null") ||
                                     widget.ability.declare.contains("-1"))
-                              ? functions.parseText(
+                              ? functions.parseText(context,
                                   "Effekt: ${widget.ability.effect}",
                                 )
-                              : functions.parseText(
+                              : functions.parseText(context,
                                   widget.ability.declare +
                                       "\n\n" +
                                       widget.ability.effect,
@@ -159,7 +159,7 @@ class _AbilityPopUp extends State<AbilityPopUp> {
                           (widget.ability.keywords.contains("null") ||
                                   widget.ability.keywords.contains("-1"))
                               ? Text("")
-                              : functions.parseText(
+                              : functions.parseText(context,
                                   "Keywords: ${widget.ability.keywords}",
                                 ),
 

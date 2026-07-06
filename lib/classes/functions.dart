@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:aos_battle_helper/classes/settings.dart';
 import 'package:aos_battle_helper/classes/unit.dart';
 import 'package:flutter_parsed_text/flutter_parsed_text.dart';
+import '../ageOfSigmar/aosGeneralSpells.dart';
 import '../widget/AbilityPopUp.dart';
 import '../widget/HomePage.dart';
 import '../widget/WarScroll.dart';
@@ -220,7 +221,7 @@ class Functions {
     return abilitys;
   }
 
-  List<Ability> normalAbilitys(List<Ability> normalAbilitys, String phaseColorString, bool ownPhase) {
+  List<Ability> coreAbilitys(List<Ability> normalAbilitys, String phaseColorString, bool ownPhase) {
     List<Ability> abilitys = [];
     for (Ability ability in normalAbilitys) {
       if (ability.color.contains(phaseColorString)) {
@@ -371,7 +372,11 @@ class Functions {
   }
 
   //https://pub.dev/packages/flutter_parsed_text
-  Widget parseText(String text) {
+  Widget parseText(BuildContext context, String text) {
+    Ability ward = aosGeneralSpells().getWardSave();
+
+    Map<String, Ability> testMap = {"ward roll": ward};
+
     return ParsedText(
       text: text,
       parse: <MatchText>[
@@ -395,6 +400,10 @@ class Functions {
             return {
               'display': match[2]!,
             };
+          },
+          onTap: (display) {
+            display = display.replaceAll("*", "").replaceAll("^", "");
+            showAbilityPopUp(context, settings, testMap[display]!);
           },
         ),
       ],

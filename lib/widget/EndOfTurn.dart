@@ -77,7 +77,7 @@ class _EndOfTurn extends State<EndOfTurn> {
     );
 
     spellsThisPhase.addAll(
-      functions.normalAbilitys(
+      functions.coreAbilitys(
         widget.settings.normalAbilitys,
         widget.phaseColorString,
         widget.settings.ownPhase,
@@ -318,26 +318,26 @@ class _EndOfTurn extends State<EndOfTurn> {
                                   spellsThisPhase[index].typeName.contains(
                                     "Passive",
                                   )
-                                      ? functions.parseText(spellsThisPhase[index].typeName)
-                                      : functions.parseText(spellsThisPhase[index].timing),
-                                  functions.parseText(spellsThisPhase[index].originUnit),
+                                      ? functions.parseText(context, spellsThisPhase[index].typeName)
+                                      : functions.parseText(context, spellsThisPhase[index].timing),
+                                  functions.parseText(context, spellsThisPhase[index].originUnit),
                                   Text(""),
                                   (spellsThisPhase[index].effect.contains(
                                     "null",
                                   ) ||
                                       spellsThisPhase[index].effect
                                           .contains("-1"))
-                                      ? functions.parseText(
+                                      ? functions.parseText(context,
                                     spellsThisPhase[index].declare,
                                   )
                                       : (spellsThisPhase[index].declare
                                       .contains("null") ||
                                       spellsThisPhase[index].declare
                                           .contains("-1"))
-                                      ? functions.parseText(
+                                      ? functions.parseText(context,
                                     spellsThisPhase[index].effect,
                                   )
-                                      : functions.parseText(
+                                      : functions.parseText(context,
                                     spellsThisPhase[index].declare +
                                         "\n\n" +
                                         spellsThisPhase[index].effect,
@@ -350,7 +350,7 @@ class _EndOfTurn extends State<EndOfTurn> {
                                       spellsThisPhase[index].keywords
                                           .contains("-1"))
                                       ? Text("")
-                                      : functions.parseText(
+                                      : functions.parseText(context,
                                     "Keywords: ${spellsThisPhase[index].keywords}",
                                   ),
                                   /*
