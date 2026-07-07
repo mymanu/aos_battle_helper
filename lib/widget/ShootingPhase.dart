@@ -24,6 +24,10 @@ class ShootingPhase extends StatefulWidget {
 
   String phaseColorString = "Blue";
 
+  bool showSpellLoreAbilities = false;
+  bool showCoreAbilities = false;
+  bool showCommandAbilities = false;
+
   @override
   _ShootingPhase createState() => _ShootingPhase();
 }
@@ -54,21 +58,6 @@ class _ShootingPhase extends State<ShootingPhase> {
     );
 
     spellsThisPhase.addAll(
-      functions.spellLoreAbilitys(
-        widget.settings.army.spellLore,
-        widget.phaseColorString,
-        widget.settings.ownPhase,
-      ),
-    );
-    spellsThisPhase.addAll(
-      functions.spellLoreAbilitys(
-        widget.settings.army.spellLore,
-        "Green",
-        widget.settings.ownPhase,
-      ),
-    );
-
-    spellsThisPhase.addAll(
       functions.battleTraitAbilitys(
         widget.settings.army.battleTraitsList,
         widget.phaseColorString,
@@ -98,31 +87,44 @@ class _ShootingPhase extends State<ShootingPhase> {
       ),
     );
 
-    spellsThisPhase.addAll(
-      functions.commandAbilitys(
-        widget.settings.commandAbilitys,
-        widget.phaseColorString,
-        widget.settings.ownPhase,
-      ),
+
+    List<Ability> spellLoreAbilities =
+    functions.spellLoreAbilitys(
+      widget.settings.army.spellLore,
+      widget.phaseColorString,
+      widget.settings.ownPhase,
     );
-    spellsThisPhase.addAll(
-      functions.commandAbilitys(
-        widget.settings.commandAbilitys,
+    spellLoreAbilities.addAll(
+      functions.spellLoreAbilitys(
+        widget.settings.army.spellLore,
         "Green",
         widget.settings.ownPhase,
       ),
     );
 
-    spellsThisPhase.addAll(
+    List<Ability> coreAbilities =
+    functions.coreAbilitys(
+      widget.settings.normalAbilitys,
+      widget.phaseColorString,
+      widget.settings.ownPhase,
+    );
+    coreAbilities.addAll(
       functions.coreAbilitys(
         widget.settings.normalAbilitys,
-        widget.phaseColorString,
+        "Green",
         widget.settings.ownPhase,
       ),
     );
-    spellsThisPhase.addAll(
-      functions.coreAbilitys(
-        widget.settings.normalAbilitys,
+
+    List<Ability> commandAbilities =
+    functions.commandAbilitys(
+      widget.settings.commandAbilitys,
+      widget.phaseColorString,
+      widget.settings.ownPhase,
+    );
+    commandAbilities.addAll(
+      functions.commandAbilitys(
+        widget.settings.commandAbilitys,
         "Green",
         widget.settings.ownPhase,
       ),
@@ -130,6 +132,15 @@ class _ShootingPhase extends State<ShootingPhase> {
 
     for(Ability abi in spellsThisPhase) {
       if(!abi.commandPoints.contains("-")) {
+        int commandCostInt = int.parse(abi.commandPoints);
+        if (commandCostInt > widget.settings.commandPoints) {
+          abi.erledigt = true;
+        }
+      }
+    }
+
+    for (Ability abi in commandAbilities) {
+      if (!abi.commandPoints.contains("-")) {
         int commandCostInt = int.parse(abi.commandPoints);
         if (commandCostInt > widget.settings.commandPoints) {
           abi.erledigt = true;
@@ -284,7 +295,27 @@ class _ShootingPhase extends State<ShootingPhase> {
       body: CustomScrollView(
         primary: false,
         slivers: <Widget>[
+          //1. Grid mit den ursprünglichen Kacheln
           SliverPadding(
+            //padding: const EdgeInsets.all(40),
+              padding: const EdgeInsets.only(right: 50),
+              sliver:
+              calculateSliverGrid(spellsThisPhase, "default")
+          ),
+
+          //TODO Ab hier Core Abilities
+
+          widget.showCoreAbilities ?
+          //1. Grid mit den ursprünglichen Kacheln
+          SliverPadding(
+            //padding: const EdgeInsets.all(40),
+              padding: const EdgeInsets.only(right: 50),
+              sliver:
+              calculateSliverGrid(coreAbilities,"Core")
+          )
+              :
+          SliverPadding(
+            //padding: const EdgeInsets.all(40),
             padding: const EdgeInsets.only(right: 50),
             sliver: SliverGrid(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -297,160 +328,92 @@ class _ShootingPhase extends State<ShootingPhase> {
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 crossAxisCount: 3,
-                childAspectRatio: 2,
+                childAspectRatio: 1.8,
               ),
               delegate: SliverChildBuilderDelegate((
-                BuildContext context,
-                int index,
-              ) {
+                  BuildContext context,
+                  int index,
+                  ) {
                 return SingleChildScrollView(
                   child: Card(
-                    child: spellsThisPhase[index].erledigt
-                        ? ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                spellsThisPhase[index].erledigt = false;
-                              });
-                            },
-                            child: Column(
-                              children: [
-                                Text(
-                                  spellsThisPhase[index].name,
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                Icon(Icons.done, size: 100),
-                                /*
-                              Container(
-                                height: 100,
-                                width: 100,
-                                child: LayoutBuilder(
-                                  builder: (context, constraint) {
-                                    return new Icon(
-                                      Icons.done,
-                                      size: constraint.biggest.height,
-                                    );
-                                  },
-                                ),
-                              ),
-                              */
-                              ],
-                            ),
-                          )
-                        : Stack(
-                      children: [
-                        Positioned(
-                          top: 0,
-                          right: 0,
-                          child:
-                          spellsThisPhase[index].commandPoints
-                              .contains("-")
-                              ? Text("")
-                              : Text(
-                            "Command Point cost: " +
-                                spellsThisPhase[index]
-                                    .commandPoints,
+                    child:
+                    //Ab hier Card wenn die Ability erledigt ist
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          widget.showCoreAbilities = true;
+                        });
+                      },
+                      child: Column(
+                        children: [
+                          Text(
+                            "Show Core Abilities",
+                            style: TextStyle(fontSize: 20),
                           ),
-                        ),
-
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  spellsThisPhase[index].name,
-                                  //cardContentList[index].ability.name,
-                                  style: TextStyle(
-                                    backgroundColor: widget.phaseColor,
-                                    fontWeight: FontWeight.bold,
-                                    color: calculateTextColor(
-                                      widget.phaseColor,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            spellsThisPhase[index].typeName.contains(
-                              "Passive",
-                            )
-                                ? functions.parseText(context, spellsThisPhase[index].typeName)
-                                : functions.parseText(context, spellsThisPhase[index].timing),
-                            functions.parseText(context, spellsThisPhase[index].originUnit),
-                            Text(""),
-                            (spellsThisPhase[index].effect.contains(
-                              "null",
-                            ) ||
-                                spellsThisPhase[index].effect
-                                    .contains("-1"))
-                                ? functions.parseText(context,
-                              spellsThisPhase[index].declare,
-                            )
-                                : (spellsThisPhase[index].declare
-                                .contains("null") ||
-                                spellsThisPhase[index].declare
-                                    .contains("-1"))
-                                ? functions.parseText(context,
-                              spellsThisPhase[index].effect,
-                            )
-                                : functions.parseText(context,
-                              spellsThisPhase[index].declare +
-                                  "\n\n" +
-                                  spellsThisPhase[index].effect,
-                            ),
-                            Text(""),
-
-                            (spellsThisPhase[index].keywords.contains(
-                              "null",
-                            ) ||
-                                spellsThisPhase[index].keywords
-                                    .contains("-1"))
-                                ? Text("")
-                                : functions.parseText(context,
-                              "Keywords: ${spellsThisPhase[index].keywords}",
-                            ),
-
-                              /*
-                            ListTile(
-                              leading: Icon(Icons.album),
-                              title: Text(spells[index].title),
-                              subtitle: Text(spells[index].details),
-                            ),
-                            */
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: <Widget>[
-                                  TextButton(
-                                    child: Text("Fähigkeit erledigt"),
-                                    onPressed: () {
-                                      setState(() {
-                                        if(!spellsThisPhase[index].commandPoints.contains("-")) {
-                                          int commandCostInt = int.parse(spellsThisPhase[index].commandPoints);
-                                          widget.settings.commandPoints = widget.settings.commandPoints - commandCostInt;
-                                        }
-                                        spellsThisPhase[index].erledigt =
-                                        true;
-                                      });
-                                    },
-                                  ),
-                                  const SizedBox(width: 8),
-                                  TextButton(
-                                    //child: Text("Item $index"),
-                                    child: Text("Show Ability PopUp"),
-                                    onPressed: () {
-                                      functions.showAbilityPopUp(context, widget.settings, spellsThisPhase[index]);
-                                    },
-                                  ),
-                                  const SizedBox(width: 8),
-                                ],
-                              ),
-                            ],
-                          ),
-                    ],
-                  ),
+                          Icon(Icons.arrow_downward, size: 100),
+                        ],
+                      ),
+                    ),
                   ),
                 );
-              }, childCount: spellsThisPhase.length),
+              }, childCount: 1),
+            ),
+          ),
+
+          //TODO Ab hier Command Abilities
+
+          widget.showCommandAbilities ?
+          //1. Grid mit den ursprünglichen Kacheln
+          SliverPadding(
+            //padding: const EdgeInsets.all(40),
+            padding: const EdgeInsets.only(right: 50),
+            sliver:
+            calculateSliverGrid(commandAbilities,"Command"),
+          )
+              :
+          SliverPadding(
+            //padding: const EdgeInsets.all(40),
+            padding: const EdgeInsets.only(right: 50),
+            sliver: SliverGrid(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                /*
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 2,
+                childAspectRatio: 1.1,
+                */
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 3,
+                childAspectRatio: 1.8,
+              ),
+              delegate: SliverChildBuilderDelegate((
+                  BuildContext context,
+                  int index,
+                  ) {
+                return SingleChildScrollView(
+                  child: Card(
+                    child:
+                    //Ab hier Card wenn die Ability erledigt ist
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          widget.showCommandAbilities = true;
+                        });
+                      },
+                      child: Column(
+                        children: [
+                          Text(
+                            "Show Command Abilities",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          Icon(Icons.arrow_downward, size: 100),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              }, childCount: 1),
             ),
           ),
           //Ab hier Kacheln für Units in der unitsThisPhase List bauen
@@ -756,6 +719,203 @@ class _ShootingPhase extends State<ShootingPhase> {
         builder: (context) =>
             allUnits(title: "All Warscrolls", settings: settings),
       ),
+    );
+  }
+
+  SliverGrid calculateSliverGrid(List<Ability> spellsThisPhase, String abilityBool){
+    Functions functions = Functions();
+    return SliverGrid(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        /*
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 2,
+                childAspectRatio: 1.1,
+                */
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        crossAxisCount: 3,
+        childAspectRatio: 1.8,
+      ),
+      delegate: SliverChildBuilderDelegate((
+          BuildContext context,
+          int index,
+          ) {
+        return SingleChildScrollView(
+          child: Card(
+            child: spellsThisPhase[index].erledigt
+                ?
+            //Ab hier Card wenn die Ability erledigt ist
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  spellsThisPhase[index].erledigt = false;
+                });
+              },
+              child: Column(
+                children: [
+                  Text(
+                    spellsThisPhase[index].name,
+                    //cardContentList[index].ability.name.contains("-1") ? cardContentList[index].unit.name : cardContentList[index].ability.name,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  Icon(Icons.done, size: 100),
+                ],
+              ),
+            )
+                :
+            //Ab hier Card wenn es eine Ability ist
+            Stack(
+              children: [
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child:
+                  spellsThisPhase[index].castingValue
+                      .contains("-")
+                      ? Text("")
+                      : Text(
+                    "Casting Value: " +
+                        spellsThisPhase[index].castingValue,
+                  ),
+                ),
+
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child:
+                  spellsThisPhase[index].commandPoints
+                      .contains("-")
+                      ? Text("")
+                      : Text(
+                    "Command Point cost: " +
+                        spellsThisPhase[index]
+                            .commandPoints,
+                  ),
+                ),
+
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          spellsThisPhase[index].name,
+                          //cardContentList[index].ability.name,
+                          style: TextStyle(
+                            backgroundColor: widget.phaseColor,
+                            fontWeight: FontWeight.bold,
+                            color: calculateTextColor(
+                              widget.phaseColor,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    spellsThisPhase[index].typeName.contains(
+                      "Passive",
+                    )
+                        ? functions.parseText(context, spellsThisPhase[index].typeName)
+                        : functions.parseText(context, spellsThisPhase[index].timing),
+                    functions.parseText(context, spellsThisPhase[index].originUnit),
+                    Text(""),
+                    (spellsThisPhase[index].effect.contains(
+                      "null",
+                    ) ||
+                        spellsThisPhase[index].effect
+                            .contains("-1"))
+                        ? functions.parseText(context,
+                      spellsThisPhase[index].declare,
+                    )
+                        : (spellsThisPhase[index].declare
+                        .contains("null") ||
+                        spellsThisPhase[index].declare
+                            .contains("-1"))
+                        ? functions.parseText(context,
+                      spellsThisPhase[index].effect,
+                    )
+                        : functions.parseText(context,
+                      spellsThisPhase[index].declare +
+                          "\n\n" +
+                          spellsThisPhase[index].effect,
+                    ),
+                    Text(""),
+
+                    (spellsThisPhase[index].keywords.contains(
+                      "null",
+                    ) ||
+                        spellsThisPhase[index].keywords
+                            .contains("-1"))
+                        ? Text("")
+                        : functions.parseText(context,
+                      "Keywords: ${spellsThisPhase[index].keywords}",
+                    ),
+
+                    /*
+                            Text(cardContentList[index].ability.timing),
+                            Text(cardContentList[index].ability.originUnit),
+                            Text(cardContentList[index].ability.details),
+                             */
+                    /*
+                            ListTile(
+                              leading: Icon(Icons.album),
+                              title: Text(spells[index].title),
+                              subtitle: Text(spells[index].details),
+                            ),
+                            */
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        TextButton(
+                          child: Text("Close Abilites"),
+                          onPressed: () {
+                            setState(() {
+                              switch (abilityBool) {
+                                case "SpellLore":
+                                  widget.showSpellLoreAbilities = false;
+                                  break;
+                                case "Core":
+                                  widget.showCoreAbilities = false;
+                                  break;
+                                case "Command":
+                                  widget.showCommandAbilities = false;
+                                  break;
+                                default:
+                                  widget.showSpellLoreAbilities = false;
+                                  widget.showCoreAbilities = false;
+                                  widget.showCommandAbilities = false;
+                              }
+                            });
+                          },
+                        ),
+                        const SizedBox(width: 8),
+                        TextButton(
+                          child: Text("Ability done"),
+                          onPressed: () {
+                            setState(() {
+                              spellsThisPhase[index].erledigt = true;
+                            });
+                          },
+                        ),
+                        const SizedBox(width: 8),
+                        TextButton(
+                          //child: Text("Item $index"),
+                          child: Text("Show Ability PopUp"),
+                          onPressed: () {
+                            functions.showAbilityPopUp(context, widget.settings, spellsThisPhase[index]);
+                          },
+                        ),
+                        const SizedBox(width: 8),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      }, childCount: spellsThisPhase.length),
     );
   }
 }
