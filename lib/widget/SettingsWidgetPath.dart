@@ -200,12 +200,34 @@ class _SettingsWidgetPath extends State<SettingsWidgetPath> {
                         maximumSize: Size(510, 510),
                       ),
                       child: Text(
-                        'Add Path BattlePlan 1',
+                        'Add Path BattlePlan Round 1',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 20),
                       ),
                       onPressed: () {
                         addBattlePlanSpells();
+                        ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Battle-Plan Abilities successfully added"));
+                      },
+                    ),
+
+                    SizedBox(height: 20),
+
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.orange,
+                        backgroundColor: Colors.blueGrey.shade800,
+                        shadowColor: Colors.black,
+                        padding: const EdgeInsets.all(10.0),
+                        minimumSize: Size(250, 100),
+                        maximumSize: Size(510, 510),
+                      ),
+                      child: Text(
+                        'Add Path BattlePlan Round 2',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        addBattlePlanSpellsPTGRound2();
                         ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Battle-Plan Abilities successfully added"));
                       },
                     ),
@@ -920,6 +942,10 @@ class _SettingsWidgetPath extends State<SettingsWidgetPath> {
 
   void addBattlePlanSpells() {
     widget.settings = BattlePlan().rissInAethelgard(widget.settings);
+  }
+
+  void addBattlePlanSpellsPTGRound2() {
+    widget.settings = BattlePlan().diePfadeSichern(widget.settings);
   }
 
   void _navigateToMenu(BuildContext context, Settings settings) {

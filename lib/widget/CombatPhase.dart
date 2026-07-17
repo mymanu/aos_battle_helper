@@ -812,11 +812,9 @@ class _CombatPhase extends State<CombatPhase> {
                         : functions.parseText(context, spellsThisPhase[index].timing),
                     functions.parseText(context, spellsThisPhase[index].originUnit),
                     Text(""),
-                    (spellsThisPhase[index].effect.contains(
+                    spellsThisPhase[index].effect.contains(
                       "null",
-                    ) ||
-                        spellsThisPhase[index].effect
-                            .contains("-1"))
+                    )
                         ? functions.parseText(context,
                       spellsThisPhase[index].declare,
                     )

@@ -135,7 +135,7 @@ class aosGeneralSpells {
     allOutAttack.color = "Green";
     allOutAttack.declare = "Used By: The unit using that Attack ability.";
     allOutAttack.effect =
-        "Add 1 to hit rolls for attacks made as part of that Attack ability. "
+        "Effect: Add 1 to hit rolls for attacks made as part of that Attack ability. "
         "This also affects weapons that have the Companion weapon ability."
             "\n For the rest of the turn this suffers -1 to save rolls.";
     allOutAttack.commandPoints = "1";

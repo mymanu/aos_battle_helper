@@ -476,7 +476,17 @@ class _Scoring extends State<ScoringPath> {
             ),
             SizedBox(height: 20),
 
-            Text("Regeln für Siegpunkte"),
+            Text("Regeln für Siegpunkte Runde 2:"),
+            Text(
+              "\n•  Heimatziel kontrollieren: 1 SP"
+                  "\n• 1 neutrales Ziel  kontrollieren: 2 SP"
+                  "\n• 2 neutrales Ziel  kontrollieren: 3 SP"
+                  "\n• Taktik erfüllen: 4 SP",
+            ),
+
+            SizedBox(height: 50),
+
+            Text("Regeln für Siegpunkte Runde 1:"),
             Text(
               "\n• 1 Missionsziel kontrollieren: 2 SP"
               "\n• 2 Missionsziele kontrollieren: 3 SP"

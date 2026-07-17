@@ -820,11 +820,8 @@ class _ShootingPhase extends State<ShootingPhase> {
                         : functions.parseText(context, spellsThisPhase[index].timing),
                     functions.parseText(context, spellsThisPhase[index].originUnit),
                     Text(""),
-                    (spellsThisPhase[index].effect.contains(
-                      "null",
-                    ) ||
-                        spellsThisPhase[index].effect
-                            .contains("-1"))
+                    spellsThisPhase[index].effect.contains(
+                      "null",)
                         ? functions.parseText(context,
                       spellsThisPhase[index].declare,
                     )
