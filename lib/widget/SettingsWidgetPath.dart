@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../ageOfSigmar/aosGeneralSpells.dart';
 import '../ageOfSigmar/ironjawzHardcoded.dart';
+import '../ageOfSigmar/pathToGlory.dart';
 import '../ageOfSigmar/seraphonHardcoded.dart';
 import '../classes/BattlePlan.dart';
 import '../classes/functions.dart';
@@ -802,6 +803,58 @@ class _SettingsWidgetPath extends State<SettingsWidgetPath> {
 
                 Column(
                   children: [
+                    Text("Loot from 1st Round:"),
+
+                    SizedBox(height: 10),
+
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.orange,
+                        backgroundColor: Colors.blueGrey.shade800,
+                        shadowColor: Colors.black,
+                        padding: const EdgeInsets.all(10.0),
+                        minimumSize: Size(250, 100),
+                        maximumSize: Size(510, 510),
+                      ),
+                      child: Text(
+                        'Ork Loot Round 1',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        addOrrukLootPTGRound1();
+                        ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("WAAAAGH! Ironjawz Loot successfully added"));
+                      },
+                    ),
+
+                    SizedBox(height: 20),
+
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.orange,
+                        backgroundColor: Colors.blueGrey.shade800,
+                        shadowColor: Colors.black,
+                        padding: const EdgeInsets.all(10.0),
+                        minimumSize: Size(250, 100),
+                        maximumSize: Size(510, 510),
+                      ),
+                      child: Text(
+                        'Seraphon Loot Round 1',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        addSeraphonLootPTGRound1();
+                        ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("ROOAARR! Seraphon Loot successfully added"));
+                      },
+                    ),
+                  ],
+                ),
+
+                Spacer(),
+
+                Column(
+                  children: [
                     Text("Hard Coded Armies:"),
 
                     SizedBox(height: 10),
@@ -946,6 +999,14 @@ class _SettingsWidgetPath extends State<SettingsWidgetPath> {
 
   void addBattlePlanSpellsPTGRound2() {
     widget.settings = BattlePlan().diePfadeSichern(widget.settings);
+  }
+
+  void addOrrukLootPTGRound1() {
+    widget.settings = PathToGlory().addOrrukLoot(widget.settings);
+  }
+
+  void addSeraphonLootPTGRound1() {
+    widget.settings = PathToGlory().addSeraphonLoot(widget.settings);
   }
 
   void _navigateToMenu(BuildContext context, Settings settings) {

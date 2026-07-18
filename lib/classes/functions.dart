@@ -758,6 +758,13 @@ class Functions {
             }
           }
 
+          if (selectionMapTwoJSON.containsKey("selections")) {
+            for (Map<String, dynamic> entry
+            in selectionMapTwoJSON["selections"]) {
+              selectTwo.selectionsDynamic.add(entry);
+            }
+          }
+
           if (selectionMapTwoJSON.containsKey("type")) {
             selectTwo.type = selectionMapTwoJSON["type"];
           }
@@ -895,6 +902,11 @@ class Functions {
             profile.attributes = profileMapJSON["attributes"];
           }
 
+          bool weaponNew = true;
+          if (profile.typeName.contains("Weapon")) {
+            unit = readWeaponJSON(unit, profile, weaponNew);
+          }
+
           bool abilityAlreadyAdded = false;
           if (profile.typeName.contains("Ability")) {
             //unit = readAbilityOfJSON(unit, profile);
@@ -1019,31 +1031,6 @@ class Functions {
             selectFourList.add(selectFour);
           }
 
-          for (Selections selectFour in selectFourList) {
-            bool weaponNew = true;
-            for (Map<String, dynamic> profileMapJSON
-            in selectFour.profilesDynamic) {
-              Profiles profile = Profiles(
-                profileMapJSON["id"],
-                profileMapJSON["name"],
-              );
-
-              if (profileMapJSON.containsKey("characteristics")) {
-                profile.characteristics = profileMapJSON["characteristics"];
-              }
-              if (profileMapJSON.containsKey("typeName")) {
-                profile.typeName = profileMapJSON["typeName"];
-              }
-              if (profileMapJSON.containsKey("attributes")) {
-                profile.attributes = profileMapJSON["attributes"];
-              }
-
-              if (profile.typeName.contains("Weapon")) {
-                unit = readWeaponJSON(unit, profile, weaponNew);
-              }
-            }
-          }
-
           bool weaponNew = true;
           for (Map<String, dynamic> profileMapJSON
           in selectThree.profilesDynamic) {
@@ -1069,6 +1056,31 @@ class Functions {
             if (profile.typeName.contains("Ability")) {
               //unit = readAbilityOfJSON(unit, profile);
               unit = readUnitAbilityOfJSON(unit, profile, abilityAlreadyAdded);
+            }
+          }
+
+          for (Selections selectFour in selectFourList) {
+            bool weaponNew = true;
+            for (Map<String, dynamic> profileMapJSON
+            in selectFour.profilesDynamic) {
+              Profiles profile = Profiles(
+                profileMapJSON["id"],
+                profileMapJSON["name"],
+              );
+
+              if (profileMapJSON.containsKey("characteristics")) {
+                profile.characteristics = profileMapJSON["characteristics"];
+              }
+              if (profileMapJSON.containsKey("typeName")) {
+                profile.typeName = profileMapJSON["typeName"];
+              }
+              if (profileMapJSON.containsKey("attributes")) {
+                profile.attributes = profileMapJSON["attributes"];
+              }
+
+              if (profile.typeName.contains("Weapon")) {
+                unit = readWeaponJSON(unit, profile, weaponNew);
+              }
             }
           }
         }
