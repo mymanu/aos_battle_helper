@@ -11,6 +11,7 @@ import 'package:aos_battle_helper/classes/settings.dart';
 import 'package:aos_battle_helper/classes/unit.dart';
 import 'package:flutter_parsed_text/flutter_parsed_text.dart';
 import '../ageOfSigmar/aosGeneralSpells.dart';
+import '../spearhead/spearheadGeneralSpells.dart';
 import '../widget/AbilityPopUp.dart';
 import '../widget/HomePage.dart';
 import '../widget/WarScroll.dart';
@@ -1380,6 +1381,16 @@ class Functions {
     return ThemeData.estimateBrightnessForColor(background) == Brightness.light
         ? Colors.black
         : Colors.white;
+  }
+
+  Settings addGuardedHero(Settings settings) {
+    for (Unit unit in settings.army.unitList) {
+      if (unit.keywords.contains("HERO")) {
+        unit.abilitys.add(SpearheadGeneralSpells().getGuardedHero());
+      }
+    }
+
+    return settings;
   }
 
 }

@@ -187,6 +187,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                         addCommandSpells();
                         addNormalSpells();
                         addAoSPreparationSpells();
+                        addGuardedHero();
                         ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Preparation, Core and Command Spells successfully added"));
                       },
                     ),
@@ -998,6 +999,10 @@ class _SettingsWidget extends State<SettingsWidget> {
 
   void addAoSPreparationSpells() {
     widget.settings = aosGeneralSpells().aosPreparationSpells(widget.settings);
+  }
+
+  void addGuardedHero() {
+    widget.settings = Functions().addGuardedHero(widget.settings);
   }
 
   void addSpearheadSpells() {
