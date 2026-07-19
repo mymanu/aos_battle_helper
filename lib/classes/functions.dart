@@ -384,6 +384,7 @@ class Functions {
 
     return ParsedText(
       text: text,
+      style: TextStyle(color: calculateTextColor(Colors.black)),
       parse: <MatchText>[
         MatchText(
           pattern:

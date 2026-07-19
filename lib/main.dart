@@ -13,9 +13,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Settings settings = Settings();
+
+    final ColorScheme colorScheme = ColorScheme.fromSeed(
+        brightness: MediaQuery.platformBrightnessOf(context),
+        seedColor: Colors.teal
+    );
+
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData.dark(
+      theme: ThemeData(
+        colorScheme: colorScheme,
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: colorScheme.tertiary,
+          foregroundColor: colorScheme.onTertiary,
+        ),
+      ),
+      /*ThemeData.dark(
       // ThemeData(
         // This is the theme of your application.
         //
@@ -33,7 +46,7 @@ class MyApp extends StatelessWidget {
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
         //colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
+      ),*/
       home: HomePage(title: 'Age of Sigmar Battle Helper', settings: settings),
     );
   }

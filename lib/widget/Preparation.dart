@@ -253,7 +253,7 @@ class _Preparation extends State<Preparation> {
                           Text(
                             spellsThisPhase[index].name,
                             //cardContentList[index].ability.name.contains("-1") ? cardContentList[index].unit.name : cardContentList[index].ability.name,
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: 20, color: calculateTextColor(Colors.grey)),
                           ),
                           Icon(Icons.done, size: 100),
                           /*
@@ -287,6 +287,7 @@ class _Preparation extends State<Preparation> {
                               : Text(
                             "Casting Value: " +
                                 spellsThisPhase[index].castingValue,
+                            style: TextStyle(color: calculateTextColor(Colors.grey)),
                           ),
                         ),
 
@@ -301,6 +302,7 @@ class _Preparation extends State<Preparation> {
                             "Command Point cost: " +
                                 spellsThisPhase[index]
                                     .commandPoints,
+                            style: TextStyle(color: calculateTextColor(Colors.grey)),
                           ),
                         ),
                         Column(
