@@ -478,9 +478,7 @@ class _Scoring extends State<ScoringPath> {
 
             Text("Regeln für Siegpunkte Runde 2:"),
             Text(
-              "\n•  Heimatziel kontrollieren: 1 SP"
-                  "\n• 1 neutrales Ziel  kontrollieren: 2 SP"
-                  "\n• 2 neutrales Ziel  kontrollieren: 3 SP"
+              "\n• Jedes kontrollierte Missionsziel: je 1 SP"
                   "\n• Taktik erfüllen: 4 SP",
             ),
 
