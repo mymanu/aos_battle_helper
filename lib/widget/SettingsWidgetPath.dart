@@ -976,7 +976,7 @@ class _SettingsWidgetPath extends State<SettingsWidgetPath> {
   }
 
   void addGuardedHero() {
-    widget.settings = Functions().addGuardedHero(widget.settings);
+    widget.settings = Functions().addGuardedHeroAndSacredRites(widget.settings);
   }
 
   void pickIronjawzHardcoded() {

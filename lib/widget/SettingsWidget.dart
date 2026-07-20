@@ -1002,7 +1002,7 @@ class _SettingsWidget extends State<SettingsWidget> {
   }
 
   void addGuardedHero() {
-    widget.settings = Functions().addGuardedHero(widget.settings);
+    widget.settings = Functions().addGuardedHeroAndSacredRites(widget.settings);
   }
 
   void addSpearheadSpells() {

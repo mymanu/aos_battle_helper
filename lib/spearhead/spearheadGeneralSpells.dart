@@ -13,6 +13,19 @@ class SpearheadGeneralSpells {
     return guardedHero;
   }
 
+  Ability getSacredRites() {
+    Ability sacredRites = Ability("Sacred Rites");
+    sacredRites.typeName = "Ability (Activated)";
+    sacredRites.timing = "Your Hero Phase";
+    sacredRites.color = "Yellow";
+    sacredRites.keywords = "**Prayer**, **Unlimited**";
+    sacredRites.declare = "Pick a friendly **PRIEST** to use this ability, then make a **chanting roll** of D6. "
+        "On an unmodified chanting roll of 1, remove 1 ritual point from that **PRIEST** instead of D3.";
+    sacredRites.effect =
+    "Give a number of ritual points to the **PRIEST** equal to the unmodified chanting roll and do not reset the **PRIEST**`s ritual points to 0.";
+    return sacredRites;
+  }
+
   Settings addSpearheadSpells(Settings settings) {
     List<Ability> normalSpells = [];
 
