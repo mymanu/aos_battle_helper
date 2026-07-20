@@ -1385,12 +1385,16 @@ class Functions {
   }
 
   Settings addGuardedHeroAndSacredRites(Settings settings) {
+    bool sacredRitesAdded = false;
     for (Unit unit in settings.army.unitList) {
       if (unit.keywords.contains("HERO")) {
         unit.abilitys.add(SpearheadGeneralSpells().getGuardedHero());
       }
       if (unit.keywords.contains("PRIEST")) {
-        settings.army.spellLore.abilitys.add(SpearheadGeneralSpells().getSacredRites());
+        if(!sacredRitesAdded){
+          settings.army.spellLore.abilitys.add(SpearheadGeneralSpells().getSacredRites());
+          sacredRitesAdded = true;
+        }
       }
     }
 
