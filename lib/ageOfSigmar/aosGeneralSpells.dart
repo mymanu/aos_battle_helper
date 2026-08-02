@@ -94,7 +94,7 @@ class aosGeneralSpells {
     redeploy.declare =
         "Pick a friendly unit that is not in combat to use this ability.";
     redeploy.effect =
-        "Each model in that unit can move up to D6\"."
+        "Each model in that unit can move up to D6\". "
         "That move cannot pass through or end within the combat range of an enemy unit.";
     redeploy.commandPoints = "1";
     commandSpells.add(redeploy);
@@ -156,18 +156,18 @@ class aosGeneralSpells {
     powerThrough.typeName = "Ability (Activated)";
     powerThrough.color = "Purple";
     powerThrough.declare =
-        "Declare: Pick a friendly unit that charged this turn"
+        "Declare: Pick a friendly unit that charged this turn "
         "to use this ability, then you must pick an enemy unit "
-        "in combat with it to be the target. The target must"
-        "have a lower Health characteristic than the unit"
+        "in combat with it to be the target. The target must "
+        "have a lower Health characteristic than the unit "
         "using this ability.";
     powerThrough.effect =
-        "Inflict D3 mortal damage on the target. Then,"
-        "the unit using this ability can move a distance up to"
-        "its Move characteristic. It can pass through and end"
-        "that move within the combat ranges of enemy units"
-        "that were in combat with it at the start of the move,"
-        "but not those of other enemy units. It does not have"
+        "Inflict D3 mortal damage on the target. Then, "
+        "the unit using this ability can move a distance up to "
+        "its Move characteristic. It can pass through and end "
+        "that move within the combat ranges of enemy units "
+        "that were in combat with it at the start of the move, "
+        "but not those of other enemy units. It does not have "
         "to end the move in combat.";
     powerThrough.commandPoints = "1";
     commandSpells.add(powerThrough);
