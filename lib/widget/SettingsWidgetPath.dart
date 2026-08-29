@@ -246,6 +246,28 @@ class _SettingsWidgetPath extends State<SettingsWidgetPath> {
                         maximumSize: Size(510, 510),
                       ),
                       child: Text(
+                        'Add Path BattlePlan Round 3',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        addBattlePlanSpellsPTGRound3();
+                        ScaffoldMessenger.of(context).showSnackBar(functions.showSnackBar("Battle-Plan Abilities successfully added"));
+                      },
+                    ),
+
+                    SizedBox(height: 20),
+
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.orange,
+                        backgroundColor: Colors.blueGrey.shade800,
+                        shadowColor: Colors.black,
+                        padding: const EdgeInsets.all(10.0),
+                        minimumSize: Size(250, 100),
+                        maximumSize: Size(510, 510),
+                      ),
+                      child: Text(
                         'Clear Settings',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 20),
@@ -804,7 +826,7 @@ class _SettingsWidgetPath extends State<SettingsWidgetPath> {
 
                 Column(
                   children: [
-                    Text("Loot from 1st Round:"),
+                    Text("Loot from 2nd Round:"),
 
                     SizedBox(height: 10),
 
@@ -818,7 +840,7 @@ class _SettingsWidgetPath extends State<SettingsWidgetPath> {
                         maximumSize: Size(510, 510),
                       ),
                       child: Text(
-                        'Ork Loot Round 1',
+                        'Ork Loot Round 2',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 20),
                       ),
@@ -840,7 +862,7 @@ class _SettingsWidgetPath extends State<SettingsWidgetPath> {
                         maximumSize: Size(510, 510),
                       ),
                       child: Text(
-                        'Seraphon Loot Round 1',
+                        'Seraphon Loot Round 2',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 20),
                       ),
@@ -1004,6 +1026,10 @@ class _SettingsWidgetPath extends State<SettingsWidgetPath> {
 
   void addBattlePlanSpellsPTGRound2() {
     widget.settings = BattlePlan().diePfadeSichern(widget.settings);
+  }
+
+  void addBattlePlanSpellsPTGRound3() {
+    widget.settings = BattlePlan().dieEingefroreneZitadelle(widget.settings);
   }
 
   void addOrrukLootPTGRound1() {
