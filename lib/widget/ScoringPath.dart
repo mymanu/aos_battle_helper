@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../classes/functions.dart';
 import '../classes/settings.dart';
 import '../classes/unit.dart';
 import 'BattleTactics.dart';
@@ -25,6 +26,8 @@ class _Scoring extends State<ScoringPath> {
 
     int finalScorePlayer1 = 0;
     int finalScorePlayer2 = 0;
+
+    Functions functions = Functions();
 
     for (int score in widget.settings.scoresPlayer1) {
       finalScorePlayer1 = finalScorePlayer1 + score;
@@ -125,6 +128,7 @@ class _Scoring extends State<ScoringPath> {
         ],
       ),
       body: Center(
+        child: SingleChildScrollView(
         child: Column(
           children: [
             Text("Warhammer - Age of Sigmar - Path to Glory"),
@@ -476,6 +480,71 @@ class _Scoring extends State<ScoringPath> {
             ),
             SizedBox(height: 20),
 
+            Text("Regeln für Siegpunkte Runde 3:"),
+          functions.parseText(context,
+                "**Normaler Knoten** kontrolliert: +2 SP pro Ziel.\n"
+                "**Aktivierter Knoten** kontrolliert: +3 SP.\n\n\n\n\n\n"
+                "Zusätzlich kann jeder Spieler einen von 4 Schicksalspfaden beschreiten um weitere Siegespunkte zu erspielen.\n\n"
+
+                    "Pfad 1: „Meisterschaft der Zeitströme“ (Fokus: Kontroll- & Feldspiel)\n"
+      "Für Generäle, die das Nadelöhr mathematisch besetzen und die Zitadelle dominieren wollen.\n\n"
+
+      "Den Schicht-Knoten bündeln:\n"
+      "Kontrolliere in einer beliebigen Schlachtrunde mindestens 2 Schicht-Knoten gleichzeitig am Ende deines Zugs. (+4 SP)\n\n"
+
+      "Den Impuls erzwingen:\n"
+      "Besetze in einer Runde den vom Underdog Aktivierten Knoten mit einer befreundeten Einheit, während sich mindestens eine feindliche Einheit in 6 Zoll Reichweite befindet. (+4 SP)\n\n"
+
+      "Kausale Übernahme:\n"
+      "Übernimm am Ende deines Zugs einen Schicht-Knoten, der zu Beginn deines Zugs dem Gegner gehörte. (+4 SP)\n\n"
+
+      "**\n\n"
+
+      "Pfad 2: „Kausale Zerschlagung“ (Fokus: Aggression & Entfaltung)\n"
+      "Für Generäle, die die Zeit-Energie nutzen, um den Feind mit roher Gewalt zu zerschmettern.\n\n"
+
+      "Schock im Zeitsturm:\n"
+      "Füge einer feindlichen Einheit Schaden zu, die sich auf oder an (innerhalb 3 Zoll) einem Schicht-Knoten befindet. (+4 SP)\n\n"
+
+      "Artefakt-Exekution:\n"
+      "Vernichte eine gegnerische Einheit ODER den gegnerischen General in dem Zug, in dem du dein Stufe-2-Artefakt einsetzt. (+4 SP)\n\n"
+
+      "Brechung der Anker:\n"
+      "Vernichte im Laufe des Spiels insgesamt 2 gegnerische Einheiten im Umkreis von 6 Zoll um den zentralen Schicht-Knoten (Knoten 2). (+4 SP)\n\n"
+
+      "**\n\n"
+
+      "Pfad 3: „Chronos-Infiltration“ (Fokus: Mobilität & Raumgewinn)\n"
+      "Für Generäle, die die verschobenen Zeitschichten nutzen, um den Feind zu umgehen.\n\n"
+
+      "Flanken-Fluss:\n"
+      "Beende deinen Spielzug mit mindestens zwei Einheiten vollständig in der gegnerischen Spielfeldhälfte. (+4 SP)\n\n"
+
+      "Tiefen-Verankerung:\n"
+      "Kontrolliere den Schicht-Knoten, der der gegnerischen Aufstellungszone am nächsten liegt, am Ende eines deiner Spielzüge. (+4 SP)\n\n"
+
+      "Riss-Durchbruch:\n"
+      "Bringe vor dem Ende von Schlachtrunde 4 deinen General oder ein MONSTER vollständig in die gegnerische Aufstellungszone. (+4 SP)\n\n"
+
+      "**\n\n"
+
+      "Pfad 4: „Präzise Rekalibrierung“ (Fokus: Taktische Zähigkeit & Konter)\n"
+      "Für Generäle, die den feindlichen Ansturm aussitzen und im richtigen Moment zurückschlagen.\n\n"
+
+      "Dem Zeitsturm trotzen:\n"
+      "Eine deiner Einheiten erleidet auf einem Schicht-Knoten Schaden durch feindliche Attacken, hält das Ziel am Ende der Runde aber immer noch. (+4 SP)\n\n"
+
+      "Paradoxer Gegenschlag:\n"
+      "Setze eine Paradox-Aktion ein und vernichte in derselben Runde die gegnerische Einheit, die zuvor Schaden angerichtet hat. (+4 SP)\n\n"
+
+      "Nadelöhr-Zentrum:\n"
+          "Beende die 4. oder 5. Schlachtrunde mit der absoluten Kontrolle über den zentralen Schicht-Knoten (Knoten 2). (+4 SP)"
+
+          "**"
+            ),
+
+            SizedBox(height: 50),
+
             Text("Regeln für Siegpunkte Runde 2:"),
             Text(
               "\n• Jedes kontrollierte Missionsziel: je 1 SP"
@@ -666,6 +735,7 @@ class _Scoring extends State<ScoringPath> {
             ),
             */
           ],
+        ),
         ),
       ),
     );
