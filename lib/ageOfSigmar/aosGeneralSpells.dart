@@ -210,7 +210,7 @@ class aosGeneralSpells {
     unbind.color = "Yellow";
     unbind.declare =
         "Used By: A friendly Wizard within 30\" of the enemy Wizard casting the spell.";
-    unbind.typeName =
+    unbind.effect =
         "Make an unbinding roll of 2D6. If the roll exceeds the casting roll for the spell, then the spell is "
         "unbound and its effect is not resolved. This reaction cannot be used more than once per casting roll.";
     normalSpells.add(unbind);
