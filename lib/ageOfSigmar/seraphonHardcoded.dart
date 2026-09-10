@@ -35,17 +35,17 @@ class SeraphonHardcoded {
     leadByExample.timing = "Any Charge Phase";
     leadByExample.color = "Orange";
     leadByExample.declare =
-        "If this unit charged this phase, pick another friendly unit wholly within 12\" of it to be the target.";
+    "If this unit charged this phase, pick another friendly unit wholly within 12\" of it to be the target.";
     leadByExample.effect =
-        "You can re-roll charge rolls for the target for the rest of the phase.";
+    "You can re-roll charge rolls for the target for the rest of the phase.";
 
     Ability stars = Ability("Being of the Stars (Heroic Trait)");
     stars.typeName = "Ability (Activated)";
     stars.timing = "Any Phase";
     stars.color = "Red";
     stars.effect =
-        "Ignore modifiers to save rolls for this unit (positive and negative).";
-    
+    "Ignore modifiers to save rolls for this unit (positive and negative).";
+
     Ability rectrice = Ability("Incandescent Rectrices");
     rectrice.typeName = "Ability (Activated)";
     rectrice.timing = "Any Hero Phase";
@@ -54,20 +54,20 @@ class SeraphonHardcoded {
 
     List<Ability> slannSoloSpells = [
       SpearheadGeneralSpells().getGuardedHero(),
-      leadByExample, stars,rectrice,
+      leadByExample, stars, rectrice,
     ];
 
-    Unit slannSolo = Unit.withSpells(
+    Unit skinkFloyd = Unit.withSpells(
       "Skink Floyd - erst gezockt dann abgerockt",
       slannSoloSpells,
     );
-    slannSolo.weapons.add(greatWeapon);
-    slannSolo.weapons.add(hooves);
-    slannSolo.move = "12\"";
-    slannSolo.health = "11";
-    slannSolo.save = "3+";
-    slannSolo.control = "5";
-    slannSolo.keywords = "General, Hero, Order, Seraphon, Cavalry";
+    skinkFloyd.weapons.add(greatWeapon);
+    skinkFloyd.weapons.add(hooves);
+    skinkFloyd.move = "12\"";
+    skinkFloyd.health = "11";
+    skinkFloyd.save = "3+";
+    skinkFloyd.control = "5";
+    skinkFloyd.keywords = "General, Hero, Order, Seraphon, Cavalry";
 
     // Special Hero
     //---------------------------------------------------------
@@ -396,7 +396,7 @@ class SeraphonHardcoded {
     // Unit-List Build
 
     List<Unit> units = [
-      slannSolo,
+      skinkFloyd,
       saurusWarriors,
       skinkStarpriest,
       kroxigor,
@@ -611,37 +611,56 @@ class SeraphonHardcoded {
   Settings addSkinkFloydHardcoded(Settings settings) {
     // Special Hero
 
+    Weapon rangedWeapon = Weapon("rangedWeapon", "Ghyranite Ranged Weapon");
+    rangedWeapon.range = "12\"";
+    rangedWeapon.attack = "3";
+    rangedWeapon.hit = "3+";
+    rangedWeapon.wound = "3+";
+    rangedWeapon.rend = "1";
+    rangedWeapon.damage = "1";
+    rangedWeapon.ability = "Shoot in Combat";
+
     Weapon greatWeapon = Weapon("greatWeapon", "Great Weapon of Renown");
     greatWeapon.attack = "5";
     greatWeapon.hit = "3+";
     greatWeapon.wound = "2+";
     greatWeapon.rend = "2";
     greatWeapon.damage = "3";
-    greatWeapon.ability = "Crit (Mortal)";
 
-    Weapon hooves = Weapon(
-      "hooves",
-      "Ghyranite Steed`s Teeth, Hooves or Claws",
+    Weapon jaws = Weapon(
+      "jaws",
+      "Ghyranite Behemoth`s Jaws",
     );
-    hooves.attack = "2";
-    hooves.hit = "5+";
-    hooves.wound = "3+";
-    hooves.damage = "1";
-    hooves.ability = "Companion";
+    jaws.attack = "5";
+    jaws.hit = "3+";
+    jaws.wound = "2+";
+    jaws.rend = "2";
+    jaws.damage = "3";
+    jaws.ability = "Companion";
 
-    Ability leadByExample = Ability("Lead By Example (Path of the Ruler)");
-    leadByExample.typeName = "Ability (Activated)";
-    leadByExample.timing = "Any Charge Phase";
-    leadByExample.color = "Orange";
-    leadByExample.declare =
-    "If this unit charged this phase, pick another friendly unit wholly within 12\" of it to be the target.";
-    leadByExample.effect =
-    "You can re-roll charge rolls for the target for the rest of the phase.";
+    Ability dependableAssault = Ability("Dependable Assault (Path of the Brawler)");
+    dependableAssault.typeName = "Ability (Activated)";
+    dependableAssault.timing = "Your Charge Phase";
+    dependableAssault.color = "Orange";
+    dependableAssault.effect =
+    "If this unit is not in combat and has not used a Run or Retreat ability this turn, "
+        "it can move a distance of 7\". This unit can pass through the combat ranges of enemy units "
+    "but it must end that move within 1/2\" of a visible enemy unit. "
+    "If it does so, this unit has charged.";
+    dependableAssault.keywords = "Core, Move, Charge";
+
+    Ability veteransEye = Ability("Veteran`s Eye (Path of the Brawler 2)");
+    veteransEye.typeName = "Ability (Passive)";
+    veteransEye.timing = "Any Combat Phase";
+    veteransEye.color = "Red";
+    veteransEye.effect =
+    "Add 1 to hit for this unit`s combat attacks. (**Bereits bei den 3+ Treffen eingerechnet**!!!!)";
+
 
     Ability stars = Ability("Being of the Stars (Heroic Trait)");
-    stars.typeName = "Ability (Activated)";
+    stars.typeName = "Ability (Passive)";
     stars.timing = "Any Phase";
-    stars.color = "Red";
+    stars.color = "Red Blue";
     stars.effect =
     "Ignore modifiers to save rolls for this unit (positive and negative).";
 
@@ -653,20 +672,21 @@ class SeraphonHardcoded {
 
     List<Ability> slannSoloSpells = [
       SpearheadGeneralSpells().getGuardedHero(),
-      leadByExample, stars, rectrice,
+      dependableAssault, veteransEye, stars, rectrice,
     ];
 
     Unit skinkFloyd = Unit.withSpells(
       "Skink Floyd - erst gezockt dann abgerockt",
       slannSoloSpells,
     );
+    skinkFloyd.weapons.add(rangedWeapon);
     skinkFloyd.weapons.add(greatWeapon);
-    skinkFloyd.weapons.add(hooves);
-    skinkFloyd.move = "12\"";
-    skinkFloyd.health = "11";
+    skinkFloyd.weapons.add(jaws);
+    skinkFloyd.move = "10\"";
+    skinkFloyd.health = "14";
     skinkFloyd.save = "3+";
-    skinkFloyd.control = "5";
-    skinkFloyd.keywords = "General, Hero, Order, Seraphon, Cavalry";
+    skinkFloyd.control = "8";
+    skinkFloyd.keywords = "General, Hero, Order, Seraphon, Monster";
 
     settings.army.unitList.insert(0, skinkFloyd);
     return settings;
